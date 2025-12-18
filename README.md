@@ -12,30 +12,35 @@ A modern, professional portfolio website showcasing the work and expertise of Mu
 ## 🚀 Sections
 
 ### Hero Section
+
 - Animated background with floating particles
 - Neural network visualization
 - Bold typography with gradient effects
 - Call-to-action buttons
 
 ### About Me
+
 - Professional bio highlighting expertise
 - Animated AI avatar
 - Key expertise areas with hover effects
 - Clean, modern layout
 
 ### Featured Projects
+
 - 6 showcased projects with detailed descriptions
 - Technology tags and links
 - Hover animations and glow effects
 - Card-based layout with smooth transitions
 
 ### Technical Expertise
+
 - Skill categories: ML/AI, Data Science, Programming
 - Animated progress bars
 - Visual skill indicators
 - Organized by expertise areas
 
 ### Contact Section
+
 - Working contact form with validation
 - Social media links
 - Professional contact information
@@ -44,6 +49,7 @@ A modern, professional portfolio website showcasing the work and expertise of Mu
 ## 🛠️ Technical Implementation
 
 ### Technologies Used
+
 - **HTML5**: Semantic markup and accessibility
 - **CSS3**: Advanced animations, gradients, and responsive design
 - **JavaScript**: Interactive features and animations
@@ -51,6 +57,7 @@ A modern, professional portfolio website showcasing the work and expertise of Mu
 - **Google Fonts**: Modern typography
 
 ### Key Features
+
 - Smooth scrolling navigation
 - Intersection Observer API for scroll animations
 - Particle system with canvas animations
@@ -61,6 +68,7 @@ A modern, professional portfolio website showcasing the work and expertise of Mu
 - Accessibility considerations
 
 ### Animations & Interactions
+
 - Fade-in animations on scroll
 - Hover effects on cards and buttons
 - Typing effect for hero tagline
