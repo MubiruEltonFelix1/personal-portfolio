@@ -34,7 +34,7 @@ A modern, professional portfolio website showcasing the academic journey and tec
 
 ### Technical Skills & Learning Journey
 
-- Skill categories reflecting current learning: AI/ML, Data Science, Programming
+- Skill categories reflecting current learning: Website Development, Data Science, Programming
 - Realistic progress bars showing student-level proficiency
 - Visual skill indicators with smooth animations
 - Focus on foundational skills and growth areas
