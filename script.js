@@ -315,21 +315,19 @@ function initializeFormHandling() {
                 return;
             }
             
-            // Simulate form submission
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitButton.innerHTML;
+            // Create mailto link with form data
+            const subject = encodeURIComponent(`Portfolio Contact: Message from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:mubirueltonfelix@gmail.com?subject=${subject}&body=${body}`;
             
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitButton.disabled = true;
+            // Open email client
+            window.location.href = mailtoLink;
             
-            // Simulate API call
-            setTimeout(() => {
-                showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-                contactForm.reset();
-                
-                submitButton.innerHTML = originalText;
-                submitButton.disabled = false;
-            }, 2000);
+            // Show success notification
+            showNotification('Opening your email client to send the message!', 'success');
+            
+            // Reset form
+            contactForm.reset();
         });
     }
 }

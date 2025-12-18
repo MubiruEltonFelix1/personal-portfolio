@@ -1,6 +1,154 @@
-# Mubiru Elton Felix - AI/ML Engineer Portfolio
+# Mubiru Elton Felix - Software Engineering Student Portfolio
 
-A modern, professional portfolio website showcasing the work and expertise of Mubiru Elton Felix, an AI/ML Engineer and Data Scientist.
+A modern, professional portfolio website showcasing the academic journey and technical projects of Mubiru Elton Felix, a Software Engineering student at Mbarara University of Science and Technology with a passion for AI/ML and Data Science.
+
+## 🎨 Design Features
+
+- **Dark Theme**: Sleek black/dark mode with subtle gradients
+- **Modern Typography**: Using Inter and Space Grotesk fonts
+- **Data Science Aesthetics**: Neural networks, particles, and AI-inspired visuals
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+
+## 🚀 Sections
+
+### Hero Section
+
+- Animated background with floating particles
+- Neural network visualization
+- Bold typography with gradient effects
+- Professional tagline reflecting student status
+
+### About Me
+
+- Academic background at Mbarara University of Science and Technology
+- Focus areas: AI, ML, Data Science, and data-driven solutions
+- Animated AI avatar with modern styling
+- Key interest areas with hover effects
+
+### Featured Project
+
+- **Premier League Player Age vs Salary Visualization**: A comprehensive data analysis project
+- Detailed project description with technology stack
+- Direct GitHub integration with working links
+- "More projects coming soon" indicator for future growth
+
+### Technical Skills & Learning Journey
+
+- Skill categories reflecting current learning: AI/ML, Data Science, Programming
+- Realistic progress bars showing student-level proficiency
+- Visual skill indicators with smooth animations
+- Focus on foundational skills and growth areas
+
+### Contact Section
+
+- Professional contact form with validation
+- Updated GitHub profile link
+- Social media connections
+- Modern, accessible form design
+
+## 🛠️ Technical Implementation
+
+### Technologies Used
+
+- **HTML5**: Semantic markup and accessibility
+- **CSS3**: Advanced animations, gradients, and responsive design
+- **JavaScript**: Interactive features and particle animations
+- **Font Awesome**: Professional icons
+- **Google Fonts**: Modern typography (Inter & Space Grotesk)
+
+### Key Features
+
+- **Featured Project Layout**: Dedicated space for the Premier League project
+- **Coming Soon Card**: Animated placeholder for future projects
+- **Smooth Animations**: Scroll-triggered reveals and hover effects
+- **Mobile-Responsive**: Fully functional across all devices
+- **Performance Optimized**: Efficient animations and loading
+
+### New Enhancements
+
+- **Two-Column Project Layout**: Featured project + coming soon card
+- **Student-Appropriate Skill Levels**: Realistic progress indicators
+- **GitHub Integration**: Direct links to actual repositories
+- **Professional Student Branding**: Balances ambition with authenticity
+
+## 🎯 Current Project Showcase
+
+### Premier League Player Age vs Salary Visualization
+
+- **Repository**: [github.com/MubiruEltonFelix1/premier-league-age-salary-visualization](https://github.com/MubiruEltonFelix1/premier-league-age-salary-visualization)
+- **Technologies**: Python, Data Analysis, Data Visualization, Statistics
+- **Description**: Comprehensive analysis of the relationship between player age and salary in Premier League football
+
+## 📱 Responsive Design
+
+The portfolio adapts beautifully across all device sizes:
+
+- **Desktop**: Two-column project layout with full visual effects
+- **Tablet**: Single-column layout with preserved animations
+- **Mobile**: Optimized spacing and touch-friendly interactions
+
+## 🎨 Professional Student Aesthetic
+
+**Color Scheme**:
+
+- Primary Background: `#0a0a0a` (Deep Black)
+- Secondary Background: `#1a1a1a` (Dark Gray)
+- Accent Color: `#00d4ff` (Cyan Blue)
+- Text Primary: `#ffffff` (White)
+
+**Design Philosophy**:
+
+- Professional yet approachable for a student
+- Emphasizes growth potential and learning journey
+- Showcases real work while indicating future projects
+- Maintains high visual standards for recruiter appeal
+
+## 🚀 Getting Started
+
+1. Download the portfolio files
+2. Open `index.html` in any modern web browser
+3. Explore the interactive features and animations
+4. Customize content as projects are added
+
+No build process required - pure HTML/CSS/JavaScript implementation.
+
+## 📂 File Structure
+
+```
+portfolio/
+├── index.html          # Main HTML with updated content
+├── style.css          # Comprehensive styling with new project layouts
+├── script.js          # Interactive functionality and animations
+└── README.md          # Updated documentation
+```
+
+## 🎓 Student-Focused Features
+
+- **Academic Credentials**: Clear university affiliation
+- **Learning Journey**: Skill levels that reflect ongoing education
+- **Growth Mindset**: "More projects coming soon" messaging
+- **Real Project**: Actual GitHub repository showcase
+- **Professional Standards**: High-quality design for career readiness
+
+## 🔧 Future Expansion
+
+The portfolio is designed to grow with academic and career progress:
+
+- Easy addition of new projects to the grid
+- Scalable skill level updates
+- Expandable contact methods
+- Flexible content areas
+
+## 📞 Contact Information
+
+- **Email**: Available via contact form
+- **GitHub**: [github.com/MubiruEltonFelix1](https://github.com/MubiruEltonFelix1)
+- **LinkedIn**: Professional networking
+- **University**: Mbarara University of Science and Technology
+
+---
+
+**Built with ❤️ for academic and professional growth in AI/ML and Data Science.**
 
 ## 🎨 Design Features
 
