@@ -391,29 +391,39 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <!-- EmailJS Config (DO NOT COMMIT emailjs-config.js to git) -->
-    <script src="emailjs-config.js"></script>
+    <!-- Environment Configuration Loader -->
+    <script src="env-loader.js"></script>
     <script>
-        // Initialize EmailJS with config and debugging
+        // Initialize EmailJS with config and debugging - Updated for env-loader
         (function(){
             console.log('🔧 Initializing EmailJS...');
-            console.log('Config available:', !!window.EMAILJS_CONFIG);
             
-            if (window.EMAILJS_CONFIG) {
-                console.log('📧 EmailJS Config:', {
-                    publicKey: window.EMAILJS_CONFIG.publicKey,
-                    serviceId: window.EMAILJS_CONFIG.serviceId,
-                    templateId: window.EMAILJS_CONFIG.templateId
-                });
-                
-                emailjs.init({
-                    publicKey: window.EMAILJS_CONFIG.publicKey
-                });
-                console.log('✅ EmailJS initialized successfully');
-            } else {
-                console.error('❌ EmailJS config not found!');
-                alert('EmailJS configuration error. Please check the console.');
+            // Wait for configuration to load
+            function checkConfig() {
+                if (window.EMAILJS_CONFIG) {
+                    console.log('Config available:', !!window.EMAILJS_CONFIG);
+                    console.log('📧 EmailJS Config:', {
+                        publicKey: window.EMAILJS_CONFIG.publicKey,
+                        serviceId: window.EMAILJS_CONFIG.serviceId,
+                        templateId: window.EMAILJS_CONFIG.templateId
+                    });
+                    
+                    try {
+                        emailjs.init({
+                            publicKey: window.EMAILJS_CONFIG.publicKey
+                        });
+                        console.log('✅ EmailJS initialized successfully');
+                    } catch (error) {
+                        console.error('❌ EmailJS initialization failed:', error);
+                    }
+                } else {
+                    // Wait a bit longer for config to load
+                    setTimeout(checkConfig, 100);
+                }
             }
+            
+            // Start checking for config after a brief delay
+            setTimeout(checkConfig, 50);
         })();
     </script>
     <script>
