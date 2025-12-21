@@ -18,39 +18,59 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Mobile Navigation
-hamburger.addEventListener('click', function() {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
 
 // Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+if (navLinks.length > 0) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (hamburger && navMenu) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
     });
-});
+}
 
 // Smooth scrolling for navigation links
-navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-            const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
+if (navLinks.length > 0) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            // Check if it's an external link (like blog.html) or internal section link
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            // For external links (like blog.html), let the default behavior happen
+        });
     });
-});
+}
 
 // Particles Animation
 function initializeParticles() {
     const particlesContainer = document.getElementById('particles');
+    
+    // Check if particles container exists (it might not exist on all pages)
+    if (!particlesContainer) {
+        console.log('Particles container not found, skipping particle initialization');
+        return;
+    }
+    
     const particleCount = 50;
 
     for (let i = 0; i < particleCount; i++) {
@@ -59,6 +79,12 @@ function initializeParticles() {
 }
 
 function createParticle(container) {
+    // Double-check container exists
+    if (!container) {
+        console.warn('Cannot create particle: container is null');
+        return;
+    }
+    
     const particle = document.createElement('div');
     particle.className = 'particle';
     
@@ -104,6 +130,8 @@ function animateParticle(particle) {
 // Neural Network Animation
 function initializeNeuralNetwork() {
     const neuralContainer = document.getElementById('neuralNetwork');
+    if (!neuralContainer) return; // Exit if element doesn't exist
+    
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     
@@ -242,6 +270,8 @@ function initializeNavigationEffects() {
 // Skill Bars Animation
 function initializeSkillBars() {
     const skillsSection = document.getElementById('skills');
+    if (!skillsSection) return; // Exit if element doesn't exist
+    
     const skillBars = document.querySelectorAll('.skill-progress');
     
     let skillsAnimated = false;
@@ -274,6 +304,8 @@ function isInViewport(element) {
 // Typing Effect for Hero Section
 function initializeTypingEffect() {
     const heroTagline = document.querySelector('.hero-tagline');
+    if (!heroTagline) return; // Exit if element doesn't exist
+    
     const originalText = heroTagline.textContent;
     
     heroTagline.textContent = '';

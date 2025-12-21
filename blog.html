@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elton Blog - Tech Insights & University Life</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">MEF</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.html" class="nav-link active">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="blog-hero-background">
+            <canvas></canvas>
+        </div>
+        <div class="container">
+            <div class="blog-hero-content">
+                <h1 class="blog-title">Elton Blog</h1>
+                <p class="blog-subtitle">Tech Insights, University Life & Standing Out in the Digital World</p>
+                <p class="blog-description">
+                    Welcome to my corner of the internet where I share my journey through Software Engineering, 
+                    insights about tech at university, and practical tips on how to stand out in the competitive world of technology.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Categories -->
+    <section class="blog-categories">
+        <div class="container">
+            <div class="categories-grid">
+                <div class="category-card active" data-category="all">
+                    <i class="fas fa-th"></i>
+                    <span>All Posts</span>
+                </div>
+                <div class="category-card" data-category="university">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>University Life</span>
+                </div>
+                <div class="category-card" data-category="tech">
+                    <i class="fas fa-code"></i>
+                    <span>Tech Tips</span>
+                </div>
+                <div class="category-card" data-category="career">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Career Growth</span>
+                </div>
+                <div class="category-card" data-category="projects">
+                    <i class="fas fa-rocket"></i>
+                    <span>Projects</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="blog-posts">
+        <div class="container">
+            <div class="posts-grid">
+                <!-- Featured Post -->
+                <article class="blog-post featured" data-category="university">
+                    <div class="post-image">
+                        <div class="post-image-placeholder">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="post-badge">Featured</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">University Life</span>
+                            <span class="post-date">December 2024</span>
+                        </div>
+                        <h2 class="post-title">How to Excel in Software Engineering at University: A Student's Guide</h2>
+                        <p class="post-excerpt">
+                            Navigating through Software Engineering courses can be challenging. Here are the strategies 
+                            that helped me maintain excellent grades while building real-world skills that employers actually want.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag">Study Tips</span>
+                            <span class="tag">Software Engineering</span>
+                            <span class="tag">University</span>
+                        </div>
+                        <a href="#" class="read-more-btn">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Regular Posts -->
+                <article class="blog-post" data-category="tech">
+                    <div class="post-image">
+                        <div class="post-image-placeholder">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">Tech Tips</span>
+                            <span class="post-date">November 2024</span>
+                        </div>
+                        <h3 class="post-title">Building Your First Data Visualization Project</h3>
+                        <p class="post-excerpt">
+                            A step-by-step guide to creating compelling data visualizations that tell a story. 
+                            Learn from my Premier League salary analysis project.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Data Viz</span>
+                        </div>
+                        <a href="#" class="read-more-btn">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-post" data-category="career">
+                    <div class="post-image">
+                        <div class="post-image-placeholder">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">Career Growth</span>
+                            <span class="post-date">October 2024</span>
+                        </div>
+                        <h3 class="post-title">Standing Out as a Student Developer</h3>
+                        <p class="post-excerpt">
+                            In a sea of Computer Science graduates, how do you make yourself memorable to employers? 
+                            Here are the unconventional strategies that work.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag">Career</span>
+                            <span class="tag">Personal Brand</span>
+                        </div>
+                        <a href="#" class="read-more-btn">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-post" data-category="university">
+                    <div class="post-image">
+                        <div class="post-image-placeholder">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">University Life</span>
+                            <span class="post-date">September 2024</span>
+                        </div>
+                        <h3 class="post-title">Balancing Academics and Side Projects</h3>
+                        <p class="post-excerpt">
+                            How I manage to maintain good grades while working on personal projects that build 
+                            my portfolio and attract potential employers.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag">Time Management</span>
+                            <span class="tag">Projects</span>
+                        </div>
+                        <a href="#" class="read-more-btn">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-post" data-category="tech">
+                    <div class="post-image">
+                        <div class="post-image-placeholder">
+                            <i class="fas fa-database"></i>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">Tech Tips</span>
+                            <span class="post-date">August 2024</span>
+                        </div>
+                        <h3 class="post-title">Essential Tools Every CS Student Should Know</h3>
+                        <p class="post-excerpt">
+                            A curated list of tools, frameworks, and resources that have significantly improved 
+                            my productivity and learning efficiency as a Software Engineering student.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag">Tools</span>
+                            <span class="tag">Productivity</span>
+                        </div>
+                        <a href="#" class="read-more-btn">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-post" data-category="projects">
+                    <div class="post-image">
+                        <div class="post-image-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">Projects</span>
+                            <span class="post-date">July 2024</span>
+                        </div>
+                        <h3 class="post-title">From Idea to GitHub: My Project Development Process</h3>
+                        <p class="post-excerpt">
+                            Behind the scenes look at how I approach personal projects, from initial concept 
+                            to deployment and documentation. Includes my mistakes and lessons learned.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag">Development</span>
+                            <span class="tag">GitHub</span>
+                        </div>
+                        <a href="#" class="read-more-btn">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- EXAMPLE: New Blog Post (You can copy this template) -->
+                <article class="blog-post" data-category="university">
+                    <div class="post-image">
+                        <div class="post-image-placeholder">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="post-badge">New</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">University Life</span>
+                            <span class="post-date">December 21, 2025</span>
+                        </div>
+                        <h3 class="post-title">5 Essential VS Code Extensions for Computer Science Students</h3>
+                        <p class="post-excerpt">
+                            Boost your productivity with these must-have VS Code extensions that every 
+                            Computer Science student should install. From debugging to collaboration tools.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag">VS Code</span>
+                            <span class="tag">productivity</span>
+                            <span class="tag">tools</span>
+                        </div>
+                        <a href="#" class="read-more-btn">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Coming Soon Notice -->
+            <div class="coming-soon-notice">
+                <div class="notice-content">
+                    <i class="fas fa-pencil-alt"></i>
+                    <h3>More Posts Coming Soon!</h3>
+                    <p>I'm currently working on several in-depth articles about AI/ML learning paths, 
+                       internship hunting strategies, and building standout portfolios. Stay tuned!</p>
+                    <a href="index.html#contact" class="notify-btn">
+                        <i class="fas fa-bell"></i>
+                        Get Notified
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated with Latest Insights</h2>
+                <p>Get notified when I publish new posts about tech, university life, and career growth.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" name="subscriber_email" placeholder="Enter your email" required>
+                        <button type="submit" class="subscribe-btn" onclick="handleNewsletterSubmit(event)">
+                            <i class="fas fa-paper-plane"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+                <div class="newsletter-success" style="display: none;">
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Welcome to the Community! 🎉</h3>
+                        <p>Thank you for subscribing! You'll receive an email confirmation shortly and be the first to know about new blog posts.</p>
+                        <p><small>Want to subscribe another email? <a href="#" onclick="location.reload()" style="color: var(--accent-color);">Click here</a></small></p>
+                    </div>
+                </div>
+
+                <!-- Developer Tools (hidden in production) -->
+                <div style="margin-top: 2rem; text-align: center; opacity: 0.5;">
+                    <small>
+                        <a href="#" onclick="showSubscribers()" style="color: var(--text-muted); text-decoration: none;">
+                            📊 View Subscribers (Dev)
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Mubiru Elton Felix. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://github.com/MubiruEltonFelix1" target="_blank" rel="noopener noreferrer"
+                        class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/mubiru-elton-felix-9ab50a1b0/" target="_blank"
+                        rel="noopener noreferrer" class="social-link" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="mailto:mubirueltonfelix@gmail.com" class="social-link" title="Email"><i
+                            class="fas fa-envelope"></i></a>
+                    <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Blog Post Modal -->
+    <div id="blogModal" class="blog-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-meta">
+                    <span class="modal-category"></span>
+                    <span class="modal-date"></span>
+                </div>
+                <h1 class="modal-title"></h1>
+                <div class="modal-tags"></div>
+                <div class="modal-content-text">
+                    <!-- Blog post content will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary back-to-blog">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Blog
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("Rx8jjg8cEZaG7P8V2");
+        })();
+    </script>
+    <script>
+        // Production-ready EmailJS newsletter submission
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+
+            const emailInput = document.querySelector('#newsletterForm input[type="email"]');
+            const email = emailInput.value.trim();
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert("Please enter a valid email address");
+                return;
+            }
+
+            const btn = document.querySelector('.subscribe-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+            btn.disabled = true;
+
+            emailjs.send(
+                "service_7zp044t",
+                "template_vzqz49g",
+                {
+                    subscriber_email: email
+                }
+            )
+            .then(() => {
+                document.querySelector('#newsletterForm').style.display = 'none';
+                document.querySelector('.newsletter-success').style.display = 'block';
+            })
+            .catch((error) => {
+                console.error("EmailJS error:", error);
+                alert("Something went wrong. Please try again.");
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Subscribe';
+                btn.disabled = false;
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+    <script src="blog.js"></script>
+</body>
+
+</html>
