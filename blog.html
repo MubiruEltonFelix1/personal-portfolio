@@ -126,7 +126,7 @@
                             <span class="tag">Software Engineering</span>
                             <span class="tag">University</span>
                         </div>
-                        <a href="#" class="read-more-btn">
+                        <a href="javascript:void(0)" class="read-more-btn" data-post="featured" onclick="return false;">
                             Read More
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -154,7 +154,7 @@
                             <span class="tag">Python</span>
                             <span class="tag">Data Viz</span>
                         </div>
-                        <a href="#" class="read-more-btn">
+                        <a href="javascript:void(0)" class="read-more-btn" data-post="data-viz" onclick="return false;">
                             Read More
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -181,7 +181,7 @@
                             <span class="tag">Career</span>
                             <span class="tag">Personal Brand</span>
                         </div>
-                        <a href="#" class="read-more-btn">
+                        <a href="javascript:void(0)" class="read-more-btn" data-post="career-growth" onclick="return false;">
                             Read More
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -208,7 +208,7 @@
                             <span class="tag">Time Management</span>
                             <span class="tag">Projects</span>
                         </div>
-                        <a href="#" class="read-more-btn">
+                        <a href="javascript:void(0)" class="read-more-btn" data-post="time-management" onclick="return false;">
                             Read More
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -235,7 +235,7 @@
                             <span class="tag">Tools</span>
                             <span class="tag">Productivity</span>
                         </div>
-                        <a href="#" class="read-more-btn">
+                        <a href="javascript:void(0)" class="read-more-btn" data-post="cs-tools" onclick="return false;">
                             Read More
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -262,7 +262,7 @@
                             <span class="tag">Development</span>
                             <span class="tag">GitHub</span>
                         </div>
-                        <a href="#" class="read-more-btn">
+                        <a href="javascript:void(0)" class="read-more-btn" data-post="project-process" onclick="return false;">
                             Read More
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -292,7 +292,7 @@
                             <span class="tag">productivity</span>
                             <span class="tag">tools</span>
                         </div>
-                        <a href="#" class="read-more-btn">
+                        <a href="javascript:void(0)" class="read-more-btn" data-post="vscode-extensions" onclick="return false;">
                             Read More
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -322,10 +322,10 @@
             <div class="newsletter-content">
                 <h2>Stay Updated with Latest Insights</h2>
                 <p>Get notified when I publish new posts about tech, university life, and career growth.</p>
-                <form class="newsletter-form" id="newsletterForm">
+                <form class="newsletter-form" id="newsletterForm" onsubmit="return false;">
                     <div class="form-group">
                         <input type="email" name="subscriber_email" placeholder="Enter your email" required>
-                        <button type="submit" class="subscribe-btn" onclick="handleNewsletterSubmit(event)">
+                        <button type="button" class="subscribe-btn" onclick="sendNewsletterEmail()">
                             <i class="fas fa-paper-plane"></i>
                             Subscribe
                         </button>
@@ -338,15 +338,6 @@
                         <p>Thank you for subscribing! You'll receive an email confirmation shortly and be the first to know about new blog posts.</p>
                         <p><small>Want to subscribe another email? <a href="#" onclick="location.reload()" style="color: var(--accent-color);">Click here</a></small></p>
                     </div>
-                </div>
-
-                <!-- Developer Tools (hidden in production) -->
-                <div style="margin-top: 2rem; text-align: center; opacity: 0.5;">
-                    <small>
-                        <a href="#" onclick="showSubscribers()" style="color: var(--text-muted); text-decoration: none;">
-                            📊 View Subscribers (Dev)
-                        </a>
-                    </small>
                 </div>
             </div>
         </div>
@@ -400,46 +391,117 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- EmailJS Config (DO NOT COMMIT emailjs-config.js to git) -->
+    <script src="emailjs-config.js"></script>
     <script>
-        // Initialize EmailJS
+        // Initialize EmailJS with config and debugging
         (function(){
-            emailjs.init("Rx8jjg8cEZaG7P8V2");
+            console.log('🔧 Initializing EmailJS...');
+            console.log('Config available:', !!window.EMAILJS_CONFIG);
+            
+            if (window.EMAILJS_CONFIG) {
+                console.log('📧 EmailJS Config:', {
+                    publicKey: window.EMAILJS_CONFIG.publicKey,
+                    serviceId: window.EMAILJS_CONFIG.serviceId,
+                    templateId: window.EMAILJS_CONFIG.templateId
+                });
+                
+                emailjs.init({
+                    publicKey: window.EMAILJS_CONFIG.publicKey
+                });
+                console.log('✅ EmailJS initialized successfully');
+            } else {
+                console.error('❌ EmailJS config not found!');
+                alert('EmailJS configuration error. Please check the console.');
+            }
         })();
     </script>
     <script>
-        // Production-ready EmailJS newsletter submission
-        function handleNewsletterSubmit(event) {
-            event.preventDefault();
-
+        // Production-ready EmailJS newsletter submission - Using working code from test page
+        async function sendNewsletterEmail() {
+            console.log('📮 Newsletter subscription started...');
+            
             const emailInput = document.querySelector('#newsletterForm input[type="email"]');
             const email = emailInput.value.trim();
-
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert("Please enter a valid email address");
-                return;
+            
+            console.log('📧 Attempting to subscribe email:', email);
+            
+            if (!email) {
+                alert('⚠️ Please enter an email address');
+                return false;
             }
-
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('⚠️ Please enter a valid email address');
+                return false;
+            }
+            
+            if (!window.EMAILJS_CONFIG) {
+                alert('❌ EmailJS not configured');
+                return false;
+            }
+            
             const btn = document.querySelector('.subscribe-btn');
+            const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
             btn.disabled = true;
-
-            emailjs.send(
-                "service_7zp044t",
-                "template_vzqz49g",
-                {
-                    subscriber_email: email
-                }
-            )
-            .then(() => {
+            
+            console.log('🔧 Using EmailJS service:', window.EMAILJS_CONFIG.serviceId);
+            console.log('📧 Using EmailJS template:', window.EMAILJS_CONFIG.templateId);
+            
+            const templateParams = {
+                subscriber_email: email,
+                to_email: email,
+                timestamp: new Date().toLocaleString(),
+                confirmation_message: 'Thank you for subscribing to my portfolio newsletter! You will receive updates about new blog posts, projects, and insights.'
+            };
+            
+            console.log('📋 Template parameters:', JSON.stringify(templateParams, null, 2));
+            console.log('🚀 Sending via EmailJS...');
+            
+            try {
+                const response = await emailjs.send(
+                    window.EMAILJS_CONFIG.serviceId,
+                    window.EMAILJS_CONFIG.templateId,
+                    templateParams
+                );
+                
+                console.log('✅ Email sent successfully!');
+                console.log('📊 Response Status:', response.status);
+                console.log('📊 Response Text:', response.text);
+                
+                // Show success message
                 document.querySelector('#newsletterForm').style.display = 'none';
                 document.querySelector('.newsletter-success').style.display = 'block';
-            })
-            .catch((error) => {
-                console.error("EmailJS error:", error);
-                alert("Something went wrong. Please try again.");
-                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Subscribe';
+                
+                console.log('🎉 Newsletter subscription successful!');
+                    
+            } catch (error) {
+                console.error('❌ Email sending failed:', error.message);
+                console.error('📊 Error Status:', error.status || 'N/A');
+                console.error('📊 Error Text:', error.text || 'N/A');
+                
+                let errorMessage = "Something went wrong. Please try again.";
+                
+                if (error.status === 400) {
+                    errorMessage = "Invalid request. Please check your email address.";
+                } else if (error.status === 401) {
+                    errorMessage = "Authentication error. Please contact the site administrator.";
+                } else if (error.status === 404) {
+                    errorMessage = "Email service not found. Please contact the site administrator.";
+                } else if (error.status === 422) {
+                    errorMessage = "Invalid template data. Please contact the site administrator.";
+                }
+                
+                alert(errorMessage);
+                console.error('💔 Newsletter subscription failed');
+            } finally {
+                // Reset button
+                btn.innerHTML = originalText;
                 btn.disabled = false;
-            });
+            }
+            
+            return false; // Prevent any navigation
         }
     </script>
     <script src="script.js"></script>

@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeNewsletter();
     initializeParticles();
     initializeBlogModal();
+    initializeNotifyButton();
     
     // Set active navigation
     setActiveNavigation();
@@ -278,13 +279,23 @@ function setupScrollAnimations() {
     if (newsletter) {
         newsletter.style.opacity = '0';
         newsletter.style.transform = 'translateY(30px)';
-        observer.observe(newsletter);
+        newsletter.style.transition = 'all 1s ease-out';
         
-        newsletter.classList.add = function() {
-            this.style.transition = 'all 1s ease-out';
-            this.style.opacity = '1';
-            this.style.transform = 'translateY(0)';
-        };
+        // Create a custom observer for the newsletter
+        const newsletterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    newsletterObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        newsletterObserver.observe(newsletter);
     }
 }
 
@@ -570,6 +581,7 @@ function showSubscribers() {
 window.showSubscribers = showSubscribers;
 
 // "Notify Me" button functionality
+function initializeNotifyButton() {
     const notifyBtn = document.querySelector('.notify-btn');
     if (notifyBtn) {
         notifyBtn.addEventListener('click', function(e) {
@@ -814,16 +826,29 @@ document.querySelectorAll('.read-more-btn').forEach(btn => {
 
 // Blog Modal Functionality
 function initializeBlogModal() {
+    console.log('🔧 Initializing blog modal...');
+    
     const readMoreBtns = document.querySelectorAll('.read-more-btn');
     const modal = document.getElementById('blogModal');
     const closeBtn = document.querySelector('.close-modal');
     const backBtn = document.querySelector('.back-to-blog');
     
+    console.log('📊 Found elements:', {
+        readMoreBtns: readMoreBtns.length,
+        modal: !!modal,
+        closeBtn: !!closeBtn,
+        backBtn: !!backBtn
+    });
+    
     // Add click handlers to read more buttons
-    readMoreBtns.forEach(btn => {
+    readMoreBtns.forEach((btn, index) => {
         btn.addEventListener('click', function(e) {
+            console.log(`🖱️ Read more button ${index + 1} clicked`);
             e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
             openBlogModal(this);
+            return false;
         });
     });
     
@@ -854,10 +879,21 @@ function initializeBlogModal() {
 }
 
 function openBlogModal(button) {
+    console.log('🔓 Opening blog modal...');
+    
     const modal = document.getElementById('blogModal');
     const postCard = button.closest('.blog-post');
     
-    if (!postCard || !modal) return;
+    console.log('📋 Modal elements:', {
+        modal: !!modal,
+        postCard: !!postCard,
+        modalId: modal ? modal.id : 'not found'
+    });
+    
+    if (!postCard || !modal) {
+        console.error('❌ Missing elements for modal');
+        return;
+    }
     
     // Extract post data
     const title = postCard.querySelector('.post-title').textContent;
@@ -865,6 +901,8 @@ function openBlogModal(button) {
     const date = postCard.querySelector('.post-date').textContent;
     const excerpt = postCard.querySelector('.post-excerpt').textContent;
     const tags = Array.from(postCard.querySelectorAll('.tag')).map(tag => tag.textContent);
+    
+    console.log('📝 Post data:', { title, category, date });
     
     // Get full content based on title/category
     const fullContent = getBlogPostContent(title, category, excerpt);
@@ -882,8 +920,11 @@ function openBlogModal(button) {
     modal.querySelector('.modal-content-text').innerHTML = fullContent;
     
     // Show modal
+    console.log('✨ Showing modal...');
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // Prevent background scroll
+    
+    console.log('🎉 Modal should now be visible!');
 }
 
 function closeBlogModal() {
@@ -895,11 +936,13 @@ function closeBlogModal() {
 }
 
 function getBlogPostContent(title, category, excerpt) {
+    console.log('📖 Getting content for:', title);
+    
     // This function returns full blog post content based on the title
     // You can add your own blog posts here or load them from external files
     
     const blogPosts = {
-        "5 Ways to Stand Out as a Software Engineering Student": {
+        "How to Excel in Software Engineering at University: A Student's Guide": {
             content: `
                 <p>Standing out as a Software Engineering student requires more than just good grades. Here are five proven strategies that have helped me differentiate myself in a competitive field:</p>
                 
@@ -974,6 +1017,126 @@ function getBlogPostContent(title, category, excerpt) {
                 </ul>
                 
                 <p>This project opened doors to internship opportunities and helped me understand the power of data storytelling. Your first project doesn't need to be perfect—it just needs to be complete and well-documented.</p>
+            `
+        },
+        "Standing Out as a Student Developer": {
+            content: `
+                <p>In a sea of Computer Science graduates, how do you make yourself memorable to employers? Here are the unconventional strategies that work.</p>
+                
+                <h2>1. Solve Real Problems, Not Tutorial Problems</h2>
+                <p>Stop building another todo app. Find a problem in your daily life or community and solve it. Real problems have messy data, unclear requirements, and unexpected challenges—exactly what employers want you to handle.</p>
+                
+                <h2>2. Document Your Journey</h2>
+                <p>Share your failures and learning process, not just your successes. Employers love developers who can reflect on their work and communicate challenges clearly.</p>
+                <blockquote>"Your debugging process is more impressive than your final code."</blockquote>
+                
+                <h2>3. Contribute to Open Source</h2>
+                <p>Start small—fix typos, improve documentation, or add simple features. Open source contributions show you can work with existing codebases and collaborate with others.</p>
+                
+                <h2>4. Build Your Personal Brand</h2>
+                <p>Create content about what you're learning. Write blog posts, make videos, or give talks at local meetups. Teaching others solidifies your own knowledge.</p>
+                
+                <h2>5. Network Authentically</h2>
+                <p>Don't just ask for jobs—offer value. Share interesting articles, comment thoughtfully on LinkedIn posts, and help others in online communities.</p>
+                
+                <p>Remember: Standing out isn't about being the smartest—it's about being the most curious, helpful, and authentic version of yourself.</p>
+            `
+        },
+        "Balancing Academics and Side Projects": {
+            content: `
+                <p>How I manage to maintain good grades while working on personal projects that build my portfolio and attract potential employers.</p>
+                
+                <h2>The 70-30 Rule</h2>
+                <p>I dedicate 70% of my study time to coursework and 30% to personal projects. This ensures academic success while continuously building my portfolio.</p>
+                
+                <h2>Smart Project Selection</h2>
+                <p>Choose projects that complement your coursework. If you're studying algorithms, build a sorting visualizer. Learning databases? Create a personal finance tracker.</p>
+                <blockquote>"The best projects solve two problems: your assignment requirements and a real-world need."</blockquote>
+                
+                <h2>Time Management Strategies</h2>
+                <ul>
+                    <li>Use university breaks for bigger projects</li>
+                    <li>Work on projects during lighter course loads</li>
+                    <li>Set realistic deadlines and stick to them</li>
+                    <li>Document everything for future reference</li>
+                </ul>
+                
+                <h2>Making Projects Count</h2>
+                <p>Every project should teach you something new and be portfolio-worthy. Deploy your work, write good documentation, and be ready to explain your technical choices.</p>
+                
+                <p>The key is consistency over intensity. Small, regular progress beats sporadic bursts of activity.</p>
+            `
+        },
+        "Essential Tools Every CS Student Should Know": {
+            content: `
+                <p>A curated list of tools, frameworks, and resources that have significantly improved my productivity and learning efficiency as a Software Engineering student.</p>
+                
+                <h2>Development Environment</h2>
+                <h3>Visual Studio Code + Extensions</h3>
+                <p>The most versatile code editor with an ecosystem of extensions for every language and framework.</p>
+                
+                <h2>Version Control</h2>
+                <h3>Git & GitHub</h3>
+                <p>Essential for any developer. Learn it early, use it for everything, even personal assignments.</p>
+                <blockquote>"If it's not in Git, it doesn't exist."</blockquote>
+                
+                <h2>Productivity Tools</h2>
+                <ul>
+                    <li><strong>Notion:</strong> Note-taking and project planning</li>
+                    <li><strong>Postman:</strong> API testing and development</li>
+                    <li><strong>Docker:</strong> Consistent development environments</li>
+                    <li><strong>Figma:</strong> UI/UX design and prototyping</li>
+                </ul>
+                
+                <h2>Cloud Services</h2>
+                <h3>Deployment Platforms</h3>
+                <p>Netlify, Vercel, or GitHub Pages for static sites. Heroku or Railway for full-stack applications.</p>
+                
+                <h2>Learning Resources</h2>
+                <ul>
+                    <li>MDN Web Docs for web development</li>
+                    <li>Stack Overflow for problem-solving</li>
+                    <li>YouTube for visual learners</li>
+                    <li>Official documentation (always start here)</li>
+                </ul>
+                
+                <p>Focus on mastering a few tools rather than trying everything. Quality over quantity always wins.</p>
+            `
+        },
+        "From Idea to GitHub: My Project Development Process": {
+            content: `
+                <p>Behind the scenes look at how I approach personal projects, from initial concept to deployment and documentation. Includes my mistakes and lessons learned.</p>
+                
+                <h2>Phase 1: Ideation</h2>
+                <p>Ideas come from personal frustrations or genuine curiosity. I keep a running list and revisit it when starting new projects.</p>
+                
+                <h2>Phase 2: Planning</h2>
+                <h3>Key Questions:</h3>
+                <ul>
+                    <li>Does this already exist?</li>
+                    <li>What will I learn building this?</li>
+                    <li>What's the minimal viable version?</li>
+                    <li>How will I measure success?</li>
+                </ul>
+                
+                <h2>Phase 3: Development</h2>
+                <p>I use feature branches, write descriptive commit messages, and deploy early and often. Code reviews with peers help catch issues early.</p>
+                <blockquote>"Ship early, iterate based on feedback."</blockquote>
+                
+                <h2>Phase 4: Documentation</h2>
+                <p>Every project gets a comprehensive README with setup instructions, usage examples, and technology explanations.</p>
+                
+                <h2>Phase 5: Reflection</h2>
+                <p>I document what I learned, what I'd do differently, and ideas for future improvements. This reflection is as valuable as the code itself.</p>
+                
+                <h2>Common Mistakes</h2>
+                <ul>
+                    <li>Scope creep—adding features before finishing core functionality</li>
+                    <li>Perfect code syndrome—endless refactoring instead of shipping</li>
+                    <li>Poor documentation—forgetting how my own code works</li>
+                </ul>
+                
+                <p>Remember: Done is better than perfect. Your first version teaches you what to build in your second version.</p>
             `
         },
         "5 Essential VS Code Extensions for Computer Science Students": {
@@ -1056,5 +1219,7 @@ function getBlogPostContent(title, category, excerpt) {
         }
     };
     
-    return blogPosts[title] ? blogPosts[title].content : blogPosts["default"].content;
+    const content = blogPosts[title] ? blogPosts[title].content : blogPosts["default"].content;
+    console.log('📄 Content found:', !!content);
+    return content;
 }

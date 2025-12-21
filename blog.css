@@ -319,26 +319,30 @@
 
 /* Newsletter Section */
 .newsletter {
-    background: var(--primary-bg);
+    background: var(--secondary-bg) !important; /* Changed to lighter background for visibility */
     padding: 80px 0;
     border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--accent-color); /* Add visible border for debugging */
+    min-height: 300px; /* Ensure minimum height */
 }
 
 .newsletter-content {
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
+    position: relative;
+    z-index: 10; /* Ensure content is above any background elements */
 }
 
 .newsletter-content h2 {
     font-family: var(--font-heading);
     font-size: 2.5rem;
-    color: var(--text-primary);
+    color: var(--accent-color) !important; /* Make title more visible */
     margin-bottom: 1rem;
 }
 
 .newsletter-content p {
-    color: var(--text-secondary);
+    color: var(--text-primary) !important; /* Make text more visible */
     font-size: 1.1rem;
     margin-bottom: 2rem;
 }
@@ -352,11 +356,11 @@
 
 .newsletter-form input {
     flex: 1;
-    background: var(--card-bg);
-    border: 2px solid var(--border-color);
+    background: var(--card-bg) !important;
+    border: 2px solid var(--accent-color) !important; /* Make border more visible */
     border-radius: 25px;
     padding: 1rem 1.5rem;
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     font-size: 1rem;
     transition: var(--transition-smooth);
 }
@@ -364,16 +368,16 @@
 .newsletter-form input:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.3) !important; /* More visible focus */
 }
 
 .newsletter-form input::placeholder {
-    color: var(--text-muted);
+    color: var(--text-secondary) !important; /* More visible placeholder */
 }
 
 .subscribe-btn {
-    background: var(--gradient-secondary);
-    color: var(--text-primary);
+    background: var(--gradient-secondary) !important;
+    color: var(--text-primary) !important;
     border: none;
     border-radius: 25px;
     padding: 1rem 2rem;
@@ -384,11 +388,12 @@
     gap: 0.5rem;
     transition: var(--transition-smooth);
     white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3) !important; /* Add glow effect */
 }
 
 .subscribe-btn:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-light);
+    box-shadow: var(--shadow-medium) !important;
 }
 
 .newsletter-success {

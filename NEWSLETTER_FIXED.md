@@ -9,7 +9,7 @@ Your newsletter subscription now works using multiple reliable methods to ensure
 When someone subscribes to your newsletter, the system automatically:
 
 1. **📄 Downloads subscriber file** - A text file with all subscriber details
-2. **📋 Copies to clipboard** - Subscriber info is copied for easy pasting  
+2. **📋 Copies to clipboard** - Subscriber info is copied for easy pasting
 3. **📧 Opens email client** - Pre-fills an email to send to yourself
 4. **💾 Stores locally** - Saves in browser storage for reference
 5. **🎉 Shows success** - Beautiful confirmation for the user
@@ -17,6 +17,7 @@ When someone subscribes to your newsletter, the system automatically:
 ### 🎯 **What You'll Receive:**
 
 #### **Downloaded File Example:**
+
 ```
 🎉 NEW BLOG SUBSCRIBER
 
@@ -26,7 +27,7 @@ Time: 2:30:15 PM
 
 Subscriber is interested in:
 - Tech tips and tutorials
-- University life insights  
+- University life insights
 - Career growth advice
 - Programming projects
 
@@ -41,6 +42,7 @@ Source: Blog Newsletter Signup
 ```
 
 #### **Email Client Opens With:**
+
 - **Subject:** 🎉 New Blog Newsletter Subscription!
 - **Body:** Complete subscriber details
 - **To:** mubirueltonfelix@gmail.com
@@ -65,12 +67,15 @@ Source: Blog Newsletter Signup
 ### 📊 **Managing Subscribers:**
 
 #### **View All Subscribers:**
+
 Click the "📊 View Subscribers (Dev)" link at the bottom of the newsletter section, or run this in browser console:
+
 ```javascript
-showSubscribers()
+showSubscribers();
 ```
 
 #### **Export All Subscribers:**
+
 ```javascript
 // Copy all subscribers to clipboard
 const subscribers = JSON.parse(localStorage.getItem('blogSubscribers') || '[]');
@@ -101,27 +106,32 @@ The system uses **triple redundancy** to ensure you never miss a subscriber:
 When you have 50+ subscribers, consider upgrading to:
 
 1. **MailChimp** - Free up to 2,000 subscribers
-2. **ConvertKit** - Great for content creators  
+2. **ConvertKit** - Great for content creators
 3. **Substack** - Built for newsletter publishing
 4. **EmailOctopus** - Affordable alternative
 
 ### 🔧 **Customization:**
 
 #### **Change Your Email:**
+
 In `blog.js`, line ~220, update:
+
 ```javascript
 const mailtoLink = `mailto:YOUR_EMAIL@gmail.com?subject=${subject}&body=${body}`;
 ```
 
 #### **Customize Success Message:**
+
 Edit the `.newsletter-success` content in `blog.html`
 
 #### **Add Welcome Email Template:**
+
 Include a welcome email template in the downloaded file
 
 ### 📈 **Analytics:**
 
 Track your newsletter growth:
+
 - **Subscription rate** - Monitor daily/weekly signups
 - **Subscriber sources** - See where people find your blog
 - **Engagement** - Monitor which posts drive subscriptions
@@ -129,16 +139,19 @@ Track your newsletter growth:
 ### ❌ **Troubleshooting:**
 
 **File not downloading?**
+
 - Check browser downloads settings
 - Disable popup blockers
 - Try different browser
 
 **Clipboard not working?**
+
 - Grant clipboard permissions
 - Try the manual copy button
 - Check browser console
 
 **Email client not opening?**
+
 - Set default email client
 - Try different email apps
 - Use manual email method
@@ -157,4 +170,4 @@ Track your newsletter growth:
 
 Every subscription will trigger multiple notifications to ensure you never miss a potential subscriber. The system is robust, user-friendly, and ready for growth! 📈
 
-*Test it now by subscribing to your own newsletter!*
+_Test it now by subscribing to your own newsletter!_

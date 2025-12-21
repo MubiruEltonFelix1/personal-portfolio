@@ -5,6 +5,7 @@ This comprehensive guide will help you manage your blog posts, from creating new
 ## 📂 File Structure
 
 Your blog system consists of the following files:
+
 ```
 personal-portfolio/
 ├── blog.html          # Main blog page structure
@@ -18,50 +19,54 @@ personal-portfolio/
 ## 🆕 Adding New Blog Posts
 
 ### Step 1: Locate the Blog Posts Section
+
 Open `blog.html` and find the blog posts grid section (around line 100-200):
 
 ```html
 <div class="posts-grid">
-    <!-- Existing posts here -->
-    <!-- Add new posts here -->
+  <!-- Existing posts here -->
+  <!-- Add new posts here -->
 </div>
 ```
 
 ### Step 2: Blog Post Template
+
 Use this template for new blog posts:
 
 ```html
 <div class="blog-post" data-category="YOUR_CATEGORY">
-    <div class="post-image">
-        <div class="post-image-placeholder">
-            <i class="fas fa-ICON_NAME"></i>
-        </div>
-        <!-- Optional: Add featured badge -->
-        <div class="post-badge">New</div>
+  <div class="post-image">
+    <div class="post-image-placeholder">
+      <i class="fas fa-ICON_NAME"></i>
     </div>
-    <div class="post-content">
-        <div class="post-meta">
-            <span class="post-category">CATEGORY_NAME</span>
-            <span class="post-date">Month Day, Year</span>
-        </div>
-        <h3 class="post-title">Your Blog Post Title Here</h3>
-        <p class="post-excerpt">
-            A compelling excerpt that summarizes your blog post and encourages readers to click "Read More". Keep it between 100-150 characters.
-        </p>
-        <div class="post-tags">
-            <span class="tag">tag1</span>
-            <span class="tag">tag2</span>
-            <span class="tag">tag3</span>
-        </div>
-        <a href="#" class="read-more-btn">
-            <span>Read More</span>
-            <i class="fas fa-arrow-right"></i>
-        </a>
+    <!-- Optional: Add featured badge -->
+    <div class="post-badge">New</div>
+  </div>
+  <div class="post-content">
+    <div class="post-meta">
+      <span class="post-category">CATEGORY_NAME</span>
+      <span class="post-date">Month Day, Year</span>
     </div>
+    <h3 class="post-title">Your Blog Post Title Here</h3>
+    <p class="post-excerpt">
+      A compelling excerpt that summarizes your blog post and encourages readers to click "Read
+      More". Keep it between 100-150 characters.
+    </p>
+    <div class="post-tags">
+      <span class="tag">tag1</span>
+      <span class="tag">tag2</span>
+      <span class="tag">tag3</span>
+    </div>
+    <a href="#" class="read-more-btn">
+      <span>Read More</span>
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
 </div>
 ```
 
 ### Step 3: Add Full Blog Post Content
+
 To add the full content that appears when users click "Read More":
 
 1. **Open `blog.js`** and find the `getBlogPostContent` function (around line 400)
@@ -71,18 +76,18 @@ To add the full content that appears when users click "Read More":
 "Your Exact Blog Post Title": {
     content: `
         <p>Introduction paragraph...</p>
-        
+
         <h2>Main Section Heading</h2>
         <p>Content for this section...</p>
-        
+
         <h3>Subsection</h3>
         <ul>
             <li>Point 1</li>
             <li>Point 2</li>
         </ul>
-        
+
         <blockquote>"An inspiring quote or key insight."</blockquote>
-        
+
         <p>More content...</p>
     `
 },
@@ -91,26 +96,29 @@ To add the full content that appears when users click "Read More":
 **Important:** The title in `blog.js` must exactly match the title in your HTML post card.
 
 ### Step 4: Category Options
+
 Available categories (must match `data-category` attribute):
 
 - `all` - Shows in all categories
 - `university` - University Life posts
-- `tech` - Tech Tips posts  
+- `tech` - Tech Tips posts
 - `coding` - Coding tutorials
 - `personal` - Personal development
 
 ### Step 4: Featured Posts
+
 To make a post featured (full-width with larger layout), add the `featured` class:
 
 ```html
 <div class="blog-post featured" data-category="YOUR_CATEGORY">
-    <!-- Same content structure as above -->
+  <!-- Same content structure as above -->
 </div>
 ```
 
 ## 📝 Content Writing Guidelines
 
 ### Blog Post Titles
+
 - Keep titles between 40-60 characters
 - Make them compelling and descriptive
 - Use action words when appropriate
@@ -120,12 +128,14 @@ To make a post featured (full-width with larger layout), add the `featured` clas
   - "Essential Tools Every Computer Science Student Needs"
 
 ### Blog Post Excerpts
+
 - 100-150 characters works best
 - End with a hook or question
 - Avoid spoiling the main content
 - Focus on benefits to the reader
 
 ### Tags
+
 - Use 2-5 tags per post
 - Keep tags consistent across similar posts
 - Popular tag ideas:
@@ -133,7 +143,9 @@ To make a post featured (full-width with larger layout), add the `featured` clas
   - `career-advice`, `project-showcase`, `tutorials`, `motivation`
 
 ### Icons
+
 Choose appropriate Font Awesome icons for your posts:
+
 - `fa-graduation-cap` - University posts
 - `fa-code` - Programming posts
 - `fa-chart-line` - Data science posts
@@ -146,10 +158,11 @@ Choose appropriate Font Awesome icons for your posts:
 ### Adding New Categories
 
 1. **Update the category buttons** in `blog.html` (around line 80):
+
 ```html
 <div class="category-card" data-category="new-category">
-    <i class="fas fa-icon-name"></i>
-    <span>Category Name</span>
+  <i class="fas fa-icon-name"></i>
+  <span>Category Name</span>
 </div>
 ```
 
@@ -157,19 +170,20 @@ Choose appropriate Font Awesome icons for your posts:
 
 ### Existing Categories
 
-| Category | Data Attribute | Icon | Purpose |
-|----------|----------------|------|---------|
-| All Posts | `all` | `fa-th` | Shows all posts |
-| University Life | `university` | `fa-graduation-cap` | Campus experiences, student life |
-| Tech Tips | `tech` | `fa-lightbulb` | Technology insights, tutorials |
-| Coding | `coding` | `fa-code` | Programming projects, tutorials |
-| Personal | `personal` | `fa-user` | Personal growth, career advice |
+| Category        | Data Attribute | Icon                | Purpose                          |
+| --------------- | -------------- | ------------------- | -------------------------------- |
+| All Posts       | `all`          | `fa-th`             | Shows all posts                  |
+| University Life | `university`   | `fa-graduation-cap` | Campus experiences, student life |
+| Tech Tips       | `tech`         | `fa-lightbulb`      | Technology insights, tutorials   |
+| Coding          | `coding`       | `fa-code`           | Programming projects, tutorials  |
+| Personal        | `personal`     | `fa-user`           | Personal growth, career advice   |
 
 ## 📖 Blog Post Modal System
 
 Your blog uses a modal system for displaying full blog post content. When users click "Read More", a modal window opens with the complete article content.
 
 ### How It Works
+
 - **Modal trigger**: "Read More" buttons open the modal
 - **Content loading**: Full content is loaded from the `getBlogPostContent` function in `blog.js`
 - **Responsive design**: Modal adapts to different screen sizes
@@ -186,13 +200,13 @@ Blog post content supports rich HTML formatting:
 <h3>Subheadings</h3>
 
 <ul>
-    <li>Bullet points</li>
-    <li>Lists</li>
+  <li>Bullet points</li>
+  <li>Lists</li>
 </ul>
 
 <ol>
-    <li>Numbered lists</li>
-    <li>Steps</li>
+  <li>Numbered lists</li>
+  <li>Steps</li>
 </ol>
 
 <blockquote>"Inspiring quotes or key insights"</blockquote>
@@ -208,6 +222,7 @@ function example() {
 ```
 
 ### Content Writing Tips
+
 - **Use headings** to break up long content
 - **Include quotes** for key insights
 - **Add code examples** when relevant
@@ -218,20 +233,27 @@ function example() {
 ## 🎨 Customizing Post Appearance
 
 ### Post Images
+
 Currently using placeholder icons. To add real images:
 
 1. **Replace the placeholder div**:
+
 ```html
 <!-- Replace this -->
 <div class="post-image-placeholder">
-    <i class="fas fa-icon-name"></i>
+  <i class="fas fa-icon-name"></i>
 </div>
 
 <!-- With this -->
-<img src="path/to/your/image.jpg" alt="Post description" style="width: 100%; height: 100%; object-fit: cover;">
+<img
+  src="path/to/your/image.jpg"
+  alt="Post description"
+  style="width: 100%; height: 100%; object-fit: cover;"
+/>
 ```
 
 2. **Create an images folder**:
+
 ```
 personal-portfolio/
 ├── images/
@@ -242,24 +264,29 @@ personal-portfolio/
 ```
 
 ### Custom Badges
+
 Add special badges to highlight posts:
 
 ```html
-<div class="post-badge">New</div>          <!-- New post -->
-<div class="post-badge">Popular</div>      <!-- Popular post -->
-<div class="post-badge">Featured</div>     <!-- Featured content -->
+<div class="post-badge">New</div>
+<!-- New post -->
+<div class="post-badge">Popular</div>
+<!-- Popular post -->
+<div class="post-badge">Featured</div>
+<!-- Featured content -->
 ```
 
 ### Styling Badges
+
 Add custom badge styles in `blog.css`:
 
 ```css
 .post-badge.popular {
-    background: #ff6b6b;
+  background: #ff6b6b;
 }
 
 .post-badge.featured {
-    background: #4ecdc4;
+  background: #4ecdc4;
 }
 ```
 
@@ -268,11 +295,13 @@ Add custom badge styles in `blog.css`:
 Your blog is already responsive, but keep these guidelines in mind:
 
 ### Content Length
+
 - Keep titles under 50 characters for mobile
 - Excerpts should be even shorter on small screens
 - Test your content on different screen sizes
 
 ### Images
+
 - Optimize images for web (under 500KB recommended)
 - Use appropriate alt text for accessibility
 - Consider using WebP format for better performance
@@ -280,6 +309,7 @@ Your blog is already responsive, but keep these guidelines in mind:
 ## 🔗 Linking and Navigation
 
 ### Internal Links
+
 Link to specific sections of your portfolio:
 
 ```html
@@ -289,11 +319,12 @@ Link to specific sections of your portfolio:
 ```
 
 ### External Links
+
 Always use proper attributes for external links:
 
 ```html
 <a href="https://external-site.com" target="_blank" rel="noopener noreferrer">
-    External Resource
+  External Resource
 </a>
 ```
 
@@ -302,24 +333,28 @@ Always use proper attributes for external links:
 ### Content Calendar Ideas
 
 **University Life Posts:**
+
 - "A Day in the Life of a Software Engineering Student"
 - "Best Study Spots at MBARARA University"
 - "Balancing Coursework and Personal Projects"
 - "Student Resources You Might Not Know About"
 
 **Tech Tips Posts:**
+
 - "Essential VS Code Extensions for Students"
 - "Git Commands Every Student Should Know"
 - "Building Your First Data Visualization"
 - "Free Resources for Learning Python"
 
 **Coding Posts:**
+
 - "My Premier League Data Project Walkthrough"
 - "Debugging Tips for Beginners"
 - "Code Organization Best Practices"
 - "Version Control for Student Projects"
 
 **Personal Development:**
+
 - "Standing Out as a Computer Science Student"
 - "Building a Professional Online Presence"
 - "Networking Tips for Introverted Students"
@@ -328,6 +363,7 @@ Always use proper attributes for external links:
 ## 🚀 Advanced Features
 
 ### Newsletter Integration
+
 The newsletter signup is already implemented. To connect it to a real email service:
 
 1. **MailChimp Integration**: Replace the form action in `blog.html`
@@ -335,14 +371,18 @@ The newsletter signup is already implemented. To connect it to a real email serv
 3. **EmailJS**: For direct email integration without backend
 
 ### Analytics
+
 Consider adding Google Analytics to track:
+
 - Most popular blog posts
 - User engagement time
 - Traffic sources
 - Mobile vs desktop usage
 
 ### SEO Optimization
+
 For each blog post:
+
 - Use descriptive URLs if you convert to individual pages
 - Add meta descriptions
 - Use proper heading hierarchy (H1, H2, H3)
@@ -351,17 +391,21 @@ For each blog post:
 ## 🛠️ Technical Maintenance
 
 ### Performance
+
 - Optimize images before adding them
 - Keep the number of posts reasonable (consider pagination for 20+ posts)
 - Test loading times regularly
 
 ### Updates
+
 - Keep Font Awesome icons updated
 - Test functionality after any changes
 - Backup your content regularly
 
 ### Browser Testing
+
 Test your blog on:
+
 - Chrome, Firefox, Safari, Edge
 - Mobile devices (iOS Safari, Chrome Mobile)
 - Different screen sizes
@@ -386,19 +430,23 @@ Before publishing a new blog post:
 ### Common Issues
 
 **Blog button doesn't work:**
+
 - Check that `blog.html` exists in the same folder as `index.html`
 - Verify the link path in navigation
 
 **Category filtering broken:**
+
 - Ensure `data-category` attributes match category button values
 - Check browser console for JavaScript errors
 
 **Styling looks wrong:**
+
 - Verify `blog.css` is linked in `blog.html`
 - Clear browser cache
 - Check for CSS syntax errors
 
 **Mobile layout issues:**
+
 - Test on actual mobile devices
 - Use browser developer tools to simulate mobile
 - Check CSS media queries
@@ -406,6 +454,7 @@ Before publishing a new blog post:
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check browser console for errors
 2. Validate HTML using online validators
 3. Test in incognito/private browsing mode
@@ -413,5 +462,5 @@ If you encounter issues:
 
 ---
 
-*Last updated: December 21, 2025*
-*For technical support, refer to the main portfolio documentation.*
+_Last updated: December 21, 2025_
+_For technical support, refer to the main portfolio documentation._
