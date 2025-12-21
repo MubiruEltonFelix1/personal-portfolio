@@ -1,6 +1,6 @@
 // Environment variable loader for frontend
 // This script loads configuration from .env file for development
-// In production, you should use environment variables or a build process
+// In production, falls back to emailjs-config.js
 
 (function() {
     // Check if we're in development (file:// protocol or localhost)
@@ -8,10 +8,18 @@
                          window.location.hostname === 'localhost' || 
                          window.location.hostname === '127.0.0.1';
 
+    console.log(`🌍 Environment: ${isDevelopment ? 'Development' : 'Production'}`);
+
     if (isDevelopment) {
+        console.log('🔧 Loading configuration from .env file...');
         // For development, load from .env file
         fetch('.env')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(data => {
                 const lines = data.split('\n');
                 const config = {};
@@ -34,41 +42,55 @@
                 };
 
                 console.log('✅ Environment variables loaded from .env file');
-                
-                // Initialize EmailJS if available
-                if (typeof emailjs !== 'undefined' && window.EMAILJS_CONFIG.publicKey) {
+                initializeEmailJS();
+            })
+            .catch(error => {
+                console.warn('⚠️ Failed to load .env file:', error);
+                console.log('🔄 Falling back to emailjs-config.js');
+                loadFallbackConfig();
+            });
+    } else {
+        // For production, use fallback to emailjs-config.js
+        console.log('🚀 Production mode - loading emailjs-config.js');
+        loadFallbackConfig();
+    }
+
+    function loadFallbackConfig() {
+        // Load the emailjs-config.js file
+        const script = document.createElement('script');
+        script.src = 'emailjs-config.js';
+        script.onload = function() {
+            console.log('✅ Fallback configuration loaded');
+            initializeEmailJS();
+        };
+        script.onerror = function() {
+            console.error('❌ Failed to load emailjs-config.js');
+            console.error('� Make sure emailjs-config.js exists or set up environment variables');
+        };
+        document.head.appendChild(script);
+    }
+
+    function initializeEmailJS() {
+        // Wait a moment for EmailJS library to be available
+        setTimeout(() => {
+            if (typeof emailjs !== 'undefined' && window.EMAILJS_CONFIG && window.EMAILJS_CONFIG.publicKey) {
+                try {
                     emailjs.init({
                         publicKey: window.EMAILJS_CONFIG.publicKey
                     });
-                    console.log('✅ EmailJS initialized from .env configuration');
+                    console.log('✅ EmailJS initialized successfully');
+                    console.log('📧 Service ID:', window.EMAILJS_CONFIG.serviceId);
+                    console.log('📧 Template ID:', window.EMAILJS_CONFIG.templateId);
+                } catch (error) {
+                    console.error('❌ EmailJS initialization failed:', error);
                 }
-            })
-            .catch(error => {
-                console.error('❌ Failed to load .env file:', error);
-                console.log('Falling back to emailjs-config.js');
-                
-                // Fallback to existing config file
-                const script = document.createElement('script');
-                script.src = 'emailjs-config.js';
-                document.head.appendChild(script);
-            });
-    } else {
-        // For production, use environment variables or build-time configuration
-        console.log('🚀 Production mode - using build-time configuration');
-        
-        // You can set these during your build process
-        window.EMAILJS_CONFIG = {
-            publicKey: process.env.EMAILJS_PUBLIC_KEY || 'Rx8jjg8cEZaG7P8V2',
-            serviceId: process.env.EMAILJS_SERVICE_ID || 'service_7zp044t',
-            templateId: process.env.EMAILJS_TEMPLATE_ID || 'template_vzqz49g'
-        };
-
-        // Initialize EmailJS
-        if (typeof emailjs !== 'undefined') {
-            emailjs.init({
-                publicKey: window.EMAILJS_CONFIG.publicKey
-            });
-            console.log('✅ EmailJS initialized from environment variables');
-        }
+            } else {
+                console.error('❌ EmailJS configuration incomplete:', {
+                    emailjsAvailable: typeof emailjs !== 'undefined',
+                    configAvailable: !!window.EMAILJS_CONFIG,
+                    publicKeyAvailable: !!(window.EMAILJS_CONFIG && window.EMAILJS_CONFIG.publicKey)
+                });
+            }
+        }, 100);
     }
 })();

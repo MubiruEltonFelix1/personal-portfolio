@@ -1,8 +1,8 @@
 # Environment Variables
 .env
 
-# EmailJS credentials
-emailjs-config.js
+# EmailJS credentials (commented out to allow production deployment)
+# emailjs-config.js
 
 # Local development
 .vscode/
