@@ -1223,3 +1223,111 @@ function getBlogPostContent(title, category, excerpt) {
     console.log('📄 Content found:', !!content);
     return content;
 }
+
+// Blog Search Functionality
+function searchPosts() {
+    const searchInput = document.getElementById('blogSearch');
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const posts = document.querySelectorAll('.blog-post');
+    
+    if (!searchTerm) {
+        // Show all posts if search is empty
+        posts.forEach(post => post.style.display = 'block');
+        return;
+    }
+    
+    posts.forEach(post => {
+        const title = post.querySelector('.post-title').textContent.toLowerCase();
+        const excerpt = post.querySelector('.post-excerpt').textContent.toLowerCase();
+        const category = post.querySelector('.post-category').textContent.toLowerCase();
+        const tags = Array.from(post.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+        
+        const searchableContent = `${title} ${excerpt} ${category} ${tags}`;
+        
+        if (searchableContent.includes(searchTerm)) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
+
+// Add real-time search as user types
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('blogSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', searchPosts);
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                searchPosts();
+            }
+        });
+    }
+});
+
+// Social Sharing Functions
+function sharePost(postId, platform) {
+    const postTitles = {
+        'featured': 'How to Excel in Software Engineering at University: A Student\'s Guide',
+        'data-viz': 'Building Your First Data Visualization Project',
+        'career-growth': 'Standing Out as a Student Developer',
+        'time-management': 'Balancing Academics and Side Projects',
+        'cs-tools': 'Essential Tools Every CS Student Should Know',
+        'project-process': 'From Idea to GitHub: My Project Development Process',
+        'vscode-extensions': '5 Essential VS Code Extensions for Computer Science Students'
+    };
+    
+    const baseUrl = window.location.origin + window.location.pathname;
+    const postUrl = `${baseUrl}#post-${postId}`;
+    const postTitle = postTitles[postId] || 'Check out this blog post';
+    const authorHandle = '@MubiruEltonFelix'; // Replace with your actual handle
+    
+    let shareUrl = '';
+    
+    switch(platform) {
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(postTitle)}&url=${encodeURIComponent(postUrl)}&via=${encodeURIComponent(authorHandle.replace('@', ''))}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
+            break;
+    }
+    
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+}
+
+function copyPostLink(postId) {
+    const baseUrl = window.location.origin + window.location.pathname;
+    const postUrl = `${baseUrl}#post-${postId}`;
+    
+    navigator.clipboard.writeText(postUrl).then(() => {
+        // Show a temporary success message
+        const btn = event.target.closest('.share-btn');
+        const originalIcon = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        btn.style.background = '#00ff88';
+        btn.style.color = 'white';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalIcon;
+            btn.style.background = '';
+            btn.style.color = '';
+        }, 2000);
+    }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = postUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        alert('Link copied to clipboard!');
+    });
+}

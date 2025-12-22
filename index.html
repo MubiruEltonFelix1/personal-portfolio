@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhanced-features.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -146,7 +147,7 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Featured Project</h2>
+            <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
                 <div class="project-card featured-project">
                     <div class="project-header">
@@ -156,26 +157,65 @@
                                 target="_blank" rel="noopener noreferrer" class="project-link" title="View on GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
+                            <button class="project-link demo-btn" onclick="showProjectDemo('premier-league')" title="View Interactive Demo">
+                                <i class="fas fa-play"></i>
+                            </button>
                         </div>
                     </div>
-                    <h3 class="project-title">Premier League Player Age vs Salary Visualization</h3>
-                    <p class="project-description">
-                        A comprehensive data visualization project that explores the relationship between Premier League
-                        football players' ages and their salaries, using real-world data to uncover trends and insights
-                        in professional football economics.
-                    </p>
+                    <h3 class="project-title">Premier League Player Age vs Salary Analysis</h3>
+                    
+                    <!-- Case Study Format -->
+                    <div class="case-study">
+                        <div class="case-study-section">
+                            <h4 class="case-study-title"><i class="fas fa-lightbulb"></i> Problem Statement</h4>
+                            <p class="case-study-content">
+                                Understanding the relationship between player age and salary in Premier League football to uncover insights about player valuation and career trajectories in professional sports.
+                            </p>
+                        </div>
+                        
+                        <div class="case-study-section">
+                            <h4 class="case-study-title"><i class="fas fa-cogs"></i> Methodology</h4>
+                            <p class="case-study-content">
+                                Collected real-world Premier League data, performed statistical analysis, and created interactive visualizations using Python data science libraries including Pandas, Matplotlib, and Seaborn.
+                            </p>
+                        </div>
+                        
+                        <div class="case-study-section">
+                            <h4 class="case-study-title"><i class="fas fa-chart-line"></i> Key Insights</h4>
+                            <ul class="insights-list">
+                                <li>Peak salary age for Premier League players occurs around 27-29 years</li>
+                                <li>Significant salary variation exists within age groups, indicating skill-based compensation</li>
+                                <li>Younger players show high potential with strategic investment opportunities</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="case-study-section">
+                            <h4 class="case-study-title"><i class="fas fa-rocket"></i> Technical Implementation</h4>
+                            <p class="case-study-content">
+                                Built comprehensive data pipeline with automated cleaning, statistical modeling, and dynamic visualization generation. Implemented correlation analysis and regression modeling for predictive insights.
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Data Analysis</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Matplotlib</span>
+                        <span class="tech-tag">Seaborn</span>
+                        <span class="tech-tag">Statistical Analysis</span>
                         <span class="tech-tag">Data Visualization</span>
-                        <span class="tech-tag">Statistics</span>
                     </div>
+                    
                     <div class="project-actions">
                         <a href="https://github.com/MubiruEltonFelix1/premier-league-age-salary-visualization"
                             target="_blank" rel="noopener noreferrer" class="btn btn-primary project-btn">
                             <i class="fab fa-github"></i>
-                            View on GitHub
+                            View Code
                         </a>
+                        <button class="btn btn-secondary project-btn" onclick="showProjectDemo('premier-league')">
+                            <i class="fas fa-play"></i>
+                            Interactive Demo
+                        </button>
                     </div>
                 </div>
 
@@ -187,6 +227,20 @@
                             Exciting AI/ML and data science projects are currently in development.
                             Stay tuned for innovative solutions and cutting-edge implementations.
                         </p>
+                        <div class="upcoming-projects">
+                            <div class="upcoming-project">
+                                <i class="fas fa-brain"></i>
+                                <span>Machine Learning Prediction Models</span>
+                            </div>
+                            <div class="upcoming-project">
+                                <i class="fas fa-robot"></i>
+                                <span>AI-Powered Web Applications</span>
+                            </div>
+                            <div class="upcoming-project">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>Advanced Data Analytics Dashboards</span>
+                            </div>
+                        </div>
                         <div class="coming-soon-animation">
                             <div class="dot"></div>
                             <div class="dot"></div>
@@ -319,6 +373,85 @@
         </div>
     </section>
 
+    <!-- GitHub Integration Section -->
+    <section id="github-stats" class="github-stats">
+        <div class="container">
+            <h2 class="section-title">GitHub Activity & Contributions</h2>
+            <div class="github-content">
+                <div class="github-overview">
+                    <div class="github-card">
+                        <div class="github-header">
+                            <i class="fab fa-github"></i>
+                            <h3>Code Activity</h3>
+                        </div>
+                        <div class="github-metrics">
+                            <div class="metric">
+                                <span class="metric-value" id="github-repos">-</span>
+                                <span class="metric-label">Public Repositories</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value" id="github-commits">-</span>
+                                <span class="metric-label">Total Contributions</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value" id="github-languages">-</span>
+                                <span class="metric-label">Languages Used</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="github-card">
+                        <div class="github-header">
+                            <i class="fas fa-star"></i>
+                            <h3>Featured Repositories</h3>
+                        </div>
+                        <div class="featured-repos" id="featured-repos">
+                            <div class="repo-item">
+                                <h4 class="repo-name">premier-league-age-salary-visualization</h4>
+                                <p class="repo-description">Data analysis and visualization of Premier League player statistics</p>
+                                <div class="repo-stats">
+                                    <span class="repo-language">Python</span>
+                                    <span class="repo-stars">⭐ 0</span>
+                                </div>
+                            </div>
+                            <!-- More repos will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="github-chart">
+                    <h3>Contribution Graph</h3>
+                    <div class="contribution-graph">
+                        <img src="https://ghchart.rshah.org/MubiruEltonFelix1" alt="GitHub Contribution Graph" class="github-graph-img" />
+                    </div>
+                    <p class="github-note">Real-time GitHub activity visualization</p>
+                </div>
+                
+                <div class="github-languages">
+                    <h3>Most Used Languages</h3>
+                    <div class="languages-chart">
+                        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MubiruEltonFelix1&layout=compact&theme=radical" alt="Top Languages" class="languages-img" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Demo Modal -->
+    <div id="project-demo-modal" class="demo-modal">
+        <div class="demo-content">
+            <div class="demo-header">
+                <h3 id="demo-title">Project Demo</h3>
+                <button class="demo-close" onclick="closeProjectDemo()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="demo-body" id="demo-body">
+                <!-- Demo content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -348,6 +481,20 @@
                             <div>
                                 <span class="method-label">GitHub</span>
                                 <span class="method-value">github.com/MubiruEltonFelix1</span>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fab fa-youtube"></i>
+                            <div>
+                                <span class="method-label">YouTube</span>
+                                <span class="method-value">youtube.com/c/EltonLyricalGenius</span>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fab fa-tiktok"></i>
+                            <div>
+                                <span class="method-label">TikTok</span>
+                                <span class="method-value">@mubirueltonfelix1</span>
                             </div>
                         </div>
                     </div>
@@ -387,6 +534,10 @@
                     <a href="https://www.linkedin.com/in/mubiru-elton-felix-9ab50a1b0/" target="_blank"
                         rel="noopener noreferrer" class="social-link" title="LinkedIn"><i
                             class="fab fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/c/EltonLyricalGenius" target="_blank" rel="noopener noreferrer"
+                        class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@mubirueltonfelix1" target="_blank" rel="noopener noreferrer"
+                        class="social-link" title="TikTok"><i class="fab fa-tiktok"></i></a>
                     <a href="mailto:mubirueltonfelix@gmail.com" class="social-link" title="Email"><i
                             class="fas fa-envelope"></i></a>
                     <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
@@ -395,7 +546,72 @@
         </div>
     </footer>
 
+    <!-- AI Portfolio Assistant -->
+    <div class="ai-assistant">
+        <div class="assistant-toggle" id="assistantToggle">
+            <i class="fas fa-robot"></i>
+            <span class="assistant-tooltip">Ask me anything about Elton's portfolio!</span>
+        </div>
+        
+        <div class="assistant-chat" id="assistantChat">
+            <div class="chat-header">
+                <div class="assistant-info">
+                    <div class="assistant-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="assistant-details">
+                        <h4>Portfolio Assistant</h4>
+                        <div class="assistant-status">
+                            <span class="status-dot"></span>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="close-chat" id="closeChat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message assistant-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>👋 Hi! I'm Elton's AI assistant. I can help you learn about his experience, projects, and skills. Try asking me:</p>
+                        <div class="quick-questions">
+                            <button class="quick-question">
+                                What are his main skills?
+                            </button>
+                            <button class="quick-question">
+                                Tell me about his projects
+                            </button>
+                            <button class="quick-question">
+                                What's his background?
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Ask me anything about Elton..." maxlength="200">
+                    <button class="send-btn" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="typing-indicator" id="typingIndicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="enhanced-features.js"></script>
 </body>
 
 </html>

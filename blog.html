@@ -74,6 +74,16 @@
     <!-- Blog Categories -->
     <section class="blog-categories">
         <div class="container">
+            <!-- Search Bar -->
+            <div class="blog-search">
+                <div class="search-container">
+                    <input type="text" id="blogSearch" placeholder="Search articles..." class="search-input">
+                    <button class="search-btn" onclick="searchPosts()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
             <div class="categories-grid">
                 <div class="category-card active" data-category="all">
                     <i class="fas fa-th"></i>
@@ -114,9 +124,19 @@
                     <div class="post-content">
                         <div class="post-meta">
                             <span class="post-category">University Life</span>
-                            <span class="post-date">December 2024</span>
+                            <span class="post-date">December 2025</span>
                         </div>
                         <h2 class="post-title">How to Excel in Software Engineering at University: A Student's Guide</h2>
+                        <div class="post-meta-extra">
+                            <span class="read-time">
+                                <i class="fas fa-clock"></i>
+                                8 min read
+                            </span>
+                            <span class="post-views">
+                                <i class="fas fa-eye"></i>
+                                1.2k views
+                            </span>
+                        </div>
                         <p class="post-excerpt">
                             Navigating through Software Engineering courses can be challenging. Here are the strategies 
                             that helped me maintain excellent grades while building real-world skills that employers actually want.
@@ -126,10 +146,23 @@
                             <span class="tag">Software Engineering</span>
                             <span class="tag">University</span>
                         </div>
-                        <a href="javascript:void(0)" class="read-more-btn" data-post="featured" onclick="return false;">
-                            Read More
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <div class="post-actions">
+                            <a href="javascript:void(0)" class="read-more-btn" data-post="featured" onclick="return false;">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="social-share">
+                                <button class="share-btn" onclick="sharePost('featured', 'twitter')" title="Share on Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button class="share-btn" onclick="sharePost('featured', 'linkedin')" title="Share on LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </button>
+                                <button class="share-btn" onclick="copyPostLink('featured')" title="Copy Link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </article>
 
@@ -143,9 +176,19 @@
                     <div class="post-content">
                         <div class="post-meta">
                             <span class="post-category">Tech Tips</span>
-                            <span class="post-date">November 2024</span>
+                            <span class="post-date">November 2025</span>
                         </div>
                         <h3 class="post-title">Building Your First Data Visualization Project</h3>
+                        <div class="post-meta-extra">
+                            <span class="read-time">
+                                <i class="fas fa-clock"></i>
+                                6 min read
+                            </span>
+                            <span class="post-views">
+                                <i class="fas fa-eye"></i>
+                                854 views
+                            </span>
+                        </div>
                         <p class="post-excerpt">
                             A step-by-step guide to creating compelling data visualizations that tell a story. 
                             Learn from my Premier League salary analysis project.
@@ -170,7 +213,7 @@
                     <div class="post-content">
                         <div class="post-meta">
                             <span class="post-category">Career Growth</span>
-                            <span class="post-date">October 2024</span>
+                            <span class="post-date">October 2025</span>
                         </div>
                         <h3 class="post-title">Standing Out as a Student Developer</h3>
                         <p class="post-excerpt">
@@ -197,7 +240,7 @@
                     <div class="post-content">
                         <div class="post-meta">
                             <span class="post-category">University Life</span>
-                            <span class="post-date">September 2024</span>
+                            <span class="post-date">September 2025</span>
                         </div>
                         <h3 class="post-title">Balancing Academics and Side Projects</h3>
                         <p class="post-excerpt">
@@ -224,7 +267,7 @@
                     <div class="post-content">
                         <div class="post-meta">
                             <span class="post-category">Tech Tips</span>
-                            <span class="post-date">August 2024</span>
+                            <span class="post-date">August 2025</span>
                         </div>
                         <h3 class="post-title">Essential Tools Every CS Student Should Know</h3>
                         <p class="post-excerpt">
@@ -251,7 +294,7 @@
                     <div class="post-content">
                         <div class="post-meta">
                             <span class="post-category">Projects</span>
-                            <span class="post-date">July 2024</span>
+                            <span class="post-date">July 2025</span>
                         </div>
                         <h3 class="post-title">From Idea to GitHub: My Project Development Process</h3>
                         <p class="post-excerpt">
