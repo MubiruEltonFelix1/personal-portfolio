@@ -1,7 +1,4 @@
 // DOM Elements
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section');
 const skillBars = document.querySelectorAll('.skill-progress');
 const contactForm = document.getElementById('contactForm');
@@ -17,49 +14,33 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTypingEffect();
 });
 
-// Mobile Navigation
-if (hamburger && navMenu) {
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-}
-
-// Close mobile menu when clicking on a link
-if (navLinks.length > 0) {
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (hamburger && navMenu) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-    });
-}
-
 // Smooth scrolling for navigation links
-if (navLinks.length > 0) {
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            
-            // Check if it's an external link (like blog.html) or internal section link
-            if (targetId.startsWith('#')) {
-                e.preventDefault();
-                const targetSection = document.querySelector(targetId);
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (navLinks.length > 0) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
                 
-                if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                // Check if it's an external link (like blog.html) or internal section link
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
-            }
-            // For external links (like blog.html), let the default behavior happen
+                // For external links (like blog.html), let the default behavior happen
+            });
         });
-    });
-}
+    }
+});
 
 // Particles Animation
 function initializeParticles() {
