@@ -81,6 +81,10 @@ class GitHubIntegration {
 class ProjectDemoSystem {
     constructor() {
         this.demos = {
+            'titanic-analysis': {
+                title: 'Titanic Survival Prediction Analysis',
+                content: this.generateTitanicDemo()
+            },
             'premier-league': {
                 title: 'Premier League Age vs Salary Analysis',
                 content: this.generatePremierLeagueDemo()
@@ -133,14 +137,26 @@ plt.show()</code></pre>
                         <div class="chart-mock">
                             <div class="axis-label">Salary (£M)</div>
                             <div class="data-points">
-                                <div class="point" style="left: 20%; bottom: 30%"></div>
-                                <div class="point" style="left: 40%; bottom: 60%"></div>
-                                <div class="point" style="left: 60%; bottom: 80%"></div>
-                                <div class="point" style="left: 80%; bottom: 50%"></div>
+                                <div class="point" style="left: 25%; bottom: 35%" title="Age 22: £2.5M"></div>
+                                <div class="point" style="left: 35%; bottom: 45%" title="Age 24: £4.2M"></div>
+                                <div class="point" style="left: 45%; bottom: 75%" title="Age 27: £8.1M"></div>
+                                <div class="point" style="left: 55%; bottom: 85%" title="Age 29: £9.8M"></div>
+                                <div class="point" style="left: 65%; bottom: 70%" title="Age 31: £7.5M"></div>
+                                <div class="point" style="left: 75%; bottom: 50%" title="Age 33: £4.8M"></div>
+                                <div class="point" style="left: 85%; bottom: 30%" title="Age 35: £2.1M"></div>
                             </div>
-                            <div class="axis-label bottom">Age</div>
+                            <div class="axis-label bottom">Age (Years)</div>
                         </div>
                     </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color"></div>
+                            <span>Player Salary Distribution</span>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+                        <em>Interactive scatter plot showing the relationship between player age and salary in the Premier League</em>
+                    </p>
                 </div>
                 
                 <div class="demo-actions">
@@ -148,6 +164,117 @@ plt.show()</code></pre>
                        target="_blank" class="btn btn-primary">
                         <i class="fab fa-github"></i> View Full Project
                     </a>
+                </div>
+            </div>
+        `;
+    }
+
+    generateTitanicDemo() {
+        return `
+            <div class="demo-container">
+                <h4>Machine Learning Survival Prediction Demo</h4>
+                <p>This project analyzes the famous Titanic dataset to predict passenger survival using advanced machine learning techniques.</p>
+                
+                <div class="demo-section">
+                    <h5>🚢 Dataset Overview</h5>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number">891</span>
+                            <span class="stat-label">Total Passengers</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">342</span>
+                            <span class="stat-label">Survived</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">84.5%</span>
+                            <span class="stat-label">Model Accuracy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h5>📊 Survival Analysis by Features</h5>
+                    <div class="feature-analysis">
+                        <div class="feature-chart">
+                            <h6>Survival by Gender</h6>
+                            <div class="chart-container">
+                                <div class="bar-chart">
+                                    <div class="bar female" style="height: 74%">
+                                        <span class="bar-label">Female: 74%</span>
+                                    </div>
+                                    <div class="bar male" style="height: 19%">
+                                        <span class="bar-label">Male: 19%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-chart">
+                            <h6>Survival by Class</h6>
+                            <div class="chart-container">
+                                <div class="bar-chart">
+                                    <div class="bar first-class" style="height: 63%">
+                                        <span class="bar-label">1st: 63%</span>
+                                    </div>
+                                    <div class="bar second-class" style="height: 47%">
+                                        <span class="bar-label">2nd: 47%</span>
+                                    </div>
+                                    <div class="bar third-class" style="height: 24%">
+                                        <span class="bar-label">3rd: 24%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-section">
+                    <h5>🤖 Machine Learning Pipeline</h5>
+                    <div class="code-snippet">
+                        <pre><code>from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
+import pandas as pd
+
+# Feature engineering
+def engineer_features(df):
+    df['FamilySize'] = df['SibSp'] + df['Parch'] + 1
+    df['IsAlone'] = (df['FamilySize'] == 1).astype(int)
+    df['Title'] = df['Name'].str.extract(' ([A-Za-z]+)\\.', expand=False)
+    return df
+
+# Model training
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+cv_scores = cross_val_score(rf_model, X_train, y_train, cv=5)
+print(f"Cross-validation accuracy: {cv_scores.mean():.3f}")
+
+# Feature importance
+feature_importance = pd.DataFrame({
+    'feature': X_train.columns,
+    'importance': rf_model.feature_importances_
+}).sort_values('importance', ascending=False)
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <h5>🎯 Key Insights & Model Performance</h5>
+                    <ul>
+                        <li><strong>Gender Impact:</strong> Being female increased survival probability by 55%</li>
+                        <li><strong>Social Class:</strong> First-class passengers had 2.6x higher survival rate than third-class</li>
+                        <li><strong>Age Factor:</strong> Children under 16 had significantly higher survival rates</li>
+                        <li><strong>Family Size:</strong> Optimal family size of 2-4 members showed best survival rates</li>
+                        <li><strong>Port of Embarkation:</strong> Cherbourg passengers had higher survival (55% vs 34%)</li>
+                    </ul>
+                </div>
+                
+                <div class="demo-actions">
+                    <a href="https://github.com/MubiruEltonFelix1/titanic-data-analysis" 
+                       target="_blank" class="btn btn-primary">
+                        <i class="fab fa-github"></i> View Full Project
+                    </a>
+                    <button class="btn btn-secondary" onclick="alert('Interactive prediction tool coming soon!')">
+                        <i class="fas fa-calculator"></i> Try Prediction Tool
+                    </button>
                 </div>
             </div>
         `;
@@ -496,6 +623,269 @@ function trackSocialClick(platform) {
             event_category: 'engagement'
         });
     }
+}
+
+// Project Action Functions
+function showTechStack(projectId) {
+    const techStacks = {
+        'titanic-analysis': {
+            title: 'Titanic Analysis Technologies',
+            technologies: [
+                { name: 'Python', description: 'Primary programming language for data analysis', icon: 'fab fa-python', color: '#3776ab' },
+                { name: 'Pandas', description: 'Data manipulation and analysis library', icon: 'fas fa-table', color: '#150458' },
+                { name: 'Scikit-learn', description: 'Machine learning algorithms and tools', icon: 'fas fa-brain', color: '#f7931e' },
+                { name: 'Matplotlib', description: 'Data visualization and plotting', icon: 'fas fa-chart-line', color: '#11557c' },
+                { name: 'Seaborn', description: 'Statistical data visualization', icon: 'fas fa-chart-bar', color: '#444444' },
+                { name: 'Jupyter', description: 'Interactive development environment', icon: 'fas fa-book-open', color: '#f37626' }
+            ]
+        },
+        'premier-league': {
+            title: 'Premier League Analysis Technologies',
+            technologies: [
+                { name: 'Python', description: 'Data processing and analysis', icon: 'fab fa-python', color: '#3776ab' },
+                { name: 'Pandas', description: 'Data manipulation framework', icon: 'fas fa-table', color: '#150458' },
+                { name: 'Matplotlib', description: 'Creating statistical visualizations', icon: 'fas fa-chart-line', color: '#11557c' },
+                { name: 'Seaborn', description: 'Advanced statistical plots', icon: 'fas fa-chart-bar', color: '#444444' },
+                { name: 'NumPy', description: 'Numerical computing library', icon: 'fas fa-calculator', color: '#013243' },
+                { name: 'Statistics', description: 'Statistical analysis methods', icon: 'fas fa-square-root-alt', color: '#dc3545' }
+            ]
+        },
+        'coming-soon': {
+            title: 'Upcoming Project Technologies',
+            technologies: [
+                { name: 'Python', description: 'Core language for ML and data science', icon: 'fab fa-python', color: '#3776ab' },
+                { name: 'TensorFlow', description: 'Deep learning and neural networks', icon: 'fas fa-brain', color: '#ff6f00' },
+                { name: 'React', description: 'Frontend framework for interactive UIs', icon: 'fab fa-react', color: '#61dafb' },
+                { name: 'Node.js', description: 'Backend runtime environment', icon: 'fab fa-node-js', color: '#339933' },
+                { name: 'PostgreSQL', description: 'Advanced database management', icon: 'fas fa-database', color: '#336791' },
+                { name: 'Docker', description: 'Containerization and deployment', icon: 'fab fa-docker', color: '#2496ed' }
+            ]
+        }
+    };
+
+    const techData = techStacks[projectId];
+    if (!techData) return;
+
+    const modal = createTechModal(techData);
+    document.body.appendChild(modal);
+    modal.style.display = 'flex';
+}
+
+function createTechModal(techData) {
+    const modal = document.createElement('div');
+    modal.className = 'tech-modal';
+    modal.innerHTML = `
+        <div class="tech-modal-content">
+            <div class="tech-modal-header">
+                <h3>${techData.title}</h3>
+                <button class="close-tech-modal" onclick="this.closest('.tech-modal').remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="tech-modal-body">
+                <div class="tech-grid">
+                    ${techData.technologies.map(tech => `
+                        <div class="tech-item">
+                            <div class="tech-icon" style="color: ${tech.color}">
+                                <i class="${tech.icon}"></i>
+                            </div>
+                            <div class="tech-info">
+                                <h4>${tech.name}</h4>
+                                <p>${tech.description}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    return modal;
+}
+
+function showQuickPreview(projectId) {
+    const previews = {
+        'titanic-analysis': {
+            title: 'Titanic Survival Prediction',
+            image: 'https://via.placeholder.com/600x300/1e293b/64748b?text=Titanic+Analysis+Preview',
+            description: 'Machine learning model achieving 84.5% accuracy in predicting passenger survival',
+            stats: ['891 Passengers Analyzed', '84.5% Model Accuracy', '6 Key Features Used']
+        },
+        'premier-league': {
+            title: 'Premier League Age vs Salary',
+            image: 'https://via.placeholder.com/600x300/1e293b/64748b?text=Premier+League+Analysis+Preview',
+            description: 'Statistical analysis revealing peak salary age and career trajectory insights',
+            stats: ['Real-world Player Data', 'Peak Age: 27-29 Years', 'Interactive Visualizations']
+        },
+        'coming-soon': {
+            title: 'Upcoming AI/ML Projects',
+            image: 'https://via.placeholder.com/600x300/1e293b/64748b?text=Coming+Soon+Projects',
+            description: 'Innovative AI and machine learning projects currently in development',
+            stats: ['Advanced ML Models', 'Real-time AI Applications', 'Interactive Dashboards']
+        }
+    };
+
+    const previewData = previews[projectId];
+    if (!previewData) return;
+
+    const modal = createPreviewModal(previewData);
+    document.body.appendChild(modal);
+    modal.style.display = 'flex';
+}
+
+// Coming Soon Specific Functions
+function showComingSoonPreview() {
+    const modal = document.createElement('div');
+    modal.className = 'coming-soon-preview-modal';
+    modal.innerHTML = `
+        <div class="coming-soon-preview-content">
+            <div class="coming-soon-preview-header">
+                <h3>🚀 Exciting Projects in Development</h3>
+                <button class="close-coming-soon-preview" onclick="this.closest('.coming-soon-preview-modal').remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="coming-soon-preview-body">
+                <div class="development-timeline">
+                    <div class="timeline-item active">
+                        <div class="timeline-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>ML Prediction Models</h4>
+                            <p>Advanced machine learning algorithms for real-world prediction problems</p>
+                            <span class="timeline-date">Q1 2025</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>AI-Powered Web Apps</h4>
+                            <p>Interactive web applications leveraging artificial intelligence</p>
+                            <span class="timeline-date">Q2 2025</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Analytics Dashboards</h4>
+                            <p>Real-time data visualization and business intelligence tools</p>
+                            <span class="timeline-date">Q3 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-footer">
+                    <p>🔔 <strong>Stay tuned!</strong> Follow my GitHub for the latest updates and releases.</p>
+                    <a href="https://github.com/MubiruEltonFelix1" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-github"></i> Follow on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    modal.style.display = 'flex';
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.remove();
+        }
+    });
+}
+
+function createPreviewModal(previewData) {
+    const modal = document.createElement('div');
+    modal.className = 'preview-modal';
+    modal.innerHTML = `
+        <div class="preview-modal-content">
+            <div class="preview-modal-header">
+                <h3>${previewData.title}</h3>
+                <button class="close-preview-modal" onclick="this.closest('.preview-modal').remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="preview-modal-body">
+                <div class="preview-image">
+                    <img src="${previewData.image}" alt="${previewData.title}" />
+                </div>
+                <div class="preview-info">
+                    <p class="preview-description">${previewData.description}</p>
+                    <div class="preview-stats">
+                        ${previewData.stats.map(stat => `
+                            <div class="stat-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>${stat}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    return modal;
+}
+
+function shareProject(projectId) {
+    const projects = {
+        'titanic-analysis': {
+            title: 'Titanic Survival Prediction Analysis',
+            description: 'Machine learning analysis achieving 84.5% accuracy in predicting passenger survival',
+            url: window.location.href + '#titanic-project'
+        },
+        'premier-league': {
+            title: 'Premier League Age vs Salary Analysis',
+            description: 'Statistical analysis revealing peak salary age and career trajectory insights',
+            url: window.location.href + '#premier-league-project'
+        },
+        'coming-soon': {
+            title: 'Upcoming AI/ML Projects',
+            description: 'Exciting artificial intelligence and machine learning projects in development',
+            url: window.location.href + '#coming-soon-projects'
+        }
+    };
+
+    const project = projects[projectId];
+    if (!project) return;
+
+    // Try to use Web Share API if available
+    if (navigator.share) {
+        navigator.share({
+            title: project.title,
+            text: project.description,
+            url: project.url
+        }).catch(err => console.log('Error sharing:', err));
+    } else {
+        // Fallback: Copy to clipboard
+        const shareText = `${project.title}\n${project.description}\n${project.url}`;
+        navigator.clipboard.writeText(shareText).then(() => {
+            // Show temporary notification
+            showShareNotification('Project link copied to clipboard!');
+        }).catch(() => {
+            // Ultimate fallback
+            prompt('Copy this link to share:', project.url);
+        });
+    }
+}
+
+function showShareNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'share-notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
 // Initialize AI Assistant when DOM is loaded
