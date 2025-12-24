@@ -1,0 +1,282 @@
+/* Christmas Design Styles - Professional & Modern */
+
+/* Christmas Banner - Floating Effect */
+.christmas-banner {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    background: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 
+                0 5px 15px rgba(0, 212, 255, 0.2);
+    animation: floatBanner 4s ease-in-out infinite;
+    backdrop-filter: blur(10px);
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.christmas-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    animation: snowflakeRotate 4s linear infinite;
+}
+
+.christmas-message {
+    flex: 1;
+    text-align: center;
+    margin: 0 20px;
+}
+
+.christmas-message h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.christmas-message p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.christmas-decoration {
+    display: flex;
+    gap: 10px;
+}
+
+.ornament {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    animation: ornamentFloat 2s ease-in-out infinite;
+}
+
+.ornament::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 6px;
+    background: var(--text-muted);
+    border-radius: 2px;
+}
+
+.ornament-red {
+    background: var(--accent-color);
+    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.1), 
+                0 4px 8px rgba(0, 212, 255, 0.3);
+}
+
+.ornament-gold {
+    background: var(--secondary-accent);
+    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.1), 
+                0 4px 8px rgba(255, 107, 107, 0.3);
+    animation-delay: -0.5s;
+}
+
+.ornament-green {
+    background: var(--text-secondary);
+    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.1), 
+                0 4px 8px rgba(176, 176, 176, 0.3);
+    animation-delay: -1s;
+}
+
+/* Floating Snowflakes */
+.christmas-snowflakes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.snowflake {
+    position: absolute;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    animation: snowfall linear infinite;
+    opacity: 0.3;
+}
+
+.snowflake:nth-child(1) {
+    left: 10%;
+    animation-duration: 8s;
+    animation-delay: 0s;
+    font-size: 1rem;
+}
+
+.snowflake:nth-child(2) {
+    left: 30%;
+    animation-duration: 10s;
+    animation-delay: -2s;
+    font-size: 1.4rem;
+}
+
+.snowflake:nth-child(3) {
+    left: 50%;
+    animation-duration: 12s;
+    animation-delay: -4s;
+    font-size: 0.8rem;
+}
+
+.snowflake:nth-child(4) {
+    left: 70%;
+    animation-duration: 9s;
+    animation-delay: -1s;
+    font-size: 1.1rem;
+}
+
+.snowflake:nth-child(5) {
+    left: 90%;
+    animation-duration: 11s;
+    animation-delay: -3s;
+    font-size: 1.3rem;
+}
+
+/* Christmas Animations */
+@keyframes floatBanner {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 
+                    0 5px 15px rgba(0, 212, 255, 0.2);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                    0 8px 25px rgba(0, 212, 255, 0.3);
+    }
+}
+
+@keyframes christmasGlow {
+    0% {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 
+                    0 5px 15px rgba(0, 212, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                    0 8px 25px rgba(0, 212, 255, 0.3);
+    }
+}
+
+@keyframes snowflakeRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes ornamentFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Ensure hero background is not affected */
+.hero {
+    background: var(--primary-bg) !important;
+}
+
+.hero-background {
+    background: transparent !important;
+}
+
+/* Fix any potential background bleeding */
+.hero-content {
+    position: relative;
+    z-index: 5;
+    background: transparent;
+}
+
+/* Responsive Christmas Design */
+@media (max-width: 768px) {
+    .christmas-banner {
+        top: 70px;
+        width: calc(100% - 20px);
+        animation: floatBannerMobile 3s ease-in-out infinite;
+    }
+
+    .banner-content {
+        padding: 15px 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .christmas-message h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .christmas-message p {
+        font-size: 0.85rem;
+    }
+
+    .christmas-decoration {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .christmas-banner {
+        top: 60px;
+        width: calc(100% - 10px);
+    }
+
+    .banner-content {
+        padding: 12px 15px;
+    }
+
+    .christmas-message h3 {
+        font-size: 1rem;
+    }
+
+    .christmas-message p {
+        font-size: 0.8rem;
+    }
+
+    .christmas-icon {
+        font-size: 2rem;
+    }
+}
+
+@keyframes floatBannerMobile {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
