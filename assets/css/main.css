@@ -210,6 +210,49 @@ img {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
+.skills-focus-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.skill-focus-card {
+    background: linear-gradient(180deg, var(--surface-soft), var(--surface));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.skill-focus-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+.skill-focus-card h3 {
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+}
+
+.skills-summary-card {
+    margin-top: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+
+.skills-summary-card h3 {
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+}
+
+.skills-summary-list {
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.4rem;
+}
+
 .skills-item {
     border: 1px solid var(--border);
     background: var(--surface);
