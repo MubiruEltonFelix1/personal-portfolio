@@ -3,8 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileNav();
     setupReveal();
     setupGalleryModal();
+    setupQuickMessage();
     setupContactForm();
 });
+
+const CONTACT_WHATSAPP = '256780204995';
+const CONTACT_EMAIL = 'mubirufelixelton@gmail.com';
 
 function setupActiveNav() {
     const path = window.location.pathname.toLowerCase();
@@ -71,6 +75,39 @@ function setupGalleryModal() {
     });
 }
 
+function openWhatsAppOrFallbackToEmail({ name = '', email = '', message = '', subject = 'Portfolio Message' }) {
+    const composedMessage = [
+        name ? `Name: ${name}` : '',
+        email ? `Email: ${email}` : '',
+        '',
+        message || 'Hello Mubiru, I would like to connect.'
+    ]
+        .filter(Boolean)
+        .join('\n');
+
+    const whatsappUrl = `https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent(composedMessage)}`;
+    const popup = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+    if (!popup) {
+        const mailSubject = encodeURIComponent(subject);
+        const mailBody = encodeURIComponent(composedMessage);
+        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
+    }
+}
+
+function setupQuickMessage() {
+    const quickMessageLink = document.getElementById('quickMessageLink');
+    if (!quickMessageLink) return;
+
+    quickMessageLink.addEventListener('click', event => {
+        event.preventDefault();
+        openWhatsAppOrFallbackToEmail({
+            subject: 'Portfolio Quick Message',
+            message: 'Hello Mubiru, I would like to discuss a collaboration opportunity.'
+        });
+    });
+}
+
 function setupContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
@@ -83,8 +120,11 @@ function setupContactForm() {
 
         if (!name || !email || !message) return;
 
-        const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-        window.location.href = `mailto:mubirufelixelton@gmail.com?subject=${subject}&body=${body}`;
+        openWhatsAppOrFallbackToEmail({
+            name,
+            email,
+            message,
+            subject: `Portfolio inquiry from ${name}`
+        });
     });
 }
