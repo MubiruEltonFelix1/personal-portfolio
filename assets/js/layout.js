@@ -1,18 +1,18 @@
-(function () {
-    const root = document.body.dataset.root || '';
-    const navTarget = document.getElementById('site-nav');
-    const footerTarget = document.getElementById('site-footer');
+(function() {
+        const root = document.body.dataset.root || '';
+        const navTarget = document.getElementById('site-nav');
+        const footerTarget = document.getElementById('site-footer');
 
-    const links = [
-        { href: `${root}index.html`, label: 'Home', key: 'home' },
-        { href: `${root}about/`, label: 'About', key: 'about' },
-        { href: `${root}projects/`, label: 'Projects', key: 'projects' },
-        { href: `${root}gallery/`, label: 'Gallery', key: 'gallery' },
-        { href: `${root}contact/`, label: 'Contact', key: 'contact' }
-    ];
+        const links = [
+            { href: `${root}index.html`, label: 'Home', key: 'home' },
+            { href: `${root}about/`, label: 'About', key: 'about' },
+            { href: `${root}projects/`, label: 'Projects', key: 'projects' },
+            { href: `${root}gallery/`, label: 'Gallery', key: 'gallery' },
+            { href: `${root}contact/`, label: 'Contact', key: 'contact' }
+        ];
 
-    if (navTarget) {
-        navTarget.innerHTML = `
+        if (navTarget) {
+            navTarget.innerHTML = `
             <nav class="site-nav">
                 <div class="nav-inner">
                     <a class="brand" href="${root}index.html">

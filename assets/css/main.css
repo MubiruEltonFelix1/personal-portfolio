@@ -399,7 +399,6 @@ img {
     .menu-toggle {
         display: inline-flex;
     }
-
     .nav-links {
         position: absolute;
         right: 1rem;
@@ -413,7 +412,6 @@ img {
         align-items: flex-start;
         display: none;
     }
-
     .nav-links.open {
         display: flex;
     }
