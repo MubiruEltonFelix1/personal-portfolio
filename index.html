@@ -1,642 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mubiru Elton Felix - Software Engineering Student | AI/ML Enthusiast</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="enhanced-features.css">
+    <title>Mubiru Elton Felix | Data Engineering & Software Engineering Student</title>
+    <meta name="description" content="Modern portfolio of Mubiru Elton Felix focused on data engineering, backend systems, and software engineering.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
+<body data-root="">
+    <div id="site-nav"></div>
 
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">MEF</span>
+    <main>
+        <section class="hero container reveal">
+            <h1>Data Engineering & Software Engineering Student</h1>
+            <p>
+                I build scalable systems, backend services, and data pipelines that turn raw information into useful
+                insights and practical products.
+            </p>
+            <div class="cta-row">
+                <a class="btn btn-primary" href="projects/">View Projects</a>
+                <a class="btn btn-ghost" href="gallery/">View Gallery</a>
+                <a class="btn btn-ghost" href="contact/">Contact Me</a>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="projects.html" class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./blog.html" class="nav-link" target="_self">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+        </section>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <div class="particles-container" id="particles"></div>
-            <div class="neural-network" id="neuralNetwork"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-layout">
-                <div class="hero-image">
-                    <div class="hero-avatar">
-                        <img src="mubirueltonfelix2.jpg" alt="Mubiru Elton Felix" class="hero-profile-img">
-                    </div>
-                </div>
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="title-line">Mubiru</span>
-                        <span class="title-line">Elton Felix</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        <span class="gradient-text">Software Engineering Student</span> |
-                        <span class="gradient-text">AI/ML Enthusiast</span>
-                    </p>
-                    <p class="hero-tagline">
-                        Passionate about building data-driven solutions to real-world problems through artificial
-                        intelligence, machine learning, and data science.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-rocket"></i>
-                            Explore Work
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="fas fa-envelope"></i>
-                            Get In Touch
-                        </a>
-                    </div>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Featured Projects</h2>
+                <p class="section-lead reveal">Selected work from my existing portfolio with a focus on analytics, machine learning, and system-oriented thinking.</p>
+                <div class="grid featured-grid">
+                    <article class="card reveal">
+                        <h3>Titanic Dataset Analysis & Survival Prediction</h3>
+                        <p class="muted">Built a complete ML pipeline with feature engineering, preprocessing, and model comparison reaching 84.5% prediction accuracy.</p>
+                        <a class="btn btn-ghost" href="projects/titanic-survival/">View Project</a>
+                    </article>
+                    <article class="card reveal">
+                        <h3>Premier League Age vs Salary Analysis</h3>
+                        <p class="muted">Statistical analysis and visual storytelling on age-salary relationships in professional football player valuation.</p>
+                        <a class="btn btn-ghost" href="projects/premier-league-age-salary/">View Project</a>
+                    </article>
+                    <article class="card reveal">
+                        <h3>Campus Food App</h3>
+                        <p class="muted">Food ordering platform for campus use with real-time menu updates, order tracking, and payment integration.</p>
+                        <a class="btn btn-ghost" href="projects/campus-food-app/">View Project</a>
+                    </article>
                 </div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="image-container">
-                        <div class="profile-avatar">
-                            <img src="mubiruelton1.jpg" alt="Mubiru Elton Felix" class="profile-img">
-                        </div>
-                    </div>
-                </div>
-                <div class="about-text">
-                    <p class="about-description">
-                        I'm a Software Engineering student at Mbarara University of Science and Technology with a deep
-                        passion for artificial intelligence, machine learning, and data science. My journey in
-                        technology is driven by an insatiable curiosity to understand how data can be transformed into
-                        intelligent solutions that solve real-world problems.
-                    </p>
-                    <p class="about-description">
-                        Currently focusing on building a strong foundation in AI/ML technologies, I'm dedicated to
-                        developing innovative data-driven applications that can make a meaningful impact. My academic
-                        journey and personal projects reflect my commitment to mastering the art and science of
-                        extracting insights from data and building intelligent systems.
-                    </p>
-                    <div class="expertise-areas">
-                        <div class="expertise-item">
-                            <i class="fas fa-robot"></i>
-                            <span>Artificial Intelligence</span>
-                        </div>
-                        <div class="expertise-item">
-                            <i class="fas fa-brain"></i>
-                            <span>Machine Learning</span>
-                        </div>
-                        <div class="expertise-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Data Science</span>
-                        </div>
-                        <div class="expertise-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <span>Data-Driven Solutions</span>
-                        </div>
-                    </div>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Skills Focus</h2>
+                <div class="grid skills-grid">
+                    <div class="skills-item reveal">Data Engineering Foundations</div>
+                    <div class="skills-item reveal">Python Data Analysis</div>
+                    <div class="skills-item reveal">Backend System Thinking</div>
+                    <div class="skills-item reveal">Statistical Analysis & Visualization</div>
+                    <div class="skills-item reveal">Responsive Web Development</div>
+                    <div class="skills-item reveal">Problem-Solving Mindset</div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card featured-project">
-                    <div class="project-header">
-                        <i class="fas fa-ship project-icon"></i>
-                        <div class="project-links">
-                            <a href="https://github.com/MubiruEltonFelix1/titanic-model"
-                                target="_blank" rel="noopener noreferrer" class="project-link" title="View on GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <button class="project-link demo-btn" onclick="showProjectDemo('titanic-analysis')" title="View Interactive Demo">
-                                <i class="fas fa-play"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Titanic Dataset Analysis & Survival Prediction</h3>
-                    <p class="project-description">
-                        Comprehensive machine learning analysis of the famous Titanic dataset to predict passenger survival rates. 
-                        Built a complete ML pipeline with extensive feature engineering, data preprocessing, and exploratory data analysis. 
-                        Implemented multiple algorithms including Random Forest, Logistic Regression, and SVM to achieve 84.5% prediction accuracy. 
-                        The project includes detailed visualizations, statistical insights, and model comparison analysis to understand the key factors that influenced passenger survival during the tragic maritime disaster.
-                    </p>
+    <div id="site-footer"></div>
 
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Pandas</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                        <span class="tech-tag">Matplotlib</span>
-                        <span class="tech-tag">Seaborn</span>
-                        <span class="tech-tag">Machine Learning</span>
-                    </div>
-                    
-                    <div class="project-actions">
-                        <a href="https://github.com/MubiruEltonFelix1/titanic-model"
-                            target="_blank" rel="noopener noreferrer" class="btn btn-primary project-btn">
-                            <i class="fab fa-github"></i>
-                            GitHub
-                        </a>
-                        <button class="btn btn-secondary project-btn" onclick="showProjectDemo('titanic-analysis')">
-                            <i class="fas fa-play"></i>
-                            Live Demo
-                        </button>
-                    </div>
-                </div>
-
-                <div class="project-card featured-project">
-                    <div class="project-header">
-                        <i class="fas fa-chart-bar project-icon"></i>
-                        <div class="project-links">
-                            <a href="https://github.com/MubiruEltonFelix1/premier-league-age-salary-visualization"
-                                target="_blank" rel="noopener noreferrer" class="project-link" title="View on GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <button class="project-link demo-btn" onclick="showProjectDemo('premier-league')" title="View Interactive Demo">
-                                <i class="fas fa-play"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Premier League Player Age vs Salary Analysis</h3>
-                    <p class="project-description">
-                        In-depth statistical analysis and visualization of Premier League player data to understand the complex relationship between age and salary structures. 
-                        Created comprehensive interactive visualizations and statistical models revealing key insights about player valuation trends across different age groups. 
-                        The analysis includes correlation studies, trend analysis, and predictive modeling to identify peak earning periods for professional football players. 
-                        Features detailed charts, regression analysis, and demographic breakdowns that provide valuable insights for sports analytics and player recruitment strategies.
-                    </p>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Pandas</span>
-                        <span class="tech-tag">Matplotlib</span>
-                        <span class="tech-tag">Seaborn</span>
-                        <span class="tech-tag">Statistical Analysis</span>
-                        <span class="tech-tag">Data Visualization</span>
-                    </div>
-                    
-                    <div class="project-actions">
-                        <a href="https://github.com/MubiruEltonFelix1/premier-league-age-salary-visualization"
-                            target="_blank" rel="noopener noreferrer" class="btn btn-primary project-btn">
-                            <i class="fab fa-github"></i>
-                            GitHub
-                        </a>
-                        <button class="btn btn-secondary project-btn" onclick="showProjectDemo('premier-league')">
-                            <i class="fas fa-play"></i>
-                            Live Demo
-                        </button>
-                    </div>
-                </div>
-
-                <div class="coming-soon-card">
-                    <div class="coming-soon-content">
-                        <i class="fas fa-rocket coming-soon-icon"></i>
-                        <h3 class="coming-soon-title">More Projects Coming Soon</h3>
-                        <p class="coming-soon-description">
-                            Exciting AI/ML and data science projects are currently in development, featuring cutting-edge machine learning algorithms and innovative data analysis techniques. 
-                            These upcoming projects will showcase advanced artificial intelligence applications, real-time data processing systems, and interactive analytical dashboards. 
-                            Stay tuned for groundbreaking solutions in predictive analytics, natural language processing, and computer vision that will demonstrate the latest advancements in data science and artificial intelligence.
-                        </p>
-                        
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                        </div>
-                        
-                        <div class="project-actions">
-                            <a href="https://github.com/MubiruEltonFelix1"
-                                target="_blank" rel="noopener noreferrer" class="btn btn-primary project-btn">
-                                <i class="fab fa-github"></i>
-                                GitHub
-                            </a>
-                            <button class="btn btn-secondary project-btn" onclick="showComingSoonPreview()">
-                                <i class="fas fa-eye"></i>
-                                Preview
-                            </button>
-                        </div>
-                        
-                        <div class="coming-soon-animation">
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Technical Skills & Learning Journey</h2>
-            <div class="skills-content">
-                <div class="skills-categories">
-                    <div class="skill-category">
-                        <h3 class="category-title">
-                            <i class="fas fa-code"></i>
-                            Website Development
-                        </h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">HTML & CSS</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="85"></div>
-                                </div>
-                                <span class="skill-percentage">85%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">JavaScript</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="75"></div>
-                                </div>
-                                <span class="skill-percentage">75%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Responsive Design</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="80"></div>
-                                </div>
-                                <span class="skill-percentage">80%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Web Frameworks</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="70"></div>
-                                </div>
-                                <span class="skill-percentage">70%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3 class="category-title">
-                            <i class="fas fa-chart-bar"></i>
-                            Data Science & Analytics
-                        </h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Data Analysis</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="85"></div>
-                                </div>
-                                <span class="skill-percentage">85%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Data Visualization</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="90"></div>
-                                </div>
-                                <span class="skill-percentage">90%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Statistical Analysis</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="78"></div>
-                                </div>
-                                <span class="skill-percentage">78%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Data Mining</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="72"></div>
-                                </div>
-                                <span class="skill-percentage">72%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3 class="category-title">
-                            <i class="fas fa-code"></i>
-                            Programming & Tools
-                        </h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Python</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="88"></div>
-                                </div>
-                                <span class="skill-percentage">88%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Java</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="75"></div>
-                                </div>
-                                <span class="skill-percentage">75%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Data Science Libraries</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="82"></div>
-                                </div>
-                                <span class="skill-percentage">82%</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Git & Version Control</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="80"></div>
-                                </div>
-                                <span class="skill-percentage">80%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GitHub Integration Section -->
-    <section id="github-stats" class="github-stats">
-        <div class="container">
-            <h2 class="section-title">GitHub Activity & Contributions</h2>
-            <div class="github-content">
-                <div class="github-overview">
-                    <div class="github-card">
-                        <div class="github-header">
-                            <i class="fab fa-github"></i>
-                            <h3>Code Activity</h3>
-                        </div>
-                        <div class="github-metrics">
-                            <div class="metric">
-                                <span class="metric-value" id="github-repos">-</span>
-                                <span class="metric-label">Public Repositories</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value" id="github-commits">-</span>
-                                <span class="metric-label">Total Contributions</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value" id="github-languages">-</span>
-                                <span class="metric-label">Languages Used</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="github-card">
-                        <div class="github-header">
-                            <i class="fas fa-star"></i>
-                            <h3>Featured Repositories</h3>
-                        </div>
-                        <div class="featured-repos" id="featured-repos">
-                            <div class="repo-item">
-                                <h4 class="repo-name">premier-league-age-salary-visualization</h4>
-                                <p class="repo-description">Data analysis and visualization of Premier League player statistics</p>
-                                <div class="repo-stats">
-                                    <span class="repo-language">Python</span>
-                                    <span class="repo-stars">⭐ 0</span>
-                                </div>
-                            </div>
-                            <!-- More repos will be loaded dynamically -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="github-chart">
-                    <h3>Contribution Graph</h3>
-                    <div class="contribution-graph">
-                        <img src="https://ghchart.rshah.org/MubiruEltonFelix1" alt="GitHub Contribution Graph" class="github-graph-img" />
-                    </div>
-                    <p class="github-note">Real-time GitHub activity visualization</p>
-                </div>
-                
-                <div class="github-languages">
-                    <h3>Most Used Languages</h3>
-                    <div class="languages-chart">
-                        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MubiruEltonFelix1&layout=compact&theme=radical" alt="Top Languages" class="languages-img" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Demo Modal -->
-    <div id="project-demo-modal" class="demo-modal">
-        <div class="demo-content">
-            <div class="demo-header">
-                <h3 id="demo-title">Project Demo</h3>
-                <button class="demo-close" onclick="closeProjectDemo()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="demo-body" id="demo-body">
-                <!-- Demo content will be loaded here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Ready to collaborate?</h3>
-                    <p>I'm always interested in discussing new opportunities, innovative projects, and challenges in
-                        AI/ML and data science.</p>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <span class="method-label">Email</span>
-                                <span class="method-value">mubirueltonfelix@gmail.com</span>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-linkedin"></i>
-                            <div>
-                                <span class="method-label">LinkedIn</span>
-                                <span class="method-value">linkedin.com/in/mubiru-elton-felix-9ab50a1b0/</span>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-github"></i>
-                            <div>
-                                <span class="method-label">GitHub</span>
-                                <span class="method-value">github.com/MubiruEltonFelix1</span>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-youtube"></i>
-                            <div>
-                                <span class="method-label">YouTube</span>
-                                <span class="method-value">youtube.com/c/EltonLyricalGenius</span>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-tiktok"></i>
-                            <div>
-                                <span class="method-label">TikTok</span>
-                                <span class="method-value">@mubirueltonfelix1</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" required>
-                            <label for="name">Your Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" required>
-                            <label for="email">Email Address</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" required></textarea>
-                            <label for="message">Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2026 Mubiru Elton Felix. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="https://github.com/MubiruEltonFelix1" target="_blank" rel="noopener noreferrer"
-                        class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/mubiru-elton-felix-9ab50a1b0/" target="_blank"
-                        rel="noopener noreferrer" class="social-link" title="LinkedIn"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/c/EltonLyricalGenius" target="_blank" rel="noopener noreferrer"
-                        class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.tiktok.com/@mubirueltonfelix1" target="_blank" rel="noopener noreferrer"
-                        class="social-link" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                    <a href="mailto:mubirueltonfelix@gmail.com" class="social-link" title="Email"><i
-                            class="fas fa-envelope"></i></a>
-                    <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- AI Portfolio Assistant -->
-    <div class="ai-assistant">
-        <div class="assistant-toggle" id="assistantToggle">
-            <i class="fas fa-robot"></i>
-            <span class="assistant-tooltip">Ask me anything about Elton's portfolio!</span>
-        </div>
-        
-        <div class="assistant-chat" id="assistantChat">
-            <div class="chat-header">
-                <div class="assistant-info">
-                    <div class="assistant-avatar">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="assistant-details">
-                        <h4>Portfolio Assistant</h4>
-                        <div class="assistant-status">
-                            <span class="status-dot"></span>
-                            <span>Online</span>
-                        </div>
-                    </div>
-                </div>
-                <button class="close-chat" id="closeChat">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="chat-messages" id="chatMessages">
-                <div class="message assistant-message">
-                    <div class="message-avatar">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="message-content">
-                        <p>👋 Hi! I'm Elton's AI assistant. I can help you learn about his experience, projects, and skills. Try asking me:</p>
-                        <div class="quick-questions">
-                            <button class="quick-question">
-                                What are his main skills?
-                            </button>
-                            <button class="quick-question">
-                                Tell me about his projects
-                            </button>
-                            <button class="quick-question">
-                                What's his background?
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chat-input-container">
-                <div class="chat-input">
-                    <input type="text" id="chatInput" placeholder="Ask me anything about Elton..." maxlength="200">
-                    <button class="send-btn" id="sendBtn">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
-                <div class="typing-indicator" id="typingIndicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="navigation.js"></script>
-    <script src="script.js"></script>
-    <script src="enhanced-features.js"></script>
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
-
 </html>

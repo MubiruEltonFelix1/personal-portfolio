@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Mubiru Elton Felix</title>
+    <meta name="description" content="Image gallery from existing portfolio assets and project visuals.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body data-root="../">
+    <div id="site-nav"></div>
+
+    <main class="section">
+        <div class="container">
+            <h1 class="section-title reveal">Gallery</h1>
+            <p class="section-lead reveal">A responsive gallery reusing existing profile photos and project visuals.</p>
+
+            <section class="grid gallery-grid">
+                <figure class="gallery-item reveal"><img loading="lazy" src="../assets/images/profile.jpg" alt="Profile image"></figure>
+                <figure class="gallery-item reveal"><img loading="lazy" src="../assets/images/mubiruelton1.jpg" alt="Mubiru Elton Felix portrait"></figure>
+                <figure class="gallery-item reveal"><img loading="lazy" src="../assets/images/mubirueltonfelix.jpg" alt="Mubiru Elton Felix image"></figure>
+                <figure class="gallery-item reveal"><img loading="lazy" src="../assets/images/mubirueltonfelix2.jpg" alt="Mubiru Elton Felix photo"></figure>
+                <figure class="gallery-item reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=80" alt="Data project visual"></figure>
+                <figure class="gallery-item reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1000&q=80" alt="Sports analytics visual"></figure>
+                <figure class="gallery-item reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1000&q=80" alt="Campus app visual"></figure>
+                <figure class="gallery-item reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=1000&q=80" alt="Blockchain visual"></figure>
+            </section>
+        </div>
+    </main>
+
+    <div id="galleryModal" class="modal" aria-hidden="true">
+        <button class="modal-close" aria-label="Close image">Close</button>
+        <img id="galleryModalImage" src="" alt="Expanded gallery image">
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="../assets/js/layout.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
