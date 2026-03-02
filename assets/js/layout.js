@@ -5,10 +5,10 @@
 
         const links = [
             { href: `${root}index.html`, label: 'Home', key: 'home' },
-            { href: `${root}about/`, label: 'About', key: 'about' },
-            { href: `${root}projects/`, label: 'Projects', key: 'projects' },
-            { href: `${root}gallery/`, label: 'Gallery', key: 'gallery' },
-            { href: `${root}contact/`, label: 'Contact', key: 'contact' }
+            { href: `${root}about/index.html`, label: 'About', key: 'about' },
+            { href: `${root}projects/index.html`, label: 'Projects', key: 'projects' },
+            { href: `${root}gallery/index.html`, label: 'Gallery', key: 'gallery' },
+            { href: `${root}contact/index.html`, label: 'Contact', key: 'contact' }
         ];
 
         if (navTarget) {

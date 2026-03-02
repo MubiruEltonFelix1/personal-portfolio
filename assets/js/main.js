@@ -77,11 +77,11 @@ function setupGalleryModal() {
 
 function openWhatsAppOrFallbackToEmail({ name = '', email = '', message = '', subject = 'Portfolio Message' }) {
     const composedMessage = [
-        name ? `Name: ${name}` : '',
-        email ? `Email: ${email}` : '',
-        '',
-        message || 'Hello Mubiru, I would like to connect.'
-    ]
+            name ? `Name: ${name}` : '',
+            email ? `Email: ${email}` : '',
+            '',
+            message || 'Hello Mubiru, I would like to connect.'
+        ]
         .filter(Boolean)
         .join('\n');
 
