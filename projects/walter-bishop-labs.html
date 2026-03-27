@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../assets/images/logo.png">
-    <title>WALTER-BISHOP-LABS | Mubiru Elton Felix</title>
-    <meta name="description" content="WALTER-BISHOP-LABS: probabilistic reasoning systems for healthcare, featuring the SEPSIS-BAYES real-time Bayesian clinical reasoning engine.">
+    <title>MyCGPA | Mubiru Elton Felix</title>
+    <meta name="description" content="MyCGPA: a student-friendly CGPA calculator and forecaster for tracking progress, planning future semesters, and reaching target academic outcomes.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,84 +18,85 @@
 
     <main class="section detail-hero">
         <div class="container">
-            <h1 class="section-title reveal">WALTER-BISHOP-LABS</h1>
-            <p class="section-lead reveal">A research and innovation initiative focused on building probabilistic reasoning systems for high-stakes, real-world decisions. The flagship implementation is SEPSIS-BAYES.</p>
+            <h1 class="section-title reveal">MyCGPA</h1>
+            <p class="section-lead reveal">MyCGPA is a practical CGPA calculator and forecaster built for students who want a clear, fast way to track results, simulate future performance, and plan for better academic outcomes.</p>
 
             <div class="detail-layout">
                 <article class="card reveal">
                     <h3>Project Summary</h3>
-                    <p class="muted">WALTER-BISHOP-LABS is built to make uncertainty actionable through transparent Bayesian reasoning systems. It focuses on explainability and practical deployment, starting with healthcare use cases.</p>
-                    <p class="muted" style="margin-top:.8rem;">Its flagship project, SEPSIS-BAYES, continuously updates a patient's probability of sepsis using contextual priors (hospital, ward type, age, recent surgery, known infection) plus streaming evidence (vitals and lab observations).</p>
+                    <p class="muted">MyCGPA helps students answer three key questions: what their current CGPA is, what their CGPA could become after future semesters, and what performance level is needed to hit a target CGPA.</p>
+                    <p class="muted" style="margin-top:.8rem;">The app uses a clean dashboard flow with tabs for completed grades, future-course forecasting, and insights, so academic planning feels simple instead of stressful.</p>
 
                     <div class="stack">
-                        <span class="tag">Python</span>
-                        <span class="tag">NumPy</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">Bayesian Inference</span>
-                        <span class="tag">Clinical Reasoning</span>
-                        <span class="tag">Hospital Data Schema</span>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Chart.js</span>
+                        <span class="tag">localStorage</span>
+                        <span class="tag">CGPA Forecasting</span>
                     </div>
 
                     <div class="cta-row">
-                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/WALTER-BISHOP-LABS">View Source on GitHub</a>
+                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa">GitHub Repository</a>
+                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/">Visit Site</a>
                     </div>
                 </article>
 
                 <article class="card reveal">
-                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80" alt="WALTER-BISHOP-LABS representative visual" style="border-radius:10px;">
-                    <p class="muted" style="margin-top:.75rem;">Healthcare-focused visual representing the SEPSIS-BAYES clinical decision support context.</p>
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80" alt="MyCGPA dashboard representative visual" style="border-radius:10px;">
+                    <p class="muted" style="margin-top:.75rem;">A student dashboard concept that reflects progress tracking, forecasting, and decision support for semester planning.</p>
                 </article>
             </div>
 
             <article class="card reveal" style="margin-top:1rem;">
                 <h3>What It Does</h3>
                 <ul class="muted" style="padding-left:1.1rem; display:grid; gap:.45rem;">
-                    <li>Computes a prior sepsis probability from patient context at admission.</li>
-                    <li>Applies Bayesian updates as new evidence arrives over time.</li>
-                    <li>Maintains a dynamic patient state with evidence history.</li>
-                    <li>Supports threshold-based clinical escalation (e.g., monitoring, antibiotics, sepsis bundle).</li>
-                    <li>Provides explainable, traceable risk updates instead of opaque binary predictions.</li>
+                    <li>Calculates current CGPA from completed semesters and courses.</li>
+                    <li>Forecasts projected CGPA using future course plans and scenario toggles.</li>
+                    <li>Estimates the required performance to reach a target CGPA.</li>
+                    <li>Provides visual insights such as strongest and weakest semesters.</li>
+                    <li>Saves progress locally so students can continue planning over time.</li>
                 </ul>
             </article>
 
             <article class="card reveal" style="margin-top:1rem;">
                 <h3>Features</h3>
                 <ul class="muted" style="padding-left:1.1rem; display:grid; gap:.45rem;">
-                    <li>Dynamic Bayesian updating with sequential evidence integration.</li>
-                    <li>Contextual priors informed by hospital and patient risk factors.</li>
-                    <li>Minimal, realistic hospital schema (patients table + observations table).</li>
-                    <li>Real-time simulation workflow and threshold-driven intervention logic.</li>
-                    <li>Roadmap for calibration, dashboard integration, and multi-disease expansion.</li>
+                    <li>Tabbed workflow: My Grades, Forecast, and Insights.</li>
+                    <li>Scenario modeling for best-case, realistic, and worst-case outcomes.</li>
+                    <li>Chart.js-powered semester GPA visualization.</li>
+                    <li>Import/export JSON tools for easy backup and restore.</li>
+                    <li>Modal-based interactions and user-friendly validation feedback.</li>
                 </ul>
             </article>
 
             <article class="card reveal" style="margin-top:1rem;">
                 <h3>Tech Stack</h3>
                 <div class="stack">
-                    <span class="tag">Python</span>
-                    <span class="tag">NumPy</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">Markdown Documentation</span>
-                    <span class="tag">Bayes Theorem</span>
-                    <span class="tag">Clinical Simulation</span>
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">Vanilla JavaScript (ES6+)</span>
+                    <span class="tag">Chart.js 4.4.1</span>
+                    <span class="tag">Google Fonts</span>
+                    <span class="tag">GitHub Pages</span>
                 </div>
-                <p class="muted" style="margin-top:.8rem;">Repository docs referenced: root README, SEPSIS BAYES README, and sepsis bayes model README/SCHEMA.</p>
+                <p class="muted" style="margin-top:.8rem;">Designed as a no-build static web app that runs directly in the browser and is easy to deploy.</p>
             </article>
 
             <article class="card reveal" style="margin-top:1rem;">
                 <h3>Screenshots & Visuals</h3>
-                <p class="muted">Project documentation and implementation references:</p>
+                <p class="muted">Project resources and references:</p>
                 <ul class="muted" style="padding-left:1.1rem; display:grid; gap:.45rem;">
-                    <li><a href="https://github.com/MubiruEltonFelix1/WALTER-BISHOP-LABS/blob/main/README.md" target="_blank" rel="noopener">Main README</a></li>
-                    <li><a href="https://github.com/MubiruEltonFelix1/WALTER-BISHOP-LABS/blob/main/SEPSIS%20BAYES/README.md" target="_blank" rel="noopener">SEPSIS-BAYES README</a></li>
-                    <li><a href="https://github.com/MubiruEltonFelix1/WALTER-BISHOP-LABS/blob/main/SEPSIS%20BAYES/sepsis%20bayes%20model/README.md" target="_blank" rel="noopener">Model README</a></li>
-                    <li><a href="https://github.com/MubiruEltonFelix1/WALTER-BISHOP-LABS/blob/main/SEPSIS%20BAYES/sepsis%20bayes%20model/SCHEMA.md" target="_blank" rel="noopener">Schema and Python implementation</a></li>
+                    <li><a href="https://github.com/MubiruEltonFelix1/my-cgpa" target="_blank" rel="noopener">Project Repository</a></li>
+                    <li><a href="https://github.com/MubiruEltonFelix1/my-cgpa/blob/main/README.md" target="_blank" rel="noopener">README Documentation</a></li>
+                    <li><a href="https://mubirueltonfelix1.github.io/my-cgpa/" target="_blank" rel="noopener">Live Demo</a></li>
                 </ul>
             </article>
 
             <div class="cta-row" style="margin-top:1rem;">
                 <a class="btn btn-ghost" href="./">Back to Projects</a>
-                <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/WALTER-BISHOP-LABS">View Source on GitHub</a>
+                <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa">GitHub Repository</a>
+                <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/">Visit Site</a>
             </div>
         </div>
     </main>
