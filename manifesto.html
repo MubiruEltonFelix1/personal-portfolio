@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <title>Manifesto - Mubiru Elton Felix</title>
+    <meta name="description" content="Read the manifesto by Mubiru Elton Felix. Open or download the full PDF statement directly from this page.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Manifesto - Mubiru Elton Felix">
+    <meta property="og:description" content="Read the manifesto by Mubiru Elton Felix. Open or download the full PDF statement directly from this page.">
+    <meta property="og:url" content="https://username.github.io/personal-portfolio/manifesto.html">
+    <meta property="og:image" content="assets/images/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <style>
+        .manifesto-main {
+            padding: 2rem 0 2.5rem;
+        }
+
+        .manifesto-wrap {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.1rem;
+        }
+
+        .manifesto-heading {
+            color: var(--accent);
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            margin-bottom: 0.3rem;
+        }
+
+        .manifesto-lead {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .mobile-note {
+            display: block;
+            border: 1px solid var(--border);
+            background: var(--surface-soft);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-note p {
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .viewer-wrap {
+            display: none;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .manifesto-frame {
+            width: 100%;
+            min-height: 80vh;
+            border: 0;
+            display: block;
+            background: #111;
+        }
+
+        .fallback-row {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-download {
+            width: 100%;
+            max-width: 360px;
+            font-size: 1rem;
+            padding: 0.85rem 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .manifesto-main {
+                padding: 3rem 0 3.5rem;
+            }
+
+            .manifesto-wrap {
+                padding: 1.4rem;
+            }
+
+            .mobile-note {
+                display: none;
+            }
+
+            .viewer-wrap {
+                display: block;
+            }
+
+            .btn-download {
+                width: auto;
+                min-width: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body data-root="">
+    <div id="site-nav"></div>
+
+    <main class="manifesto-main">
+        <section class="container">
+            <div class="manifesto-wrap">
+                <h1 class="manifesto-heading">Read the Manifesto</h1>
+                <p class="manifesto-lead">A concise statement of values, direction, and intent in one PDF.</p>
+
+                <div class="mobile-note">
+                    <p>Some mobile browsers do not preview PDFs inline. Tap below to open it in a new tab.</p>
+                    <a class="btn btn-primary btn-download" href="assets/manifesto.pdf" target="_blank" rel="noopener noreferrer">Open Manifesto PDF</a>
+                </div>
+
+                <div class="viewer-wrap" aria-label="Embedded manifesto PDF viewer">
+                    <iframe class="manifesto-frame" title="Manifesto PDF" src="assets/manifesto.pdf#view=FitH">
+                        <object data="assets/manifesto.pdf" type="application/pdf" width="100%" height="100%">
+                            <p class="muted">This browser cannot display inline PDFs. Use the button below to open or download the file.</p>
+                        </object>
+                    </iframe>
+                </div>
+
+                <div class="fallback-row">
+                    <a class="btn btn-primary btn-download" href="assets/manifesto.pdf" target="_blank" rel="noopener noreferrer">Download / Open PDF</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.pathname.toLowerCase().includes('/manifesto.html')) {
+                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+
+</html>
