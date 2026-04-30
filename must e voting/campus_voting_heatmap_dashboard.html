@@ -1,226 +1,665 @@
-
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-  *{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#0a0d14;--bg2:#0f1420;--bg3:#141927;--panel:#1a2035;--panel2:#1f2742;
-    --border:#2a3550;--border2:#3a4a70;
-    --accent:#3b82f6;--accent2:#60a5fa;--accent3:#93c5fd;
-    --gold:#f59e0b;--gold2:#fbbf24;
-    --green:#10b981;--green2:#34d399;
-    --red:#ef4444;--purple:#8b5cf6;--pink:#ec4899;
-    --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
-    --mono:'JetBrains Mono',monospace;
-    --sans:'Space Grotesk',sans-serif;
-  }
-  body{background:var(--bg);font-family:var(--sans);color:var(--text);overflow-x:hidden}
-
-  .outer{min-height:100vh;padding:0;position:relative}
-  
-  .scanline{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:scan 4s linear infinite;opacity:.3;z-index:999;pointer-events:none}
-  @keyframes scan{0%{top:-2px}100%{top:100vh}}
-
-  .header{
-    background:var(--bg2);border-bottom:1px solid var(--border);
-    padding:16px 24px;display:flex;align-items:center;justify-content:space-between;
-    position:sticky;top:0;z-index:100;
-  }
-  .logo{display:flex;align-items:center;gap:12px}
-  .logo-icon{
-    width:36px;height:36px;background:var(--accent);border-radius:8px;
-    display:flex;align-items:center;justify-content:center;font-size:18px;
-    box-shadow:0 0 20px rgba(59,130,246,.4);
-    animation:pulse-glow 2s ease-in-out infinite;
-  }
-  @keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(59,130,246,.4)}50%{box-shadow:0 0 35px rgba(59,130,246,.7)}}
-  .logo-text{font-size:15px;font-weight:600;letter-spacing:.5px}
-  .logo-sub{font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:1px}
-  
-  .status-bar{display:flex;align-items:center;gap:20px}
-  .live-badge{
-    display:flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);
-    border:1px solid rgba(16,185,129,.3);border-radius:20px;padding:4px 12px;
-    font-size:11px;font-weight:500;color:var(--green2);font-family:var(--mono);
-    letter-spacing:.5px;
-  }
-  .live-dot{width:6px;height:6px;background:var(--green2);border-radius:50%;animation:blink 1s ease-in-out infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-  
-  .time-display{font-family:var(--mono);font-size:13px;color:var(--text2);letter-spacing:1px}
-
-  .kpi-strip{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-    border-bottom:1px solid var(--border);
-  }
-  .kpi{
-    padding:20px 24px;border-right:1px solid var(--border);
-    position:relative;overflow:hidden;
-    transition:background .2s;cursor:default;
-  }
-  .kpi:last-child{border-right:none}
-  .kpi:hover{background:var(--panel)}
-  .kpi-bar{
-    position:absolute;bottom:0;left:0;height:3px;
-    transition:width 1.5s cubic-bezier(.16,1,.3,1);
-  }
-  .kpi-label{font-size:10px;font-weight:500;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;font-family:var(--mono)}
-  .kpi-value{font-size:28px;font-weight:700;letter-spacing:-1px;line-height:1}
-  .kpi-delta{font-size:11px;color:var(--green2);margin-top:6px;font-family:var(--mono)}
-  
-  .main-grid{display:grid;grid-template-columns:1fr 340px;gap:0;min-height:calc(100vh - 140px)}
-  
-  .map-panel{
-    padding:24px;background:var(--bg);border-right:1px solid var(--border);
-    position:relative;
-  }
-  .map-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-  .panel-title{font-size:13px;font-weight:600;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--mono)}
-  .map-controls{display:flex;gap:8px}
-  .btn{
-    padding:5px 12px;border-radius:6px;font-size:11px;font-weight:500;
-    border:1px solid var(--border2);background:var(--panel);color:var(--text2);
-    cursor:pointer;font-family:var(--mono);letter-spacing:.5px;transition:all .15s;
-  }
-  .btn:hover,.btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
-
-  .campus-map-wrap{
-    background:var(--bg2);border-radius:12px;border:1px solid var(--border);
-    overflow:hidden;position:relative;
-  }
-  .campus-svg{width:100%;display:block}
-
-  .side-panel{background:var(--bg2);display:flex;flex-direction:column}
-  
-  .sp-section{padding:20px;border-bottom:1px solid var(--border)}
-  .sp-title{font-size:10px;font-weight:500;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--mono);margin-bottom:14px}
-  
-  .zone-list{display:flex;flex-direction:column;gap:8px}
-  .zone-item{
-    display:flex;align-items:center;gap:10px;padding:10px 12px;
-    background:var(--bg3);border-radius:8px;border:1px solid var(--border);
-    cursor:pointer;transition:all .15s;
-  }
-  .zone-item:hover,.zone-item.active{border-color:var(--accent);background:rgba(59,130,246,.05)}
-  .zone-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-  .zone-name{font-size:12px;font-weight:500;flex:1}
-  .zone-count{font-family:var(--mono);font-size:12px;color:var(--text2)}
-  .zone-pct{font-family:var(--mono);font-size:10px;color:var(--text3);min-width:36px;text-align:right}
-  .zone-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--border)}
-  
-  .mini-bar{height:3px;border-radius:2px;margin-top:5px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
-
-  .feed{display:flex;flex-direction:column;gap:0;max-height:280px;overflow:hidden;position:relative}
-  .feed-item{
-    display:flex;align-items:center;gap:10px;padding:8px 0;
-    border-bottom:1px solid var(--border);animation:fadeSlide .4s ease;
-    opacity:0;animation-fill-mode:forwards;
-  }
-  .feed-item:last-child{border-bottom:none}
-  @keyframes fadeSlide{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
-  .feed-zone{
-    width:28px;height:20px;border-radius:4px;font-size:9px;font-weight:600;
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-    font-family:var(--mono);letter-spacing:.5px;
-  }
-  .feed-msg{font-size:11px;color:var(--text2);flex:1;line-height:1.4}
-  .feed-time{font-family:var(--mono);font-size:9px;color:var(--text3)}
-
-  .turnout-ring{display:flex;flex-direction:column;align-items:center;gap:12px;padding:4px 0}
-  
-  .chart-wrap{padding:0 20px 20px;flex:1}
-  .bar-chart{display:flex;flex-direction:column;gap:8px}
-  .bc-row{display:flex;align-items:center;gap:8px}
-  .bc-label{font-size:10px;color:var(--text3);font-family:var(--mono);width:80px;flex-shrink:0;text-align:right;letter-spacing:.3px}
-  .bc-track{flex:1;background:var(--border);border-radius:3px;height:20px;overflow:hidden;position:relative}
-  .bc-fill{height:100%;border-radius:3px;transition:width 1.5s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;padding-left:6px;font-size:10px;font-family:var(--mono);font-weight:500;white-space:nowrap;min-width:0}
-  .bc-val{font-family:var(--mono);font-size:10px;color:var(--text2);min-width:28px;text-align:right}
-
-  .footer-bar{
-    background:var(--bg2);border-top:1px solid var(--border);
-    padding:10px 24px;display:flex;align-items:center;justify-content:space-between;
-    font-family:var(--mono);font-size:10px;color:var(--text3);
-  }
-  .footer-stats{display:flex;gap:24px}
-  
-  .tooltip{
-    position:absolute;background:var(--panel2);border:1px solid var(--border2);
-    border-radius:8px;padding:10px 14px;font-size:11px;pointer-events:none;
-    opacity:0;transition:opacity .15s;z-index:200;min-width:140px;
-    box-shadow:0 8px 32px rgba(0,0,0,.5);
-  }
-  .tt-name{font-weight:600;font-size:12px;margin-bottom:4px}
-  .tt-row{display:flex;justify-content:space-between;gap:16px;color:var(--text2);margin-top:3px}
-  .tt-val{font-family:var(--mono);color:var(--accent2)}
-
-  .legend{display:flex;align-items:center;gap:16px;margin-top:12px;flex-wrap:wrap}
-  .legend-item{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text3);font-family:var(--mono)}
-  .legend-swatch{width:14px;height:8px;border-radius:2px}
-
-  .pulse-ring{
-    position:absolute;border-radius:50%;border:1px solid;
-    animation:expand .8s ease-out forwards;opacity:0;
-  }
-  @keyframes expand{0%{transform:scale(.5);opacity:.6}100%{transform:scale(2);opacity:0}}
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+    
+     :root {
+        --bg: #0a0d14;
+        --bg2: #0f1420;
+        --bg3: #141927;
+        --panel: #1a2035;
+        --panel2: #1f2742;
+        --border: #2a3550;
+        --border2: #3a4a70;
+        --accent: #3b82f6;
+        --accent2: #60a5fa;
+        --accent3: #93c5fd;
+        --gold: #f59e0b;
+        --gold2: #fbbf24;
+        --green: #10b981;
+        --green2: #34d399;
+        --red: #ef4444;
+        --purple: #8b5cf6;
+        --pink: #ec4899;
+        --text: #e2e8f0;
+        --text2: #94a3b8;
+        --text3: #64748b;
+        --mono: 'JetBrains Mono', monospace;
+        --sans: 'Space Grotesk', sans-serif;
+    }
+    
+    body {
+        background: var(--bg);
+        font-family: var(--sans);
+        color: var(--text);
+        overflow-x: hidden
+    }
+    
+    .outer {
+        min-height: 100vh;
+        padding: 0;
+        position: relative
+    }
+    
+    .scanline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        animation: scan 4s linear infinite;
+        opacity: .3;
+        z-index: 999;
+        pointer-events: none
+    }
+    
+    @keyframes scan {
+        0% {
+            top: -2px
+        }
+        100% {
+            top: 100vh
+        }
+    }
+    
+    .header {
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px
+    }
+    
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--accent);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 0 20px rgba(59, 130, 246, .4);
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-glow {
+        0%,
+        100% {
+            box-shadow: 0 0 20px rgba(59, 130, 246, .4)
+        }
+        50% {
+            box-shadow: 0 0 35px rgba(59, 130, 246, .7)
+        }
+    }
+    
+    .logo-text {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: .5px
+    }
+    
+    .logo-sub {
+        font-size: 11px;
+        color: var(--text3);
+        font-family: var(--mono);
+        letter-spacing: 1px
+    }
+    
+    .status-bar {
+        display: flex;
+        align-items: center;
+        gap: 20px
+    }
+    
+    .live-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(16, 185, 129, .1);
+        border: 1px solid rgba(16, 185, 129, .3);
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--green2);
+        font-family: var(--mono);
+        letter-spacing: .5px;
+    }
+    
+    .live-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--green2);
+        border-radius: 50%;
+        animation: blink 1s ease-in-out infinite
+    }
+    
+    @keyframes blink {
+        0%,
+        100% {
+            opacity: 1
+        }
+        50% {
+            opacity: .2
+        }
+    }
+    
+    .time-display {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--text2);
+        letter-spacing: 1px
+    }
+    
+    .kpi-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .kpi {
+        padding: 20px 24px;
+        border-right: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+        transition: background .2s;
+        cursor: default;
+    }
+    
+    .kpi:last-child {
+        border-right: none
+    }
+    
+    .kpi:hover {
+        background: var(--panel)
+    }
+    
+    .kpi-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        transition: width 1.5s cubic-bezier(.16, 1, .3, 1);
+    }
+    
+    .kpi-label {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--text3);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        font-family: var(--mono)
+    }
+    
+    .kpi-value {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -1px;
+        line-height: 1
+    }
+    
+    .kpi-delta {
+        font-size: 11px;
+        color: var(--green2);
+        margin-top: 6px;
+        font-family: var(--mono)
+    }
+    
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 0;
+        min-height: calc(100vh - 140px)
+    }
+    
+    .map-panel {
+        padding: 24px;
+        background: var(--bg);
+        border-right: 1px solid var(--border);
+        position: relative;
+    }
+    
+    .map-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px
+    }
+    
+    .panel-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text2);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-family: var(--mono)
+    }
+    
+    .map-controls {
+        display: flex;
+        gap: 8px
+    }
+    
+    .btn {
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        border: 1px solid var(--border2);
+        background: var(--panel);
+        color: var(--text2);
+        cursor: pointer;
+        font-family: var(--mono);
+        letter-spacing: .5px;
+        transition: all .15s;
+    }
+    
+    .btn:hover,
+    .btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff
+    }
+    
+    .campus-map-wrap {
+        background: var(--bg2);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .campus-svg {
+        width: 100%;
+        display: block
+    }
+    
+    .side-panel {
+        background: var(--bg2);
+        display: flex;
+        flex-direction: column
+    }
+    
+    .sp-section {
+        padding: 20px;
+        border-bottom: 1px solid var(--border)
+    }
+    
+    .sp-title {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--text3);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-family: var(--mono);
+        margin-bottom: 14px
+    }
+    
+    .zone-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px
+    }
+    
+    .zone-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: var(--bg3);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        transition: all .15s;
+    }
+    
+    .zone-item:hover,
+    .zone-item.active {
+        border-color: var(--accent);
+        background: rgba(59, 130, 246, .05)
+    }
+    
+    .zone-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0
+    }
+    
+    .zone-name {
+        font-size: 12px;
+        font-weight: 500;
+        flex: 1
+    }
+    
+    .zone-count {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text2)
+    }
+    
+    .zone-pct {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--text3);
+        min-width: 36px;
+        text-align: right
+    }
+    
+    .zone-bar-wrap {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--border)
+    }
+    
+    .mini-bar {
+        height: 3px;
+        border-radius: 2px;
+        margin-top: 5px;
+        transition: width 1.2s cubic-bezier(.16, 1, .3, 1)
+    }
+    
+    .feed {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        max-height: 280px;
+        overflow: hidden;
+        position: relative
+    }
+    
+    .feed-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+        animation: fadeSlide .4s ease;
+        opacity: 0;
+        animation-fill-mode: forwards;
+    }
+    
+    .feed-item:last-child {
+        border-bottom: none
+    }
+    
+    @keyframes fadeSlide {
+        from {
+            opacity: 0;
+            transform: translateX(10px)
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0)
+        }
+    }
+    
+    .feed-zone {
+        width: 28px;
+        height: 20px;
+        border-radius: 4px;
+        font-size: 9px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-family: var(--mono);
+        letter-spacing: .5px;
+    }
+    
+    .feed-msg {
+        font-size: 11px;
+        color: var(--text2);
+        flex: 1;
+        line-height: 1.4
+    }
+    
+    .feed-time {
+        font-family: var(--mono);
+        font-size: 9px;
+        color: var(--text3)
+    }
+    
+    .turnout-ring {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 4px 0
+    }
+    
+    .chart-wrap {
+        padding: 0 20px 20px;
+        flex: 1
+    }
+    
+    .bar-chart {
+        display: flex;
+        flex-direction: column;
+        gap: 8px
+    }
+    
+    .bc-row {
+        display: flex;
+        align-items: center;
+        gap: 8px
+    }
+    
+    .bc-label {
+        font-size: 10px;
+        color: var(--text3);
+        font-family: var(--mono);
+        width: 80px;
+        flex-shrink: 0;
+        text-align: right;
+        letter-spacing: .3px
+    }
+    
+    .bc-track {
+        flex: 1;
+        background: var(--border);
+        border-radius: 3px;
+        height: 20px;
+        overflow: hidden;
+        position: relative
+    }
+    
+    .bc-fill {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 1.5s cubic-bezier(.16, 1, .3, 1);
+        display: flex;
+        align-items: center;
+        padding-left: 6px;
+        font-size: 10px;
+        font-family: var(--mono);
+        font-weight: 500;
+        white-space: nowrap;
+        min-width: 0
+    }
+    
+    .bc-val {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--text2);
+        min-width: 28px;
+        text-align: right
+    }
+    
+    .footer-bar {
+        background: var(--bg2);
+        border-top: 1px solid var(--border);
+        padding: 10px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--text3);
+    }
+    
+    .footer-stats {
+        display: flex;
+        gap: 24px
+    }
+    
+    .tooltip {
+        position: absolute;
+        background: var(--panel2);
+        border: 1px solid var(--border2);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 11px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .15s;
+        z-index: 200;
+        min-width: 140px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, .5);
+    }
+    
+    .tt-name {
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 4px
+    }
+    
+    .tt-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--text2);
+        margin-top: 3px
+    }
+    
+    .tt-val {
+        font-family: var(--mono);
+        color: var(--accent2)
+    }
+    
+    .legend {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 12px;
+        flex-wrap: wrap
+    }
+    
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 10px;
+        color: var(--text3);
+        font-family: var(--mono)
+    }
+    
+    .legend-swatch {
+        width: 14px;
+        height: 8px;
+        border-radius: 2px
+    }
+    
+    .pulse-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid;
+        animation: expand .8s ease-out forwards;
+        opacity: 0;
+    }
+    
+    @keyframes expand {
+        0% {
+            transform: scale(.5);
+            opacity: .6
+        }
+        100% {
+            transform: scale(2);
+            opacity: 0
+        }
+    }
 </style>
 
 <div class="outer">
-  <div class="scanline"></div>
-  
-  <div class="header">
-    <div class="logo">
-      <div class="logo-icon">🗳</div>
-      <div>
-        <div class="logo-text">CampusVote — Two-Campus Intelligence</div>
-        <div class="logo-sub">TOWN + KIHUMURO MODULE v2.1</div>
-      </div>
-    </div>
-    <div class="status-bar">
-      <div class="live-badge"><div class="live-dot"></div>ELECTION LIVE</div>
-      <div class="time-display" id="clock">--:--:--</div>
-    </div>
-  </div>
+    <div class="scanline"></div>
 
-  <div class="kpi-strip">
-    <div class="kpi">
-      <div class="kpi-label">Total Votes Cast</div>
-      <div class="kpi-value" id="kpi-total" style="color:var(--accent2)">0</div>
-      <div class="kpi-delta" id="kpi-rate">▲ calculating...</div>
-      <div class="kpi-bar" id="bar-total" style="background:var(--accent);width:0%"></div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Voter Turnout</div>
-      <div class="kpi-value" id="kpi-turnout" style="color:var(--green2)">0%</div>
-      <div class="kpi-delta" id="kpi-trend">▲ trending up</div>
-      <div class="kpi-bar" id="bar-turnout" style="background:var(--green);width:0%"></div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Hottest Zone</div>
-      <div class="kpi-value" id="kpi-hot" style="color:var(--gold2);font-size:16px;padding-top:6px">—</div>
-      <div class="kpi-delta" id="kpi-hot-count" style="color:var(--gold)">0 votes in last 5 min</div>
-      <div class="kpi-bar" id="bar-hot" style="background:var(--gold);width:0%"></div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Polls Close In</div>
-      <div class="kpi-value" id="kpi-countdown" style="color:var(--red);font-size:20px;font-family:var(--mono)">04:32:17</div>
-      <div class="kpi-delta" style="color:var(--text3)">today at 17:00 EAT</div>
-      <div class="kpi-bar" id="bar-time" style="background:var(--red)"></div>
-    </div>
-  </div>
-
-  <div class="main-grid">
-    <div class="map-panel">
-      <div class="map-header">
-        <div class="panel-title">Two-Campus Vote Heatmap — Live View</div>
-        <div class="map-controls">
-          <button class="btn active" onclick="setView('heat')">Heatmap</button>
-          <button class="btn" onclick="setView('bubble')">Bubbles</button>
-          <button class="btn" onclick="setView('zones')">Zones</button>
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">🗳</div>
+            <div>
+                <div class="logo-text">CampusVote — Two-Campus Intelligence</div>
+                <div class="logo-sub">TOWN + KIHUMURO MODULE v2.1</div>
+            </div>
         </div>
-      </div>
-      
-      <div class="campus-map-wrap">
-        <div class="tooltip" id="tooltip"></div>
-        <svg class="campus-svg" viewBox="0 0 680 460" id="campusSvg" xmlns="http://www.w3.org/2000/svg">
+        <div class="status-bar">
+            <div class="live-badge">
+                <div class="live-dot"></div>ELECTION LIVE</div>
+            <div class="time-display" id="clock">--:--:--</div>
+        </div>
+    </div>
+
+    <div class="kpi-strip">
+        <div class="kpi">
+            <div class="kpi-label">Total Votes Cast</div>
+            <div class="kpi-value" id="kpi-total" style="color:var(--accent2)">0</div>
+            <div class="kpi-delta" id="kpi-rate">▲ calculating...</div>
+            <div class="kpi-bar" id="bar-total" style="background:var(--accent);width:0%"></div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-label">Voter Turnout</div>
+            <div class="kpi-value" id="kpi-turnout" style="color:var(--green2)">0%</div>
+            <div class="kpi-delta" id="kpi-trend">▲ trending up</div>
+            <div class="kpi-bar" id="bar-turnout" style="background:var(--green);width:0%"></div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-label">Hottest Zone</div>
+            <div class="kpi-value" id="kpi-hot" style="color:var(--gold2);font-size:16px;padding-top:6px">—</div>
+            <div class="kpi-delta" id="kpi-hot-count" style="color:var(--gold)">0 votes in last 5 min</div>
+            <div class="kpi-bar" id="bar-hot" style="background:var(--gold);width:0%"></div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-label">Polls Close In</div>
+            <div class="kpi-value" id="kpi-countdown" style="color:var(--red);font-size:20px;font-family:var(--mono)">04:32:17</div>
+            <div class="kpi-delta" style="color:var(--text3)">today at 17:00 EAT</div>
+            <div class="kpi-bar" id="bar-time" style="background:var(--red)"></div>
+        </div>
+    </div>
+
+    <div class="main-grid">
+        <div class="map-panel">
+            <div class="map-header">
+                <div class="panel-title">Two-Campus Vote Heatmap — Live View</div>
+                <div class="map-controls">
+                    <button class="btn active" onclick="setView('heat')">Heatmap</button>
+                    <button class="btn" onclick="setView('bubble')">Bubbles</button>
+                    <button class="btn" onclick="setView('zones')">Zones</button>
+                </div>
+            </div>
+
+            <div class="campus-map-wrap">
+                <div class="tooltip" id="tooltip"></div>
+                <svg class="campus-svg" viewBox="0 0 680 460" id="campusSvg" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="hg1" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#ef4444" stop-opacity=".8"/>
@@ -362,106 +801,152 @@
           
           <text x="10" y="455" fill="var(--text3)" font-size="8" font-family="JetBrains Mono">SCALE: 1:2000  |  EAT +0300</text>
         </svg>
-      </div>
+            </div>
 
-      <div class="legend" style="margin-top:12px;padding:0 4px">
-        <div class="legend-item"><div class="legend-swatch" style="background:#ef4444;opacity:.7"></div>Very High (400+)</div>
-        <div class="legend-item"><div class="legend-swatch" style="background:#f59e0b;opacity:.7"></div>High (200–400)</div>
-        <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6;opacity:.7"></div>Medium (100–200)</div>
-        <div class="legend-item"><div class="legend-swatch" style="background:#10b981;opacity:.7"></div>Low (0–100)</div>
-        <div class="legend-item"><div style="width:8px;height:8px;border-radius:50%;background:#3b82f6;animation:blink 1s infinite"></div>Live ping</div>
-      </div>
-    </div>
+            <div class="legend" style="margin-top:12px;padding:0 4px">
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background:#ef4444;opacity:.7"></div>Very High (400+)</div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background:#f59e0b;opacity:.7"></div>High (200–400)</div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background:#3b82f6;opacity:.7"></div>Medium (100–200)</div>
+                <div class="legend-item">
+                    <div class="legend-swatch" style="background:#10b981;opacity:.7"></div>Low (0–100)</div>
+                <div class="legend-item">
+                    <div style="width:8px;height:8px;border-radius:50%;background:#3b82f6;animation:blink 1s infinite"></div>Live ping</div>
+            </div>
+        </div>
 
-    <div class="side-panel">
-      <div class="sp-section">
-        <div class="sp-title">Zone Breakdown</div>
-        <div class="zone-list" id="zoneList"></div>
-      </div>
+        <div class="side-panel">
+            <div class="sp-section">
+                <div class="sp-title">Zone Breakdown</div>
+                <div class="zone-list" id="zoneList"></div>
+            </div>
 
-      <div class="sp-section">
-        <div class="sp-title">Overall Turnout</div>
-        <div class="turnout-ring">
-          <svg width="120" height="120" viewBox="0 0 120 120">
+            <div class="sp-section">
+                <div class="sp-title">Overall Turnout</div>
+                <div class="turnout-ring">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="48" fill="none" stroke="#1a2035" stroke-width="10"/>
             <circle id="turnout-arc" cx="60" cy="60" r="48" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 301.6" transform="rotate(-90 60 60)" style="transition:stroke-dasharray 1.5s cubic-bezier(.16,1,.3,1)"/>
             <text x="60" y="55" fill="#e2e8f0" font-family="JetBrains Mono" font-size="20" font-weight="700" text-anchor="middle">62%</text>
             <text x="60" y="72" fill="#64748b" font-family="JetBrains Mono" font-size="8" text-anchor="middle">TURNOUT</text>
           </svg>
-          <div style="font-size:11px;color:var(--text3);text-align:center;font-family:var(--mono)">1,960 of 3,164 eligible voters</div>
+                    <div style="font-size:11px;color:var(--text3);text-align:center;font-family:var(--mono)">1,960 of 3,164 eligible voters</div>
+                </div>
+            </div>
+
+            <div class="sp-section" style="flex:1">
+                <div class="sp-title">Live Activity Feed</div>
+                <div class="feed" id="feed"></div>
+            </div>
         </div>
-      </div>
-
-      <div class="sp-section" style="flex:1">
-        <div class="sp-title">Live Activity Feed</div>
-        <div class="feed" id="feed"></div>
-      </div>
     </div>
-  </div>
 
-  <div style="padding:16px 24px 0;background:var(--bg);border-top:1px solid var(--border)">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <div class="panel-title">Votes Per Zone — Ranked</div>
-      <div style="font-size:10px;font-family:var(--mono);color:var(--text3)">updated every 30s</div>
+    <div style="padding:16px 24px 0;background:var(--bg);border-top:1px solid var(--border)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div class="panel-title">Votes Per Zone — Ranked</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--text3)">updated every 30s</div>
+        </div>
+        <div class="bar-chart" id="barChart"></div>
     </div>
-    <div class="bar-chart" id="barChart"></div>
-  </div>
 
-  <div class="footer-bar">
-    <div class="footer-stats">
-      <span>SESSION: ACTIVE</span>
-      <span id="f-votes">VOTES/MIN: —</span>
-      <span>ANOMALIES: 0</span>
-      <span>INTEGRITY: ✓ VERIFIED</span>
+    <div class="footer-bar">
+        <div class="footer-stats">
+            <span>SESSION: ACTIVE</span>
+            <span id="f-votes">VOTES/MIN: —</span>
+            <span>ANOMALIES: 0</span>
+            <span>INTEGRITY: ✓ VERIFIED</span>
+        </div>
+        <span>CampusVote v2.1 · Two-Campus Student Election System</span>
     </div>
-    <span>CampusVote v2.1 · Two-Campus Student Election System</span>
-  </div>
 </div>
 
 <script>
-const zones = [
-  { id:'med', name:'Medicine (Town Campus)', votes:247, eligible:380, color:'#f59e0b', cx:88, cy:58 },
-  { id:'sci', name:'Science & Education (Town Campus)', votes:312, eligible:420, color:'#10b981', cx:88, cy:162 },
-  { id:'bus', name:'Business (Town Campus)', votes:98, eligible:184, color:'#f97316', cx:130, cy:283 },
-  { id:'atech', name:'Applied Tech (Kihumuro Campus)', votes:521, eligible:780, color:'#ef4444', cx:508, cy:86 },
-  { id:'comp', name:'Computing & Informatics (Kihumuro Campus)', votes:344, eligible:520, color:'#3b82f6', cx:255, cy:168 },
-];
+    const zones = [{
+        id: 'med',
+        name: 'Medicine (Town Campus)',
+        votes: 247,
+        eligible: 380,
+        color: '#f59e0b',
+        cx: 88,
+        cy: 58
+    }, {
+        id: 'sci',
+        name: 'Science & Education (Town Campus)',
+        votes: 312,
+        eligible: 420,
+        color: '#10b981',
+        cx: 88,
+        cy: 162
+    }, {
+        id: 'bus',
+        name: 'Business (Town Campus)',
+        votes: 98,
+        eligible: 184,
+        color: '#f97316',
+        cx: 130,
+        cy: 283
+    }, {
+        id: 'atech',
+        name: 'Applied Tech (Kihumuro Campus)',
+        votes: 521,
+        eligible: 780,
+        color: '#ef4444',
+        cx: 508,
+        cy: 86
+    }, {
+        id: 'comp',
+        name: 'Computing & Informatics (Kihumuro Campus)',
+        votes: 344,
+        eligible: 520,
+        color: '#3b82f6',
+        cx: 255,
+        cy: 168
+    }, ];
 
-let currentView = 'heat';
-let totalVotes = zones.reduce((s,z)=>s+z.votes,0);
-let votesPerMin = 0;
-let lastVotes = totalVotes;
+    let currentView = 'heat';
+    let totalVotes = zones.reduce((s, z) => s + z.votes, 0);
+    let votesPerMin = 0;
+    let lastVotes = totalVotes;
 
-const feedMessages = [
-  (z) => `Vote registered from ${z.name}`,
-  (z) => `New ballot cast · ${z.name}`,
-  (z) => `Vote confirmed · ${z.name.split(' ')[0]}`,
-  (z) => `Participation logged · ${z.name}`,
-];
+    const feedMessages = [
+        (z) => `Vote registered from ${z.name}`,
+        (z) => `New ballot cast · ${z.name}`,
+        (z) => `Vote confirmed · ${z.name.split(' ')[0]}`,
+        (z) => `Participation logged · ${z.name}`,
+    ];
 
-function pad(n){return String(n).padStart(2,'0')}
-function updateClock(){
-  const now = new Date();
-  document.getElementById('clock').textContent = `${pad(now.getUTCHours()+3)}:${pad(now.getMinutes())}:${pad(now.getSeconds())} EAT`;
-}
-setInterval(updateClock, 1000); updateClock();
+    function pad(n) {
+        return String(n).padStart(2, '0')
+    }
 
-let countdown = 4*3600+32*60+17;
-function updateCountdown(){
-  if(countdown<=0)return;
-  countdown--;
-  const h=Math.floor(countdown/3600), m=Math.floor((countdown%3600)/60), s=countdown%60;
-  document.getElementById('kpi-countdown').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-  const pct = ((4*3600+32*60+17 - countdown)/(5*3600))*100;
-  document.getElementById('bar-time').style.width = Math.min(pct,100)+'%';
-}
-setInterval(updateCountdown,1000);
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('clock').textContent = `${pad(now.getUTCHours()+3)}:${pad(now.getMinutes())}:${pad(now.getSeconds())} EAT`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-function renderZones(){
-  const list = document.getElementById('zoneList');
-  const sorted = [...zones].sort((a,b)=>b.votes-a.votes).slice(0,6);
-  const max = sorted[0].votes;
-  list.innerHTML = sorted.map(z=>`
+    let countdown = 4 * 3600 + 32 * 60 + 17;
+
+    function updateCountdown() {
+        if (countdown <= 0) return;
+        countdown--;
+        const h = Math.floor(countdown / 3600),
+            m = Math.floor((countdown % 3600) / 60),
+            s = countdown % 60;
+        document.getElementById('kpi-countdown').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+        const pct = ((4 * 3600 + 32 * 60 + 17 - countdown) / (5 * 3600)) * 100;
+        document.getElementById('bar-time').style.width = Math.min(pct, 100) + '%';
+    }
+    setInterval(updateCountdown, 1000);
+
+    function renderZones() {
+        const list = document.getElementById('zoneList');
+        const sorted = [...zones].sort((a, b) => b.votes - a.votes).slice(0, 6);
+        const max = sorted[0].votes;
+        list.innerHTML = sorted.map(z => `
     <div class="zone-item" onclick="highlightZone('${z.id}')">
       <div class="zone-dot" style="background:${z.color}"></div>
       <div style="flex:1;min-width:0">
@@ -474,12 +959,12 @@ function renderZones(){
       </div>
     </div>
   `).join('');
-}
+    }
 
-function renderBarChart(){
-  const sorted = [...zones].sort((a,b)=>b.votes-a.votes);
-  const max = sorted[0].votes;
-  document.getElementById('barChart').innerHTML = sorted.map(z=>`
+    function renderBarChart() {
+        const sorted = [...zones].sort((a, b) => b.votes - a.votes);
+        const max = sorted[0].votes;
+        document.getElementById('barChart').innerHTML = sorted.map(z => `
     <div class="bc-row">
       <div class="bc-label">${z.name.split(' ').slice(0,2).join(' ')}</div>
       <div class="bc-track">
@@ -488,118 +973,120 @@ function renderBarChart(){
       <div class="bc-val">${(z.votes/z.eligible*100).toFixed(0)}%</div>
     </div>
   `).join('');
-}
+    }
 
-function updateKPIs(){
-  totalVotes = zones.reduce((s,z)=>s+z.votes,0);
-  const eligible = zones.reduce((s,z)=>s+z.eligible,0);
-  const turnout = (totalVotes/eligible*100).toFixed(1);
-  document.getElementById('kpi-total').textContent = totalVotes.toLocaleString();
-  document.getElementById('kpi-turnout').textContent = turnout+'%';
-  document.getElementById('bar-total').style.width = Math.min(totalVotes/eligible*100,100)+'%';
-  document.getElementById('bar-turnout').style.width = turnout+'%';
-  const hot = [...zones].sort((a,b)=>b.votes-a.votes)[0];
-  document.getElementById('kpi-hot').textContent = hot.name;
-  document.getElementById('kpi-hot-count').textContent = `▲ ${Math.floor(Math.random()*8+3)} votes in last 5 min`;
-  document.getElementById('bar-hot').style.width = '75%';
-  const vpm = totalVotes - lastVotes;
-  lastVotes = totalVotes;
-  votesPerMin = Math.max(vpm, Math.floor(Math.random()*4+2));
-  document.getElementById('kpi-rate').textContent = `▲ ~${votesPerMin*2}/min rate`;
-  document.getElementById('f-votes').textContent = `VOTES/MIN: ${votesPerMin*2}`;
-  const arc = document.getElementById('turnout-arc');
-  const pct = parseFloat(turnout)/100;
-  arc.setAttribute('stroke-dasharray', `${(pct*301.6).toFixed(1)} 301.6`);
-}
+    function updateKPIs() {
+        totalVotes = zones.reduce((s, z) => s + z.votes, 0);
+        const eligible = zones.reduce((s, z) => s + z.eligible, 0);
+        const turnout = (totalVotes / eligible * 100).toFixed(1);
+        document.getElementById('kpi-total').textContent = totalVotes.toLocaleString();
+        document.getElementById('kpi-turnout').textContent = turnout + '%';
+        document.getElementById('bar-total').style.width = Math.min(totalVotes / eligible * 100, 100) + '%';
+        document.getElementById('bar-turnout').style.width = turnout + '%';
+        const hot = [...zones].sort((a, b) => b.votes - a.votes)[0];
+        document.getElementById('kpi-hot').textContent = hot.name;
+        document.getElementById('kpi-hot-count').textContent = `▲ ${Math.floor(Math.random()*8+3)} votes in last 5 min`;
+        document.getElementById('bar-hot').style.width = '75%';
+        const vpm = totalVotes - lastVotes;
+        lastVotes = totalVotes;
+        votesPerMin = Math.max(vpm, Math.floor(Math.random() * 4 + 2));
+        document.getElementById('kpi-rate').textContent = `▲ ~${votesPerMin*2}/min rate`;
+        document.getElementById('f-votes').textContent = `VOTES/MIN: ${votesPerMin*2}`;
+        const arc = document.getElementById('turnout-arc');
+        const pct = parseFloat(turnout) / 100;
+        arc.setAttribute('stroke-dasharray', `${(pct*301.6).toFixed(1)} 301.6`);
+    }
 
-function addFeedItem(zone){
-  const feed = document.getElementById('feed');
-  const msg = feedMessages[Math.floor(Math.random()*feedMessages.length)](zone);
-  const now = new Date();
-  const time = `${pad(now.getUTCHours()+3)}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-  const item = document.createElement('div');
-  item.className = 'feed-item';
-  item.style.animationDelay = '0s';
-  item.innerHTML = `
+    function addFeedItem(zone) {
+        const feed = document.getElementById('feed');
+        const msg = feedMessages[Math.floor(Math.random() * feedMessages.length)](zone);
+        const now = new Date();
+        const time = `${pad(now.getUTCHours()+3)}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+        const item = document.createElement('div');
+        item.className = 'feed-item';
+        item.style.animationDelay = '0s';
+        item.innerHTML = `
     <div class="feed-zone" style="background:${zone.color}20;color:${zone.color};border:1px solid ${zone.color}40">${zone.id.slice(0,3).toUpperCase()}</div>
     <div class="feed-msg">${msg}</div>
     <div class="feed-time">${time}</div>
   `;
-  feed.insertBefore(item, feed.firstChild);
-  while(feed.children.length > 8) feed.removeChild(feed.lastChild);
-}
-
-function addPing(zone){
-  const layer = document.getElementById('pingLayer');
-  const ring = document.createElementNS('http://www.w3.org/2000/svg','circle');
-  ring.setAttribute('cx', zone.cx);
-  ring.setAttribute('cy', zone.cy);
-  ring.setAttribute('r', '8');
-  ring.setAttribute('fill', 'none');
-  ring.setAttribute('stroke', zone.color);
-  ring.setAttribute('stroke-width', '1.5');
-  ring.classList.add('pulse-ring');
-  layer.appendChild(ring);
-  setTimeout(()=>ring.remove(), 900);
-  
-  const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-  dot.setAttribute('cx', zone.cx);
-  dot.setAttribute('cy', zone.cy);
-  dot.setAttribute('r', '3');
-  dot.setAttribute('fill', zone.color);
-  dot.setAttribute('opacity', '0.9');
-  layer.appendChild(dot);
-  setTimeout(()=>dot.remove(), 800);
-}
-
-function simulateVotes(){
-  const weights = zones.map(z=>Math.max(z.eligible-z.votes,0));
-  const total = weights.reduce((s,w)=>s+w,0);
-  const rand = Math.random()*total;
-  let acc = 0;
-  for(let i=0;i<zones.length;i++){
-    acc+=weights[i];
-    if(rand<=acc){
-      zones[i].votes += Math.floor(Math.random()*3)+1;
-      addFeedItem(zones[i]);
-      addPing(zones[i]);
-      break;
+        feed.insertBefore(item, feed.firstChild);
+        while (feed.children.length > 8) feed.removeChild(feed.lastChild);
     }
-  }
-  updateKPIs();
-  renderZones();
-  if(Math.random()<0.3) renderBarChart();
-}
 
-function setView(v){
-  currentView = v;
-  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  const h = document.getElementById('heatLayer');
-  const b = document.getElementById('bubbleLayer');
-  const z = document.getElementById('zoneLayer');
-  h.style.opacity = v==='heat'?'1':'0';
-  b.style.opacity = v==='bubble'?'1':'0';
-  z.style.opacity = v==='zones'?'1':'0';
-}
+    function addPing(zone) {
+        const layer = document.getElementById('pingLayer');
+        const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        ring.setAttribute('cx', zone.cx);
+        ring.setAttribute('cy', zone.cy);
+        ring.setAttribute('r', '8');
+        ring.setAttribute('fill', 'none');
+        ring.setAttribute('stroke', zone.color);
+        ring.setAttribute('stroke-width', '1.5');
+        ring.classList.add('pulse-ring');
+        layer.appendChild(ring);
+        setTimeout(() => ring.remove(), 900);
 
-function highlightZone(id){}
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', zone.cx);
+        dot.setAttribute('cy', zone.cy);
+        dot.setAttribute('r', '3');
+        dot.setAttribute('fill', zone.color);
+        dot.setAttribute('opacity', '0.9');
+        layer.appendChild(dot);
+        setTimeout(() => dot.remove(), 800);
+    }
 
-renderZones();
-renderBarChart();
-updateKPIs();
-setTimeout(()=>{
-  for(let i=0;i<6;i++){
-    const z = zones[Math.floor(Math.random()*zones.length)];
-    addFeedItem(z);
-  }
-},200);
+    function simulateVotes() {
+        const weights = zones.map(z => Math.max(z.eligible - z.votes, 0));
+        const total = weights.reduce((s, w) => s + w, 0);
+        const rand = Math.random() * total;
+        let acc = 0;
+        for (let i = 0; i < zones.length; i++) {
+            acc += weights[i];
+            if (rand <= acc) {
+                zones[i].votes += Math.floor(Math.random() * 3) + 1;
+                addFeedItem(zones[i]);
+                addPing(zones[i]);
+                break;
+            }
+        }
+        updateKPIs();
+        renderZones();
+        if (Math.random() < 0.3) renderBarChart();
+    }
 
-setInterval(simulateVotes, 1800);
-setInterval(()=>{if(Math.random()<0.4)simulateVotes()}, 900);
-setTimeout(()=>{
-  document.getElementById('bar-total').style.width = '62%';
-  document.getElementById('bar-turnout').style.width = '62%';
-  document.getElementById('turnout-arc').setAttribute('stroke-dasharray','187 301.6');
-},500);
+    function setView(v) {
+        currentView = v;
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        const h = document.getElementById('heatLayer');
+        const b = document.getElementById('bubbleLayer');
+        const z = document.getElementById('zoneLayer');
+        h.style.opacity = v === 'heat' ? '1' : '0';
+        b.style.opacity = v === 'bubble' ? '1' : '0';
+        z.style.opacity = v === 'zones' ? '1' : '0';
+    }
+
+    function highlightZone(id) {}
+
+    renderZones();
+    renderBarChart();
+    updateKPIs();
+    setTimeout(() => {
+        for (let i = 0; i < 6; i++) {
+            const z = zones[Math.floor(Math.random() * zones.length)];
+            addFeedItem(z);
+        }
+    }, 200);
+
+    setInterval(simulateVotes, 1800);
+    setInterval(() => {
+        if (Math.random() < 0.4) simulateVotes()
+    }, 900);
+    setTimeout(() => {
+        document.getElementById('bar-total').style.width = '62%';
+        document.getElementById('bar-turnout').style.width = '62%';
+        document.getElementById('turnout-arc').setAttribute('stroke-dasharray', '187 301.6');
+    }, 500);
 </script>

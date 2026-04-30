@@ -1,276 +1,722 @@
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#07080f;--bg2:#0d1018;--bg3:#111520;--panel:#161b2a;--panel2:#1c2236;
-  --b:#232d42;--b2:#2e3d5a;--b3:#3d5080;
-  --blue:#3b82f6;--blue2:#60a5fa;--blue3:#93c5fd;
-  --gold:#f59e0b;--gold2:#fbbf24;--gold3:#fde68a;
-  --green:#10b981;--green2:#34d399;
-  --red:#ef4444;--red2:#f87171;
-  --purple:#8b5cf6;--purple2:#a78bfa;
-  --pink:#ec4899;--pink2:#f472b6;
-  --orange:#f97316;--orange2:#fb923c;
-  --teal:#14b8a6;--teal2:#2dd4bf;
-  --t:#e2e8f0;--t2:#94a3b8;--t3:#64748b;--t4:#3d4f6a;
-  --mono:'IBM Plex Mono',monospace;
-  --head:'Syne',sans-serif;
-}
-body{background:var(--bg);font-family:var(--head);color:var(--t)}
-
-.wrap{min-height:100vh}
-
-.topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 20px;background:var(--bg2);border-bottom:1px solid var(--b);
-}
-.topbar-left{display:flex;align-items:center;gap:14px}
-.election-badge{
-  background:var(--panel2);border:1px solid var(--b2);border-radius:8px;
-  padding:6px 14px;
-}
-.eb-label{font-size:9px;color:var(--t3);font-family:var(--mono);letter-spacing:1.5px;text-transform:uppercase}
-.eb-name{font-size:13px;font-weight:700;color:var(--blue2);letter-spacing:.3px}
-.live-pill{
-  display:flex;align-items:center;gap:6px;
-  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);
-  border-radius:20px;padding:5px 12px;
-  font-size:10px;font-weight:600;color:var(--green2);font-family:var(--mono);letter-spacing:1px;
-}
-.dot-blink{width:6px;height:6px;border-radius:50%;background:var(--green2);animation:blink 1s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
-.topbar-right{display:flex;align-items:center;gap:16px}
-.stat-chip{text-align:right}
-.sc-label{font-size:9px;color:var(--t3);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase}
-.sc-val{font-size:14px;font-weight:700;font-family:var(--mono)}
-.divider{width:1px;height:32px;background:var(--b)}
-
-.tab-row{
-  display:flex;gap:0;border-bottom:1px solid var(--b);
-  background:var(--bg2);padding:0 20px;
-}
-.tab{
-  padding:10px 18px;font-size:11px;font-weight:600;color:var(--t3);
-  cursor:pointer;border-bottom:2px solid transparent;letter-spacing:.5px;
-  transition:all .15s;font-family:var(--mono);text-transform:uppercase;
-}
-.tab.on{color:var(--blue2);border-bottom-color:var(--blue)}
-.tab:hover:not(.on){color:var(--t2)}
-
-.content{padding:20px;display:flex;flex-direction:column;gap:16px}
-
-.race-section{display:none}
-.race-section.on{display:flex;flex-direction:column;gap:12px}
-
-.position-label{
-  font-size:10px;font-weight:700;color:var(--t3);letter-spacing:2px;
-  text-transform:uppercase;font-family:var(--mono);padding:0 2px;
-  display:flex;align-items:center;gap:10px;
-}
-.position-label::after{content:'';flex:1;height:1px;background:var(--b)}
-
-.candidate-card{
-  background:var(--panel);border:1px solid var(--b);border-radius:10px;
-  padding:14px 16px;transition:border-color .2s;cursor:default;
-  position:relative;overflow:hidden;
-}
-.candidate-card:hover{border-color:var(--b2)}
-.candidate-card.leading{border-color:var(--gold);background:linear-gradient(135deg,var(--panel) 70%,rgba(245,158,11,.04))}
-.cc-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.avatar{
-  width:40px;height:40px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:800;border:2px solid;
-}
-.cc-info{flex:1;min-width:0}
-.cc-name{font-size:14px;font-weight:700;letter-spacing:.2px}
-.cc-meta{font-size:10px;color:var(--t3);font-family:var(--mono);margin-top:2px}
-.cc-right{text-align:right;flex-shrink:0}
-.cc-votes{font-size:22px;font-weight:800;font-family:var(--mono);line-height:1}
-.cc-pct{font-size:11px;font-family:var(--mono);margin-top:2px}
-.race-bar-track{height:8px;background:var(--b);border-radius:4px;overflow:hidden}
-.race-bar-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
-.cc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-.cc-zone{font-size:9px;color:var(--t3);font-family:var(--mono);letter-spacing:.5px}
-.crown{position:absolute;top:10px;right:12px;font-size:14px;opacity:.7}
-.rank-badge{
-  width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:700;font-family:var(--mono);flex-shrink:0;
-}
-.delta-badge{
-  font-size:9px;font-family:var(--mono);font-weight:600;padding:2px 7px;
-  border-radius:10px;letter-spacing:.5px;
-}
-
-.chart-panel{
-  background:var(--panel);border:1px solid var(--b);border-radius:10px;padding:16px;
-}
-.cp-header{font-size:10px;color:var(--t3);font-family:var(--mono);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
-
-.timeline-wrap{position:relative;height:160px}
-.tl-label{font-size:9px;color:var(--t3);font-family:var(--mono);position:absolute;bottom:-4px}
-
-.summary-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.sg-card{background:var(--bg3);border:1px solid var(--b);border-radius:8px;padding:12px}
-.sg-label{font-size:9px;color:var(--t3);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.sg-val{font-size:20px;font-weight:800;font-family:var(--mono)}
-.sg-sub{font-size:9px;color:var(--t3);font-family:var(--mono);margin-top:3px}
-
-.momentum-bar{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.mb-row{display:flex;align-items:center;gap:8px}
-.mb-name{font-size:9px;color:var(--t2);font-family:var(--mono);width:70px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mb-track{flex:1;background:var(--b);border-radius:2px;height:12px;overflow:hidden}
-.mb-fill{height:100%;border-radius:2px;transition:width .8s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:4px}
-.mb-num{font-size:8px;font-family:var(--mono);color:#fff;font-weight:600}
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+    
+    :root {
+        --bg: #07080f;
+        --bg2: #0d1018;
+        --bg3: #111520;
+        --panel: #161b2a;
+        --panel2: #1c2236;
+        --b: #232d42;
+        --b2: #2e3d5a;
+        --b3: #3d5080;
+        --blue: #3b82f6;
+        --blue2: #60a5fa;
+        --blue3: #93c5fd;
+        --gold: #f59e0b;
+        --gold2: #fbbf24;
+        --gold3: #fde68a;
+        --green: #10b981;
+        --green2: #34d399;
+        --red: #ef4444;
+        --red2: #f87171;
+        --purple: #8b5cf6;
+        --purple2: #a78bfa;
+        --pink: #ec4899;
+        --pink2: #f472b6;
+        --orange: #f97316;
+        --orange2: #fb923c;
+        --teal: #14b8a6;
+        --teal2: #2dd4bf;
+        --t: #e2e8f0;
+        --t2: #94a3b8;
+        --t3: #64748b;
+        --t4: #3d4f6a;
+        --mono: 'IBM Plex Mono', monospace;
+        --head: 'Syne', sans-serif;
+    }
+    
+    body {
+        background: var(--bg);
+        font-family: var(--head);
+        color: var(--t)
+    }
+    
+    .wrap {
+        min-height: 100vh
+    }
+    
+    .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--b);
+    }
+    
+    .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 14px
+    }
+    
+    .election-badge {
+        background: var(--panel2);
+        border: 1px solid var(--b2);
+        border-radius: 8px;
+        padding: 6px 14px;
+    }
+    
+    .eb-label {
+        font-size: 9px;
+        color: var(--t3);
+        font-family: var(--mono);
+        letter-spacing: 1.5px;
+        text-transform: uppercase
+    }
+    
+    .eb-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--blue2);
+        letter-spacing: .3px
+    }
+    
+    .live-pill {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(16, 185, 129, .08);
+        border: 1px solid rgba(16, 185, 129, .25);
+        border-radius: 20px;
+        padding: 5px 12px;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--green2);
+        font-family: var(--mono);
+        letter-spacing: 1px;
+    }
+    
+    .dot-blink {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green2);
+        animation: blink 1s infinite
+    }
+    
+    @keyframes blink {
+        0%,
+        100% {
+            opacity: 1
+        }
+        50% {
+            opacity: .15
+        }
+    }
+    
+    .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 16px
+    }
+    
+    .stat-chip {
+        text-align: right
+    }
+    
+    .sc-label {
+        font-size: 9px;
+        color: var(--t3);
+        font-family: var(--mono);
+        letter-spacing: 1px;
+        text-transform: uppercase
+    }
+    
+    .sc-val {
+        font-size: 14px;
+        font-weight: 700;
+        font-family: var(--mono)
+    }
+    
+    .divider {
+        width: 1px;
+        height: 32px;
+        background: var(--b)
+    }
+    
+    .tab-row {
+        display: flex;
+        gap: 0;
+        border-bottom: 1px solid var(--b);
+        background: var(--bg2);
+        padding: 0 20px;
+    }
+    
+    .tab {
+        padding: 10px 18px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--t3);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        letter-spacing: .5px;
+        transition: all .15s;
+        font-family: var(--mono);
+        text-transform: uppercase;
+    }
+    
+    .tab.on {
+        color: var(--blue2);
+        border-bottom-color: var(--blue)
+    }
+    
+    .tab:hover:not(.on) {
+        color: var(--t2)
+    }
+    
+    .content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px
+    }
+    
+    .race-section {
+        display: none
+    }
+    
+    .race-section.on {
+        display: flex;
+        flex-direction: column;
+        gap: 12px
+    }
+    
+    .position-label {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--t3);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: var(--mono);
+        padding: 0 2px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .position-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--b)
+    }
+    
+    .candidate-card {
+        background: var(--panel);
+        border: 1px solid var(--b);
+        border-radius: 10px;
+        padding: 14px 16px;
+        transition: border-color .2s;
+        cursor: default;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .candidate-card:hover {
+        border-color: var(--b2)
+    }
+    
+    .candidate-card.leading {
+        border-color: var(--gold);
+        background: linear-gradient(135deg, var(--panel) 70%, rgba(245, 158, 11, .04))
+    }
+    
+    .cc-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px
+    }
+    
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 800;
+        border: 2px solid;
+    }
+    
+    .cc-info {
+        flex: 1;
+        min-width: 0
+    }
+    
+    .cc-name {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: .2px
+    }
+    
+    .cc-meta {
+        font-size: 10px;
+        color: var(--t3);
+        font-family: var(--mono);
+        margin-top: 2px
+    }
+    
+    .cc-right {
+        text-align: right;
+        flex-shrink: 0
+    }
+    
+    .cc-votes {
+        font-size: 22px;
+        font-weight: 800;
+        font-family: var(--mono);
+        line-height: 1
+    }
+    
+    .cc-pct {
+        font-size: 11px;
+        font-family: var(--mono);
+        margin-top: 2px
+    }
+    
+    .race-bar-track {
+        height: 8px;
+        background: var(--b);
+        border-radius: 4px;
+        overflow: hidden
+    }
+    
+    .race-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 1.2s cubic-bezier(.16, 1, .3, 1)
+    }
+    
+    .cc-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px
+    }
+    
+    .cc-zone {
+        font-size: 9px;
+        color: var(--t3);
+        font-family: var(--mono);
+        letter-spacing: .5px
+    }
+    
+    .crown {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        font-size: 14px;
+        opacity: .7
+    }
+    
+    .rank-badge {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 700;
+        font-family: var(--mono);
+        flex-shrink: 0;
+    }
+    
+    .delta-badge {
+        font-size: 9px;
+        font-family: var(--mono);
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 10px;
+        letter-spacing: .5px;
+    }
+    
+    .chart-panel {
+        background: var(--panel);
+        border: 1px solid var(--b);
+        border-radius: 10px;
+        padding: 16px;
+    }
+    
+    .cp-header {
+        font-size: 10px;
+        color: var(--t3);
+        font-family: var(--mono);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 14px
+    }
+    
+    .timeline-wrap {
+        position: relative;
+        height: 160px
+    }
+    
+    .tl-label {
+        font-size: 9px;
+        color: var(--t3);
+        font-family: var(--mono);
+        position: absolute;
+        bottom: -4px
+    }
+    
+    .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px
+    }
+    
+    .sg-card {
+        background: var(--bg3);
+        border: 1px solid var(--b);
+        border-radius: 8px;
+        padding: 12px
+    }
+    
+    .sg-label {
+        font-size: 9px;
+        color: var(--t3);
+        font-family: var(--mono);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 6px
+    }
+    
+    .sg-val {
+        font-size: 20px;
+        font-weight: 800;
+        font-family: var(--mono)
+    }
+    
+    .sg-sub {
+        font-size: 9px;
+        color: var(--t3);
+        font-family: var(--mono);
+        margin-top: 3px
+    }
+    
+    .momentum-bar {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 4px
+    }
+    
+    .mb-row {
+        display: flex;
+        align-items: center;
+        gap: 8px
+    }
+    
+    .mb-name {
+        font-size: 9px;
+        color: var(--t2);
+        font-family: var(--mono);
+        width: 70px;
+        flex-shrink: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis
+    }
+    
+    .mb-track {
+        flex: 1;
+        background: var(--b);
+        border-radius: 2px;
+        height: 12px;
+        overflow: hidden
+    }
+    
+    .mb-fill {
+        height: 100%;
+        border-radius: 2px;
+        transition: width .8s cubic-bezier(.16, 1, .3, 1);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 4px
+    }
+    
+    .mb-num {
+        font-size: 8px;
+        font-family: var(--mono);
+        color: #fff;
+        font-weight: 600
+    }
 </style>
 
 <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Live campus and faculty race tracker for CampusVote — Kihumuro Main Campus and Town Campus programs</h2>
 
 <div class="wrap">
-  <div class="topbar">
-    <div class="topbar-left">
-      <div class="election-badge">
-        <div class="eb-label">Election</div>
-        <div class="eb-name">CampusVote 2026</div>
-      </div>
-      <div class="live-pill"><div class="dot-blink"></div>LIVE RACE</div>
-    </div>
-    <div class="topbar-right">
-      <div class="stat-chip">
-        <div class="sc-label">Votes Cast</div>
-        <div class="sc-val" id="hdr-votes" style="color:var(--blue2)">1,960</div>
-      </div>
-      <div class="divider"></div>
-      <div class="stat-chip">
-        <div class="sc-label">Turnout</div>
-        <div class="sc-val" style="color:var(--green2)">62.0%</div>
-      </div>
-      <div class="divider"></div>
-      <div class="stat-chip">
-        <div class="sc-label">Time Left</div>
-        <div class="sc-val" id="hdr-time" style="color:var(--red2);font-size:12px">04:31:44</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-row">
-    <div class="tab on" onclick="switchTab('allStudents',this)">All Students — Guild President</div>
-    <div class="tab" onclick="switchTab('townMedicine',this)">Town: Medicine</div>
-    <div class="tab" onclick="switchTab('townScience',this)">Town: Science & Business</div>
-    <div class="tab" onclick="switchTab('kihumuroTech',this)">Kihumuro: Applied Tech</div>
-    <div class="tab" onclick="switchTab('kihumuroComputing',this)">Kihumuro: Computing</div>
-  </div>
-
-  <div class="content">
-
-    <div id="tab-allStudents" class="race-section on"></div>
-    <div id="tab-townMedicine" class="race-section"></div>
-    <div id="tab-townScience" class="race-section"></div>
-    <div id="tab-kihumuroTech" class="race-section"></div>
-    <div id="tab-kihumuroComputing" class="race-section"></div>
-
-    <div class="chart-panel">
-      <div class="cp-header">Vote momentum — last 30 minutes</div>
-      <div style="position:relative;width:100%;height:160px">
-        <canvas id="momentumChart" role="img" aria-label="Line chart showing vote momentum over last 30 minutes for leading candidates">Vote momentum data for leading candidates over the past 30 minutes.</canvas>
-      </div>
+    <div class="topbar">
+        <div class="topbar-left">
+            <div class="election-badge">
+                <div class="eb-label">Election</div>
+                <div class="eb-name">CampusVote 2026</div>
+            </div>
+            <div class="live-pill">
+                <div class="dot-blink"></div>LIVE RACE</div>
+        </div>
+        <div class="topbar-right">
+            <div class="stat-chip">
+                <div class="sc-label">Votes Cast</div>
+                <div class="sc-val" id="hdr-votes" style="color:var(--blue2)">1,960</div>
+            </div>
+            <div class="divider"></div>
+            <div class="stat-chip">
+                <div class="sc-label">Turnout</div>
+                <div class="sc-val" style="color:var(--green2)">62.0%</div>
+            </div>
+            <div class="divider"></div>
+            <div class="stat-chip">
+                <div class="sc-label">Time Left</div>
+                <div class="sc-val" id="hdr-time" style="color:var(--red2);font-size:12px">04:31:44</div>
+            </div>
+        </div>
     </div>
 
-    <div class="summary-grid">
-      <div class="sg-card">
-        <div class="sg-label">Votes / Min</div>
-        <div class="sg-val" id="vpm" style="color:var(--blue2)">18</div>
-        <div class="sg-sub" id="vpm-trend">trending up</div>
-      </div>
-      <div class="sg-card">
-        <div class="sg-label">Closest Race</div>
-        <div class="sg-val" style="color:var(--gold2);font-size:14px">Town Medicine</div>
-        <div class="sg-sub">margin: 31 votes</div>
-      </div>
-      <div class="sg-card">
-        <div class="sg-label">Biggest Lead</div>
-        <div class="sg-val" style="color:var(--green2);font-size:14px">Kihumuro Computing</div>
-        <div class="sg-sub">margin: 187 votes</div>
-      </div>
+    <div class="tab-row">
+        <div class="tab on" onclick="switchTab('allStudents',this)">All Students — Guild President</div>
+        <div class="tab" onclick="switchTab('townMedicine',this)">Town: Medicine</div>
+        <div class="tab" onclick="switchTab('townScience',this)">Town: Science & Business</div>
+        <div class="tab" onclick="switchTab('kihumuroTech',this)">Kihumuro: Applied Tech</div>
+        <div class="tab" onclick="switchTab('kihumuroComputing',this)">Kihumuro: Computing</div>
     </div>
 
-    <div class="chart-panel">
-      <div class="cp-header">Zone momentum — votes last 5 min</div>
-      <div class="momentum-bar" id="momentumBars"></div>
-    </div>
+    <div class="content">
 
-  </div>
+        <div id="tab-allStudents" class="race-section on"></div>
+        <div id="tab-townMedicine" class="race-section"></div>
+        <div id="tab-townScience" class="race-section"></div>
+        <div id="tab-kihumuroTech" class="race-section"></div>
+        <div id="tab-kihumuroComputing" class="race-section"></div>
+
+        <div class="chart-panel">
+            <div class="cp-header">Vote momentum — last 30 minutes</div>
+            <div style="position:relative;width:100%;height:160px">
+                <canvas id="momentumChart" role="img" aria-label="Line chart showing vote momentum over last 30 minutes for leading candidates">Vote momentum data for leading candidates over the past 30 minutes.</canvas>
+            </div>
+        </div>
+
+        <div class="summary-grid">
+            <div class="sg-card">
+                <div class="sg-label">Votes / Min</div>
+                <div class="sg-val" id="vpm" style="color:var(--blue2)">18</div>
+                <div class="sg-sub" id="vpm-trend">trending up</div>
+            </div>
+            <div class="sg-card">
+                <div class="sg-label">Closest Race</div>
+                <div class="sg-val" style="color:var(--gold2);font-size:14px">Town Medicine</div>
+                <div class="sg-sub">margin: 31 votes</div>
+            </div>
+            <div class="sg-card">
+                <div class="sg-label">Biggest Lead</div>
+                <div class="sg-val" style="color:var(--green2);font-size:14px">Kihumuro Computing</div>
+                <div class="sg-sub">margin: 187 votes</div>
+            </div>
+        </div>
+
+        <div class="chart-panel">
+            <div class="cp-header">Zone momentum — votes last 5 min</div>
+            <div class="momentum-bar" id="momentumBars"></div>
+        </div>
+
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const RACES = {
-  allStudents: {
-    title: 'All Students — Guild President',
-    candidates: [
-      { name:'Amina Kato', dept:'All Students · Guild President', votes:920, color:'#f59e0b', color2:'#4a2903', initials:'AK' },
-      { name:'David Mugisha', dept:'All Students · Guild President', votes:765, color:'#3b82f6', color2:'#0f2a55', initials:'DM' },
-      { name:'Grace Nyanzi', dept:'All Students · Guild President', votes:612, color:'#10b981', color2:'#043324', initials:'GN' },
-      { name:'Michael Otieno', dept:'All Students · Guild President', votes:483, color:'#ec4899', color2:'#4a0a1f', initials:'MO' },
-    ]
-  },
-  townMedicine: {
-    title: 'Town — Medicine (Program) — Program Representative',
-    candidates: [
-      { name:'Aisha Namutebi', dept:'Town · Medicine', votes:487, color:'#3b82f6', color2:'#1e3a5f', initials:'AN' },
-      { name:'Samuel Kizza', dept:'Town · Medicine', votes:360, color:'#10b981', color2:'#052e1c', initials:'SK' },
-      { name:'Lydia Opio', dept:'Town · Medicine', votes:189, color:'#ec4899', color2:'#4a0920', initials:'LO' },
-      { name:'Brian Tumusiime', dept:'Town · Medicine', votes:142, color:'#8b5cf6', color2:'#2e1065', initials:'BT' },
-    ]
-  },
-  townScience: {
-    title: 'Town — Science & Business (Programs)',
-    candidates: [
-      { name:'Josephine Atukunda', dept:'Town · Science', votes:421, color:'#f59e0b', color2:'#451a03', initials:'JA' },
-      { name:'Patrick Ssemanda', dept:'Town · Science/Business', votes:378, color:'#14b8a6', color2:'#042f2e', initials:'PS' },
-      { name:'Ruth Kato', dept:'Town · Business', votes:210, color:'#f97316', color2:'#431407', initials:'RK' },
-    ]
-  },
-  kihumuroTech: {
-    title: 'Kihumuro — Applied Tech (Programs)',
-    candidates: [
-      { name:'Daniel Kato', dept:'Kihumuro · Applied Tech', votes:512, color:'#3b82f6', color2:'#1e3a5f', initials:'DK' },
-      { name:'Esther Muwanga', dept:'Kihumuro · Applied Tech', votes:298, color:'#ec4899', color2:'#4a0920', initials:'EM' },
-      { name:'Robert Lwanga', dept:'Kihumuro · Applied Tech', votes:201, color:'#8b5cf6', color2:'#2e1065', initials:'RL' },
-      { name:'Naomi Akol', dept:'Kihumuro · Applied Tech', votes:164, color:'#10b981', color2:'#052e1c', initials:'NA' },
-    ]
-  },
-  kihumuroComputing: {
-    title: 'Kihumuro — Computing & Informatics (Programs)',
-    candidates: [
-      { name:'Kevin Ouma', dept:'Kihumuro · Computing', votes:344, color:'#10b981', color2:'#052e1c', initials:'KO' },
-      { name:'Sandra Nakato', dept:'Kihumuro · Computing', votes:313, color:'#f59e0b', color2:'#451a03', initials:'SN' },
-      { name:'Elias Bukenya', dept:'Kihumuro · Computing', votes:188, color:'#f97316', color2:'#431407', initials:'EB' },
-    ]
-  }
-};
+    const RACES = {
+        allStudents: {
+            title: 'All Students — Guild President',
+            candidates: [{
+                name: 'Amina Kato',
+                dept: 'All Students · Guild President',
+                votes: 920,
+                color: '#f59e0b',
+                color2: '#4a2903',
+                initials: 'AK'
+            }, {
+                name: 'David Mugisha',
+                dept: 'All Students · Guild President',
+                votes: 765,
+                color: '#3b82f6',
+                color2: '#0f2a55',
+                initials: 'DM'
+            }, {
+                name: 'Grace Nyanzi',
+                dept: 'All Students · Guild President',
+                votes: 612,
+                color: '#10b981',
+                color2: '#043324',
+                initials: 'GN'
+            }, {
+                name: 'Michael Otieno',
+                dept: 'All Students · Guild President',
+                votes: 483,
+                color: '#ec4899',
+                color2: '#4a0a1f',
+                initials: 'MO'
+            }, ]
+        },
+        townMedicine: {
+            title: 'Town — Medicine (Program) — Program Representative',
+            candidates: [{
+                name: 'Aisha Namutebi',
+                dept: 'Town · Medicine',
+                votes: 487,
+                color: '#3b82f6',
+                color2: '#1e3a5f',
+                initials: 'AN'
+            }, {
+                name: 'Samuel Kizza',
+                dept: 'Town · Medicine',
+                votes: 360,
+                color: '#10b981',
+                color2: '#052e1c',
+                initials: 'SK'
+            }, {
+                name: 'Lydia Opio',
+                dept: 'Town · Medicine',
+                votes: 189,
+                color: '#ec4899',
+                color2: '#4a0920',
+                initials: 'LO'
+            }, {
+                name: 'Brian Tumusiime',
+                dept: 'Town · Medicine',
+                votes: 142,
+                color: '#8b5cf6',
+                color2: '#2e1065',
+                initials: 'BT'
+            }, ]
+        },
+        townScience: {
+            title: 'Town — Science & Business (Programs)',
+            candidates: [{
+                name: 'Josephine Atukunda',
+                dept: 'Town · Science',
+                votes: 421,
+                color: '#f59e0b',
+                color2: '#451a03',
+                initials: 'JA'
+            }, {
+                name: 'Patrick Ssemanda',
+                dept: 'Town · Science/Business',
+                votes: 378,
+                color: '#14b8a6',
+                color2: '#042f2e',
+                initials: 'PS'
+            }, {
+                name: 'Ruth Kato',
+                dept: 'Town · Business',
+                votes: 210,
+                color: '#f97316',
+                color2: '#431407',
+                initials: 'RK'
+            }, ]
+        },
+        kihumuroTech: {
+            title: 'Kihumuro — Applied Tech (Programs)',
+            candidates: [{
+                name: 'Daniel Kato',
+                dept: 'Kihumuro · Applied Tech',
+                votes: 512,
+                color: '#3b82f6',
+                color2: '#1e3a5f',
+                initials: 'DK'
+            }, {
+                name: 'Esther Muwanga',
+                dept: 'Kihumuro · Applied Tech',
+                votes: 298,
+                color: '#ec4899',
+                color2: '#4a0920',
+                initials: 'EM'
+            }, {
+                name: 'Robert Lwanga',
+                dept: 'Kihumuro · Applied Tech',
+                votes: 201,
+                color: '#8b5cf6',
+                color2: '#2e1065',
+                initials: 'RL'
+            }, {
+                name: 'Naomi Akol',
+                dept: 'Kihumuro · Applied Tech',
+                votes: 164,
+                color: '#10b981',
+                color2: '#052e1c',
+                initials: 'NA'
+            }, ]
+        },
+        kihumuroComputing: {
+            title: 'Kihumuro — Computing & Informatics (Programs)',
+            candidates: [{
+                name: 'Kevin Ouma',
+                dept: 'Kihumuro · Computing',
+                votes: 344,
+                color: '#10b981',
+                color2: '#052e1c',
+                initials: 'KO'
+            }, {
+                name: 'Sandra Nakato',
+                dept: 'Kihumuro · Computing',
+                votes: 313,
+                color: '#f59e0b',
+                color2: '#451a03',
+                initials: 'SN'
+            }, {
+                name: 'Elias Bukenya',
+                dept: 'Kihumuro · Computing',
+                votes: 188,
+                color: '#f97316',
+                color2: '#431407',
+                initials: 'EB'
+            }, ]
+        }
+    };
 
-const ZONES = ['Medicine','Science/Education','Business','Applied Tech','Computing'];
-const ZONE_BASE = [52,41,22,48,35];
+    const ZONES = ['Medicine', 'Science/Education', 'Business', 'Applied Tech', 'Computing'];
+    const ZONE_BASE = [52, 41, 22, 48, 35];
 
-function totalForRace(r){ return RACES[r].candidates.reduce((s,c)=>s+c.votes,0) }
+    function totalForRace(r) {
+        return RACES[r].candidates.reduce((s, c) => s + c.votes, 0)
+    }
 
-function renderRace(key){
-  const race = RACES[key];
-  const total = totalForRace(key);
-  const sorted = [...race.candidates].sort((a,b)=>b.votes-a.votes);
-  const maxV = sorted[0].votes;
-  const el = document.getElementById('tab-'+key);
-  el.innerHTML = `<div class="position-label">${race.title}</div>` +
-    sorted.map((c,i)=>{
-      const pct = total > 0 ? (c.votes/total*100).toFixed(1) : '0.0';
-      const barW = (c.votes/maxV*100).toFixed(1);
-      const isLead = i===0;
-      const delta = i===0 ? `+${(sorted[0].votes-sorted[1].votes).toLocaleString()} ahead` : `-${(sorted[0].votes-c.votes).toLocaleString()} behind`;
-      const deltaColor = i===0 ? '#34d399' : '#f87171';
-      const rankColors = ['#f59e0b','#94a3b8','#cd7c2f','#3d4f6a'];
-      return `<div class="candidate-card ${isLead?'leading':''}">
+    function renderRace(key) {
+        const race = RACES[key];
+        const total = totalForRace(key);
+        const sorted = [...race.candidates].sort((a, b) => b.votes - a.votes);
+        const maxV = sorted[0].votes;
+        const el = document.getElementById('tab-' + key);
+        el.innerHTML = `<div class="position-label">${race.title}</div>` +
+            sorted.map((c, i) => {
+                const pct = total > 0 ? (c.votes / total * 100).toFixed(1) : '0.0';
+                const barW = (c.votes / maxV * 100).toFixed(1);
+                const isLead = i === 0;
+                const delta = i === 0 ? `+${(sorted[0].votes-sorted[1].votes).toLocaleString()} ahead` : `-${(sorted[0].votes-c.votes).toLocaleString()} behind`;
+                const deltaColor = i === 0 ? '#34d399' : '#f87171';
+                const rankColors = ['#f59e0b', '#94a3b8', '#cd7c2f', '#3d4f6a'];
+                return `<div class="candidate-card ${isLead?'leading':''}">
         ${isLead?'<div class="crown">&#9733;</div>':''}
         <div class="cc-top">
           <div class="rank-badge" style="background:${rankColors[i]}20;color:${rankColors[i]};border:1px solid ${rankColors[i]}40">${i+1}</div>
@@ -292,59 +738,116 @@ function renderRace(key){
           <div class="delta-badge" style="background:${deltaColor}18;color:${deltaColor}">${delta}</div>
         </div>
       </div>`;
-    }).join('');
-}
-
-function renderAllRaces(){
-  Object.keys(RACES).forEach(renderRace);
-}
-
-let activeTab = 'allStudents';
-function switchTab(key, el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.race-section').forEach(s=>s.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById('tab-'+key).classList.add('on');
-  activeTab = key;
-}
-
-const timeLabels = [];
-const now = new Date();
-for(let i=29;i>=0;i--){
-  const t = new Date(now - i*60000);
-  timeLabels.push(t.getMinutes().toString().padStart(2,'0'));
-}
-
-function makeData(base, variance){
-  return Array.from({length:30},(_,i)=>Math.max(0,base+Math.floor(Math.sin(i/4)*variance+Math.random()*variance)));
-}
-
-const chartColors = ['#3b82f6','#10b981','#ec4899','#f59e0b'];
-const mChart = new Chart(document.getElementById('momentumChart'),{
-  type:'line',
-  data:{
-    labels:timeLabels,
-    datasets:[
-      {label:'Medicine',data:makeData(18,6),borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.08)',borderWidth:2,pointRadius:0,tension:.4,fill:true},
-      {label:'Applied Tech',data:makeData(11,5),borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.06)',borderWidth:2,pointRadius:0,tension:.4,fill:true,borderDash:[4,3]},
-      {label:'Computing',data:makeData(7,4),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,.04)',borderWidth:1.5,pointRadius:0,tension:.4,fill:true,borderDash:[2,3]},
-    ]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false}},
-    scales:{
-      x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#64748b',font:{size:9,family:'IBM Plex Mono'},maxTicksLimit:8}},
-      y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#64748b',font:{size:9,family:'IBM Plex Mono'}},beginAtZero:true}
+            }).join('');
     }
-  }
-});
 
-const chartLegend = document.querySelector('.chart-panel');
+    function renderAllRaces() {
+        Object.keys(RACES).forEach(renderRace);
+    }
 
-function renderMomentumBars(){
-  const max = Math.max(...ZONE_BASE);
-  document.getElementById('momentumBars').innerHTML = ZONES.map((z,i)=>`
+    let activeTab = 'allStudents';
+
+    function switchTab(key, el) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+        document.querySelectorAll('.race-section').forEach(s => s.classList.remove('on'));
+        el.classList.add('on');
+        document.getElementById('tab-' + key).classList.add('on');
+        activeTab = key;
+    }
+
+    const timeLabels = [];
+    const now = new Date();
+    for (let i = 29; i >= 0; i--) {
+        const t = new Date(now - i * 60000);
+        timeLabels.push(t.getMinutes().toString().padStart(2, '0'));
+    }
+
+    function makeData(base, variance) {
+        return Array.from({
+            length: 30
+        }, (_, i) => Math.max(0, base + Math.floor(Math.sin(i / 4) * variance + Math.random() * variance)));
+    }
+
+    const chartColors = ['#3b82f6', '#10b981', '#ec4899', '#f59e0b'];
+    const mChart = new Chart(document.getElementById('momentumChart'), {
+        type: 'line',
+        data: {
+            labels: timeLabels,
+            datasets: [{
+                label: 'Medicine',
+                data: makeData(18, 6),
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59,130,246,.08)',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: .4,
+                fill: true
+            }, {
+                label: 'Applied Tech',
+                data: makeData(11, 5),
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16,185,129,.06)',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: .4,
+                fill: true,
+                borderDash: [4, 3]
+            }, {
+                label: 'Computing',
+                data: makeData(7, 4),
+                borderColor: '#ec4899',
+                backgroundColor: 'rgba(236,72,153,.04)',
+                borderWidth: 1.5,
+                pointRadius: 0,
+                tension: .4,
+                fill: true,
+                borderDash: [2, 3]
+            }, ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(255,255,255,.04)'
+                    },
+                    ticks: {
+                        color: '#64748b',
+                        font: {
+                            size: 9,
+                            family: 'IBM Plex Mono'
+                        },
+                        maxTicksLimit: 8
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'rgba(255,255,255,.04)'
+                    },
+                    ticks: {
+                        color: '#64748b',
+                        font: {
+                            size: 9,
+                            family: 'IBM Plex Mono'
+                        }
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const chartLegend = document.querySelector('.chart-panel');
+
+    function renderMomentumBars() {
+        const max = Math.max(...ZONE_BASE);
+        document.getElementById('momentumBars').innerHTML = ZONES.map((z, i) => `
     <div class="mb-row">
       <div class="mb-name">${z}</div>
       <div class="mb-track">
@@ -354,49 +857,60 @@ function renderMomentumBars(){
       </div>
     </div>
   `).join('');
-}
+    }
 
-renderMomentumBars();
+    renderMomentumBars();
 
-let secs = 4*3600+31*60+44;
-setInterval(()=>{
-  if(secs>0)secs--;
-  const h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;
-  const pad=n=>String(n).padStart(2,'0');
-  const el=document.getElementById('hdr-time');
-  if(el)el.textContent=`${pad(h)}:${pad(m)}:${pad(s)}`;
-},1000);
+    let secs = 4 * 3600 + 31 * 60 + 44;
+    setInterval(() => {
+        if (secs > 0) secs--;
+        const h = Math.floor(secs / 3600),
+            m = Math.floor((secs % 3600) / 60),
+            s = secs % 60;
+        const pad = n => String(n).padStart(2, '0');
+        const el = document.getElementById('hdr-time');
+        if (el) el.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+    }, 1000);
 
-function tick(){
-  const allKeys = Object.keys(RACES);
-  const raceKey = allKeys[Math.floor(Math.random()*allKeys.length)];
-  const race = RACES[raceKey];
-  const weights = race.candidates.map((_,i)=>race.candidates.length-i+1);
-  const total = weights.reduce((s,w)=>s+w,0);
-  let r = Math.random()*total, pick = 0;
-  for(let i=0;i<weights.length;i++){r-=weights[i];if(r<=0){pick=i;break;}}
-  race.candidates[pick].votes += Math.floor(Math.random()*3)+1;
+    function tick() {
+        const allKeys = Object.keys(RACES);
+        const raceKey = allKeys[Math.floor(Math.random() * allKeys.length)];
+        const race = RACES[raceKey];
+        const weights = race.candidates.map((_, i) => race.candidates.length - i + 1);
+        const total = weights.reduce((s, w) => s + w, 0);
+        let r = Math.random() * total,
+            pick = 0;
+        for (let i = 0; i < weights.length; i++) {
+            r -= weights[i];
+            if (r <= 0) {
+                pick = i;
+                break;
+            }
+        }
+        race.candidates[pick].votes += Math.floor(Math.random() * 3) + 1;
 
-  const zoneIdx = Math.floor(Math.random()*ZONE_BASE.length);
-  ZONE_BASE[zoneIdx] += Math.floor(Math.random()*3)+1;
+        const zoneIdx = Math.floor(Math.random() * ZONE_BASE.length);
+        ZONE_BASE[zoneIdx] += Math.floor(Math.random() * 3) + 1;
 
-  const allVotes = allKeys.reduce((s,k)=>s+totalForRace(k),0);
-  const hdrEl = document.getElementById('hdr-votes');
-  if(hdrEl) hdrEl.textContent = Math.floor(allVotes/allKeys.length).toLocaleString();
+        const allVotes = allKeys.reduce((s, k) => s + totalForRace(k), 0);
+        const hdrEl = document.getElementById('hdr-votes');
+        if (hdrEl) hdrEl.textContent = Math.floor(allVotes / allKeys.length).toLocaleString();
 
-  renderAllRaces();
-  renderMomentumBars();
+        renderAllRaces();
+        renderMomentumBars();
 
-  const ds = mChart.data.datasets[Math.floor(Math.random()*3)];
-  ds.data.shift();
-  ds.data.push(Math.max(1,Math.floor(Math.random()*20+5)));
-  mChart.update('none');
+        const ds = mChart.data.datasets[Math.floor(Math.random() * 3)];
+        ds.data.shift();
+        ds.data.push(Math.max(1, Math.floor(Math.random() * 20 + 5)));
+        mChart.update('none');
 
-  const vpmEl = document.getElementById('vpm');
-  if(vpmEl) vpmEl.textContent = String(Math.floor(Math.random()*8+14));
-}
+        const vpmEl = document.getElementById('vpm');
+        if (vpmEl) vpmEl.textContent = String(Math.floor(Math.random() * 8 + 14));
+    }
 
-renderAllRaces();
-setInterval(tick, 2200);
-setInterval(()=>{if(Math.random()<.4)tick()}, 900);
+    renderAllRaces();
+    setInterval(tick, 2200);
+    setInterval(() => {
+        if (Math.random() < .4) tick()
+    }, 900);
 </script>

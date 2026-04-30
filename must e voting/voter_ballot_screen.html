@@ -1,263 +1,791 @@
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f8fafc;--bg2:#f1f5f9;--bg3:#e2e8f0;
-  --panel:#ffffff;--panel2:#f8fafc;
-  --b:#e2e8f0;--b2:#cbd5e1;--b3:#94a3b8;
-  --blue:#2563eb;--blue2:#3b82f6;--blue3:#dbeafe;--blue4:#eff6ff;
-  --blue-t:#1d4ed8;
-  --green:#059669;--green2:#d1fae5;--green3:#ecfdf5;
-  --gold:#d97706;--gold2:#fef3c7;
-  --red:#dc2626;--red2:#fee2e2;
-  --t:#0f172a;--t2:#475569;--t3:#94a3b8;--t4:#cbd5e1;
-  --mono:'JetBrains Mono',monospace;
-  --head:'Plus Jakarta Sans',sans-serif;
-  --r:12px;--r2:16px;
-}
-body{background:var(--bg2);font-family:var(--head);color:var(--t);min-height:100vh}
-
-.phone-frame{max-width:390px;margin:0 auto;background:var(--panel);min-height:100vh;display:flex;flex-direction:column;border-left:1px solid var(--b);border-right:1px solid var(--b);overflow:hidden}
-.status-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 6px;background:var(--blue);font-size:11px;color:rgba(255,255,255,.7);font-family:var(--mono);} .sb-right{display:flex;gap:8px}
-.vote-header{background:var(--blue);color:#fff;padding:12px 20px 20px}
-.vh-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.vh-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;font-size:10px;font-family:var(--mono);letter-spacing:.5px;display:flex;align-items:center;gap:5px}
-.vh-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;animation:blink2 1s infinite} @keyframes blink2{0%,100%{opacity:1}50%{opacity:.2}}
-.vh-secure{display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,.6);font-family:var(--mono)} .lock-icon{width:10px;height:10px;fill:rgba(255,255,255,.6)}
-.vote-title{font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:4px} .vote-sub{font-size:12px;color:rgba(255,255,255,.7)}
-.progress-section{padding:16px 20px;background:var(--panel2);border-bottom:1px solid var(--b)}
-.prog-steps{display:flex;gap:0;align-items:center;margin-bottom:8px}
-.step{display:flex;align-items:center;gap:6px;flex:1}
-.step-circle{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;transition:all .3s}
-.step.done .step-circle{background:var(--green);color:#fff}.step.active .step-circle{background:var(--blue);color:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.2)}.step.todo .step-circle{background:var(--b3);color:#fff}
-.step-line{flex:1;height:2px;background:var(--b);margin:0 4px;transition:background .3s}.step.done+.step .step-line,.step.done .step-line{background:var(--green)}
-.prog-label{font-size:11px;color:var(--t2)} .prog-label span{color:var(--blue);font-weight:600}
-.ballot-body{flex:1;padding:20px;display:flex;flex-direction:column;gap:0;overflow-y:auto;min-height:0}
-.screen{display:none;flex-direction:column;gap:12px;animation:fadeIn .25s ease}.screen.active{display:flex}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.position-header{background:var(--blue4);border:1px solid var(--blue3);border-radius:var(--r);padding:12px 14px}
-.ph-label{font-size:9px;font-weight:600;color:var(--blue);font-family:var(--mono);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}.ph-title{font-size:16px;font-weight:800;color:var(--blue-t)}.ph-sub{font-size:11px;color:var(--t3);margin-top:2px}
-.candidate-opt{border:2px solid var(--b);border-radius:var(--r2);padding:14px;cursor:pointer;transition:all .2s;background:var(--panel);display:flex;align-items:center;gap:12px}
-.candidate-opt:hover{border-color:var(--blue2);background:var(--blue4)}.candidate-opt.selected{border-color:var(--blue);background:var(--blue4);box-shadow:0 0 0 1px var(--blue)}
-.co-avatar{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;border:2px solid}
-.co-info{flex:1;min-width:0}.co-name{font-size:13px;font-weight:700;margin-bottom:2px}.co-dept{font-size:10px;color:var(--t3);font-family:var(--mono)}.co-manifesto{font-size:11px;color:var(--t2);margin-top:5px;line-height:1.5}
-.co-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--b2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}.candidate-opt.selected .co-radio{border-color:var(--blue);background:var(--blue)}.co-radio-dot{width:8px;height:8px;border-radius:50%;background:#fff;opacity:0;transition:opacity .15s}.candidate-opt.selected .co-radio-dot{opacity:1}
-.abstain-opt{border:1px dashed var(--b2);border-radius:var(--r);padding:10px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;color:var(--t3);font-size:12px}.abstain-opt:hover{border-color:var(--b3);color:var(--t2)}
-.nav-row{display:flex;gap:10px;margin-top:16px}
-.btn-back,.btn-next{padding:14px 16px;border-radius:var(--r);border:1.5px solid transparent;font-size:13px;font-weight:700;font-family:var(--head);cursor:pointer;transition:all .15s;min-height:48px}
-.btn-back{flex:1;background:#fff;border-color:var(--b2);color:var(--t2)}
-.btn-back:hover{background:var(--bg2)}
-.btn-next{background:var(--blue);color:#fff}
-.btn-next:hover{background:var(--blue-t)}
-.btn-full{width:100%;padding:16px;border-radius:var(--r);border:none;font-size:14px;font-weight:800;cursor:pointer;font-family:var(--head);transition:all .15s;margin-top:4px;letter-spacing:.2px}
-.confirm-box{background:var(--red2);border:1px solid #fca5a5;border-radius:var(--r);padding:12px 14px;font-size:11px;color:#991b1b;line-height:1.6}
-.cb-title{font-weight:700;font-size:12px;margin-bottom:4px}
-
-.receipt-screen{display:none;flex:1;flex-direction:column;align-items:center;text-align:center;padding:18px 20px 24px;gap:12px;overflow-y:auto;min-height:0}
-.receipt-screen.active{display:flex}
-.success-ring{width:64px;height:64px;border-radius:50%;background:var(--green2);border:3px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:24px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1)}
-.receipt-title{font-size:18px;font-weight:800;color:var(--t);line-height:1.2}
-.receipt-sub{font-size:12px;color:var(--t2);max-width:280px;line-height:1.5}
-.receipt-code{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r);padding:12px 14px;width:100%}
-.rc-code{font-size:14px;font-weight:600;font-family:var(--mono);color:var(--blue);letter-spacing:1.2px;word-break:break-all}
-.share-btn{width:100%;padding:14px;border-radius:var(--r);border:1.5px solid var(--b2);background:transparent;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--head)}
-.receipt-list{width:100%;display:flex;flex-direction:column;gap:6px}.rl-item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--green3);border:1px solid #a7f3d0;border-radius:8px}
-.rc-label{font-size:10px;color:var(--t3);font-family:var(--mono);letter-spacing:1px;margin-bottom:6px}
-.rl-pos{font-size:10px;color:#065f46;font-family:var(--mono)}.rl-name{font-size:12px;font-weight:600;color:#065f46}
-.hint-tag{font-size:10px;color:var(--t3);font-family:var(--mono);display:flex;align-items:center;gap:6px;justify-content:center}.ht-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+    
+    :root {
+        --bg: #f8fafc;
+        --bg2: #f1f5f9;
+        --bg3: #e2e8f0;
+        --panel: #ffffff;
+        --panel2: #f8fafc;
+        --b: #e2e8f0;
+        --b2: #cbd5e1;
+        --b3: #94a3b8;
+        --blue: #2563eb;
+        --blue2: #3b82f6;
+        --blue3: #dbeafe;
+        --blue4: #eff6ff;
+        --blue-t: #1d4ed8;
+        --green: #059669;
+        --green2: #d1fae5;
+        --green3: #ecfdf5;
+        --gold: #d97706;
+        --gold2: #fef3c7;
+        --red: #dc2626;
+        --red2: #fee2e2;
+        --t: #0f172a;
+        --t2: #475569;
+        --t3: #94a3b8;
+        --t4: #cbd5e1;
+        --mono: 'JetBrains Mono', monospace;
+        --head: 'Plus Jakarta Sans', sans-serif;
+        --r: 12px;
+        --r2: 16px;
+    }
+    
+    body {
+        background: var(--bg2);
+        font-family: var(--head);
+        color: var(--t);
+        min-height: 100vh
+    }
+    
+    .phone-frame {
+        max-width: 390px;
+        margin: 0 auto;
+        background: var(--panel);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid var(--b);
+        border-right: 1px solid var(--b);
+        overflow: hidden
+    }
+    
+    .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px 6px;
+        background: var(--blue);
+        font-size: 11px;
+        color: rgba(255, 255, 255, .7);
+        font-family: var(--mono);
+    }
+    
+    .sb-right {
+        display: flex;
+        gap: 8px
+    }
+    
+    .vote-header {
+        background: var(--blue);
+        color: #fff;
+        padding: 12px 20px 20px
+    }
+    
+    .vh-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px
+    }
+    
+    .vh-badge {
+        background: rgba(255, 255, 255, .15);
+        border: 1px solid rgba(255, 255, 255, .2);
+        border-radius: 20px;
+        padding: 3px 10px;
+        font-size: 10px;
+        font-family: var(--mono);
+        letter-spacing: .5px;
+        display: flex;
+        align-items: center;
+        gap: 5px
+    }
+    
+    .vh-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #4ade80;
+        animation: blink2 1s infinite
+    }
+    
+    @keyframes blink2 {
+        0%,
+        100% {
+            opacity: 1
+        }
+        50% {
+            opacity: .2
+        }
+    }
+    
+    .vh-secure {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 9px;
+        color: rgba(255, 255, 255, .6);
+        font-family: var(--mono)
+    }
+    
+    .lock-icon {
+        width: 10px;
+        height: 10px;
+        fill: rgba(255, 255, 255, .6)
+    }
+    
+    .vote-title {
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -.3px;
+        margin-bottom: 4px
+    }
+    
+    .vote-sub {
+        font-size: 12px;
+        color: rgba(255, 255, 255, .7)
+    }
+    
+    .progress-section {
+        padding: 16px 20px;
+        background: var(--panel2);
+        border-bottom: 1px solid var(--b)
+    }
+    
+    .prog-steps {
+        display: flex;
+        gap: 0;
+        align-items: center;
+        margin-bottom: 8px
+    }
+    
+    .step {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex: 1
+    }
+    
+    .step-circle {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 700;
+        flex-shrink: 0;
+        transition: all .3s
+    }
+    
+    .step.done .step-circle {
+        background: var(--green);
+        color: #fff
+    }
+    
+    .step.active .step-circle {
+        background: var(--blue);
+        color: #fff;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, .2)
+    }
+    
+    .step.todo .step-circle {
+        background: var(--b3);
+        color: #fff
+    }
+    
+    .step-line {
+        flex: 1;
+        height: 2px;
+        background: var(--b);
+        margin: 0 4px;
+        transition: background .3s
+    }
+    
+    .step.done+.step .step-line,
+    .step.done .step-line {
+        background: var(--green)
+    }
+    
+    .prog-label {
+        font-size: 11px;
+        color: var(--t2)
+    }
+    
+    .prog-label span {
+        color: var(--blue);
+        font-weight: 600
+    }
+    
+    .ballot-body {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        overflow-y: auto;
+        min-height: 0
+    }
+    
+    .screen {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        animation: fadeIn .25s ease
+    }
+    
+    .screen.active {
+        display: flex
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(8px)
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+    
+    .position-header {
+        background: var(--blue4);
+        border: 1px solid var(--blue3);
+        border-radius: var(--r);
+        padding: 12px 14px
+    }
+    
+    .ph-label {
+        font-size: 9px;
+        font-weight: 600;
+        color: var(--blue);
+        font-family: var(--mono);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 3px
+    }
+    
+    .ph-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--blue-t)
+    }
+    
+    .ph-sub {
+        font-size: 11px;
+        color: var(--t3);
+        margin-top: 2px
+    }
+    
+    .candidate-opt {
+        border: 2px solid var(--b);
+        border-radius: var(--r2);
+        padding: 14px;
+        cursor: pointer;
+        transition: all .2s;
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        gap: 12px
+    }
+    
+    .candidate-opt:hover {
+        border-color: var(--blue2);
+        background: var(--blue4)
+    }
+    
+    .candidate-opt.selected {
+        border-color: var(--blue);
+        background: var(--blue4);
+        box-shadow: 0 0 0 1px var(--blue)
+    }
+    
+    .co-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 700;
+        border: 2px solid
+    }
+    
+    .co-info {
+        flex: 1;
+        min-width: 0
+    }
+    
+    .co-name {
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 2px
+    }
+    
+    .co-dept {
+        font-size: 10px;
+        color: var(--t3);
+        font-family: var(--mono)
+    }
+    
+    .co-manifesto {
+        font-size: 11px;
+        color: var(--t2);
+        margin-top: 5px;
+        line-height: 1.5
+    }
+    
+    .co-radio {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid var(--b2);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .2s
+    }
+    
+    .candidate-opt.selected .co-radio {
+        border-color: var(--blue);
+        background: var(--blue)
+    }
+    
+    .co-radio-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        opacity: 0;
+        transition: opacity .15s
+    }
+    
+    .candidate-opt.selected .co-radio-dot {
+        opacity: 1
+    }
+    
+    .abstain-opt {
+        border: 1px dashed var(--b2);
+        border-radius: var(--r);
+        padding: 10px 14px;
+        cursor: pointer;
+        transition: all .2s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--t3);
+        font-size: 12px
+    }
+    
+    .abstain-opt:hover {
+        border-color: var(--b3);
+        color: var(--t2)
+    }
+    
+    .nav-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px
+    }
+    
+    .btn-back,
+    .btn-next {
+        padding: 14px 16px;
+        border-radius: var(--r);
+        border: 1.5px solid transparent;
+        font-size: 13px;
+        font-weight: 700;
+        font-family: var(--head);
+        cursor: pointer;
+        transition: all .15s;
+        min-height: 48px
+    }
+    
+    .btn-back {
+        flex: 1;
+        background: #fff;
+        border-color: var(--b2);
+        color: var(--t2)
+    }
+    
+    .btn-back:hover {
+        background: var(--bg2)
+    }
+    
+    .btn-next {
+        background: var(--blue);
+        color: #fff
+    }
+    
+    .btn-next:hover {
+        background: var(--blue-t)
+    }
+    
+    .btn-full {
+        width: 100%;
+        padding: 16px;
+        border-radius: var(--r);
+        border: none;
+        font-size: 14px;
+        font-weight: 800;
+        cursor: pointer;
+        font-family: var(--head);
+        transition: all .15s;
+        margin-top: 4px;
+        letter-spacing: .2px
+    }
+    
+    .confirm-box {
+        background: var(--red2);
+        border: 1px solid #fca5a5;
+        border-radius: var(--r);
+        padding: 12px 14px;
+        font-size: 11px;
+        color: #991b1b;
+        line-height: 1.6
+    }
+    
+    .cb-title {
+        font-weight: 700;
+        font-size: 12px;
+        margin-bottom: 4px
+    }
+    
+    .receipt-screen {
+        display: none;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 18px 20px 24px;
+        gap: 12px;
+        overflow-y: auto;
+        min-height: 0
+    }
+    
+    .receipt-screen.active {
+        display: flex
+    }
+    
+    .success-ring {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--green2);
+        border: 3px solid var(--green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        animation: popIn .5s cubic-bezier(.34, 1.56, .64, 1)
+    }
+    
+    .receipt-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--t);
+        line-height: 1.2
+    }
+    
+    .receipt-sub {
+        font-size: 12px;
+        color: var(--t2);
+        max-width: 280px;
+        line-height: 1.5
+    }
+    
+    .receipt-code {
+        background: var(--bg2);
+        border: 1px solid var(--b2);
+        border-radius: var(--r);
+        padding: 12px 14px;
+        width: 100%
+    }
+    
+    .rc-code {
+        font-size: 14px;
+        font-weight: 600;
+        font-family: var(--mono);
+        color: var(--blue);
+        letter-spacing: 1.2px;
+        word-break: break-all
+    }
+    
+    .share-btn {
+        width: 100%;
+        padding: 14px;
+        border-radius: var(--r);
+        border: 1.5px solid var(--b2);
+        background: transparent;
+        color: var(--t2);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--head)
+    }
+    
+    .receipt-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 6px
+    }
+    
+    .rl-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        background: var(--green3);
+        border: 1px solid #a7f3d0;
+        border-radius: 8px
+    }
+    
+    .rc-label {
+        font-size: 10px;
+        color: var(--t3);
+        font-family: var(--mono);
+        letter-spacing: 1px;
+        margin-bottom: 6px
+    }
+    
+    .rl-pos {
+        font-size: 10px;
+        color: #065f46;
+        font-family: var(--mono)
+    }
+    
+    .rl-name {
+        font-size: 12px;
+        font-weight: 600;
+        color: #065f46
+    }
+    
+    .hint-tag {
+        font-size: 10px;
+        color: var(--t3);
+        font-family: var(--mono);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        justify-content: center
+    }
+    
+    .ht-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green)
+    }
 </style>
 
 <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Student voter ballot interface — multi-step ballot for Kihumuro Main Campus and Town Campus elections</h2>
 
 <div style="background:var(--bg2);padding:24px 16px">
-  <div style="text-align:center;margin-bottom:16px;font-size:11px;color:var(--t3);font-family:'JetBrains Mono',monospace;letter-spacing:1px">VOTER INTERFACE — MOBILE VIEW</div>
+    <div style="text-align:center;margin-bottom:16px;font-size:11px;color:var(--t3);font-family:'JetBrains Mono',monospace;letter-spacing:1px">VOTER INTERFACE — MOBILE VIEW</div>
 
-<div class="phone-frame">
-  <div class="status-bar">
-    <span id="phone-time">09:14</span>
-    <div class="sb-right"><span>4G</span><span>87%</span></div>
-  </div>
-
-  <div class="vote-header">
-    <div class="vh-meta">
-      <div class="vh-badge"><div class="vh-dot"></div>POLLS OPEN</div>
-      <div class="vh-secure">
-        <svg class="lock-icon" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        256-BIT ENCRYPTED
-      </div>
-    </div>
-    <div class="vote-title">Cast Your Vote</div>
-    <div class="vote-sub">CampusVote 2026 · Kihumuro Main Campus and Town Campus</div>
-  </div>
-
-  <div class="progress-section">
-    <div class="prog-steps">
-      <div class="step done" id="s1">
-        <div class="step-circle">&#10003;</div>
-        <div class="step-line"></div>
-      </div>
-      <div class="step active" id="s2">
-        <div class="step-circle">2</div>
-      </div>
-    </div>
-    <div class="prog-label" id="prog-label">Step <span id="prog-cur">1</span> of 2 — <span id="prog-text">Guild President</span></div>
-  </div>
-
-  <div class="ballot-body" id="ballotBody">
-
-    <div class="screen active" id="screen-1">
-      <div class="position-header">
-        <div class="ph-label">Step 1 of 2</div>
-        <div class="ph-title">Guild President — All Students</div>
-        <div class="ph-sub">Select one candidate</div>
-      </div>
-      <div class="candidate-opt" onclick="pick(this,'president','Amina Kato')">
-        <div class="co-avatar" style="background:#fef3c7;color:#92400e;border-color:#fde68a">AK</div>
-        <div class="co-info">
-          <div class="co-name">Amina Kato</div>
-          <div class="co-dept">Guild Presidential Candidate</div>
-          <div class="co-manifesto">"Unite campuses, improve welfare, and expand student services."</div>
+    <div class="phone-frame">
+        <div class="status-bar">
+            <span id="phone-time">09:14</span>
+            <div class="sb-right"><span>4G</span><span>87%</span></div>
         </div>
-        <div class="co-radio"><div class="co-radio-dot"></div></div>
-      </div>
-      <div class="candidate-opt" onclick="pick(this,'president','David Mugisha')">
-        <div class="co-avatar" style="background:#dbeafe;color:#1d4ed8;border-color:#bfdbfe">DM</div>
-        <div class="co-info">
-          <div class="co-name">David Mugisha</div>
-          <div class="co-dept">Guild Presidential Candidate</div>
-          <div class="co-manifesto">"Strengthen academic support and practical training opportunities."</div>
+
+        <div class="vote-header">
+            <div class="vh-meta">
+                <div class="vh-badge">
+                    <div class="vh-dot"></div>POLLS OPEN</div>
+                <div class="vh-secure">
+                    <svg class="lock-icon" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> 256-BIT ENCRYPTED
+                </div>
+            </div>
+            <div class="vote-title">Cast Your Vote</div>
+            <div class="vote-sub">CampusVote 2026 · Kihumuro Main Campus and Town Campus</div>
         </div>
-        <div class="co-radio"><div class="co-radio-dot"></div></div>
-      </div>
-      <div class="candidate-opt" onclick="pick(this,'president','Grace Nyanzi')">
-        <div class="co-avatar" style="background:#d1fae5;color:#065f46;border-color:#a7f3d0">GN</div>
-        <div class="co-info">
-          <div class="co-name">Grace Nyanzi</div>
-          <div class="co-dept">Guild Presidential Candidate</div>
-          <div class="co-manifesto">"Focus on inclusion, student finance support, and health services."</div>
+
+        <div class="progress-section">
+            <div class="prog-steps">
+                <div class="step done" id="s1">
+                    <div class="step-circle">&#10003;</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step active" id="s2">
+                    <div class="step-circle">2</div>
+                </div>
+            </div>
+            <div class="prog-label" id="prog-label">Step <span id="prog-cur">1</span> of 2 — <span id="prog-text">Guild President</span></div>
         </div>
-        <div class="co-radio"><div class="co-radio-dot"></div></div>
-      </div>
-      <div class="candidate-opt" onclick="pick(this,'president','Michael Otieno')">
-        <div class="co-avatar" style="background:#ede9fe;color:#5b21b6;border-color:#ddd6fe">MO</div>
-        <div class="co-info">
-          <div class="co-name">Michael Otieno</div>
-          <div class="co-dept">Guild Presidential Candidate</div>
-          <div class="co-manifesto">"Expand campus infrastructure and student enterprise programs."</div>
+
+        <div class="ballot-body" id="ballotBody">
+
+            <div class="screen active" id="screen-1">
+                <div class="position-header">
+                    <div class="ph-label">Step 1 of 2</div>
+                    <div class="ph-title">Guild President — All Students</div>
+                    <div class="ph-sub">Select one candidate</div>
+                </div>
+                <div class="candidate-opt" onclick="pick(this,'president','Amina Kato')">
+                    <div class="co-avatar" style="background:#fef3c7;color:#92400e;border-color:#fde68a">AK</div>
+                    <div class="co-info">
+                        <div class="co-name">Amina Kato</div>
+                        <div class="co-dept">Guild Presidential Candidate</div>
+                        <div class="co-manifesto">"Unite campuses, improve welfare, and expand student services."</div>
+                    </div>
+                    <div class="co-radio">
+                        <div class="co-radio-dot"></div>
+                    </div>
+                </div>
+                <div class="candidate-opt" onclick="pick(this,'president','David Mugisha')">
+                    <div class="co-avatar" style="background:#dbeafe;color:#1d4ed8;border-color:#bfdbfe">DM</div>
+                    <div class="co-info">
+                        <div class="co-name">David Mugisha</div>
+                        <div class="co-dept">Guild Presidential Candidate</div>
+                        <div class="co-manifesto">"Strengthen academic support and practical training opportunities."</div>
+                    </div>
+                    <div class="co-radio">
+                        <div class="co-radio-dot"></div>
+                    </div>
+                </div>
+                <div class="candidate-opt" onclick="pick(this,'president','Grace Nyanzi')">
+                    <div class="co-avatar" style="background:#d1fae5;color:#065f46;border-color:#a7f3d0">GN</div>
+                    <div class="co-info">
+                        <div class="co-name">Grace Nyanzi</div>
+                        <div class="co-dept">Guild Presidential Candidate</div>
+                        <div class="co-manifesto">"Focus on inclusion, student finance support, and health services."</div>
+                    </div>
+                    <div class="co-radio">
+                        <div class="co-radio-dot"></div>
+                    </div>
+                </div>
+                <div class="candidate-opt" onclick="pick(this,'president','Michael Otieno')">
+                    <div class="co-avatar" style="background:#ede9fe;color:#5b21b6;border-color:#ddd6fe">MO</div>
+                    <div class="co-info">
+                        <div class="co-name">Michael Otieno</div>
+                        <div class="co-dept">Guild Presidential Candidate</div>
+                        <div class="co-manifesto">"Expand campus infrastructure and student enterprise programs."</div>
+                    </div>
+                    <div class="co-radio">
+                        <div class="co-radio-dot"></div>
+                    </div>
+                </div>
+                <div class="abstain-opt" id="abs-pres" onclick="abstain(this,'president')">
+                    <div style="width:20px;height:20px;border-radius:50%;border:2px dashed currentColor;flex-shrink:0"></div>
+                    <span>Abstain from this position</span>
+                </div>
+                <div class="nav-row">
+                    <button class="btn-next" id="next1" onclick="goTo(2)" style="flex:1">Next &rarr;</button>
+                </div>
+            </div>
+
+            <div class="screen" id="screen-2">
+                <div style="font-size:15px;font-weight:800;margin-bottom:4px">Review Your Choice</div>
+                <div style="font-size:11px;color:var(--t2);margin-bottom:12px">Confirm your selection for Guild President.</div>
+                <div class="review-row">
+                    <div class="rr-left">
+                        <div class="rr-pos">GUILD PRESIDENT</div>
+                        <div class="rr-name" id="rev-president">—</div>
+                    </div>
+                    <div class="rr-edit" onclick="goTo(1)">Edit</div>
+                </div>
+                <div class="confirm-box">
+                    <div class="cb-title">Final confirmation</div>
+                    Once submitted, your vote is sealed and cannot be modified. Your identity is separated from your choices — your vote is anonymous.
+                </div>
+                <button class="btn-full" style="background:var(--blue);color:#fff" onclick="submitVote()">Submit My Vote</button>
+                <button class="btn-back" style="width:100%;margin-top:8px" onclick="goTo(1)">Back</button>
+            </div>
+
         </div>
-        <div class="co-radio"><div class="co-radio-dot"></div></div>
-      </div>
-      <div class="abstain-opt" id="abs-pres" onclick="abstain(this,'president')">
-        <div style="width:20px;height:20px;border-radius:50%;border:2px dashed currentColor;flex-shrink:0"></div>
-        <span>Abstain from this position</span>
-      </div>
-      <div class="nav-row">
-        <button class="btn-next" id="next1" onclick="goTo(2)" style="flex:1">Next &rarr;</button>
-      </div>
-    </div>
 
-    <div class="screen" id="screen-2">
-      <div style="font-size:15px;font-weight:800;margin-bottom:4px">Review Your Choice</div>
-      <div style="font-size:11px;color:var(--t2);margin-bottom:12px">Confirm your selection for Guild President.</div>
-      <div class="review-row">
-        <div class="rr-left"><div class="rr-pos">GUILD PRESIDENT</div><div class="rr-name" id="rev-president">—</div></div>
-        <div class="rr-edit" onclick="goTo(1)">Edit</div>
-      </div>
-      <div class="confirm-box">
-        <div class="cb-title">Final confirmation</div>
-        Once submitted, your vote is sealed and cannot be modified. Your identity is separated from your choices — your vote is anonymous.
-      </div>
-      <button class="btn-full" style="background:var(--blue);color:#fff" onclick="submitVote()">Submit My Vote</button>
-      <button class="btn-back" style="width:100%;margin-top:8px" onclick="goTo(1)">Back</button>
-    </div>
+        <div class="receipt-screen" id="receipt-screen" style="padding:20px">
+            <div class="success-ring">&#10003;</div>
+            <div class="receipt-title">Vote Submitted!</div>
+            <div class="receipt-sub">Your vote has been recorded securely. Thank you for participating in your democracy.</div>
+            <div class="receipt-code">
+                <div class="rc-label">YOUR VOTE RECEIPT ID</div>
+                <div class="rc-code" id="receipt-id">CV-2025-XXXXXX</div>
+            </div>
+            <div style="font-size:11px;color:var(--t3);line-height:1.6;text-align:center">
+                Save this code. You can verify your vote was counted at <span style="color:var(--blue);font-family:'JetBrains Mono',monospace">vote.compas.ac.ug/verify</span>
+            </div>
+            <div class="receipt-list" id="receipt-list"></div>
+            <div class="hint-tag">
+                <div class="ht-dot"></div>SMS confirmation sent to +256 7XX XXX XXX</div>
+            <button class="share-btn" onclick="sendPrompt('How does the vote receipt verification work in the e-voting system? ↗')">How does vote verification work? &#8599;</button>
+        </div>
 
-  </div>
-
-  <div class="receipt-screen" id="receipt-screen" style="padding:20px">
-    <div class="success-ring">&#10003;</div>
-    <div class="receipt-title">Vote Submitted!</div>
-    <div class="receipt-sub">Your vote has been recorded securely. Thank you for participating in your democracy.</div>
-    <div class="receipt-code">
-      <div class="rc-label">YOUR VOTE RECEIPT ID</div>
-      <div class="rc-code" id="receipt-id">CV-2025-XXXXXX</div>
     </div>
-    <div style="font-size:11px;color:var(--t3);line-height:1.6;text-align:center">
-      Save this code. You can verify your vote was counted at <span style="color:var(--blue);font-family:'JetBrains Mono',monospace">vote.compas.ac.ug/verify</span>
-    </div>
-    <div class="receipt-list" id="receipt-list"></div>
-    <div class="hint-tag"><div class="ht-dot"></div>SMS confirmation sent to +256 7XX XXX XXX</div>
-    <button class="share-btn" onclick="sendPrompt('How does the vote receipt verification work in the e-voting system? ↗')">How does vote verification work? &#8599;</button>
-  </div>
-
-</div>
 </div>
 
 <script>
-const votes = {};
-const STEPS = ['','Guild President','Review'];
+    const votes = {};
+    const STEPS = ['', 'Guild President', 'Review'];
 
-function pick(el, pos, name){
-  el.closest('.screen').querySelectorAll('.candidate-opt').forEach(c=>c.classList.remove('selected'));
-  el.closest('.screen').querySelectorAll('.abstain-opt').forEach(a=>a.classList.remove('selected'));
-  el.classList.add('selected');
-  votes[pos] = name;
-}
+    function pick(el, pos, name) {
+        el.closest('.screen').querySelectorAll('.candidate-opt').forEach(c => c.classList.remove('selected'));
+        el.closest('.screen').querySelectorAll('.abstain-opt').forEach(a => a.classList.remove('selected'));
+        el.classList.add('selected');
+        votes[pos] = name;
+    }
 
-function abstain(el, pos){
-  el.closest('.screen').querySelectorAll('.candidate-opt').forEach(c=>c.classList.remove('selected'));
-  el.closest('.screen').querySelectorAll('.abstain-opt').forEach(a=>a.classList.remove('selected'));
-  el.classList.add('selected');
-  votes[pos] = 'Abstain';
-}
+    function abstain(el, pos) {
+        el.closest('.screen').querySelectorAll('.candidate-opt').forEach(c => c.classList.remove('selected'));
+        el.closest('.screen').querySelectorAll('.abstain-opt').forEach(a => a.classList.remove('selected'));
+        el.classList.add('selected');
+        votes[pos] = 'Abstain';
+    }
 
-function goTo(n){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  const s = document.getElementById('screen-'+n);
-  if(s) s.classList.add('active');
+    function goTo(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        const s = document.getElementById('screen-' + n);
+        if (s) s.classList.add('active');
 
-  document.querySelectorAll('.step').forEach((el,i)=>{
-    el.classList.remove('done','active','todo');
-    if(i+1 < n) el.classList.add('done');
-    else if(i+1 === n) el.classList.add('active');
-    else el.classList.add('todo');
-  });
+        document.querySelectorAll('.step').forEach((el, i) => {
+            el.classList.remove('done', 'active', 'todo');
+            if (i + 1 < n) el.classList.add('done');
+            else if (i + 1 === n) el.classList.add('active');
+            else el.classList.add('todo');
+        });
 
-  const cur = document.getElementById('prog-cur');
-  const txt = document.getElementById('prog-text');
-  if(cur) cur.textContent = n;
-  if(txt) txt.textContent = STEPS[n]||'Review';
+        const cur = document.getElementById('prog-cur');
+        const txt = document.getElementById('prog-text');
+        if (cur) cur.textContent = n;
+        if (txt) txt.textContent = STEPS[n] || 'Review';
 
-  if(n===2){
-    const el = document.getElementById('rev-president');
-    if(el) el.textContent = votes.president || '— Not selected';
-  }
-}
+        if (n === 2) {
+            const el = document.getElementById('rev-president');
+            if (el) el.textContent = votes.president || '— Not selected';
+        }
+    }
 
-function submitVote(){
-  const ballotBody = document.getElementById('ballotBody');
-  const receiptScreen = document.getElementById('receipt-screen');
-  if(ballotBody) ballotBody.style.display = 'none';
-  const prog = document.querySelector('.progress-section');
-  if(prog) prog.style.display = 'none';
-  if(receiptScreen){
-    receiptScreen.style.display = 'flex';
-    const code = 'CV-' + Date.now().toString(36).toUpperCase().slice(-6);
-    const el = document.getElementById('receipt-id');
-    if(el) el.textContent = code;
-    const list = document.getElementById('receipt-list');
-    const positions = {president:'Guild President'};
-    if(list) list.innerHTML = Object.entries(positions).map(([k,label])=>`
+    function submitVote() {
+        const ballotBody = document.getElementById('ballotBody');
+        const receiptScreen = document.getElementById('receipt-screen');
+        if (ballotBody) ballotBody.style.display = 'none';
+        const prog = document.querySelector('.progress-section');
+        if (prog) prog.style.display = 'none';
+        if (receiptScreen) {
+            receiptScreen.style.display = 'flex';
+            const code = 'CV-' + Date.now().toString(36).toUpperCase().slice(-6);
+            const el = document.getElementById('receipt-id');
+            if (el) el.textContent = code;
+            const list = document.getElementById('receipt-list');
+            const positions = {
+                president: 'Guild President'
+            };
+            if (list) list.innerHTML = Object.entries(positions).map(([k, label]) => `
       <div class="rl-item">
         <div class="rl-pos">${label}</div>
         <div class="rl-name">${votes[k]||'Abstained'}</div>
       </div>
     `).join('');
-  }
-}
+        }
+    }
 
-setInterval(()=>{
-  const t = new Date();
-  const el = document.getElementById('phone-time');
-  if(el) el.textContent = t.getHours()+':'+String(t.getMinutes()).padStart(2,'0');
-},10000);
+    setInterval(() => {
+        const t = new Date();
+        const el = document.getElementById('phone-time');
+        if (el) el.textContent = t.getHours() + ':' + String(t.getMinutes()).padStart(2, '0');
+    }, 10000);
 </script>
