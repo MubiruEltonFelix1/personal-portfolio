@@ -1,0 +1,100 @@
+/* tokens.css — Design tokens and global base styles for cyberpunk yellow/black theme */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Exo+2:wght@300;400;600&display=swap');
+
+:root{
+  --color-bg: #08090A;
+  --color-panel: #0F1114;
+  --color-panel-2: #13151A;
+  --color-panel-3: #1A1D24;
+  --color-yellow: #FFD600;
+  --color-yellow-glow: rgba(255, 214, 0, 0.13);
+  --color-yellow-bdr: rgba(255, 214, 0, 0.28);
+  --color-text: #DDE0E8;
+  --color-muted: #5A6070;
+
+  --font-display: 'Orbitron', monospace;
+  --font-mono: 'Space Mono', monospace;
+  --font-body: 'Exo 2', sans-serif;
+
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --border: 1px solid var(--color-yellow-bdr);
+}
+
+/* Background texture */
+html,body{height:100%;}
+body{
+  background: var(--color-bg);
+  color:var(--color-text);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image: linear-gradient(rgba(255,214,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,214,0,0.04) 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:0.65;
+  z-index:0;
+}
+
+/* Utility reset and containers */
+*{box-sizing:border-box}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:2}
+
+/* Section header pattern */
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.section-label{font-family:var(--font-mono);font-size:12px;color:var(--color-yellow);text-transform:uppercase;letter-spacing:.12em}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--color-yellow),transparent)}
+
+/* Card pattern */
+.card{background:var(--color-panel);border:1px solid rgba(255,214,0,0.12);border-radius:var(--radius-md);padding:24px;transition:all .25s ease;position:relative}
+.card:hover{border-color:var(--color-yellow);transform:translateY(-2px)}
+.card::before{content:"";position:absolute;left:0;top:0;height:2px;width:100%;background:transparent;transition:opacity .25s,background .25s;opacity:0}
+.card:hover::before{opacity:1;background:var(--color-yellow)}
+
+/* Buttons */
+.btn{display:inline-block;text-decoration:none;padding:12px 28px;font-family:var(--font-mono);font-weight:700;cursor:pointer;border-radius:4px}
+.btn-primary{background:var(--color-yellow);color:var(--color-bg);border:none;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.btn-ghost{background:transparent;color:var(--color-yellow);border:1px solid var(--color-yellow-bdr)}
+
+/* Nav placeholder styles (detailed nav changes will come later) */
+#site-nav{position:relative;z-index:100}
+
+/* Project tags */
+.tag{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:6px 8px;border-radius:4px;color:var(--color-yellow);background:var(--color-yellow-glow);border:1px solid rgba(255,214,0,0.08);margin-right:6px}
+
+/* Grid helpers */
+.grid{display:grid;gap:16px}
+.featured-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+
+/* Gallery */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.gallery-item{background:var(--color-panel);border-radius:6px;overflow:hidden}
+.gallery-item img{display:block;width:100%;height:auto}
+.gallery-item:hover{border:1px solid var(--color-yellow)}
+
+/* Footer */
+.site-footer{border-top:1px solid var(--color-yellow-bdr);padding:18px 0;color:var(--color-muted);display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:12px}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(12px);animation:fadeUp .6s ease both}
+.reveal.delay-1{animation-delay:0.08s}
+.reveal.delay-2{animation-delay:0.16s}
+.reveal.delay-3{animation-delay:0.24s}
+
+@keyframes fillBar{from{width:0}to{width:var(--fill)}}
+.skill-bar{background:var(--color-panel-2);border-radius:6px;overflow:hidden;height:10px}
+.skill-bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--color-yellow),#f8e25a);width:0}
+
+/* small helpers */
+.muted{color:var(--color-muted)}
+.h1{font-family:var(--font-display);}
+
+/* Accessibility focus */
+:focus{outline:2px solid var(--color-yellow);outline-offset:2px}
