@@ -16,7 +16,7 @@
             <nav class="site-nav">
                 <div class="nav-inner">
                     <a class="brand" href="${root}index.html">
-                        <span class="pulse-dot"></span>
+                        <img src="${root}assets/images/logo.png" alt="MEF" class="logo-icon" />
                         <span class="brand-text">MEF</span>
                     </a>
                     <button class="menu-toggle" aria-label="Toggle Menu" id="menuToggle">

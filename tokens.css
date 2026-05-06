@@ -315,13 +315,12 @@ body::before {
     letter-spacing: 0.05em
 }
 
-.pulse-dot {
+.logo-icon {
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: var(--color-yellow);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin-right: 8px
 }
 
 @keyframes pulse {
@@ -743,8 +742,8 @@ main {
     right: -40px;
     width: 200px;
     height: 200px;
-    color: var(--color-yellow);
-    opacity: 0.04
+    object-fit: contain;
+    opacity: 0.15
 }
 
 .community-content {
