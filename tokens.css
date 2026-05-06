@@ -400,8 +400,8 @@ body::before {
         position: fixed;
         top: 56px;
         left: 0;
-        right: 0;
-        bottom: 0;
+        width: 100%;
+        height: calc(100vh - 56px);
         flex-direction: column;
         background: var(--color-panel);
         gap: 0;
@@ -411,17 +411,20 @@ body::before {
         padding: 20px;
         overflow-y: auto;
         border-left: 1px solid var(--color-yellow-bdr);
-        z-index: 999
+        z-index: 999;
+        visibility: visible
     }
     .nav-links.active {
-        transform: translateX(0)
+        transform: translateX(0);
+        visibility: visible
     }
     .nav-link {
         padding: 12px 0;
         border-bottom: 1px solid var(--color-yellow-bdr)
     }
     .menu-toggle {
-        display: flex
+        display: flex;
+        z-index: 1001
     }
 }
 
