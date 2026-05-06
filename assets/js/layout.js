@@ -55,12 +55,35 @@
         if (footerTarget) {
             footerTarget.innerHTML = `
             <footer class="site-footer">
-                <div class="footer-inner">
-                    <a class="footer-brand" href="${root}index.html">
-                        <span class="brand-text" style="font-family:var(--font-display);color:var(--color-yellow)">MEF</span>
-                    </a>
-                    <span class="footer-text">Tech Community · MUST</span>
-                    <span class="footer-copyright">© 2026 Mubiru Elton Felix</span>
+                <div class="footer-content">
+                    <div class="footer-section footer-brand-sec">
+                        <a class="footer-brand" href="${root}index.html">
+                            <span class="brand-text" style="font-family:var(--font-display);color:var(--color-yellow);font-size:20px;">MEF</span>
+                        </a>
+                        <p class="footer-tagline">Crafting scalable systems & data solutions</p>
+                    </div>
+                    <div class="footer-section footer-nav-sec">
+                        <h4 class="footer-heading">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="${root}about/index.html">About</a></li>
+                            <li><a href="${root}projects/index.html">Projects</a></li>
+                            <li><a href="${root}contact/index.html">Contact</a></li>
+                            <li><a href="${root}blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section footer-social-sec">
+                        <h4 class="footer-heading">Connect</h4>
+                        <div class="social-links">
+                            <a href="https://github.com/MubiruEltonFelix1" target="_blank" rel="noopener noreferrer" title="GitHub">GitHub</a>
+                            <a href="https://www.linkedin.com/in/mubiru-elton-felix-9ab50a1b0/" target="_blank" rel="noopener noreferrer" title="LinkedIn">LinkedIn</a>
+                            <a href="https://www.tiktok.com/@mubirueltonfelix1" target="_blank" rel="noopener noreferrer" title="TikTok">TikTok</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-divider"></div>
+                <div class="footer-bottom">
+                    <span class="footer-text">Tech Community Lead · MUST</span>
+                    <span class="footer-copyright">© 2026 Mubiru Elton Felix. All rights reserved.</span>
                 </div>
             </footer>
         `;
