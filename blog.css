@@ -1,5 +1,28 @@
 /* Blog-specific styles */
 
+:root {
+    --primary-bg: var(--color-bg);
+    --secondary-bg: var(--color-panel);
+    --card-bg: var(--color-panel-2);
+    --accent-color: var(--color-yellow);
+    --secondary-accent: var(--color-yellow-dim);
+    --text-primary: var(--color-text);
+    --text-secondary: rgba(240, 240, 240, 0.78);
+    --text-muted: var(--color-muted);
+    --text-light: var(--color-text);
+    --border-color: var(--color-yellow-bdr);
+    --gradient-primary: linear-gradient(135deg, var(--color-yellow) 0%, #f7dd77 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--color-yellow) 0%, var(--color-yellow-dim) 100%);
+    --gradient-accent: linear-gradient(45deg, var(--color-yellow), #f7dd77, var(--color-yellow-dim), #fff1ab);
+}
+
+body {
+    background: var(--primary-bg);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
 /* Blog Hero Section */
 .blog-hero {
     min-height: 60vh;
@@ -28,7 +51,7 @@
 }
 
 .blog-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 700;
     margin-bottom: 1rem;
@@ -89,7 +112,7 @@
 
 .category-card.active {
     border-color: var(--accent-color);
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(245, 197, 24, 0.1);
 }
 
 .category-card i {
@@ -245,7 +268,7 @@
 }
 
 .post-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--text-primary);
@@ -272,13 +295,13 @@
 }
 
 .tag {
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(245, 197, 24, 0.1);
     color: var(--accent-color);
     padding: 0.3rem 0.7rem;
     border-radius: 12px;
     font-size: 0.8rem;
     font-weight: 500;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(245, 197, 24, 0.2);
 }
 
 .read-more-btn {
@@ -366,7 +389,7 @@
 }
 
 .newsletter-content h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     font-size: 2.5rem;
     color: var(--accent-color) !important; /* Make title more visible */
     margin-bottom: 1rem;
@@ -399,7 +422,7 @@
 .newsletter-form input:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.3) !important; /* More visible focus */
+    box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.22) !important; /* More visible focus */
 }
 
 .newsletter-form input::placeholder {
@@ -419,7 +442,7 @@
     gap: 0.5rem;
     transition: var(--transition-smooth);
     white-space: nowrap;
-    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3) !important; /* Add glow effect */
+    box-shadow: 0 4px 15px rgba(245, 197, 24, 0.2) !important; /* Add glow effect */
 }
 
 .subscribe-btn:hover {
@@ -456,7 +479,7 @@
 }
 
 .success-message h3 {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     color: var(--text-primary);
     margin-bottom: 1rem;
     font-size: 1.5rem;
@@ -505,9 +528,9 @@
     width: 100%;
     padding: 1rem 3rem 1rem 1.5rem;
     font-size: 1rem;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(245, 197, 24, 0.16);
     border-radius: 25px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     color: var(--text-primary);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -516,8 +539,8 @@
 .search-input:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 20px rgba(64, 123, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.18);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .search-input::placeholder {
@@ -537,14 +560,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #0d0d0d;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .search-btn:hover {
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 4px 15px rgba(64, 123, 255, 0.4);
+    box-shadow: 0 6px 18px rgba(245, 197, 24, 0.22);
 }
 
 /* Post Actions and Social Sharing */
@@ -564,8 +587,8 @@
 }
 
 .share-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
+    background: rgba(245, 197, 24, 0.08);
+    border: 1px solid rgba(245, 197, 24, 0.16);
     border-radius: 8px;
     width: 36px;
     height: 36px;
@@ -580,7 +603,7 @@
 
 .share-btn:hover {
     background: var(--accent-color);
-    color: white;
+    color: #0d0d0d;
     transform: translateY(-2px);
 }
 
@@ -730,7 +753,7 @@
 
 .close-modal:hover {
     color: var(--accent-color);
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(245, 197, 24, 0.1);
 }
 
 .modal-body {
@@ -806,13 +829,13 @@
     border-left: 4px solid var(--accent-color);
     margin: 2rem 0;
     padding: 1rem 1.5rem;
-    background: rgba(0, 212, 255, 0.05);
+    background: rgba(245, 197, 24, 0.06);
     font-style: italic;
     color: var(--text-primary);
 }
 
 .modal-content-text code {
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(245, 197, 24, 0.1);
     color: var(--accent-color);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
@@ -844,6 +867,58 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid var(--border-color);
+    background: var(--primary-bg);
+    padding: 2rem 0;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-content p {
+    color: var(--text-muted);
+}
+
+.social-links {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-muted);
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--primary-bg);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 /* Modal Responsive Design */
