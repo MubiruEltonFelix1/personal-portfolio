@@ -99,7 +99,7 @@ function initializeCommunityCarousel() {
     render();
     startAutoplay();
 }
-    });
+});
 }
 
 function setupMobileNav() {
