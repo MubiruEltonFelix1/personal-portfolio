@@ -99,8 +99,6 @@ function initializeCommunityCarousel() {
     render();
     startAutoplay();
 }
-});
-}
 
 function setupMobileNav() {
     const button = document.getElementById('menuToggle');
