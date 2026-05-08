@@ -68,15 +68,76 @@
             </div>
         </section>
 
-        <!-- MUST Community Banner -->
-        <section class="community-banner reveal">
-            <div class="community-container">
-                <div class="community-content">
-                    <div class="community-icon-small">
-                        <img src="assets/images/mucosa logo.png" alt="MUCOSA" style="width: 100%; height: 100%; object-fit: contain;" />
+        <!-- Community Roles Carousel -->
+        <section class="section community-carousel-section">
+            <div class="container">
+                <h2 class="section-title reveal">Community Roles</h2>
+                <p class="section-lead reveal">Community work keeps my learning practical: mentorship, AI organizing, and student-led collaboration around technology.</p>
+
+                <div class="community-carousel reveal" data-carousel="community-roles">
+                    <div class="carousel-viewport carousel-shell">
+                        <div class="carousel-track">
+                            <article class="carousel-slide community-role-card is-active">
+                                <div class="role-top">
+                                    <div class="role-media">
+                                        <img src="assets/images/mucosa%20logo.png" alt="MUCOSA logo">
+                                    </div>
+                                    <div>
+                                        <div class="role-kicker">MUCOSA</div>
+                                        <h3>Tech Community Lead</h3>
+                                        <p class="role-org">Mbarara University of Science and Technology (MUCOSA)</p>
+                                    </div>
+                                </div>
+                                <p class="muted">Driving innovation through mentorship, collaborative learning, and hands-on projects under MUCOSA.</p>
+                                <div class="stack">
+                                    <span class="tag">Mentorship</span>
+                                    <span class="tag">Innovation</span>
+                                </div>
+                            </article>
+
+                            <article class="carousel-slide community-role-card">
+                                <div class="role-top">
+                                    <div class="role-media" aria-hidden="true">🌐</div>
+                                    <div>
+                                        <div class="role-kicker">Global AI Mbarara</div>
+                                        <h3>Co-Organiser</h3>
+                                        <p class="role-org">Global AI Mbarara — Global AI Community</p>
+                                    </div>
+                                </div>
+                                <p class="muted">Co-organising AI meetups, workshops, and events that connect Mbarara's AI ecosystem with the global community.</p>
+                                <div class="stack">
+                                    <span class="tag">globalai.community</span>
+                                    <span class="tag">AI Events</span>
+                                </div>
+                            </article>
+
+                            <article class="carousel-slide community-role-card">
+                                <div class="role-top">
+                                    <div class="role-media" aria-hidden="true">🧠</div>
+                                    <div>
+                                        <div class="role-kicker">DeepMinds AI Mbarara</div>
+                                        <h3>Student Lead</h3>
+                                        <p class="role-org">DeepMinds AI Mbarara</p>
+                                    </div>
+                                </div>
+                                <p class="muted">Leading student-driven AI research, learning sessions, and project initiatives under the DeepMinds AI chapter at Mbarara.</p>
+                                <div class="stack">
+                                    <span class="tag">Research</span>
+                                    <span class="tag">Student Leadership</span>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                    <h3 class="community-title">Tech Community Lead — Mbarara University of Science and Technology</h3>
-                    <p class="community-subtitle">Driving innovation through mentorship, collaborative learning, and hands-on projects under MUCOSA</p>
+
+                    <div class="carousel-controls">
+                        <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous role">‹</button>
+                        <div class="carousel-dots" aria-label="Community roles pagination">
+                            <button type="button" class="carousel-dot is-active" aria-label="Go to MUCOSA role" aria-pressed="true"></button>
+                            <button type="button" class="carousel-dot" aria-label="Go to Global AI Mbarara role" aria-pressed="false"></button>
+                            <button type="button" class="carousel-dot" aria-label="Go to DeepMinds AI Mbarara role" aria-pressed="false"></button>
+                        </div>
+                        <button type="button" class="carousel-arrow" data-carousel-next aria-label="Next role">›</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -86,30 +147,65 @@
                 <h2 class="section-title reveal">Featured Projects</h2>
                 <p class="section-lead reveal">Selected work from my existing portfolio with a focus on analytics, machine learning, and system-oriented thinking.</p>
                 <div class="grid featured-grid">
-                    <article class="card reveal">
-                        <h3>CampusVote E-Voting Suite</h3>
-                        <p class="muted">A two-campus student election concept for Kihumuro (Main Campus) and Town Campus, with preview links for the heatmap dashboard, candidate race tracker, and voter ballot screen HTML demos.</p>
-                        <div class="stack">
-                            <a class="btn btn-ghost" target="_blank" rel="noopener" href="must%20e%20voting/campus_voting_heatmap_dashboard.html">Heatmap</a>
-                            <a class="btn btn-ghost" target="_blank" rel="noopener" href="must%20e%20voting/candidate_race_tracker.html">Race Tracker</a>
-                            <a class="btn btn-ghost" target="_blank" rel="noopener" href="must%20e%20voting/voter_ballot_screen.html">Ballot Screen</a>
+                    <article class="project-card reveal">
+                        <div>
+                            <h3>CampusVote E-Voting Suite</h3>
+                            <p class="muted">A two-campus student election concept for Kihumuro and Town Campus with a clear route into the live heatmap, race tracker, and voter ballot demos.</p>
+                        </div>
+                        <div>
+                            <div class="stack">
+                                <span class="tag">Django</span>
+                                <span class="tag">PostgreSQL</span>
+                                <span class="tag">HTML/CSS</span>
+                            </div>
+                            <a class="btn btn-ghost project-cta" href="projects/campus-vote-suite/">View Project</a>
                         </div>
                     </article>
 
-                    <article class="card reveal">
-                        <h3>AstraLog</h3>
-                        <p class="muted">Event-driven observability platform for capturing structured system events, tracing behavior over time, and accelerating debugging and performance analysis.</p>
-                        <a class="btn btn-ghost" href="projects/campus-food-app/">View Project</a>
+                    <article class="project-card reveal">
+                        <div>
+                            <h3>AstraLog</h3>
+                            <p class="muted">Event-driven observability platform for capturing structured system events, tracing behavior over time, and accelerating debugging and performance analysis.</p>
+                        </div>
+                        <div>
+                            <div class="stack">
+                                <span class="tag">Python</span>
+                                <span class="tag">Event-Driven</span>
+                                <span class="tag">Observability</span>
+                            </div>
+                            <a class="btn btn-ghost project-cta" href="projects/campus-food-app/">View Project</a>
+                        </div>
                     </article>
-                    <article class="card reveal">
-                        <h3>Walter Bishop Labs: Calculus Experiments</h3>
-                        <p class="muted">Computational mathematics lab where calculus topics are explored as reusable experiments with symbolic analysis, numerical sampling, and visual interpretation.</p>
-                        <a class="btn btn-ghost" href="projects/titanic-survival/">View Project</a>
+
+                    <article class="project-card reveal">
+                        <div>
+                            <h3>Walter Bishop Labs: Calculus Experiments</h3>
+                            <p class="muted">Computational mathematics lab where calculus is explored through symbolic analysis, numerical sampling, and visual interpretation.</p>
+                        </div>
+                        <div>
+                            <div class="stack">
+                                <span class="tag">Python</span>
+                                <span class="tag">SymPy</span>
+                                <span class="tag">NumPy</span>
+                                <span class="tag">Matplotlib</span>
+                            </div>
+                            <a class="btn btn-ghost project-cta" href="projects/titanic-survival/">View Project</a>
+                        </div>
                     </article>
-                    <article class="card reveal">
-                        <h3>MyCGPA</h3>
-                        <p class="muted">Student-friendly CGPA dashboard for tracking academic progress, forecasting future semesters, and planning how to reach a target CGPA.</p>
-                        <a class="btn btn-ghost" href="projects/walter-bishop-labs.html">View Project</a>
+
+                    <article class="project-card reveal">
+                        <div>
+                            <h3>MyCGPA</h3>
+                            <p class="muted">Student-friendly CGPA calculator and forecaster for tracking progress, simulating future semesters, and planning toward a target CGPA.</p>
+                        </div>
+                        <div>
+                            <div class="stack">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Data Viz</span>
+                                <span class="tag">Academic Tools</span>
+                            </div>
+                            <a class="btn btn-ghost project-cta" href="projects/walter-bishop-labs.html">View Project</a>
+                        </div>
                     </article>
                 </div>
             </div>

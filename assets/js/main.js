@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupGalleryModal();
     setupQuickMessage();
     setupContactForm();
+    initializeCommunityCarousel();
 });
 
 const CONTACT_WHATSAPP = '256780204995';
@@ -21,6 +22,83 @@ function setupActiveNav() {
 
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.toggle('active', link.dataset.key === key);
+    });
+}
+
+function initializeCommunityCarousel() {
+    const carousel = document.querySelector('[data-carousel="community-roles"]');
+
+    if (!carousel) {
+        return;
+    }
+
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+    const prevButton = carousel.querySelector('[data-carousel-prev]');
+    const nextButton = carousel.querySelector('[data-carousel-next]');
+    const dots = Array.from(carousel.querySelectorAll('.carousel-dot'));
+    const intervalMs = 4000;
+
+    if (!track || !slides.length) {
+        return;
+    }
+
+    let activeIndex = 0;
+    let intervalId = null;
+
+    const render = () => {
+        track.style.transform = `translateX(-${activeIndex * 100}%)`;
+
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('is-active', index === activeIndex);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('is-active', index === activeIndex);
+            dot.setAttribute('aria-pressed', index === activeIndex ? 'true' : 'false');
+        });
+    };
+
+    const goToSlide = (index) => {
+        activeIndex = (index + slides.length) % slides.length;
+        render();
+    };
+
+    const nextSlide = () => goToSlide(activeIndex + 1);
+    const prevSlide = () => goToSlide(activeIndex - 1);
+
+    const startAutoplay = () => {
+        stopAutoplay();
+        intervalId = window.setInterval(nextSlide, intervalMs);
+    };
+
+    const stopAutoplay = () => {
+        if (intervalId) {
+            window.clearInterval(intervalId);
+            intervalId = null;
+        }
+    };
+
+    if (prevButton) {
+        prevButton.addEventListener('click', prevSlide);
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener('click', nextSlide);
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', startAutoplay);
+
+    render();
+    startAutoplay();
+}
     });
 }
 

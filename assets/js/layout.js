@@ -31,21 +31,32 @@
             </nav>
         `;
             
-            // Add click handler for menu toggle
             const menuToggle = navTarget.querySelector('#menuToggle');
             const navLinks = navTarget.querySelector('.nav-links');
+            const navShell = navTarget.querySelector('.site-nav');
+
+            const updateNavShell = () => {
+                if (!navShell) {
+                    return;
+                }
+
+                navShell.classList.toggle('is-scrolled', window.scrollY > 80);
+            };
+
+            updateNavShell();
+            window.addEventListener('scroll', updateNavShell, { passive: true });
+
             if (menuToggle) {
                 menuToggle.addEventListener('click', function() {
                     menuToggle.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                    navLinks.classList.toggle('open');
+                    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
                 });
                 
-                // Close menu on link click
                 navTarget.querySelectorAll('.nav-link').forEach(link => {
                     link.addEventListener('click', function() {
                         menuToggle.classList.remove('active');
-                        navLinks.classList.remove('active');
+                        navLinks.classList.remove('open');
                         document.body.style.overflow = '';
                     });
                 });

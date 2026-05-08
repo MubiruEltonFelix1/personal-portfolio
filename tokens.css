@@ -1,21 +1,21 @@
-/* tokens.css — Design tokens and global base styles for cyberpunk yellow/black theme */
+/* tokens.css — Shared design tokens for the MEF portfolio */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Exo+2:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Exo+2:wght@300;400;600&display=swap');
 :root {
-    --color-bg: #08090A;
-    --color-panel: #0F1114;
-    --color-panel-2: #13151A;
-    --color-panel-3: #1A1D24;
-    --color-yellow: #FFD600;
-    --color-yellow-glow: rgba(255, 214, 0, 0.13);
-    --color-yellow-bdr: rgba(255, 214, 0, 0.28);
-    --color-text: #DDE0E8;
-    --color-muted: #5A6070;
+    --color-bg: #0d0d0d;
+    --color-panel: #1a1a1a;
+    --color-panel-2: #1e1e1e;
+    --color-panel-3: #252525;
+    --color-yellow: #f5c518;
+    --color-yellow-glow: rgba(245, 197, 24, 0.1);
+    --color-yellow-bdr: rgba(245, 197, 24, 0.12);
+    --color-text: #f0f0f0;
+    --color-muted: #888888;
     --font-display: 'Orbitron', monospace;
-    --font-mono: 'Space Mono', monospace;
+    --font-mono: 'IBM Plex Mono', monospace;
     --font-body: 'Exo 2', sans-serif;
-    --radius-sm: 3px;
-    --radius-md: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
     --border: 1px solid var(--color-yellow-bdr);
 }
 
@@ -91,33 +91,16 @@ body::before {
 
 .card {
     background: var(--color-panel);
-    border: 1px solid rgba(255, 214, 0, 0.12);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    transition: all .25s ease;
+    border: 1px solid rgba(245, 197, 24, 0.12);
+    border-radius: 12px;
+    padding: 28px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
     position: relative
 }
 
 .card:hover {
-    border-color: var(--color-yellow);
-    transform: translateY(-2px)
-}
-
-.card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 2px;
-    width: 100%;
-    background: transparent;
-    transition: opacity .25s, background .25s;
-    opacity: 0
-}
-
-.card:hover::before {
-    opacity: 1;
-    background: var(--color-yellow)
+    border-color: rgba(245, 197, 24, 0.5);
+    transform: translateY(-4px)
 }
 
 
@@ -126,18 +109,27 @@ body::before {
 .btn {
     display: inline-block;
     text-decoration: none;
-    padding: 12px 28px;
+    padding: 12px 24px;
     font-family: var(--font-mono);
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 4px
+    border-radius: 8px;
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease
 }
 
 .btn-primary {
     background: var(--color-yellow);
     color: var(--color-bg);
     border: none;
-    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%)
+    box-shadow: 0 8px 18px rgba(245, 197, 24, 0.16)
+}
+
+.btn-primary:hover,
+.btn-ghost:hover {
+    transform: translateY(-2px)
 }
 
 .btn-ghost {
@@ -146,18 +138,23 @@ body::before {
     border: 1px solid var(--color-yellow-bdr)
 }
 
+.btn-ghost:hover {
+    background: rgba(245, 197, 24, 0.1);
+    border-color: rgba(245, 197, 24, 0.35)
+}
+
 
 /* project tags */
 
 .tag {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 6px 8px;
-    border-radius: 4px;
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 20px;
     color: var(--color-yellow);
     background: var(--color-yellow-glow);
-    border: 1px solid rgba(255, 214, 0, 0.08);
+    border: 1px solid rgba(245, 197, 24, 0.25);
     margin-right: 6px
 }
 
