@@ -15,52 +15,21 @@
             navTarget.innerHTML = `
             <nav class="site-nav">
                 <div class="nav-inner">
-                    <a class="brand" href="${root}index.html">
+                    <a class="brand nav-brand" href="${root}index.html">
                         <img src="${root}assets/images/logo.png" alt="MEF" class="logo-icon" />
                         <span class="brand-text">MEF</span>
                     </a>
-                    <button class="menu-toggle" aria-label="Toggle Menu" id="menuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
                     </button>
-                    <ul class="nav-links" id="mainNavLinks">
+                    <ul class="nav-links" id="nav-links">
                         ${links.map(link => `<li><a class="nav-link" data-key="${link.key}" href="${link.href}">${link.label}</a></li>`).join('')}
                     </ul>
                 </div>
             </nav>
         `;
-            
-            const menuToggle = navTarget.querySelector('#menuToggle');
-            const navLinks = navTarget.querySelector('.nav-links');
-            const navShell = navTarget.querySelector('.site-nav');
-
-            const updateNavShell = () => {
-                if (!navShell) {
-                    return;
-                }
-
-                navShell.classList.toggle('is-scrolled', window.scrollY > 80);
-            };
-
-            updateNavShell();
-            window.addEventListener('scroll', updateNavShell, { passive: true });
-
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    menuToggle.classList.toggle('active');
-                    navLinks.classList.toggle('open');
-                    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-                });
-                
-                navTarget.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', function() {
-                        menuToggle.classList.remove('active');
-                        navLinks.classList.remove('open');
-                        document.body.style.overflow = '';
-                    });
-                });
-            }
         }
 
         if (footerTarget) {

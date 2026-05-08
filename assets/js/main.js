@@ -101,12 +101,47 @@ function initializeCommunityCarousel() {
 }
 
 function setupMobileNav() {
-    const button = document.getElementById('menuToggle');
-    const menu = document.getElementById('mainNavLinks');
-    if (!button || !menu) return;
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    const navShell = document.querySelector('.site-nav');
 
-    button.addEventListener('click', () => {
-        menu.classList.toggle('open');
+    if (!hamburger || !navLinks) return;
+
+    const closeMenu = () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    };
+
+    const syncNavState = () => {
+        if (!navShell) {
+            return;
+        }
+
+        navShell.classList.toggle('is-scrolled', window.scrollY > 80);
+    };
+
+    syncNavState();
+    window.addEventListener('scroll', syncNavState, { passive: true });
+
+    hamburger.addEventListener('click', () => {
+        const isOpen = navLinks.classList.contains('open');
+
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', String(!isOpen));
+        document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
     });
 }
 
