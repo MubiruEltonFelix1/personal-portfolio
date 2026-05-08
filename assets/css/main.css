@@ -630,16 +630,13 @@ body {
     .hero-content {
         max-width: 640px;
     }
-
     .hero-title {
         font-size: clamp(2.35rem, 4.2vw, 4.2rem);
     }
-
     .hero-subtitle {
         font-size: 0.98rem;
         max-width: 56ch;
     }
-
     .hero-eyebrow {
         font-size: 0.72rem;
     }
