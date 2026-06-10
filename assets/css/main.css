@@ -363,16 +363,22 @@ img {
     cursor: default;
 }
 
-.gallery-item-media {
-    overflow: hidden;
-}
-
 .gallery-item img {
     width: 100%;
-    height: 230px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
     cursor: pointer;
     transition: transform 0.25s ease;
+    background: var(--surface-soft, #161616);
+}
+.gallery-item-media {
+    overflow: hidden;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-soft, #161616);
 }
 
 .gallery-item:hover img {
@@ -1045,40 +1051,104 @@ header {
     .menu-toggle {
         display: flex;
     }
+
+    /* Mobile overlay */
     .nav-links {
         position: fixed;
-        top: 68px;
+        top: 0;
         left: 0;
         width: 100%;
-        height: calc(100vh - 68px);
-        background: rgba(13, 13, 13, 0.97);
-        backdrop-filter: blur(12px);
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.94);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 40px;
+        gap: 0;
         list-style: none;
         margin: 0;
         padding: 0;
         opacity: 0;
         pointer-events: none;
-        transform: translateY(-12px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: none;
+        transition: opacity 0.35s ease;
+        z-index: 1050;
     }
     .nav-links.open {
         opacity: 1;
         pointer-events: all;
+    }
+
+    /* Each link row */
+    .nav-links li {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .nav-links.open li {
+        opacity: 1;
         transform: translateY(0);
     }
-    .nav-links a {
-        font-size: 1.2rem;
-        letter-spacing: 0.15em;
-        color: var(--text);
+    .nav-links.open li:nth-child(1) { transition-delay: 0.05s; }
+    .nav-links.open li:nth-child(2) { transition-delay: 0.10s; }
+    .nav-links.open li:nth-child(3) { transition-delay: 0.15s; }
+    .nav-links.open li:nth-child(4) { transition-delay: 0.20s; }
+    .nav-links.open li:nth-child(5) { transition-delay: 0.25s; }
+    .nav-links.open li:nth-child(6) { transition-delay: 0.30s; }
+    .nav-links.open li:nth-child(7) { transition-delay: 0.35s; }
+
+    /* Link style — clean, no pills */
+    .nav-links a,
+    .nav-link {
+        display: inline-block;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: var(--text-muted, #c9c9c9);
+        text-decoration: none;
+        text-transform: none;
+        padding: 16px 32px;
+        margin: 4px 0;
+        border: none;
+        background: transparent;
+        border-radius: 0;
+        width: auto;
+        text-align: center;
+        position: relative;
+        transition: color 0.25s ease;
+    }
+    .nav-links a::after,
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: var(--accent, #ffd700);
+        transition: width 0.3s ease;
     }
     .nav-links a:hover,
-    .nav-links a.active {
-        color: var(--accent);
+    .nav-links a.active,
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--accent, #ffd700);
+        background: transparent;
+        border: none;
     }
+    .nav-links a:hover::after,
+    .nav-links a.active::after,
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 60%;
+    }
+
+    /* Hamburger animation */
     .hamburger.active .bar:nth-child(1),
     .menu-toggle.active .bar:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
@@ -1092,6 +1162,7 @@ header {
     .menu-toggle.active .bar:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
     }
+
     .hero-container {
         min-height: auto;
         padding-top: 0;

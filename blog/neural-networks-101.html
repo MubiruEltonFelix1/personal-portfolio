@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    <title>Neural Networks 101 — A Beginner's Guide | Elton Blog</title>
+    <meta name="description" content="What neural networks actually are, why they matter, and how to think about them — no advanced math required.">
+    <meta property="og:title" content="Neural Networks 101 — A Beginner's Guide">
+    <meta property="og:description" content="What neural networks are, why they matter, and how to think about them intuitively.">
+    <meta property="og:image" content="../assets/images/logo.png">
+    <meta property="og:url" content="blog/neural-networks-101.html">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body data-root="../">
+<div id="site-nav"></div>
+
+<main class="article-page">
+<div class="container article-container">
+    <header class="article-header reveal">
+        <span class="post-category">Foundations</span>
+        <h1>Neural Networks 101 — A Beginner's Guide</h1>
+        <div class="article-meta">
+            <span><i class="fas fa-clock"></i> 7 min read</span>
+            <span><i class="fas fa-tag"></i> Beginner</span>
+        </div>
+    </header>
+
+    <div class="article-content reveal delay-1">
+
+        <p>If you've heard the term "neural network" and pictured something mysterious, you're not alone. The name sounds intimidating. But at their core, neural networks are just a way for computers to learn patterns from data — and the basic idea is surprisingly simple.</p>
+
+        <p>Let's build an intuition from scratch. No advanced math. No jargon without explanation.</p>
+
+        <h2>What Problem Are We Solving?</h2>
+
+        <p>Imagine you want a computer to recognize handwritten digits. You could write rules: "a 7 has a horizontal top bar and a diagonal line." But what about messy handwriting? What about different styles? Rule-based systems quickly become impossible to maintain.</p>
+
+        <p>Neural networks take a different approach: instead of programming rules, we show the computer thousands of examples and let it <strong>learn the rules itself</strong>. This is the essence of machine learning.</p>
+
+        <h2>Neurons: The Building Blocks</h2>
+
+        <p>A single artificial neuron (also called a perceptron) does one simple thing: it takes several numbers as input, combines them with weights, adds a bias, and passes the result through an activation function to produce an output.</p>
+
+        <p>Think of it like making a decision. You consider multiple factors (inputs), each with different importance (weights). You have a baseline tendency (bias). And you only act if the total crosses a threshold (activation).</p>
+
+        <p>One neuron alone can solve simple yes/no problems — like deciding whether an email is spam based on keyword counts. But real-world problems need many neurons working together.</p>
+
+        <h2>Layers: Stacking Neurons for Power</h2>
+
+        <p>Neurons are organized into layers:</p>
+        <ul>
+            <li><strong>Input layer</strong> — receives the raw data (e.g., pixel values of an image)</li>
+            <li><strong>Hidden layers</strong> — intermediate layers that transform the data step by step</li>
+            <li><strong>Output layer</strong> — produces the final prediction (e.g., "this is a 7")</li>
+        </ul>
+
+        <p>The "deep" in deep learning simply means there are <strong>many hidden layers</strong>. Each layer learns increasingly abstract features. In image recognition, early layers might detect edges, middle layers detect shapes, and later layers detect entire objects like eyes or wheels.</p>
+
+        <h2>How Does It Learn?</h2>
+
+        <p>Learning happens through a process called <strong>training</strong>:</p>
+
+        <ol>
+            <li><strong>Forward pass</strong> — feed an input through the network and get a prediction</li>
+            <li><strong>Compare</strong> — measure how wrong the prediction is (the "loss")</li>
+            <li><strong>Backward pass</strong> — figure out how each weight contributed to the error</li>
+            <li><strong>Update</strong> — nudge every weight slightly to reduce the error next time</li>
+            <li><strong>Repeat</strong> — do this thousands of times across all training examples</li>
+        </ol>
+
+        <p>Step 3 is called <strong>backpropagation</strong> (we have a <a href="backpropagation.html" style="color:var(--accent);">full article on it</a>), and step 4 uses <strong>gradient descent</strong> (also <a href="gradient-descent-explained.html" style="color:var(--accent);">covered in depth</a>). Together, they're the engine of modern deep learning.</p>
+
+        <blockquote>"A neural network is just a function with millions of knobs. Training turns those knobs until the function does what you want."</blockquote>
+
+        <h2>Why Do They Work So Well?</h2>
+
+        <p>Neural networks have a remarkable property called <strong>universal approximation</strong>: with enough neurons, they can approximate any continuous function to arbitrary precision. In plain English — they can learn almost any pattern, no matter how complex.</p>
+
+        <p>But the real magic is <strong>representation learning</strong>. Unlike traditional machine learning where humans manually engineer features, neural networks learn useful features automatically. Given raw pixels, they learn edges, textures, object parts, and full objects — all without being explicitly told what to look for.</p>
+
+        <h2>Getting Started</h2>
+
+        <p>If you want to experiment with neural networks right now:</p>
+        <ul>
+            <li>Try the <strong>Neural Network Builder</strong> tool on this site — it lets you configure and watch a network train in real time</li>
+            <li>Check out the <strong>Gradient Descent Playground</strong> to see optimization in action</li>
+            <li>For coding: start with <code>scikit-learn</code> for simple networks, then graduate to <code>PyTorch</code> or <code>TensorFlow</code></li>
+        </ul>
+
+        <p>Neural networks aren't magic. They're a clever combination of simple math, organized at scale, trained with patience. Once that clicks, the whole field opens up.</p>
+    </div>
+
+    <a href="index.html" class="article-back reveal"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+</div>
+</main>
+
+<div id="site-footer"></div>
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

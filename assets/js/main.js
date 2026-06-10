@@ -15,7 +15,9 @@ function setupActiveNav() {
     const path = window.location.pathname.toLowerCase();
     let key = 'home';
 
-    if (path.includes('/about/')) key = 'about';
+    if (path.includes('/tools/')) key = 'tools';
+    else if (path.includes('/blog/')) key = 'blog';
+    else if (path.includes('/about/')) key = 'about';
     else if (path.includes('/projects/')) key = 'projects';
     else if (path.includes('/gallery/')) key = 'gallery';
     else if (path.includes('/contact/')) key = 'contact';

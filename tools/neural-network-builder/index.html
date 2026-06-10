@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Neural Network Builder | Mubiru Elton Felix</title>
+    <meta name="description" content="Interactive neural network playground — spin the columns, build a network, and watch it train in real time.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="tools.css">
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="tools-main">
+        <section class="tools-hero">
+            <div class="container">
+                <div class="hero-eyebrow reveal">// Interactive Playground</div>
+                <h1 class="hero-title reveal">Neural Network <span class="accent">Builder</span></h1>
+                <p class="hero-subtitle reveal">Spin the columns to configure your architecture, then watch a neural network materialize, train, and converge — all in your browser.</p>
+            </div>
+        </section>
+
+        <section class="config-section">
+            <div class="container">
+                <h2 class="section-title reveal">Configure Your Network</h2>
+                <p class="section-lead reveal">Scroll each column to pick your parameters, or hit Randomize to roll the dice.</p>
+
+                <div class="slot-machine" id="slotMachine">
+                    <div class="slot-column reveal" data-column="project">
+                        <div class="slot-label">Project Type</div>
+                        <div class="slot-window">
+                            <div class="slot-track" id="slotTrack1">
+                                <div class="slot-item" data-value="image-classifier"><i class="fas fa-image"></i> Image Classifier</div>
+                                <div class="slot-item" data-value="text-generator"><i class="fas fa-align-left"></i> Text Generator</div>
+                                <div class="slot-item" data-value="speech-recognizer"><i class="fas fa-microphone"></i> Speech Recognizer</div>
+                                <div class="slot-item" data-value="sentiment-analyzer"><i class="fas fa-heart"></i> Sentiment Analyzer</div>
+                                <div class="slot-item" data-value="anomaly-detector"><i class="fas fa-exclamation-triangle"></i> Anomaly Detector</div>
+                                <div class="slot-item" data-value="recommendation-engine"><i class="fas fa-star"></i> Recommendation Engine</div>
+                                <div class="slot-item" data-value="object-detector"><i class="fas fa-search"></i> Object Detector</div>
+                                <div class="slot-item" data-value="style-transfer"><i class="fas fa-palette"></i> Style Transfer</div>
+                            </div>
+                        </div>
+                        <div class="slot-nav">
+                            <button class="slot-arrow slot-up" data-dir="-1"><i class="fas fa-chevron-up"></i></button>
+                            <button class="slot-arrow slot-down" data-dir="1"><i class="fas fa-chevron-down"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="slot-column reveal delay-1" data-column="layers">
+                        <div class="slot-label">Hidden Layers</div>
+                        <div class="slot-window">
+                            <div class="slot-track" id="slotTrack2">
+                                <div class="slot-item" data-value="1">1 Layer</div>
+                                <div class="slot-item" data-value="2">2 Layers</div>
+                                <div class="slot-item" data-value="3">3 Layers</div>
+                                <div class="slot-item" data-value="4">4 Layers</div>
+                                <div class="slot-item" data-value="5">5 Layers</div>
+                                <div class="slot-item" data-value="6">6 Layers</div>
+                                <div class="slot-item" data-value="7">7 Layers</div>
+                                <div class="slot-item" data-value="8">8 Layers</div>
+                                <div class="slot-item" data-value="9">9 Layers</div>
+                                <div class="slot-item" data-value="10">10 Layers</div>
+                            </div>
+                        </div>
+                        <div class="slot-nav">
+                            <button class="slot-arrow slot-up" data-dir="-1"><i class="fas fa-chevron-up"></i></button>
+                            <button class="slot-arrow slot-down" data-dir="1"><i class="fas fa-chevron-down"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="slot-column reveal delay-2" data-column="neurons">
+                        <div class="slot-label">Neurons per Layer</div>
+                        <div class="slot-window">
+                            <div class="slot-track" id="slotTrack3">
+                                <div class="slot-item" data-value="8">8 Neurons</div>
+                                <div class="slot-item" data-value="16">16 Neurons</div>
+                                <div class="slot-item" data-value="32">32 Neurons</div>
+                                <div class="slot-item" data-value="64">64 Neurons</div>
+                                <div class="slot-item" data-value="128">128 Neurons</div>
+                                <div class="slot-item" data-value="256">256 Neurons</div>
+                                <div class="slot-item" data-value="512">512 Neurons</div>
+                            </div>
+                        </div>
+                        <div class="slot-nav">
+                            <button class="slot-arrow slot-up" data-dir="-1"><i class="fas fa-chevron-up"></i></button>
+                            <button class="slot-arrow slot-down" data-dir="1"><i class="fas fa-chevron-down"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advanced-settings reveal delay-3">
+                    <div class="setting-group">
+                        <label class="setting-label"><span>Activation</span>
+                            <select id="activation" class="setting-select">
+                                <option value="relu">ReLU</option><option value="sigmoid">Sigmoid</option><option value="tanh">Tanh</option><option value="leaky-relu">Leaky ReLU</option><option value="elu">ELU</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="setting-group">
+                        <label class="setting-label"><span>Learning Rate: <strong id="lrValue">0.01</strong></span>
+                            <input type="range" id="learningRate" class="setting-range" min="0.001" max="0.1" step="0.001" value="0.01">
+                        </label>
+                    </div>
+                    <div class="setting-group">
+                        <label class="setting-label"><span>Epochs: <strong id="epochValue">50</strong></span>
+                            <input type="range" id="epochs" class="setting-range" min="10" max="200" step="10" value="50">
+                        </label>
+                    </div>
+                    <div class="setting-group">
+                        <label class="setting-label"><span>Dataset Size: <strong id="datasetValue">5,000</strong></span>
+                            <input type="range" id="datasetSize" class="setting-range" min="1000" max="50000" step="1000" value="5000">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="action-row reveal delay-3">
+                    <button class="btn btn-randomize" id="btnRandomize"><i class="fas fa-dice"></i> Randomize</button>
+                    <button class="btn btn-build" id="btnBuild"><i class="fas fa-hammer"></i> Build &amp; Train</button>
+                </div>
+
+                <div class="config-summary reveal delay-3" id="configSummary">
+                    <span class="summary-chip"><i class="fas fa-folder"></i> <span id="summaryProject">Image Classifier</span></span>
+                    <span class="summary-chip"><i class="fas fa-layer-group"></i> <span id="summaryLayers">3</span> hidden layers</span>
+                    <span class="summary-chip"><i class="fas fa-circle-nodes"></i> <span id="summaryNeurons">64</span> neurons/layer</span>
+                    <span class="summary-chip"><i class="fas fa-bolt"></i> <span id="summaryActivation">ReLU</span></span>
+                    <span class="summary-chip"><i class="fas fa-gauge"></i> LR: <span id="summaryLR">0.01</span></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="viz-section" id="vizSection">
+            <div class="container">
+                <div class="viz-layout">
+                    <div class="viz-panel network-panel">
+                        <h3 class="viz-title"><i class="fas fa-project-diagram"></i> Network Architecture <span class="viz-badge" id="archStatus">Ready</span></h3>
+                        <div class="network-canvas" id="networkCanvas">
+                            <svg id="networkSvg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet"></svg>
+                            <div class="network-overlay" id="networkOverlay">
+                                <div class="overlay-icon"><i class="fas fa-cogs"></i></div>
+                                <p>Configure your network above and hit <strong>Build &amp; Train</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viz-panel metrics-panel">
+                        <h3 class="viz-title"><i class="fas fa-chart-line"></i> Training Dashboard <span class="viz-badge" id="trainStatus">Idle</span></h3>
+                        <div class="metrics-grid">
+                            <div class="metric-card"><div class="metric-value" id="metricAccuracy">--</div><div class="metric-label">Accuracy</div><div class="metric-trend" id="trendAccuracy"></div></div>
+                            <div class="metric-card"><div class="metric-value" id="metricLoss">--</div><div class="metric-label">Loss</div><div class="metric-trend" id="trendLoss"></div></div>
+                            <div class="metric-card"><div class="metric-value" id="metricEpoch">0</div><div class="metric-label">Epoch</div><div class="metric-sub" id="metricTotalEpochs">/ 0</div></div>
+                            <div class="metric-card"><div class="metric-value" id="metricParams">--</div><div class="metric-label">Parameters</div><div class="metric-sub">trainable</div></div>
+                        </div>
+                        <div class="mini-chart" id="miniChart"><canvas id="chartCanvas" width="600" height="180"></canvas></div>
+                        <div class="training-log" id="trainingLog"><div class="log-line muted"><i class="fas fa-circle-info"></i> Training log will appear here...</div></div>
+                        <div class="progress-bar-wrap" id="progressWrap" style="display:none;"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text" id="progressText">0%</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="explainer-section">
+            <div class="container">
+                <h2 class="section-title reveal">What's Happening Here?</h2>
+                <div class="explainer-grid">
+                    <article class="explainer-card reveal"><div class="explainer-icon"><i class="fas fa-sliders"></i></div><h3>1. Configure</h3><p class="muted">Each column selects a key hyperparameter. The project type determines the output shape, layers control depth, and neurons set the width of each layer.</p></article>
+                    <article class="explainer-card reveal delay-1"><div class="explainer-icon"><i class="fas fa-hammer"></i></div><h3>2. Build</h3><p class="muted">We construct a feed-forward neural network from your choices. The visualization shows every neuron and the weighted connections between layers.</p></article>
+                    <article class="explainer-card reveal delay-2"><div class="explainer-icon"><i class="fas fa-forward-step"></i></div><h3>3. Forward Pass</h3><p class="muted">Data flows left to right — inputs are multiplied by weights, summed, and passed through the activation function at each neuron.</p></article>
+                    <article class="explainer-card reveal delay-3"><div class="explainer-icon"><i class="fas fa-rotate-left"></i></div><h3>4. Backpropagation</h3><p class="muted">The error flows backward, updating each weight to reduce the loss. This is the engine of deep learning — and it runs automatically here.</p></article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="tools.js"></script>
+</body>
+</html>

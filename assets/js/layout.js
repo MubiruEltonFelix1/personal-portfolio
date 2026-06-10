@@ -5,9 +5,11 @@
 
         const links = [
             { href: `${root}index.html`, label: 'Home', key: 'home' },
-            { href: `${root}about/index.html`, label: 'About', key: 'about' },
-            { href: `${root}projects/index.html`, label: 'Projects', key: 'projects' },
+            { href: `${root}tools/index.html`, label: 'Tools', key: 'tools' },
+            { href: `${root}blog/index.html`, label: 'Blog', key: 'blog' },
             { href: `${root}gallery/index.html`, label: 'Gallery', key: 'gallery' },
+            { href: `${root}projects/index.html`, label: 'Projects', key: 'projects' },
+            { href: `${root}about/index.html`, label: 'About', key: 'about' },
             { href: `${root}contact/index.html`, label: 'Contact', key: 'contact' }
         ];
 
@@ -46,9 +48,10 @@
                         <h4 class="footer-heading">Quick Links</h4>
                         <ul class="footer-links">
                             <li><a href="${root}about/index.html">About</a></li>
+                            <li><a href="${root}tools/index.html">Tools</a></li>
                             <li><a href="${root}projects/index.html">Projects</a></li>
                             <li><a href="${root}contact/index.html">Contact</a></li>
-                            <li><a href="${root}blog.html">Blog</a></li>
+                            <li><a href="${root}blog/index.html">Blog</a></li>
                         </ul>
                     </div>
                     <div class="footer-section footer-social-sec">

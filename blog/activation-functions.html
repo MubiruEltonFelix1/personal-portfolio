@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    <title>Activation Functions — ReLU, Sigmoid & Friends | Elton Blog</title>
+    <meta name="description" content="Why activation functions exist, how ReLU, Sigmoid, Tanh compare, and which one to reach for — with practical guidance.">
+    <meta property="og:title" content="Activation Functions — ReLU, Sigmoid & Friends">
+    <meta property="og:description" content="Why activation functions exist, how they differ, and which one to reach for — with practical comparisons.">
+    <meta property="og:image" content="../assets/images/logo.png">
+    <meta property="og:url" content="blog/activation-functions.html">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body data-root="../">
+<div id="site-nav"></div>
+
+<main class="article-page">
+<div class="container article-container">
+    <header class="article-header reveal">
+        <span class="post-category">Foundations</span>
+        <h1>Activation Functions — ReLU, Sigmoid &amp; Friends</h1>
+        <div class="article-meta">
+            <span><i class="fas fa-clock"></i> 6 min read</span>
+            <span><i class="fas fa-tag"></i> Beginner</span>
+        </div>
+    </header>
+
+    <div class="article-content reveal delay-1">
+
+        <p>Without activation functions, a neural network — no matter how deep — would be equivalent to a single linear transformation. All those layers would collapse into one matrix multiplication. Activation functions are what give neural networks their <strong>nonlinearity</strong> — their ability to learn complex, curved decision boundaries instead of just straight lines.</p>
+
+        <h2>Why Nonlinearity Matters</h2>
+
+        <p>Imagine trying to separate two classes of points arranged in concentric circles using only straight lines. Impossible, right? You need curves. Activation functions are what let neural networks draw those curves. Without them, the network can only learn linear relationships — and most real-world problems are highly nonlinear.</p>
+
+        <h2>The Contenders</h2>
+
+        <h3>ReLU — Rectified Linear Unit</h3>
+        <p><code>f(x) = max(0, x)</code></p>
+        <p>If the input is positive, pass it through unchanged. If negative, output zero. That's it. ReLU is dead simple, computationally cheap, and — critically — doesn't saturate for positive values, which prevents the vanishing gradient problem in deep networks.</p>
+        <p><strong>When to use:</strong> Your default choice for hidden layers in feed-forward and convolutional networks. Start here.</p>
+        <p><strong>Watch out for:</strong> "Dying ReLU" — if a neuron's weights push it into always-outputting-zero territory, its gradient is zero and it stops learning permanently. Leaky ReLU (<code>f(x) = max(0.01x, x)</code>) and ELU fix this with a small negative slope.</p>
+
+        <h3>Sigmoid</h3>
+        <p><code>f(x) = 1 / (1 + e^(-x))</code></p>
+        <p>The classic S-curve that squashes any input into the range (0, 1). Historically popular because it has a nice probabilistic interpretation — the output can be read as a probability.</p>
+        <p><strong>When to use:</strong> The output layer of binary classification problems (e.g., "is this email spam?"). For hidden layers, ReLU has largely replaced it.</p>
+        <p><strong>Watch out for:</strong> Saturates for large positive or negative inputs — the gradient becomes nearly zero, causing vanishing gradients in deep networks. Also, outputs are not zero-centered, which can cause zigzagging during optimization.</p>
+
+        <h3>Tanh</h3>
+        <p><code>f(x) = (e^x - e^(-x)) / (e^x + e^(-x))</code></p>
+        <p>Like sigmoid but stretched to output in (-1, 1) and zero-centered. Historically preferred over sigmoid for hidden layers because zero-centered outputs help gradient descent converge faster.</p>
+        <p><strong>When to use:</strong> Sometimes in recurrent neural networks (RNNs, LSTMs). For feed-forward hidden layers, ReLU variants are generally better.</p>
+        <p><strong>Watch out for:</strong> Same saturation problem as sigmoid — gradients vanish for inputs far from zero.</p>
+
+        <h3>Softmax</h3>
+        <p>Not quite an activation function in the traditional sense — it's used exclusively in the output layer for multi-class classification. It converts a vector of raw scores into a probability distribution (all outputs between 0 and 1, summing to 1).</p>
+        <p><strong>When to use:</strong> Output layer for classification with 3+ classes.</p>
+
+        <h2>Quick Decision Guide</h2>
+
+        <ul>
+            <li><strong>Hidden layers (feed-forward / CNN):</strong> ReLU. If dying neurons become a problem, try Leaky ReLU or ELU.</li>
+            <li><strong>Binary classification output:</strong> Sigmoid (1 neuron) with binary cross-entropy loss.</li>
+            <li><strong>Multi-class classification output:</strong> Softmax with categorical cross-entropy loss.</li>
+            <li><strong>Regression output:</strong> No activation (linear) — let the network output any real number.</li>
+            <li><strong>RNN / LSTM gates:</strong> Sigmoid (for gating) and Tanh (for state updates).</li>
+        </ul>
+
+        <blockquote>"Start with ReLU. The others are solutions to problems you probably don't have yet."</blockquote>
+
+        <p>Activation functions aren't a place to overthink early on. ReLU works for 90% of cases. When it doesn't, you'll know — your loss will plateau, your gradients will vanish, and then you can reach for the alternatives with a clear understanding of why.</p>
+    </div>
+
+    <a href="index.html" class="article-back reveal"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+</div>
+</main>
+
+<div id="site-footer"></div>
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
