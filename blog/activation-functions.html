@@ -38,6 +38,27 @@
 
         <p>Without activation functions, a neural network — no matter how deep — would be equivalent to a single linear transformation. All those layers would collapse into one matrix multiplication. Activation functions are what give neural networks their <strong>nonlinearity</strong> — their ability to learn complex, curved decision boundaries instead of just straight lines.</p>
 
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="200" fill="#0f0f0f" rx="10"/>
+                <text x="360" y="22" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="10">COMMON ACTIVATION FUNCTIONS COMPARED</text>
+                <line x1="50" y1="170" x2="680" y2="170" stroke="#2a2a2a" stroke-width="0.5"/>
+                <line x1="50" y1="30" x2="50" y2="170" stroke="#2a2a2a" stroke-width="0.5"/>
+                <!-- ReLU -->
+                <polyline points="120,170 120,170 340,60 340,170" fill="none" stroke="#ffd700" stroke-width="2.5"/>
+                <text x="230" y="185" text-anchor="middle" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="9">ReLU</text>
+                <!-- Sigmoid -->
+                <polyline points="50,165 70,163 120,145 180,100 250,55 320,32 390,22 460,18 530,16 600,15 670,14" fill="none" stroke="#f0c400" stroke-width="1.8" opacity="0.6"/>
+                <text x="360" y="192" text-anchor="middle" fill="#f0c400" font-family="IBM Plex Mono,monospace" font-size="9" opacity="0.6">Sigmoid</text>
+                <!-- Tanh -->
+                <polyline points="50,25 80,30 120,55 180,100 250,145 320,163 390,167 460,169 530,170 600,170 670,170" fill="none" stroke="#c9c9c9" stroke-width="1.5" opacity="0.4"/>
+                <text x="520" y="192" text-anchor="middle" fill="#c9c9c9" font-family="IBM Plex Mono,monospace" font-size="9" opacity="0.4">Tanh</text>
+                <text x="680" y="174" fill="#888" font-family="IBM Plex Mono,monospace" font-size="8">x</text>
+                <text x="48" y="26" fill="#888" font-family="IBM Plex Mono,monospace" font-size="8">y</text>
+            </svg>
+            <figcaption>ReLU (gold), Sigmoid (amber), and Tanh (gray) — each with different properties</figcaption>
+        </figure>
+
         <h2>Why Nonlinearity Matters</h2>
 
         <p>Imagine trying to separate two classes of points arranged in concentric circles using only straight lines. Impossible, right? You need curves. Activation functions are what let neural networks draw those curves. Without them, the network can only learn linear relationships — and most real-world problems are highly nonlinear.</p>

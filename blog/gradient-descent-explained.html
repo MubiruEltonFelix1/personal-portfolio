@@ -46,6 +46,29 @@
 
         <p>That's gradient descent.</p>
 
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="200" fill="#0f0f0f" rx="10"/>
+                <text x="360" y="22" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="10">GRADIENT DESCENT ON A 2D LOSS SURFACE</text>
+                <ellipse cx="360" cy="110" rx="300" ry="75" fill="none" stroke="#2a2a2a" stroke-width="0.5"/>
+                <ellipse cx="360" cy="110" rx="230" ry="55" fill="none" stroke="#2a2a2a" stroke-width="0.5"/>
+                <ellipse cx="360" cy="110" rx="160" ry="36" fill="none" stroke="#2a2a2a" stroke-width="0.5"/>
+                <ellipse cx="360" cy="110" rx="90" ry="19" fill="none" stroke="#2a2a2a" stroke-width="0.6"/>
+                <ellipse cx="360" cy="110" rx="30" ry="6" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.5"/>
+                <circle cx="360" cy="110" r="5" fill="#ffd700"/>
+                <polyline points="80,55 130,67 180,78 230,86 280,95 320,101 350,107 360,110" fill="none" stroke="#ffd700" stroke-width="2" stroke-dasharray="5,3" opacity="0.7">
+                    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+                </polyline>
+                <circle r="4" fill="#ffd700">
+                    <animateMotion dur="3.2s" repeatCount="indefinite" path="M80,55 L130,67 L180,78 L230,86 L280,95 L320,101 L350,107 L360,110"/>
+                </circle>
+                <text x="70" y="47" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="9">Start</text>
+                <text x="370" y="197" fill="#888" font-family="IBM Plex Mono,monospace" font-size="9">w (parameters)</text>
+                <text x="22" y="115" fill="#888" font-family="IBM Plex Mono,monospace" font-size="9" transform="rotate(-90,22,115)">Loss</text>
+            </svg>
+            <figcaption>Gradient descent traces a downhill path on the loss surface toward the minimum</figcaption>
+        </figure>
+
         <ul>
             <li><strong>Your position</strong> = the model's current parameters (weights and biases)</li>
             <li><strong>The mountain</strong> = the loss function (how wrong the model is)</li>

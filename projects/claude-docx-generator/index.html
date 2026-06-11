@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Claude DOCX Generator | Mubiru Elton Felix</title>
+    <meta name="description" content="Turn AI-generated JavaScript into real .docx files instantly. When the AI writes the document code but can't deliver the file, this tool bridges the gap.">
+    <meta property="og:title" content="Claude DOCX Generator — Paste & Produce">
+    <meta property="og:description" content="Turn AI-generated JavaScript into real .docx files instantly. No path editing, no wrestling with file systems.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="project.css">
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="project-page">
+        <!-- Hero -->
+        <section class="project-hero">
+            <div class="container">
+                <div class="hero-eyebrow reveal">// Project</div>
+                <h1 class="hero-title reveal">Claude DOCX <span class="accent">Generator</span></h1>
+                <p class="hero-subtitle reveal">Paste &amp; Produce — turn AI-generated JavaScript into real .docx files instantly, without editing a single file path.</p>
+                <div class="project-badges reveal delay-1">
+                    <span class="badge"><i class="fas fa-code"></i> Node.js</span>
+                    <span class="badge"><i class="fas fa-laptop"></i> Local Tool</span>
+                    <span class="badge"><i class="fas fa-folder-open"></i> Outputs: outputs/</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why This Exists -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Why This Exists</h2>
+
+                <div class="scenario-card reveal">
+                    <div class="scenario-icon"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <h3>Scenario: AI Timed Out, But the DOCX Still Needs to Exist</h3>
+                        <p class="muted">You're working with an AI assistant to generate a 40-page report, proposal, thesis draft, or technical document. The AI successfully writes the JavaScript that builds the DOCX using the <code>docx</code> package — hundreds of lines of generated content. But then one of these things happens:</p>
+                    </div>
+                </div>
+
+                <div class="problem-grid reveal delay-1">
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-hourglass-end"></i></div>
+                        <h4>Session Timeout</h4>
+                        <p>The AI session times out before producing the actual <code>.docx</code> file.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-folder-xmark"></i></div>
+                        <h4>Environment Paths</h4>
+                        <p>The generated script contains an environment-specific path such as <code>/mnt/data/report.docx</code> that doesn't exist on your machine.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-cloud"></i></div>
+                        <h4>Platform Mismatch</h4>
+                        <p>The code came from Claude, ChatGPT, Gemini, or another platform that saved files to a location you can't access locally.</p>
+                    </div>
+                </div>
+
+                <p class="section-lead reveal delay-2">You just want the document <strong>now</strong> — not another round of path fixing and debugging.</p>
+
+                <p class="muted reveal delay-2">Instead of editing file paths throughout the script, you paste the generated code into <code>paste_here.js</code> and run <code>node paste_here.js</code>. This tool automatically intercepts the DOCX file write operation and redirects the output into the local <code>outputs/</code> directory.</p>
+
+                <blockquote class="reve delay-3">When an AI can generate the document code but cannot deliver the document itself, this repository bridges the gap.</blockquote>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Quick Facts</h2>
+                <div class="facts-grid reveal">
+                    <div class="fact-item">
+                        <i class="fas fa-box"></i>
+                        <span>No publish required — this is a local tool. Run with Node.js.</span>
+                    </div>
+                    <div class="fact-item">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>Safe outputs — <code>outputs/</code> is in <code>.gitignore</code> so generated DOCX files won't be committed accidentally.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Quick Start</h2>
+                <div class="steps-container reveal">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-body">
+                            <h4>Install the tool</h4>
+                            <pre><code>npm install claude-docx-generator</code></pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-body">
+                            <h4>Paste your DOCX-generating code</h4>
+                            <p class="muted">Paste your docx-generating code into <code>paste_here.js</code>. It already requires <code>runner.js</code> which redirects Buffer writes into <code>outputs/</code>.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-body">
+                            <h4>Run it</h4>
+                            <pre><code>node paste_here.js
+# or
+npm run paste
+# or directly via npx
+npx claude-docx-generator</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">How It Works</h2>
+                <div class="how-card reveal">
+                    <p class="muted">Many docx scripts follow this pattern:</p>
+                    <pre><code>Packer.toBuffer(doc).then(buffer =>
+    fs.writeFileSync('/some/absolute/path/my.docx', buffer)
+);</code></pre>
+                    <p class="muted"><code>runner.js</code> monkey-patches <code>fs.writeFileSync</code> and <code>fs.writeFile</code> at runtime. When the patched functions detect a <code>Buffer</code> (the docx payload), they replace the destination path with <code>outputs/&lt;basename&gt;</code> — so you don't have to edit the original code.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- File Map -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">File Map</h2>
+                <div class="file-grid reveal">
+                    <div class="file-card">
+                        <div class="file-icon"><i class="fas fa-file-code"></i></div>
+                        <code>paste_here.js</code>
+                        <span class="muted">Development template where you paste code</span>
+                    </div>
+                    <div class="file-card">
+                        <div class="file-icon"><i class="fas fa-gear"></i></div>
+                        <code>runner.js</code>
+                        <span class="muted">Intercepts Buffer writes and redirects into outputs/</span>
+                    </div>
+                    <div class="file-card">
+                        <div class="file-icon"><i class="fas fa-flask"></i></div>
+                        <code>generate2.js</code>
+                        <span class="muted">Example generator included in the repo</span>
+                    </div>
+                    <div class="file-card">
+                        <div class="file-icon"><i class="fas fa-file-export"></i></div>
+                        <code>generate2_to_docx.js</code>
+                        <span class="muted">Example DOCX exporter</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Best Practices</h2>
+                <ul class="practices-list reveal">
+                    <li><i class="fas fa-check-circle"></i> Keep <code>outputs/</code> small — it contains generated binary files and is git-ignored.</li>
+                    <li><i class="fas fa-check-circle"></i> If your pasted script writes streams, custom promises, or uses other FS APIs, open an issue or ask to extend <code>runner.js</code>.</li>
+                </ul>
+
+                <div class="action-row reveal delay-1">
+                    <a href="https://github.com/MubiruEltonFelix1/claude-docx-generator" target="_blank" rel="noopener" class="btn btn-github">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                    <a href="../" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to Projects
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

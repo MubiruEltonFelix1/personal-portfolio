@@ -38,6 +38,31 @@
 
         <p>You've trained your model. On the training data, accuracy is 99.7%. You're feeling great. Then you test it on new data — and accuracy drops to 72%. What happened? <strong>Overfitting</strong>. Your model memorized the training examples instead of learning the underlying pattern.</p>
 
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="200" fill="#0f0f0f" rx="10"/>
+                <text x="360" y="22" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="10">UNDERFITTING · JUST RIGHT · OVERFITTING</text>
+                <!-- Data points -->
+                <circle cx="100" cy="140" r="2.5" fill="#888"/>
+                <circle cx="180" cy="120" r="2.5" fill="#888"/>
+                <circle cx="260" cy="100" r="2.5" fill="#888"/>
+                <circle cx="340" cy="95" r="2.5" fill="#888"/>
+                <circle cx="420" cy="85" r="2.5" fill="#888"/>
+                <circle cx="500" cy="78" r="2.5" fill="#888"/>
+                <circle cx="580" cy="75" r="2.5" fill="#888"/>
+                <!-- Underfit: straight line -->
+                <line x1="60" y1="128" x2="620" y2="81" stroke="#2a2a2a" stroke-width="1.5" opacity="0.5"/>
+                <text x="300" y="155" text-anchor="middle" fill="#2a2a2a" font-family="IBM Plex Mono,monospace" font-size="8">Underfit (straight line)</text>
+                <!-- Just right: smooth curve -->
+                <path d="M80,145 Q150,130 220,112 Q290,98 360,92 Q430,86 500,80 Q570,75 620,73" fill="none" stroke="#ffd700" stroke-width="2.5"/>
+                <text x="540" y="165" text-anchor="middle" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="9">Just Right</text>
+                <!-- Overfit: wiggly through every point -->
+                <path d="M80,145 Q95,165 100,140 Q110,125 120,145 Q140,155 150,135 Q160,120 180,120 Q190,130 200,115 Q220,95 240,110 Q250,120 260,100 Q275,85 290,105 Q310,120 340,95 Q355,85 370,105 Q390,120 420,85 Q440,70 460,95 Q480,110 500,78 Q520,60 540,90 Q560,100 580,75 Q600,55 620,73" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.6"/>
+                <text x="150" y="180" text-anchor="middle" fill="#c41e3a" font-family="IBM Plex Mono,monospace" font-size="8" opacity="0.7">Overfit (memorized)</text>
+            </svg>
+            <figcaption>Three fits to the same data: underfit misses the pattern, overfit memorizes noise, just right captures the trend</figcaption>
+        </figure>
+
         <p>This is the central tension in machine learning. Let's understand it properly.</p>
 
         <h2>The Three States of a Model</h2>

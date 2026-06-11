@@ -38,6 +38,38 @@
 
         <p>If you've heard the term "neural network" and pictured something mysterious, you're not alone. The name sounds intimidating. But at their core, neural networks are just a way for computers to learn patterns from data — and the basic idea is surprisingly simple.</p>
 
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="200" fill="#0f0f0f" rx="10"/>
+                <text x="360" y="22" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="10">INPUT LAYER → HIDDEN LAYERS → OUTPUT LAYER</text>
+                <circle cx="60" cy="80" r="12" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                <circle cx="60" cy="140" r="12" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                <circle cx="180" cy="60" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="180" cy="100" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="180" cy="140" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="180" cy="180" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="300" cy="70" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="300" cy="110" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="300" cy="150" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="420" cy="80" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="420" cy="120" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="420" cy="160" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="540" cy="60" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
+                <circle cx="540" cy="110" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
+                <circle cx="540" cy="160" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
+                <circle cx="660" cy="90" r="11" fill="none" stroke="#ffd700" stroke-width="2"/>
+                <circle cx="660" cy="140" r="11" fill="none" stroke="#ffd700" stroke-width="2"/>
+                <line x1="72" y1="80" x2="171" y2="60" stroke="#2a2a2a" stroke-width="0.3"/>
+                <line x1="72" y1="80" x2="171" y2="100" stroke="#2a2a2a" stroke-width="0.3"/>
+                <line x1="72" y1="140" x2="171" y2="140" stroke="#2a2a2a" stroke-width="0.3"/>
+                <line x1="72" y1="140" x2="171" y2="180" stroke="#2a2a2a" stroke-width="0.3"/>
+                <circle cx="180" cy="100" r="3" fill="#ffd700" opacity="0.7"><animate attributeName="opacity" values="0.7;0;0.7" dur="2s" repeatCount="indefinite"/></circle>
+                <circle cx="420" cy="120" r="3" fill="#ffd700" opacity="0.6"><animate attributeName="opacity" values="0;0.6;0" dur="1.8s" repeatCount="indefinite" begin="0.4s"/></circle>
+                <circle cx="660" cy="140" r="3" fill="#ffd700" opacity="0.8"><animate attributeName="opacity" values="0.8;0;0.8" dur="2.2s" repeatCount="indefinite" begin="0.8s"/></circle>
+            </svg>
+            <figcaption>A feed-forward neural network: data flows left-to-right through layers of neurons</figcaption>
+        </figure>
+
         <p>Let's build an intuition from scratch. No advanced math. No jargon without explanation.</p>
 
         <h2>What Problem Are We Solving?</h2>

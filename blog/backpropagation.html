@@ -38,6 +38,36 @@
 
         <p>If gradient descent is the engine of deep learning, <strong>backpropagation</strong> is the fuel injection system. It's the algorithm that figures out exactly how much each of the millions (or billions) of parameters in a neural network should be adjusted to reduce the error. Without it, training deep networks would be computationally impossible.</p>
 
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 180" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="180" fill="#0f0f0f" rx="10"/>
+                <text x="360" y="20" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="10">FORWARD PASS (left→right) AND BACKWARD PASS (right→left)</text>
+                <circle cx="80" cy="80" r="11" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                <circle cx="80" cy="130" r="11" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                <circle cx="200" cy="70" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.7"/>
+                <circle cx="200" cy="140" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.7"/>
+                <circle cx="320" cy="80" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.5"/>
+                <circle cx="320" cy="130" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.5"/>
+                <circle cx="440" cy="90" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.8"/>
+                <circle cx="440" cy="120" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.8"/>
+                <line x1="91" y1="80" x2="191" y2="70" stroke="#2a2a2a" stroke-width="0.4"/>
+                <line x1="209" y1="70" x2="311" y2="80" stroke="#2a2a2a" stroke-width="0.4"/>
+                <line x1="328" y1="80" x2="430" y2="90" stroke="#2a2a2a" stroke-width="0.4"/>
+                <!-- Forward arrow -->
+                <line x1="480" y1="40" x2="560" y2="40" stroke="#ffd700" stroke-width="1.5" opacity="0.7"/>
+                <polygon points="560,35 572,40 560,45" fill="#ffd700" opacity="0.7"/>
+                <text x="520" y="32" text-anchor="middle" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="8">Forward</text>
+                <!-- Backward arrow -->
+                <line x1="560" y1="150" x2="480" y2="150" stroke="#ffd700" stroke-width="1.5" opacity="0.7"/>
+                <polygon points="480,145 468,150 480,155" fill="#ffd700" opacity="0.7"/>
+                <text x="520" y="168" text-anchor="middle" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="8">Backward</text>
+                <text x="80" y="170" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="8">Input</text>
+                <text x="200" y="170" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="8">Hidden</text>
+                <text x="440" y="170" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="8">Output</text>
+            </svg>
+            <figcaption>Forward pass computes predictions; backward pass computes gradients for every weight</figcaption>
+        </figure>
+
         <h2>The Problem: Who's to Blame?</h2>
 
         <p>Imagine a neural network with 5 layers, each with 100 neurons. That's tens of thousands of weights. When the network makes a wrong prediction, every single weight contributed to that error — some more than others. But how do we figure out <em>which</em> weights need the biggest adjustment?</p>
