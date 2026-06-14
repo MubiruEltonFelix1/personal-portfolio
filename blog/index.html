@@ -38,13 +38,15 @@
         <section class="blog-posts">
             <div class="container">
 
-                <!-- Category: AI / Deep Learning -->
-                <div class="category-section reveal">
-                    <h2 class="category-heading"><span class="accent">AI / Deep Learning</span></h2>
-                    <p class="category-subtitle">From first principles to practical intuition — no PhD required.</p>
-                </div>
+                <!-- Category: AI / Deep Learning (collapsible) -->
+                <details class="category-details" open>
+                    <summary class="category-summary reveal">
+                        <span class="category-heading"><span class="accent">AI / Deep Learning</span></span>
+                        <span class="collapse-icon"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="category-subtitle" style="margin-top:0.5rem;padding:0 4px;">From first principles to practical intuition — no PhD required.</p>
 
-                <div class="posts-grid">
+                <div class="posts-grid" style="margin-top:1.5rem;">
 
                     <article class="post-card reveal">
                         <div class="post-illustration">
@@ -171,6 +173,7 @@
                     </article>
 
                 </div>
+                </details>
 
                 <!-- Category: Community Leadership -->
                 <div class="category-section reveal delay-1" style="margin-top:3.5rem;">

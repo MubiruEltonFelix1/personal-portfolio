@@ -63,6 +63,49 @@
 .category-heading { font-size:1.4rem; font-weight:700; color:var(--text); margin-bottom:4px; letter-spacing:-0.01em; }
 .category-subtitle { font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin:0; }
 
+/* ---- Collapsible Categories ---- */
+.category-details {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+.category-details[open] { padding-bottom: 1.5rem; }
+.category-summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px 4px;
+    border-radius: 8px;
+    user-select: none;
+    transition: background 0.2s;
+}
+.category-summary::-webkit-details-marker { display: none; }
+.category-summary:hover { background: rgba(255, 215, 0, 0.04); }
+.category-summary .category-heading {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+.collapse-icon {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+.category-details[open] .collapse-icon {
+    transform: rotate(180deg);
+}
+.category-details[open] .posts-grid {
+    animation: fadeSlideIn 0.3s ease;
+}
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width:600px) {
     .posts-grid { grid-template-columns:1fr; }
     .post-illustration { height:150px; }
