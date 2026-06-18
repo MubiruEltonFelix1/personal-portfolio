@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Tour Uganda | Mubiru Elton Felix</title>
+    <meta name="description" content="Tour Uganda — The all-in-one travel planning ecosystem for the Pearl of Africa. Plan, price, and book your Uganda trip from one place.">
+    <meta property="og:title" content="Tour Uganda — Pearl of Africa Travel">
+    <meta property="og:description" content="AI trip planner, interactive map, destination guides, accommodation directory, cost calculator, and more.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="project.css">
+    <style>
+        .project-hero { background: radial-gradient(circle at bottom left, rgba(255,215,0,0.06), transparent 50%); }
+        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:24px; }
+        .page-table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:0.85rem; }
+        .page-table th, .page-table td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--border); }
+        .page-table th { color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; }
+        .page-table td { color:var(--text-muted); }
+        .page-table td:first-child { font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--text); }
+        .tech-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.15); border-radius:20px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--accent); }
+        .link-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.5rem; }
+        .link-row .btn i { margin-right:6px; }
+        @media (max-width:600px) {
+            .feature-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="project-page">
+        <!-- Hero -->
+        <section class="project-hero">
+            <div class="container">
+                <div class="hero-eyebrow reveal">// Travel Planning Ecosystem</div>
+                <h1 class="hero-title reveal">Tour <span class="accent">Uganda</span></h1>
+                <p class="hero-subtitle reveal">The all-in-one travel planning ecosystem for the Pearl of Africa. Plan, price, and book your Uganda trip from one place.</p>
+                <div class="project-badges reveal delay-1">
+                    <span class="badge"><i class="fas fa-route"></i> Trip Planner</span>
+                    <span class="badge"><i class="fas fa-map-marked-alt"></i> Interactive Map</span>
+                    <span class="badge"><i class="fas fa-calculator"></i> Cost Calculator</span>
+                    <span class="badge"><i class="fas fa-robot"></i> AI Chat</span>
+                </div>
+                <div class="link-row reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/"><i class="fas fa-globe"></i> Visit Site</a>
+                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/tour-uganda"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Overview</h2>
+                <p class="muted reveal">Tour Uganda is a comprehensive travel platform that brings together every aspect of planning a trip to Uganda. From an AI-powered trip planner to interactive maps, accommodation directories, and a live cost calculator — everything is designed to give travellers a seamless, informed experience.</p>
+                <p class="muted reveal delay-1" style="margin-top:0.8rem;">Built as a multi-page static application with dark mode, responsive design, and an integrated AI chat assistant for real-time travel Q&A.</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Features</h2>
+                <div class="feature-grid reveal">
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-robot"></i></div>
+                        <h4>AI Trip Planner</h4>
+                        <p>Answer 3 simple questions, get a full day-by-day itinerary tailored to your preferences.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-map"></i></div>
+                        <h4>Interactive Map</h4>
+                        <p>Leaflet-powered map with national parks, gorilla sectors, airports, hospitals, and more.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-compass"></i></div>
+                        <h4>Destination Guides</h4>
+                        <p>8 featured destinations with GPS coordinates, ratings, seasonal calendars, and hidden gems.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-hotel"></i></div>
+                        <h4>Accommodation Directory</h4>
+                        <p>Filter lodges and hotels by tier and budget, complete with map view integration.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-handshake"></i></div>
+                        <h4>Tour Operators</h4>
+                        <p>Verified operator profiles with specialties, ratings, and direct contact.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-bus"></i></div>
+                        <h4>Transport Hub</h4>
+                        <p>Flights, car rental, private drivers, buses, and boats — all in one place.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-calculator"></i></div>
+                        <h4>Cost Calculator</h4>
+                        <p>Live trip estimate broken down by category — accommodation, transport, activities, meals.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h4>Itinerary Builder</h4>
+                        <p>Drag-and-drop day planner for building your perfect trip schedule.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-images"></i></div>
+                        <h4>Inspiration Gallery</h4>
+                        <p>Virtual tours, traveller reviews, and a curated photo gallery.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-moon"></i></div>
+                        <h4>Dark Mode</h4>
+                        <p>Full theme toggle with persisted user preference across all pages.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-comment-dots"></i></div>
+                        <h4>AI Chat Assistant</h4>
+                        <p>In-page travel Q&A chatbot for real-time answers about destinations, transport, and tips.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Map -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Site Pages</h2>
+                <p class="muted reveal">The platform spans 10 pages, each serving a distinct part of the travel planning journey:</p>
+                <div class="reveal delay-1">
+                    <table class="page-table">
+                        <thead>
+                            <tr><th>Page</th><th>File</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Home</td><td>index.html</td><td>Hero, AI planner, interactive map, featured destinations</td></tr>
+                            <tr><td>Destinations</td><td>destinations.html</td><td>Park guides, seasonal calendar, hidden gems</td></tr>
+                            <tr><td>Accommodation</td><td>accommodation.html</td><td>Lodge listings with tier/price filters and map view</td></tr>
+                            <tr><td>Tour Operators</td><td>operators.html</td><td>Verified operator directory with specialties</td></tr>
+                            <tr><td>Transport</td><td>transport.html</td><td>Flights, car rental, drivers, buses, boats</td></tr>
+                            <tr><td>Budget</td><td>calculator.html</td><td>Live cost calculator with category breakdown</td></tr>
+                            <tr><td>Itinerary Builder</td><td>itinerary.html</td><td>Drag-and-drop day planner</td></tr>
+                            <tr><td>Inspiration</td><td>inspiration.html</td><td>Virtual tours, reviews, photo gallery</td></tr>
+                            <tr><td>Community</td><td>community.html</td><td>Emergency contacts, forum, partner portal</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <div class="action-row reveal">
+                    <a href="https://mubirueltonfelix1.github.io/tour-uganda/" target="_blank" rel="noopener" class="btn btn-github">
+                        <i class="fas fa-globe"></i> Visit Site
+                    </a>
+                    <a href="../" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to Projects
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

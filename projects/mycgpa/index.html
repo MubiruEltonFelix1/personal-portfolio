@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>MyCGPA | Mubiru Elton Felix</title>
+    <meta name="description" content="MyCGPA — Student-friendly CGPA calculator and forecaster. Track current performance, model future semesters, and plan toward a target CGPA.">
+    <meta property="og:title" content="MyCGPA — Academic Planner">
+    <meta property="og:description" content="Track, forecast, and plan your academic performance with MyCGPA.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="project.css">
+    <style>
+        .project-hero { background: radial-gradient(circle at top left, rgba(255,215,0,0.07), transparent 50%); }
+        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:24px; }
+        .tech-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.15); border-radius:20px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--accent); }
+        .link-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.5rem; }
+        .link-row .btn i { margin-right:6px; }
+        .steps-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-bottom:24px; }
+        @media (max-width:600px) {
+            .feature-grid, .steps-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="project-page">
+        <!-- Hero -->
+        <section class="project-hero">
+            <div class="container">
+                <div class="hero-eyebrow reveal">// Academic Planning Tool</div>
+                <h1 class="hero-title reveal">My<span class="accent">CGPA</span></h1>
+                <p class="hero-subtitle reveal">Student-friendly CGPA calculator and forecaster — track current performance, model future semesters, and plan the grades needed to hit a target CGPA.</p>
+                <div class="project-badges reveal delay-1">
+                    <span class="badge"><i class="fas fa-calculator"></i> CGPA Calculator</span>
+                    <span class="badge"><i class="fas fa-chart-line"></i> Forecasting</span>
+                    <span class="badge"><i class="fas fa-chart-bar"></i> Chart.js</span>
+                    <span class="badge"><i class="fas fa-mobile-alt"></i> Responsive</span>
+                </div>
+                <div class="link-row reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://my-cgpa.vercel.app"><i class="fas fa-external-link-alt"></i> Live App</a>
+                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Overview</h2>
+                <p class="muted reveal">MyCGPA is a purpose-built academic planning tool for university students. It solves a real problem: knowing where you stand academically and what it will take to reach your goals. Instead of manual spreadsheet calculations or opaque university portals, MyCGPA gives a clear, visual picture of past performance and future possibilities.</p>
+                <p class="muted reveal delay-1" style="margin-top:0.8rem;">Built with vanilla HTML, CSS, and JavaScript — no framework overhead — with Chart.js providing clean, responsive visualisations of your academic trajectory.</p>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Tech Stack</h2>
+                <div class="reveal" style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <span class="tech-badge"><i class="fab fa-html5"></i> HTML5</span>
+                    <span class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
+                    <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="tech-badge"><i class="fas fa-chart-bar"></i> Chart.js</span>
+                    <span class="tech-badge"><i class="fas fa-graduation-cap"></i> Academic Planning</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">How It Works</h2>
+                <div class="steps-grid reveal">
+                    <div class="problem-card" style="text-align:center;">
+                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-plus-circle"></i></div>
+                        <h4>Add Courses</h4>
+                        <p>Enter your current semester courses with credit units and grades.</p>
+                    </div>
+                    <div class="problem-card" style="text-align:center;">
+                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-eye"></i></div>
+                        <h4>See Your Standing</h4>
+                        <p>View your current semester GPA and cumulative CGPA at a glance.</p>
+                    </div>
+                    <div class="problem-card" style="text-align:center;">
+                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-bullseye"></i></div>
+                        <h4>Set a Target</h4>
+                        <p>Input a target CGPA and discover exactly what grades you need in future semesters.</p>
+                    </div>
+                    <div class="problem-card" style="text-align:center;">
+                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-chart-line"></i></div>
+                        <h4>Visualise</h4>
+                        <p>Interactive Chart.js graphs show your academic trajectory over time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Core Features</h2>
+                <div class="feature-grid reveal">
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-calculator"></i></div>
+                        <h4>CGPA Calculation</h4>
+                        <p>Accurate computation of semester GPA and cumulative CGPA based on credit units and grade points.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-chart-simple"></i></div>
+                        <h4>Grade Forecasting</h4>
+                        <p>Model future semesters and see what grades you need to achieve your target CGPA before graduation.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-rotate"></i></div>
+                        <h4>What-If Analysis</h4>
+                        <p>Experiment with different grade scenarios in upcoming semesters to plan your study strategy.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-file-export"></i></div>
+                        <h4>Visual Reports</h4>
+                        <p>Chart.js-powered graphs that make your academic progress easy to understand and share.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links -->
+        <section class="project-section">
+            <div class="container project-container">
+                <div class="action-row reveal">
+                    <a href="https://my-cgpa.vercel.app" target="_blank" rel="noopener" class="btn btn-github">
+                        <i class="fas fa-external-link-alt"></i> Live App
+                    </a>
+                    <a href="https://github.com/MubiruEltonFelix1/my-cgpa" target="_blank" rel="noopener" class="btn btn-back" style="border-color:var(--border);color:var(--text-muted);">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="../" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to Projects
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

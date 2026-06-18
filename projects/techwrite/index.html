@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>TechWrite | Mubiru Elton Felix</title>
+    <meta name="description" content="TechWrite — A tech article platform where students and lecturers write, share, and engage with technology content.">
+    <meta property="og:title" content="TechWrite — Campus Tech Articles">
+    <meta property="og:description" content="Write, upload, view, comment, and bookmark tech articles. Built for students and lecturers.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="project.css">
+    <style>
+        .project-hero { background: radial-gradient(circle at center, rgba(255,215,0,0.06), transparent 60%); }
+        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:24px; }
+        .tech-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.15); border-radius:20px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--accent); }
+        .link-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.5rem; }
+        .link-row .btn i { margin-right:6px; }
+        @media (max-width:600px) {
+            .feature-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="project-page">
+        <!-- Hero -->
+        <section class="project-hero">
+            <div class="container">
+                <div class="hero-eyebrow reveal">// Campus Tech Publishing</div>
+                <h1 class="hero-title reveal">Tech<span class="accent">Write</span></h1>
+                <p class="hero-subtitle reveal">A tech article platform for students and lecturers — write, publish, comment, and curate technology content across campus.</p>
+                <div class="project-badges reveal delay-1">
+                    <span class="badge"><i class="fas fa-pen-fancy"></i> Write</span>
+                    <span class="badge"><i class="fas fa-bookmark"></i> Save</span>
+                    <span class="badge"><i class="fas fa-comments"></i> Comment</span>
+                    <span class="badge"><i class="fas fa-bell"></i> Notifications</span>
+                </div>
+                <div class="link-row reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app"><i class="fas fa-external-link-alt"></i> Visit Site</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Overview</h2>
+                <p class="muted reveal">TechWrite is a dedicated publishing platform where students and lecturers can write, upload, and share technology articles. Readers can view, comment, save articles for later reading, and receive notifications — creating a vibrant campus tech community.</p>
+                <p class="muted reveal delay-1" style="margin-top:0.8rem;">Built to bridge the gap between classroom learning and the broader tech conversation, TechWrite gives every campus voice a platform to share insights, tutorials, research, and opinions on technology.</p>
+            </div>
+        </section>
+
+        <!-- Branding: The Write Mark -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Brand Identity</h2>
+                <p class="muted reveal">TechWrite is branded around the idea of <strong>the write mark</strong> — a play on both <em>writing</em> and <em>right</em> — positioning the platform as the definitive place for campus tech thought leadership.</p>
+                <div class="feature-grid reveal delay-1" style="margin-top:1rem;">
+                    <div class="problem-card" style="text-align:center;">
+                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-feather-alt"></i></div>
+                        <h4>The Write Mark</h4>
+                        <p>Every article leaves a mark. TechWrite is where campus tech voices make theirs.</p>
+                    </div>
+                    <div class="problem-card" style="text-align:center;">
+                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-layer-group"></i></div>
+                        <h4>Tech Stack</h4>
+                        <p>React, TypeScript, Supabase, Tailwind CSS, Lovable Cloud</p>
+                    </div>
+                    <div class="problem-card" style="text-align:center;">
+                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-graduation-cap"></i></div>
+                        <h4>For Campus</h4>
+                        <p>Built by students, for students and lecturers — a living tech library.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Core Features</h2>
+                <div class="feature-grid reveal">
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-pen-fancy"></i></div>
+                        <h4>Write & Publish</h4>
+                        <p>Rich text editor for writing tech articles with support for code blocks, images, and formatting.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-book-open"></i></div>
+                        <h4>Browse & Discover</h4>
+                        <p>Category-based browsing, search, and trending articles to help readers discover relevant tech content.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-comment-dots"></i></div>
+                        <h4>Comments & Discussion</h4>
+                        <p>Threaded comments on articles enabling discussion between authors and readers.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-bookmark"></i></div>
+                        <h4>Read Later</h4>
+                        <p>Save articles to a personal reading list for offline or later consumption.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-bell"></i></div>
+                        <h4>Notifications</h4>
+                        <p>Real-time notifications for new comments, replies, and articles from followed authors.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-user-graduate"></i></div>
+                        <h4>Role-Based Access</h4>
+                        <p>Student and lecturer roles with appropriate permissions for publishing and moderation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <div class="action-row reveal">
+                    <a href="https://mucosaweekly.lovable.app" target="_blank" rel="noopener" class="btn btn-github">
+                        <i class="fas fa-external-link-alt"></i> Visit TechWrite
+                    </a>
+                    <p class="muted" style="font-size:0.8rem;margin-top:0.5rem;width:100%;text-align:center;">Built with Lovable Cloud — source available on request</p>
+                    <a href="../" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to Projects
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>
