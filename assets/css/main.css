@@ -762,8 +762,9 @@ body {
     display: none;
 }
 
-.hero-image-placeholder {
-    display: none;
+.hero-ornament:hover {
+    border-color: rgba(255, 215, 0, 0.45);
+    box-shadow: 0 0 70px rgba(255, 215, 0, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .cta-row {
@@ -1150,8 +1151,9 @@ header {
     }
     .hero-ornament {
         width: min(48vw, 240px);
+        height: min(48vw, 240px);
         align-self: center;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
     }
 }
 
