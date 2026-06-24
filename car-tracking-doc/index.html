@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Tracking Business — Uganda | Document Viewer</title>
+    <meta name="description" content="Car Tracking Business in Uganda — A comprehensive business plan and analysis document.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <style>
+        :root {
+            --bg: #000000;
+            --surface: #0f0f0f;
+            --surface-soft: #161616;
+            --text: #f5f5f5;
+            --text-muted: #c9c9c9;
+            --accent: #ffd700;
+            --accent-soft: #f0c400;
+            --border: #2a2a2a;
+            --radius: 14px;
+            --container: 960px;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .doc-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .doc-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .doc-header-left a {
+            color: var(--accent);
+            font-size: 1.1rem;
+            transition: opacity 0.2s;
+        }
+
+        .doc-header-left a:hover {
+            opacity: 0.7;
+        }
+
+        .doc-header-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        .doc-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .doc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .doc-btn:hover {
+            border-color: var(--accent);
+            background: var(--surface-soft);
+        }
+
+        .doc-btn-primary {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .doc-btn-primary:hover {
+            background: var(--accent-soft);
+            border-color: var(--accent-soft);
+        }
+
+        /* Status bar */
+        .doc-status {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 99;
+            padding: 10px 24px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .doc-status .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .doc-status.success .spinner {
+            border-color: var(--accent);
+            animation: none;
+        }
+
+        .doc-status.success i {
+            color: var(--accent);
+        }
+
+        .doc-status.error {
+            color: #ff6b6b;
+        }
+
+        /* Main content */
+        .doc-main {
+            flex: 1;
+            margin-top: 110px;
+            padding: 40px 24px 60px;
+        }
+
+        /* Document container — styled mammoth output */
+        .doc-content {
+            max-width: var(--container);
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 48px 56px;
+            min-height: 60vh;
+        }
+
+        .doc-content h1,
+        .doc-content h2,
+        .doc-content h3,
+        .doc-content h4 {
+            color: var(--accent);
+            margin-top: 1.8em;
+            margin-bottom: 0.6em;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .doc-content h1 { font-size: 2rem; }
+        .doc-content h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4em; }
+        .doc-content h3 { font-size: 1.2rem; }
+
+        .doc-content p {
+            margin-bottom: 1em;
+            color: var(--text);
+        }
+
+        .doc-content ul,
+        .doc-content ol {
+            padding-left: 1.5em;
+            margin-bottom: 1em;
+            color: var(--text);
+        }
+
+        .doc-content li {
+            margin-bottom: 0.3em;
+        }
+
+        .doc-content strong, .doc-content b {
+            color: var(--accent);
+        }
+
+        .doc-content em, .doc-content i {
+            color: var(--text-muted);
+        }
+
+        .doc-content a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .doc-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            font-size: 0.9rem;
+        }
+
+        .doc-content th {
+            background: var(--surface-soft);
+            color: var(--accent);
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .doc-content td {
+            padding: 9px 14px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .doc-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+
+        .doc-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 1em;
+            margin: 1em 0;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .doc-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2em 0;
+        }
+
+        /* Footer */
+        .doc-footer {
+            text-align: center;
+            padding: 20px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .doc-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Error state */
+        .doc-error {
+            text-align: center;
+            padding: 60px 24px;
+        }
+
+        .doc-error i {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .doc-error h2 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-error p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            .doc-header {
+                padding: 0 16px;
+                height: 56px;
+            }
+            .doc-header-title {
+                display: none;
+            }
+            .doc-status {
+                top: 56px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            .doc-main {
+                margin-top: 100px;
+                padding: 20px 12px 40px;
+            }
+            .doc-content {
+                padding: 24px 20px;
+            }
+            .doc-content h1 { font-size: 1.5rem; }
+            .doc-content h2 { font-size: 1.25rem; }
+            .doc-btn span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="doc-header">
+        <div class="doc-header-left">
+            <a href="../" aria-label="Back to portfolio"><i class="fas fa-arrow-left"></i></a>
+            <span class="doc-header-title">Car Tracking Business — Uganda</span>
+        </div>
+        <div class="doc-header-actions">
+            <a href="../Car_Tracking_Business_Uganda.docx" download class="doc-btn" id="downloadBtn">
+                <i class="fas fa-download"></i> <span>Download</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Status -->
+    <div class="doc-status" id="docStatus">
+        <span class="spinner" id="statusSpinner"></span>
+        <span id="statusText">Loading document...</span>
+    </div>
+
+    <!-- Main -->
+    <main class="doc-main">
+        <div class="doc-content" id="docContent">
+            <div class="doc-error" id="docError" style="display:none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h2>Could not load document</h2>
+                <p>The document could not be read in your browser. You can download it directly instead.</p>
+                <a href="../Car_Tracking_Business_Uganda.docx" download class="doc-btn doc-btn-primary">
+                    <i class="fas fa-download"></i> Download Document
+                </a>
+            </div>
+            <div style="text-align:center;padding:40px 0;" id="docLoading">
+                <span class="spinner" style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;"></span>
+                <p style="color:var(--text-muted);margin-top:1rem;font-size:0.9rem;">Rendering document...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="doc-footer">
+        <p><a href="../">Mubiru Elton Felix</a> &middot; Document Viewer</p>
+    </footer>
+
+    <script>
+        (function() {
+            const statusEl = document.getElementById('docStatus');
+            const statusText = document.getElementById('statusText');
+            const statusSpinner = document.getElementById('statusSpinner');
+            const docContent = document.getElementById('docContent');
+            const docError = document.getElementById('docError');
+            const docLoading = document.getElementById('docLoading');
+
+            // Path to the .docx — relative to this page (one level up from car-tracking-doc/)
+            const docPath = '../Car_Tracking_Business_Uganda.docx';
+
+            function setStatus(state, msg) {
+                statusEl.className = 'doc-status ' + state;
+                statusText.textContent = msg;
+                if (state === 'success') {
+                    statusSpinner.className = 'fas fa-check';
+                } else if (state === 'error') {
+                    statusSpinner.className = 'fas fa-times';
+                } else {
+                    statusSpinner.className = 'spinner';
+                }
+            }
+
+            function showError() {
+                docLoading.style.display = 'none';
+                docError.style.display = 'block';
+                setStatus('error', 'Failed to load document');
+            }
+
+            fetch(docPath)
+                .then(function(res) {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.arrayBuffer();
+                })
+                .then(function(buffer) {
+                    setStatus('loading', 'Converting document...');
+                    return mammoth.convertToHtml({ arrayBuffer: buffer }, {
+                        styleMap: [
+                            "p[style-name='Title'] => h1:fresh",
+                            "p[style-name='Heading 1'] => h1:fresh",
+                            "p[style-name='Heading 2'] => h2:fresh",
+                            "p[style-name='Heading 3'] => h3:fresh",
+                            "p[style-name='Heading 4'] => h4:fresh"
+                        ]
+                    });
+                })
+                .then(function(result) {
+                    docLoading.style.display = 'none';
+
+                    if (result.value && result.value.trim().length > 0) {
+                        docContent.innerHTML = result.value;
+                        setStatus('success', 'Document loaded successfully');
+                    } else {
+                        // Document rendered but empty — show error
+                        showError();
+                    }
+
+                    // Add warnings if any (mammoth might have minor conversion notes)
+                    if (result.messages && result.messages.length > 0) {
+                        console.log('Mammoth messages:', result.messages);
+                    }
+                })
+                .catch(function(err) {
+                    console.error('Document load error:', err);
+                    showError();
+                });
+        })();
+    </script>
+</body>
+</html>
