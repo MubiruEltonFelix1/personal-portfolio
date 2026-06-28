@@ -6,44 +6,275 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../assets/images/logo.png">
     <title>Projects | Mubiru Elton Felix</title>
-    <meta name="description" content="Project portfolio of Mubiru Elton Felix spanning web apps, CLI tools, observability platforms, and machine learning systems.">
+    <meta name="description" content="Project portfolio spanning web apps, CLI tools, observability platforms, ML systems, and more — built by Mubiru Elton Felix.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../tokens.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <style>
-        .project-category { margin-bottom: 0.5rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); transition: border-color 0.25s; }
-        .project-category:hover { border-color: rgba(255,215,0,0.25); }
-        .project-category + .project-category { margin-top: 0; }
+        /* ── Hero ── */
+        .projects-hero {
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        .projects-hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .projects-hero h1 .accent { color: var(--accent); }
+        .projects-hero p {
+            color: rgba(201,201,201,0.75);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            max-width: 56ch;
+            margin-bottom: 1.5rem;
+        }
 
-        .category-toggle { width:100%; display:flex; align-items:center; gap:12px; padding:1.1rem 1.4rem; background:none; border:none; color:var(--text); cursor:pointer; text-align:left; font:inherit; transition:background 0.2s; }
-        .category-toggle:hover { background:var(--surface-soft); }
-        .category-toggle:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; border-radius:var(--radius); }
+        /* ── Filter Tabs ── */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .filter-btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.45rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface-soft);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.02em;
+        }
+        .filter-btn:hover {
+            border-color: rgba(255,215,0,0.3);
+            color: var(--text);
+        }
+        .filter-btn.is-active {
+            border-color: var(--accent);
+            background: rgba(255,215,0,0.08);
+            color: var(--accent);
+        }
+        .filter-btn .count {
+            display: inline-block;
+            margin-left: 4px;
+            opacity: 0.5;
+        }
 
-        .category-toggle h2 { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--accent); margin:0; font-family: var(--font-display, 'Inter', sans-serif); font-weight:600; flex:1; }
-        .category-toggle .category-count { font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--text-muted); background:var(--surface-soft); border:1px solid var(--border); border-radius:999px; padding:2px 10px; white-space:nowrap; }
-        .toggle-icon { width:28px; height:28px; border-radius:8px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:0.85rem; flex-shrink:0; transition:transform 0.3s ease, background 0.2s; }
-        .category-toggle:hover .toggle-icon { background:rgba(255,215,0,0.06); }
-        .category-toggle[aria-expanded="true"] .toggle-icon { transform:rotate(45deg); }
+        /* ── Project Grid ── */
+        .proj-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
 
-        .category-body { overflow:hidden; transition:max-height 0.45s ease, opacity 0.3s ease; max-height:0; opacity:0; }
-        .category-body.is-open { max-height:6000px; opacity:1; }
-        .category-body-inner { padding:0 1.4rem 1.4rem; }
+        /* ── Project Card ── */
+        .proj-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .proj-card:hover {
+            border-color: rgba(255,215,0,0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.25);
+        }
+        .proj-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2;
+        }
+        .proj-card:hover::before { opacity: 1; }
 
-        .coming-soon-card { background:var(--surface-soft); border:1px dashed var(--border); border-radius:var(--radius); padding:2.5rem 1.5rem; text-align:center; }
-        .coming-soon-card i { font-size:1.8rem; color:var(--text-muted); opacity:0.4; margin-bottom:0.8rem; }
-        .coming-soon-card h4 { color:var(--text-muted); font-size:1rem; margin-bottom:0.4rem; }
-        .coming-soon-card p { color:var(--text-muted); opacity:0.6; font-size:0.85rem; max-width:400px; margin:0 auto; }
+        /* card header bar (terminal dots) */
+        .proj-card-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.6rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .proj-card-bar .bar-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #555;
+        }
+        .proj-card-bar .bar-dot:nth-child(1) { background: #ff5f56; }
+        .proj-card-bar .bar-dot:nth-child(2) { background: #ffbd2e; }
+        .proj-card-bar .bar-dot:nth-child(3) { background: #27c93f; }
+        .proj-card-bar .bar-label {
+            margin-left: auto;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            letter-spacing: 0.04em;
+        }
 
-        .section-lead-actions { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:-0.5rem; margin-bottom:1.8rem; }
-        .btn-sm { font-family:'IBM Plex Mono',monospace; font-size:0.72rem; padding:0.4rem 0.9rem; border-radius:6px; background:var(--surface-soft); border:1px solid var(--border); color:var(--text-muted); cursor:pointer; transition:all 0.2s; }
-        .btn-sm:hover { border-color:var(--accent); color:var(--accent); background:rgba(255,215,0,0.04); }
+        .proj-card-media {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        .proj-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+        .proj-card:hover .proj-card-media img { transform: scale(1.05); }
 
-        @media (max-width:600px) {
-            .category-toggle { padding:0.9rem 1rem; }
-            .category-body-inner { padding:0 1rem 1rem; }
-            .category-toggle h2 { font-size:0.95rem; }
+        .proj-card-body {
+            padding: 1.2rem 1.2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .proj-card-body .proj-cat-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.55rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.25rem;
+            opacity: 0.7;
+        }
+
+        .proj-card-body h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+        .proj-card-body p {
+            font-size: 0.78rem;
+            color: rgba(201,201,201,0.7);
+            line-height: 1.55;
+            flex: 1;
+            margin-bottom: 0.7rem;
+        }
+
+        .proj-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 0.7rem;
+        }
+        .proj-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255,215,0,0.05);
+            border: 1px solid rgba(255,215,0,0.12);
+            color: var(--text-muted);
+        }
+
+        .proj-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+        .proj-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0.35rem 0.9rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+        .proj-btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+        .proj-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,215,0,0.2); }
+        .proj-btn-ghost {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+        .proj-btn-ghost:hover { border-color: var(--accent); background: rgba(255,215,0,0.04); }
+
+        /* ── Coming Soon Placeholder ── */
+        .proj-card.soon {
+            border-style: dashed;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: default;
+            min-height: 200px;
+        }
+        .proj-card.soon:hover { transform: none; border-color: var(--border); box-shadow: none; }
+        .proj-card.soon::before { display: none; }
+        .proj-card.soon .soon-inner { padding: 1.5rem; }
+        .proj-card.soon .soon-inner i {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            opacity: 0.3;
+            margin-bottom: 8px;
+        }
+        .proj-card.soon .soon-inner h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ── No results ── */
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+        }
+        .no-results.is-visible { display: block; }
+
+        /* ── Mobile ── */
+        @media (max-width: 600px) {
+            .proj-grid { grid-template-columns: 1fr; }
+            .proj-card-media { height: 150px; }
+            .filter-bar { gap: 6px; }
+            .filter-btn { font-size: 0.6rem; padding: 0.35rem 0.8rem; }
         }
     </style>
 </head>
@@ -51,274 +282,352 @@
 <body data-root="../">
     <div id="site-nav"></div>
 
-    <main class="section">
-        <div class="container">
-            <h1 class="section-title reveal">Projects</h1>
-            <p class="section-lead reveal">A modular collection of my work — organised by discipline. Click any category to expand, or open a project to explore the details.</p>
+    <main>
+        <section class="section">
+            <div class="container">
+                <!-- Hero -->
+                <div class="projects-hero">
+                    <p class="reveal" style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.5rem;">
+                        <i class="fas fa-folder-open" style="margin-right:6px;"></i> Portfolio
+                    </p>
+                    <h1 class="reveal">Things I've <span class="accent">Built</span></h1>
+                    <p class="reveal">
+                        A collection of projects spanning web apps, CLI tools, landing pages, machine learning experiments, and everything in between. Filter by category or just scroll.
+                    </p>
 
-            <div class="section-lead-actions reveal">
-                <button class="btn-sm" id="expandAllBtn" type="button"><i class="fas fa-plus"></i> Expand All</button>
-                <button class="btn-sm" id="collapseAllBtn" type="button"><i class="fas fa-minus"></i> Collapse All</button>
-            </div>
-
-            <!-- ── Web Apps ── -->
-            <section class="project-category reveal" data-category="web-apps">
-                <button class="category-toggle" aria-expanded="true" type="button">
-                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                    <h2><i class="fas fa-globe" style="margin-right:8px;opacity:0.7;"></i> Web Apps</h2>
-                    <span class="category-count">5 projects</span>
-                </button>
-                <div class="category-body is-open">
-                    <div class="category-body-inner">
-                        <div class="grid projects-grid">
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="../banner.jpg" alt="BrainBolt — Real-Time Quiz Arena">
-                                <div class="project-body">
-                                    <h3>BrainBolt</h3>
-                                    <p class="muted">Fast, gamified live quiz battles with solo, team, and league play. Esports-broadcast styled real-time arena with mobile-first tap-to-answer.</p>
-                                    <div class="stack">
-                                        <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Supabase</span><span class="tag">Real-Time</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" href="brainbolt/">Details</a>
-                                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://brain-bolt-arena.lovable.app">Live Demo</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1000&q=80" alt="TechWrite — Campus Tech Publishing">
-                                <div class="project-body">
-                                    <h3>TechWrite</h3>
-                                    <p class="muted">A tech article platform where students and lecturers write, publish, comment, save, and discuss technology content — with real-time notifications.</p>
-                                    <div class="stack">
-                                        <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Supabase</span><span class="tag">Content Platform</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" href="techwrite/">Details</a>
-                                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app">Visit Site</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1000&q=80" alt="Calculator and financial documents on desk">
-                                <div class="project-body">
-                                    <h3>MyCGPA</h3>
-                                    <p class="muted">Student-friendly CGPA calculator and forecaster that helps track current performance, model future semesters, and plan the grades needed to hit a target CGPA.</p>
-                                    <div class="stack">
-                                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Chart.js</span><span class="tag">Academic Planning</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" href="mycgpa/">Details</a>
-                                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/">Live App</a>
-                                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa">GitHub</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1000&q=80" alt="Crowd at outdoor concert with raised hands">
-                                <div class="project-body">
-                                    <h3>Toka Events</h3>
-                                    <p class="muted">Social event discovery platform built for African cities — helping people find events, connect with attendees, and relive shared moments after.</p>
-                                    <div class="stack">
-                                        <span class="tag">Event Discovery</span><span class="tag">Community</span><span class="tag">Mobile Money</span><span class="tag">UX</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" href="toka-events/">Details</a>
-                                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://toka-events.site">Visit Site</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1000&q=80" alt="Tour Uganda — Travel Planning Ecosystem">
-                                <div class="project-body">
-                                    <h3>Tour Uganda</h3>
-                                    <p class="muted">All-in-one travel planning ecosystem for the Pearl of Africa — AI trip planner, interactive map, cost calculator, itinerary builder, and more.</p>
-                                    <div class="stack">
-                                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Leaflet</span><span class="tag">Travel Tech</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" href="tour-uganda/">Details</a>
-                                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/">Visit Site</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
+                    <!-- Filter Bar -->
+                    <div class="filter-bar reveal delay-1" id="filterBar">
+                        <button class="filter-btn is-active" data-filter="all">All <span class="count">(11)</span></button>
+                        <button class="filter-btn" data-filter="web-apps">Web Apps <span class="count">(5)</span></button>
+                        <button class="filter-btn" data-filter="cli">CLI <span class="count">(1)</span></button>
+                        <button class="filter-btn" data-filter="landing">Landing Pages <span class="count">(3)</span></button>
+                        <button class="filter-btn" data-filter="dapps">DApps <span class="count">(0)</span></button>
+                        <button class="filter-btn" data-filter="educational">Educational <span class="count">(2)</span></button>
+                        <button class="filter-btn" data-filter="ml-dl">ML/DL <span class="count">(0)</span></button>
                     </div>
                 </div>
-            </section>
 
-            <!-- ── CLI Solutions ── -->
-            <section class="project-category reveal" data-category="cli">
-                <button class="category-toggle" aria-expanded="true" type="button">
-                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                    <h2><i class="fas fa-terminal" style="margin-right:8px;opacity:0.7;"></i> CLI Solutions</h2>
-                    <span class="category-count">1 project</span>
-                </button>
-                <div class="category-body is-open">
-                    <div class="category-body-inner">
-                        <div class="grid projects-grid">
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1000&q=80" alt="Claude DOCX Generator terminal tool">
-                                <div class="project-body">
-                                    <h3>Claude DOCX Generator</h3>
-                                    <p class="muted">Turn AI-generated JavaScript into real .docx files instantly. Paste the code, run one command, and get your document — no path editing required.</p>
-                                    <div class="stack">
-                                        <span class="tag">Node.js</span><span class="tag">docx</span><span class="tag">CLI</span><span class="tag">Document Generation</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" href="claude-docx-generator/">Details</a>
-                                        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/claude-docx-generator">GitHub</a>
-                                    </div>
-                                </div>
-                            </article>
+                <!-- Project Grid -->
+                <div class="proj-grid reveal delay-2" id="projGrid">
+
+                    <!-- ── BrainBolt ── -->
+                    <article class="proj-card" data-category="web-apps">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Web App</span>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ── Project Landing Pages ── -->
-            <section class="project-category reveal" data-category="landing-pages">
-                <button class="category-toggle" aria-expanded="true" type="button">
-                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                    <h2><i class="fas fa-rocket" style="margin-right:8px;opacity:0.7;"></i> Project Landing Pages</h2>
-                    <span class="category-count">3 projects</span>
-                </button>
-                <div class="category-body is-open">
-                    <div class="category-body-inner">
-                        <div class="grid projects-grid">
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1000&q=80" alt="Server room data center with blue lighting">
-                                <div class="project-body">
-                                    <h3>AstraLog</h3>
-                                    <p class="muted">Structured event observability platform that captures system behaviour as queryable events for monitoring, tracing, and analytics.</p>
-                                    <div class="stack">
-                                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Event Schema</span><span class="tag">Observability</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/AstraLog">GitHub</a>
-                                        <a class="btn btn-ghost" href="campus-food-app/">Details</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1000&q=80" alt="Laptop displaying code on desk">
-                                <div class="project-body">
-                                    <h3>Portfolio Website</h3>
-                                    <p class="muted">Responsive portfolio site with smooth animations, clean structure, and strong performance practices — the site you're on right now.</p>
-                                    <div class="stack">
-                                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">GSAP</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1">GitHub</a>
-                                        <a class="btn btn-ghost" href="portfolio-website/">Details</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=1000&q=80" alt="Blockchain MUST Landing">
-                                <div class="project-body">
-                                    <h3>Blockchain MUST Landing</h3>
-                                    <p class="muted">Modern blockchain-themed landing page featuring interactive elements and educational content about blockchain technology.</p>
-                                    <div class="stack">
-                                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Web3</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1">GitHub</a>
-                                        <a class="btn btn-ghost" href="blockchain-must-landing/">Details</a>
-                                    </div>
-                                </div>
-                            </article>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="../banner.jpg" alt="BrainBolt">
                         </div>
-                    </div>
-                </div>
-            </section>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                            <h3>BrainBolt</h3>
+                            <p>Fast, gamified live quiz battles with solo, team, and league play. Esports-broadcast styled real-time arena with mobile-first tap-to-answer.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">React</span>
+                                <span class="proj-tag">TypeScript</span>
+                                <span class="proj-tag">Supabase</span>
+                                <span class="proj-tag">Real-Time</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" href="brainbolt/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://brain-bolt-arena.lovable.app">Live Demo</a>
+                            </div>
+                        </div>
+                    </article>
 
-            <!-- ── DApps ── -->
-            <section class="project-category reveal" data-category="dapps">
-                <button class="category-toggle" aria-expanded="false" type="button">
-                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                    <h2><i class="fas fa-cube" style="margin-right:8px;opacity:0.7;"></i> DApps</h2>
-                    <span class="category-count">Coming soon</span>
-                </button>
-                <div class="category-body">
-                    <div class="category-body-inner">
-                        <div class="coming-soon-card">
+                    <!-- ── TechWrite ── -->
+                    <article class="proj-card" data-category="web-apps">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Web App</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1000&q=80" alt="TechWrite">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                            <h3>TechWrite</h3>
+                            <p>A tech article platform where students and lecturers write, publish, comment, save, and discuss technology content with real-time notifications.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">React</span>
+                                <span class="proj-tag">TypeScript</span>
+                                <span class="proj-tag">Supabase</span>
+                                <span class="proj-tag">Content Platform</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" href="techwrite/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app">Visit Site</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── MyCGPA ── -->
+                    <article class="proj-card" data-category="web-apps">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Web App</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1000&q=80" alt="MyCGPA">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                            <h3>MyCGPA</h3>
+                            <p>Student-friendly CGPA calculator and forecaster that helps track performance, model future semesters, and plan the grades needed to hit a target CGPA.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">HTML5</span>
+                                <span class="proj-tag">CSS3</span>
+                                <span class="proj-tag">JavaScript</span>
+                                <span class="proj-tag">Chart.js</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" href="mycgpa/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/">Live App</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Toka Events ── -->
+                    <article class="proj-card" data-category="web-apps">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Web App</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1000&q=80" alt="Toka Events">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                            <h3>Toka Events</h3>
+                            <p>Social event discovery platform built for African cities — helping people find events, connect with attendees, and relive shared moments.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">Event Discovery</span>
+                                <span class="proj-tag">Community</span>
+                                <span class="proj-tag">Mobile Money</span>
+                                <span class="proj-tag">UX</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" href="toka-events/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://toka-events.site">Visit Site</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Tour Uganda ── -->
+                    <article class="proj-card" data-category="web-apps">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Web App</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1000&q=80" alt="Tour Uganda">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                            <h3>Tour Uganda</h3>
+                            <p>All-in-one travel planning ecosystem for the Pearl of Africa — AI trip planner, interactive map, cost calculator, itinerary builder, and more.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">HTML5</span>
+                                <span class="proj-tag">CSS3</span>
+                                <span class="proj-tag">JavaScript</span>
+                                <span class="proj-tag">Leaflet</span>
+                                <span class="proj-tag">Travel Tech</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" href="tour-uganda/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/">Visit Site</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── CLI ── -->
+                    <article class="proj-card" data-category="cli">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">CLI</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1000&q=80" alt="Claude DOCX Generator">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-terminal" style="margin-right:4px;"></i> CLI Solutions</div>
+                            <h3>Claude DOCX Generator</h3>
+                            <p>Turn AI-generated JavaScript into real .docx files instantly. Paste the code, run one command, and get your document.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">Node.js</span>
+                                <span class="proj-tag">docx</span>
+                                <span class="proj-tag">CLI</span>
+                                <span class="proj-tag">Document Generation</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" href="claude-docx-generator/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/claude-docx-generator"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── AstraLog ── -->
+                    <article class="proj-card" data-category="landing">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Landing Page</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1000&q=80" alt="AstraLog">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
+                            <h3>AstraLog</h3>
+                            <p>Structured event observability platform that captures system behaviour as queryable events for monitoring, tracing, and analytics.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">HTML5</span>
+                                <span class="proj-tag">CSS3</span>
+                                <span class="proj-tag">JavaScript</span>
+                                <span class="proj-tag">Observability</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/AstraLog"><i class="fab fa-github"></i> GitHub</a>
+                                <a class="proj-btn proj-btn-ghost" href="campus-food-app/"><i class="fas fa-arrow-right"></i> Details</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Portfolio Website ── -->
+                    <article class="proj-card" data-category="landing">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Landing Page</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1000&q=80" alt="Portfolio Website">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
+                            <h3>Portfolio Website</h3>
+                            <p>Responsive portfolio site with smooth animations, clean structure, and strong performance practices — the site you are on right now.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">HTML5</span>
+                                <span class="proj-tag">CSS3</span>
+                                <span class="proj-tag">JavaScript</span>
+                                <span class="proj-tag">GSAP</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> GitHub</a>
+                                <a class="proj-btn proj-btn-ghost" href="portfolio-website/"><i class="fas fa-arrow-right"></i> Details</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Blockchain MUST Landing ── -->
+                    <article class="proj-card" data-category="landing">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Landing Page</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=1000&q=80" alt="Blockchain MUST Landing">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
+                            <h3>Blockchain MUST Landing</h3>
+                            <p>Modern blockchain-themed landing page featuring interactive elements and educational content about blockchain technology.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">HTML5</span>
+                                <span class="proj-tag">CSS3</span>
+                                <span class="proj-tag">JavaScript</span>
+                                <span class="proj-tag">Web3</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> GitHub</a>
+                                <a class="proj-btn proj-btn-ghost" href="blockchain-must-landing/"><i class="fas fa-arrow-right"></i> Details</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── The Residual Stream ── -->
+                    <article class="proj-card" data-category="educational">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Educational</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&q=80" alt="The Residual Stream">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-graduation-cap" style="margin-right:4px;"></i> Educational</div>
+                            <h3>The Residual Stream</h3>
+                            <p>Building a transformer from scratch in public. JAX implementations of BPE tokenization, multi-head attention, training loops, LoRA, and Chinchilla scaling laws.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">Python</span>
+                                <span class="proj-tag">JAX</span>
+                                <span class="proj-tag">NumPy</span>
+                                <span class="proj-tag">Transformers</span>
+                                <span class="proj-tag">Green AI</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/the-residual-stream"><i class="fab fa-github"></i> GitHub</a>
+                                <a class="proj-btn proj-btn-ghost" href="the-residual-stream/"><i class="fas fa-arrow-right"></i> Details</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Walter Bishop Labs ── -->
+                    <article class="proj-card" data-category="educational">
+                        <div class="proj-card-bar">
+                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                            <span class="bar-label">Educational</span>
+                        </div>
+                        <div class="proj-card-media">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1000&q=80" alt="Walter Bishop Labs">
+                        </div>
+                        <div class="proj-card-body">
+                            <div class="proj-cat-tag"><i class="fas fa-graduation-cap" style="margin-right:4px;"></i> Educational</div>
+                            <h3>Walter Bishop Labs: Calculus</h3>
+                            <p>Experiment-first calculus lab combining symbolic analysis, numerical sampling, and visual interpretation to study function behaviour and optimisation intuition.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">Python</span>
+                                <span class="proj-tag">SymPy</span>
+                                <span class="proj-tag">NumPy</span>
+                                <span class="proj-tag">Matplotlib</span>
+                                <span class="proj-tag">Calculus</span>
+                            </div>
+                            <div class="proj-actions">
+                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/walter-bishop-labs-calculus"><i class="fab fa-github"></i> GitHub</a>
+                                <a class="proj-btn proj-btn-ghost" href="titanic-survival/"><i class="fas fa-arrow-right"></i> Details</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── DApps Coming Soon ── -->
+                    <article class="proj-card soon" data-category="dapps">
+                        <div class="soon-inner">
                             <i class="fas fa-cubes"></i>
-                            <h4>Decentralised Applications</h4>
-                            <p>Web3, smart contracts, and blockchain-based applications are in the pipeline. Check back for live dApps deployed on testnet and mainnet.</p>
+                            <h4>DApps — Coming Soon</h4>
+                            <p style="font-size:0.7rem;color:var(--text-muted);opacity:0.6;margin-top:4px;">Web3, smart contracts, and blockchain apps in the pipeline.</p>
                         </div>
-                    </div>
-                </div>
-            </section>
+                    </article>
 
-            <!-- ── Educational Repo Solutions ── -->
-            <section class="project-category reveal" data-category="educational">
-                <button class="category-toggle" aria-expanded="true" type="button">
-                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                    <h2><i class="fas fa-graduation-cap" style="margin-right:8px;opacity:0.7;"></i> Educational Repo Solutions</h2>
-                    <span class="category-count">2 projects</span>
-                </button>
-                <div class="category-body is-open">
-                    <div class="category-body-inner">
-                        <div class="grid projects-grid">
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&q=80" alt="The Residual Stream — building transformers from scratch">
-                                <div class="project-body">
-                                    <h3>The Residual Stream</h3>
-                                    <p class="muted">Building a transformer from the matrix multiply up — in public, from scratch, every week. JAX-only implementations of BPE tokenization, multi-head attention, training loops, LoRA, and Chinchilla scaling laws — with a focus on computational efficiency and low-resource training techniques.</p>
-                                    <div class="stack">
-                                        <span class="tag">Python</span><span class="tag">JAX</span><span class="tag">NumPy</span><span class="tag">Transformers</span><span class="tag">Green AI</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/the-residual-stream">GitHub</a>
-                                        <a class="btn btn-ghost" href="the-residual-stream/">Details</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="project-card">
-                                <img class="project-image" loading="lazy" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1000&q=80" alt="Walter Bishop Labs Calculus Experiments visual">
-                                <div class="project-body">
-                                    <h3>Walter Bishop Labs: Calculus Experiments</h3>
-                                    <p class="muted">Experiment-first calculus lab combining symbolic analysis, numerical sampling, and visual interpretation to study function behaviour and optimisation intuition.</p>
-                                    <div class="stack">
-                                        <span class="tag">Python</span><span class="tag">SymPy</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Calculus</span>
-                                    </div>
-                                    <div class="cta-row">
-                                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/walter-bishop-labs-calculus">GitHub</a>
-                                        <a class="btn btn-ghost" href="titanic-survival/">Details</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ── Machine / Deep Learning Apps ── -->
-            <section class="project-category reveal" data-category="ml-dl-apps">
-                <button class="category-toggle" aria-expanded="false" type="button">
-                    <span class="toggle-icon"><i class="fas fa-plus"></i></span>
-                    <h2><i class="fas fa-brain" style="margin-right:8px;opacity:0.7;"></i> Machine / Deep Learning Apps</h2>
-                    <span class="category-count">Coming soon</span>
-                </button>
-                <div class="category-body">
-                    <div class="category-body-inner">
-                        <div class="coming-soon-card">
+                    <!-- ── ML/DL Coming Soon ── -->
+                    <article class="proj-card soon" data-category="ml-dl">
+                        <div class="soon-inner">
                             <i class="fas fa-flask"></i>
-                            <h4>ML/DL Applications</h4>
-                            <p>Deployable machine learning and deep learning applications — trained models with APIs, inference endpoints, and interactive demos — are in development.</p>
+                            <h4>ML/DL Apps — Coming Soon</h4>
+                            <p style="font-size:0.7rem;color:var(--text-muted);opacity:0.6;margin-top:4px;">Trained models with APIs, inference endpoints, and interactive demos in development.</p>
                         </div>
-                    </div>
+                    </article>
+
                 </div>
-            </section>
-        </div>
+
+                <!-- No Results -->
+                <div class="no-results" id="noResults">
+                    <i class="fas fa-search" style="font-size:1.6rem;opacity:0.3;margin-bottom:0.8rem;"></i>
+                    <p>No projects match this category yet. Check back soon.</p>
+                </div>
+
+            </div>
+        </section>
     </main>
 
     <div id="site-footer"></div>
@@ -326,43 +635,37 @@
     <script src="../assets/js/main.js"></script>
     <script>
         (function() {
-            const categories = document.querySelectorAll('.project-category');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.proj-card');
+            const noResults = document.getElementById('noResults');
 
-            function toggleCategory(btn) {
-                const section = btn.closest('.project-category');
-                const body = section.querySelector('.category-body');
-                const isOpen = btn.getAttribute('aria-expanded') === 'true';
+            function filterProjects(category) {
+                let visibleCount = 0;
 
-                btn.setAttribute('aria-expanded', !isOpen);
-                if (isOpen) {
-                    body.classList.remove('is-open');
-                } else {
-                    body.classList.add('is-open');
-                }
+                cards.forEach(function(card) {
+                    const cat = card.dataset.category;
+                    const match = category === 'all' || cat === category;
+
+                    if (card.classList.contains('soon')) {
+                        card.style.display = match ? 'flex' : 'none';
+                        if (match) visibleCount++;
+                    } else {
+                        card.style.display = match ? 'flex' : 'none';
+                        if (match) visibleCount++;
+                    }
+                });
+
+                filterBtns.forEach(function(btn) {
+                    const btnCat = btn.dataset.filter;
+                    btn.classList.toggle('is-active', btnCat === category);
+                });
+
+                noResults.classList.toggle('is-visible', visibleCount === 0);
             }
 
-            categories.forEach(function(section) {
-                const btn = section.querySelector('.category-toggle');
-                btn.addEventListener('click', function(e) {
-                    toggleCategory(btn);
-                });
-            });
-
-            document.getElementById('expandAllBtn').addEventListener('click', function() {
-                categories.forEach(function(section) {
-                    const btn = section.querySelector('.category-toggle');
-                    const body = section.querySelector('.category-body');
-                    btn.setAttribute('aria-expanded', 'true');
-                    body.classList.add('is-open');
-                });
-            });
-
-            document.getElementById('collapseAllBtn').addEventListener('click', function() {
-                categories.forEach(function(section) {
-                    const btn = section.querySelector('.category-toggle');
-                    const body = section.querySelector('.category-body');
-                    btn.setAttribute('aria-expanded', 'false');
-                    body.classList.remove('is-open');
+            filterBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    filterProjects(btn.dataset.filter);
                 });
             });
         })();
