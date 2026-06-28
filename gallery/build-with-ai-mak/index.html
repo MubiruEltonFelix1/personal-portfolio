@@ -28,6 +28,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: 50% 30%;
             display: block;
         }
         .event-detail-hero .overlay {
@@ -124,6 +125,81 @@
             font-size: 0.7rem;
         }
 
+        /* ── Project Feature Cards ── */
+        .project-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin: 1.2rem 0 1.5rem;
+        }
+        .project-feature-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.3rem 1.2rem;
+            transition: border-color 0.25s;
+        }
+        .project-feature-card:hover {
+            border-color: rgba(255, 215, 0, 0.25);
+        }
+        .project-feature-card i {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .project-feature-card h4 {
+            font-size: 0.82rem;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .project-feature-card p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            color: var(--accent);
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* ── Challenge / Lesson sections ── */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 1.2rem 0 1.8rem;
+        }
+        .split-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.3rem 1.2rem;
+        }
+        .split-card h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .split-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.55;
+        }
+
         /* ── Photo Grid ── */
         .event-photo-grid {
             display: grid;
@@ -155,6 +231,41 @@
             letter-spacing: 0.03em;
         }
 
+        /* ── Certificate ── */
+        .certificate-section {
+            margin: 2rem 0;
+        }
+        .certificate-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: border-color 0.25s;
+        }
+        .certificate-card:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        .certificate-card img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            display: block;
+            background: #fff;
+            padding: 1rem;
+        }
+        .certificate-card .cert-caption {
+            padding: 0.8rem 1.2rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .certificate-card .cert-caption i {
+            color: var(--accent);
+        }
+
         /* ── Action Bar ── */
         .event-actions {
             display: flex;
@@ -163,6 +274,40 @@
             margin: 2rem 0 3rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--border);
+        }
+
+        .btn-event {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.7rem 1.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+        }
+        .btn-event-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+        .btn-event-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 215, 0, 0.2);
+        }
+        .btn-event-ghost {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+        .btn-event-ghost:hover {
+            border-color: var(--accent);
+            background: rgba(255, 215, 0, 0.04);
+            transform: translateY(-2px);
         }
 
         .event-back-link {
@@ -184,6 +329,8 @@
             .event-detail-hero .hero-text { padding: 1.2rem 1rem 1rem; }
             .event-photo-grid { grid-template-columns: 1fr; }
             .event-photo-grid figure img { height: 180px; }
+            .split-section { grid-template-columns: 1fr; }
+            .project-feature-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -210,24 +357,24 @@
             <div class="event-content">
                 <!-- Lead -->
                 <p class="reveal delay-1" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
-                    A weekend of building, learning, and connecting — the Build With AI Makerere Hackathon brought together 
+                    A weekend of building, learning, and connecting. The Build With AI Makerere Hackathon brought together 
                     developers, designers, and dreamers at the American Center Kampala. Organised by 
                     <strong style="color:var(--accent);">Shakiran Nannyombi</strong> and 
                     <strong style="color:var(--accent);">Benjamin Wakida Eldon</strong>, in partnership with 
-                    Major League Hacking and GDG on Campus — Makerere University.
+                    Major League Hacking and GDG on Campus Makerere University.
                 </p>
 
-                <!-- Team Highlight -->
+                <!-- Result Highlight -->
                 <div class="event-highlight reveal delay-1">
                     <h4><i class="fas fa-trophy" style="margin-right:6px;"></i> Result</h4>
                     <p style="font-size:1rem;color:var(--text);font-weight:600;">
-                        Our project — <strong style="color:var(--accent);">MoMo Scam Checker</strong> — secured 
+                        Our project <strong style="color:var(--accent);">MoMo Scam Checker</strong> secured 
                         <strong style="color:var(--accent);">2nd place</strong> at the hackathon!
                     </p>
                 </div>
 
                 <!-- Team -->
-                <h2 class="reveal delay-1">The Team — Tech Clan</h2>
+                <h2 class="reveal delay-1">The Team: Tech Clan</h2>
                 <ul class="event-team-list reveal delay-2">
                     <li><i class="fas fa-user"></i> Joy Wabule</li>
                     <li><i class="fas fa-user"></i> Awany Jey Daniel</li>
@@ -235,64 +382,174 @@
                     <li><i class="fas fa-user"></i> Mubiru Elton Felix</li>
                 </ul>
 
+                <!-- ─── THE PROJECT ─── -->
+                <h2 class="reveal delay-2">The Project: MoMo Scam Checker</h2>
+
+                <h3 class="reveal delay-2">What Inspired It</h3>
                 <p class="reveal delay-2">
-                    Our team, <strong>Tech Clan</strong>, came together around a shared mission: build something that 
-                    actually helps people. The result was <strong>MoMo Scam Checker</strong>, a solution designed to 
-                    help reduce money lost to scammers across various telecommunication networks in Uganda.
+                    Mobile Money (MoMo) fraud is a pressing, real-world issue affecting millions of Ugandans every day. 
+                    Social engineering scams range from distressed callers claiming a "wrongful cash transfer" to fraudsters 
+                    impersonating telecom customer care agents asking for PINs. These tactics disproportionately target 
+                    everyday citizens, many of whom rely on analog feature phones with nothing but USSD menus.
+                </p>
+                <p class="reveal delay-2">
+                    Smartphone users can access web resources to verify numbers, but most victims are offline. The goal 
+                    was clear: build a comprehensive, community-driven registry that bridges this gap, raises awareness, 
+                    and gives people a way to instantly verify suspicious numbers across all major Ugandan networks
+                    (MTN, Airtel, Lycamobile, and UTL).
                 </p>
 
-                <!-- The Experience -->
-                <h2 class="reveal delay-2">The Experience</h2>
-                <p class="reveal delay-2">
-                    Beyond the podium finish, the experience was truly memorable — from the amazing venue and awesome swag 
-                    to the inspiring people in the room (and, of course, the snacks).
-                </p>
-                <p class="reveal delay-2">
-                    It was also great meeting in person several people I've connected with on LinkedIn but hadn't had 
-                    the chance to meet face-to-face, including Godwin Ofwono, lailah grant, Ronnie Linslay Atuhaire, 
-                    Mariah Miranda .L and Byaruhanga Daniel.
+                <!-- Feature Cards -->
+                <h3 class="reveal delay-2">How It Was Built</h3>
+                <div class="project-feature-grid reveal delay-2">
+                    <div class="project-feature-card">
+                        <i class="fab fa-react"></i>
+                        <h4>Frontend Architecture</h4>
+                        <p>Built with React and TypeScript, styled with a modern, high-contrast Tailwind CSS interface featuring a sleek, semi-transparent sticky header for smooth scannability.</p>
+                    </div>
+                    <div class="project-feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Offline USSD Simulator</h4>
+                        <p>An interactive feature phone sandbox styled as a classic Nokia 3310. Simulates real-time USSD dial codes like *256*5# so users can practice identifying scams without internet.</p>
+                    </div>
+                    <div class="project-feature-card">
+                        <i class="fas fa-robot"></i>
+                        <h4>MoMo Copilot AI Autofill</h4>
+                        <p>Gemini-powered extraction lets users paste messy scam SMS or upload screenshots. The AI instantly extracts phone numbers, risk ratings, scam categories, and telecom operators.</p>
+                    </div>
+                    <div class="project-feature-card">
+                        <i class="fas fa-database"></i>
+                        <h4>Community Registry</h4>
+                        <p>A dynamic data grid displaying active flags, specific fraud tactics, and real-time community reports so users can verify numbers before engaging.</p>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <p class="reveal delay-2" style="margin-bottom:1.5rem;">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Tailwind CSS</span>
+                    <span class="tech-tag">Gemini API</span>
+                    <span class="tech-tag">Gemini Flash</span>
+                    <span class="tech-tag">USSD Simulation</span>
+                    <span class="tech-tag">Google AI</span>
+                    <span class="tech-tag">OCR / Vision</span>
                 </p>
 
-                <!-- Photo Gallery -->
-                <h2 class="reveal delay-2">Event Gallery</h2>
-                <div class="event-photo-grid reveal delay-2">
+                <!-- How the AI Works -->
+                <h3 class="reveal delay-2">The AI That Powers It</h3>
+                <p class="reveal delay-2">
+                    The Gemini API (optimised using Gemini Flash for instant response) runs two core workflows. First, 
+                    <strong>structured data extraction</strong>: when a user receives a suspicious SMS like 
+                    <em>"Y'ello! You have won 1,000,000 UGX in the promotion! Call 0772109843 to claim..."</em>, 
+                    the model processes the raw text and instantly autofills the phone number, operator, and scam category 
+                    into the reporting form.
+                </p>
+                <p class="reveal delay-2">
+                    Second, <strong>multimodal screenshot analysis</strong>: scammers often operate via WhatsApp chats, 
+                    MoMo transaction receipts, or system alert pop-ups. Users can upload screenshots directly. Gemini's 
+                    multimodal capabilities perform OCR to read text inside the image, analyse the visual layout, and 
+                    parse the relevant fraud details into the form without requiring a single typed word.
+                </p>
+                <p class="reveal delay-2">
+                    The AI also acts as an initial triage layer, evaluating the semantic meaning of each incident. 
+                    It maps behaviours against known Ugandan scam tactics (like the "Wrong Number Reversal" or 
+                    "Wewole Loan Scam") to suggest a risk rating and generate a clean summary for the report.
+                </p>
+
+                <!-- Learnings & Challenges -->
+                <h2 class="reveal delay-3">What We Learned</h2>
+                <div class="split-section reveal delay-3">
+                    <div class="split-card">
+                        <h4><i class="fas fa-lightbulb" style="margin-right:6px;"></i> Inclusive Design</h4>
+                        <p>Creating tools for a diverse demographic means designing for both high-end smartphone users and individuals using classic button phones. The simulator proved that educational tools must mimic the real user environment to be effective.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-globe" style="margin-right:6px;"></i> Localised Context</h4>
+                        <p>Fraud patterns are heavily regionalised. Tailoring the app specifically to Ugandan fraud categories (Wewole Loan scams, School Emergency scams) makes the tool instantly recognisable and trustworthy for the target audience.</p>
+                    </div>
+                </div>
+
+                <h2 class="reveal delay-3">Challenges We Tackled</h2>
+                <div class="split-section reveal delay-3">
+                    <div class="split-card">
+                        <h4><i class="fas fa-keyboard" style="margin-right:6px;"></i> USSD Sandbox</h4>
+                        <p>Mimicking state-based phone keypad inputs and custom text display updates within a standard web browser required meticulous state management to feel identical to dialing an actual shortcode.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-paint-brush" style="margin-right:6px;"></i> UI Balance</h4>
+                        <p>Security apps can easily become cluttered with frantic text warnings. We had to cleanly place high-priority MoMo security tips alongside a QR generator and partner logos without overwhelming the visual hierarchy.</p>
+                    </div>
+                    <div class="split-card" style="grid-column: span 1;">
+                        <h4><i class="fas fa-language" style="margin-right:6px;"></i> Chaotic Scam Text</h4>
+                        <p>Scammers intentionally misspell words or mix Luganda and English to bypass automated filters. Fine-tuning the AI autofill to reliably capture clean numbers from highly unstructured data required rigorous testing.</p>
+                    </div>
+                </div>
+
+                <!-- Certificate -->
+                <h2 class="reveal delay-3">Certificate</h2>
+                <div class="certificate-section reveal delay-3">
+                    <div class="certificate-card">
+                        <img src="../../events/Copy%20of%20Google%20Developer%20Groups.png" alt="Build With AI Makerere Hackathon Certificate" loading="lazy">
+                        <div class="cert-caption">
+                            <i class="fas fa-certificate"></i>
+                            Participation certificate from the Build With AI Makerere Hackathon
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Photo Gallery -->
+                <h2 class="reveal delay-3">Event Gallery</h2>
+                <div class="event-photo-grid reveal delay-3">
                     <figure>
-                        <img src="../../events/Build_With_AI_2.jpg" alt="Build With AI Makerree — team collaboration" loading="lazy">
+                        <img src="../../events/Build_With_AI_2.jpg" alt="Build With AI Makerere team collaboration" loading="lazy">
                         <figcaption>Team Tech Clan in action</figcaption>
                     </figure>
                     <figure>
-                        <img src="../../events/Build_With_AI_3.jpg" alt="Build With AI Makerere — presentations" loading="lazy">
+                        <img src="../../events/Build_With_AI_3.jpg" alt="Build With AI Makerere presentations" loading="lazy">
                         <figcaption>Project presentations</figcaption>
                     </figure>
                     <figure>
-                        <img src="../../events/Build_With_AI_4.jpg" alt="Build With AI Makerere — moments" loading="lazy">
+                        <img src="../../events/Build_With_AI_4.jpg" alt="Build With AI Makerere moments" loading="lazy">
                         <figcaption>Moments from the hackathon floor</figcaption>
                     </figure>
                     <figure>
-                        <img src="../../events/Build_With_AI_6.jpg" alt="Build With AI Makerere — group memories" loading="lazy">
+                        <img src="../../events/Build_With_AI_6.jpg" alt="Build With AI Makerere group memories" loading="lazy">
                         <figcaption>Group memories</figcaption>
                     </figure>
                 </div>
 
+                <!-- The Experience -->
+                <h2 class="reveal delay-3">Beyond the Code</h2>
+                <p class="reveal delay-3">
+                    Beyond the podium finish, the experience was truly memorable. From the amazing venue and awesome swag 
+                    to the inspiring people in the room (and yes, the snacks).
+                </p>
+                <p class="reveal delay-3">
+                    It was also great meeting in person several people I have connected with on LinkedIn but had not 
+                    had the chance to meet face-to-face, including Godwin Ofwono, lailah grant, Ronnie Linslay Atuhaire, 
+                    Mariah Miranda .L and Byaruhanga Daniel.
+                </p>
+
                 <!-- Acknowledgments -->
                 <h2 class="reveal delay-3">Acknowledgments</h2>
                 <p class="reveal delay-3">
-                    A big thank you to <strong>Major League Hacking</strong> and <strong>GDG on Campus — Makerere University</strong> 
-                    for organising and hosting such an incredible event. It was an amazing experience, and I'm already 
-                    looking forward to the next one!
+                    A big thank you to <strong>Major League Hacking</strong> and <strong>GDG on Campus Makerere University</strong> 
+                    for organising and hosting such an incredible event. It was an amazing experience, and I am already 
+                    looking forward to the next one.
                 </p>
                 <p class="reveal delay-3">
-                    And to everyone who made this weekend unforgettable — the organisers, mentors, judges, fellow 
-                    participants, and everyone who stopped by our table to ask about MoMo Scam Checker. That's what 
+                    And to everyone who made this weekend unforgettable: the organisers, mentors, judges, fellow 
+                    participants, and everyone who stopped by our table to ask about MoMo Scam Checker. That is what 
                     the tech community in Uganda is about.
                 </p>
 
                 <!-- Action Bar -->
                 <div class="event-actions reveal delay-3">
-                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7476868688101568512/" target="_blank" rel="noopener" class="btn-event btn-event-primary" style="padding:0.7rem 1.5rem;font-size:0.78rem;">
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7476868688101568512/" target="_blank" rel="noopener" class="btn-event btn-event-primary">
                         <i class="fab fa-linkedin"></i> View on LinkedIn
                     </a>
-                    <a href="../" class="btn-event btn-event-ghost" style="padding:0.7rem 1.5rem;font-size:0.78rem;">
+                    <a href="../" class="btn-event btn-event-ghost">
                         <i class="fas fa-arrow-left"></i> All Events
                     </a>
                 </div>
