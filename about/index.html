@@ -6,134 +6,714 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../assets/images/logo.png">
     <title>About | Mubiru Elton Felix</title>
-    <meta name="description" content="About Mubiru Elton Felix: software engineering student focused on data engineering, backend systems, and problem solving.">
+    <meta name="description" content="Mubiru Elton Felix — software engineering student, data enthusiast, community builder. MUCOSA President, DeepMinds AI Student Lead, Co-Organiser Global AI Mbarara.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../tokens.css">
     <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        /* ── Reset overrides for about page ── */
+        .about-main { margin-top: 56px; }
+
+        /* ── Hero ── */
+        .about-hero {
+            padding: 5rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245,197,24,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-hero-content { position: relative; z-index: 2; }
+        .about-hero-content .greeting {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.6rem;
+        }
+        .about-hero-content h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--text);
+            line-height: 1.05;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .about-hero-content h1 .accent { color: var(--accent); }
+        .about-hero-content .role-line {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+        }
+        .about-hero-content .bio-line {
+            font-size: 0.92rem;
+            color: rgba(201,201,201,0.75);
+            line-height: 1.65;
+            max-width: 48ch;
+            margin-bottom: 1.3rem;
+        }
+
+        .about-hero-photo {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+        }
+        .about-hero-photo .photo-frame {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            position: relative;
+            background: var(--surface);
+        }
+        .about-hero-photo .photo-frame::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,215,0,0.15);
+            pointer-events: none;
+        }
+        .about-hero-photo .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .about-hero-photo .photo-ring {
+            position: absolute;
+            width: 290px;
+            height: 290px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255,215,0,0.15);
+            animation: spin 30s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Quick Stats ── */
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        .about-stats .stat-cell {
+            background: var(--surface-soft);
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .about-stats .stat-cell:hover { background: var(--surface); }
+        .about-stats .stat-cell .num {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .about-stats .stat-cell .label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+        }
+
+        /* ── Section title ── */
+        .about-section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .about-section-title i { font-size: 0.9rem; opacity: 0.7; }
+        .about-section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        /* ── Social Links ── */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 10px;
+            margin-bottom: 3rem;
+        }
+        .social-link-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 1.2rem;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+        .social-link-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(255,215,0,0.06);
+        }
+        .social-link-card .social-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--accent);
+            transition: background 0.2s, color 0.2s;
+        }
+        .social-link-card:hover .social-icon {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+        .social-link-card .social-info { min-width: 0; }
+        .social-link-card .social-info .s-name {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .social-link-card .social-info .s-handle {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            font-family: 'IBM Plex Mono', monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .social-link-card .social-arrow {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .social-link-card:hover .social-arrow {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* ── My Story ── */
+        .story-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .story-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            position: relative;
+        }
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .story-card .story-icon {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+        .story-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+        .story-card .story-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+        .story-card p {
+            font-size: 0.85rem;
+            color: rgba(201,201,201,0.8);
+            line-height: 1.6;
+        }
+
+        /* ── Community Leadership ── */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 3rem;
+        }
+        .community-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .community-card:hover {
+            border-color: rgba(255,215,0,0.25);
+            transform: translateY(-3px);
+        }
+        .community-card .cc-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.6rem;
+        }
+        .community-card .cc-top .cc-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+        }
+        .community-card .cc-top .cc-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .community-card .cc-top .cc-meta h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1px;
+        }
+        .community-card .cc-top .cc-meta .cc-role {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .community-card p {
+            font-size: 0.8rem;
+            color: rgba(201,201,201,0.7);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ── Timeline ── */
+        .about-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+        }
+        .about-timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), var(--border), transparent);
+            border-radius: 2px;
+        }
+        .tl-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        .tl-item:last-child { padding-bottom: 0; }
+        .tl-item .tl-dot {
+            position: absolute;
+            left: -2rem;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        .tl-item .tl-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+        .tl-item .tl-meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+        .tl-item .tl-meta .tl-tag {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 4px;
+            background: rgba(255,215,0,0.08);
+            color: var(--accent);
+            margin-left: 4px;
+            font-size: 0.6rem;
+        }
+
+        /* ── Focus Areas ── */
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 3rem;
+        }
+        .focus-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.2rem;
+            text-align: center;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .focus-card:hover {
+            border-color: rgba(255,215,0,0.25);
+            transform: translateY(-3px);
+        }
+        .focus-card i {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .focus-card h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .focus-card p {
+            font-size: 0.72rem;
+            color: rgba(201,201,201,0.65);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ── CTA ── */
+        .about-cta {
+            text-align: center;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border);
+        }
+        .about-cta p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            .about-hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-hero-content .bio-line { margin: 0 auto 1.3rem; }
+            .about-hero { padding: 3rem 0 2rem; }
+            .about-hero-photo .photo-frame { width: 180px; height: 180px; }
+            .about-hero-photo .photo-ring { width: 210px; height: 210px; }
+            .about-hero-grid { gap: 2rem; }
+            .about-hero-grid .about-hero-content { order: 2; }
+            .about-hero-grid .about-hero-photo { order: 1; }
+            .about-stats { grid-template-columns: repeat(2, 1fr); }
+            .story-layout { grid-template-columns: 1fr; }
+            .social-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 
 <body data-root="../">
     <div id="site-nav"></div>
 
-    <main class="section">
+    <main class="about-main">
+        <!-- ─── HERO ─── -->
+        <section class="about-hero">
+            <div class="container">
+                <div class="about-hero-grid">
+                    <div class="about-hero-content reveal">
+                        <div class="greeting">// Hello, I'm</div>
+                        <h1>Mubiru<br><span class="accent">Elton Felix</span></h1>
+                        <p class="role-line">Software Engineering Student &middot; Data Enthusiast &middot; Community Builder</p>
+                        <p class="bio-line">
+                            I build things that matter. From AI-powered tools to community-driven platforms, my work sits at the intersection of software, data, and people. Currently shaping the next generation of tech talent at Mbarara University.
+                        </p>
+                        <div class="cta-row">
+                            <a href="../projects/" class="btn btn-primary"><i class="fas fa-arrow-right"></i> View Projects</a>
+                            <a href="../contact/" class="btn btn-ghost"><i class="fas fa-envelope"></i> Get in Touch</a>
+                        </div>
+                    </div>
+                    <div class="about-hero-photo reveal delay-1">
+                        <div class="photo-ring"></div>
+                        <div class="photo-frame">
+                            <img src="../assets/images/profile.jpg" alt="Mubiru Elton Felix" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── STATS ─── -->
         <div class="container">
-            <h1 class="section-title reveal">About Me</h1>
-            <p class="section-lead reveal">
-                Welcome to my digital world! I'm Elton Felix Mubiru, a passionate software engineering student and aspiring developer who believes in the power of technology to transform lives and solve complex problems.
-            </p>
-
-            <div class="detail-layout">
-                <article class="card reveal">
-                    <h3>Academic Background</h3>
-                    <p class="muted">
-                        My educational journey began at St. Mary's Kitende, where I completed both my O-Level and A-Level studies from 2018 to 2024. These formative years shaped my analytical thinking and problem-solving skills.
-                    </p>
-                    <p class="muted" style="margin-top: .8rem;">
-                        Currently, I'm pursuing Software Engineering at Mbarara University (2025 - Present), learning programming fundamentals, software design principles, and modern development methodologies.
-                    </p>
-                </article>
-
-                <article class="card reveal">
-                    <img src="../assets/images/profile.jpg" alt="Elton Felix Mubiru profile photo" style="border-radius:12px; border:1px solid var(--border);">
-                </article>
-            </div>
-
-            <div class="grid" style="margin-top:1rem; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));">
-                <article class="card reveal">
-                    <h3>Data Engineering</h3>
-                    <p class="muted">I am focused on transforming raw data into useful outputs through clean processing, analysis, and scalable pipeline thinking.</p>
-                </article>
-                <article class="card reveal">
-                    <h3>Backend Systems</h3>
-                    <p class="muted">I enjoy designing reliable backend logic and system flows that support maintainable, real-world applications.</p>
-                </article>
-                <article class="card reveal">
-                    <h3>Problem Solving</h3>
-                    <p class="muted">My work is guided by curiosity, structured thinking, and continuous improvement through practical projects.</p>
-                </article>
-            </div>
-
-            <!-- MUST Community Banner -->
-            <section class="community-banner reveal" style="margin:2rem 0;">
-                <div class="community-container">
-                    <div class="community-content">
-                        <div class="community-icon-small">
-                            <img src="../assets/images/mucosa logo.png" alt="MUCOSA" style="width: 100%; height: 100%; object-fit: contain;" />
-                        </div>
-                        <h3 class="community-title">MUCOSA President — Mbarara University Computing Students Association</h3>
-                        <p class="community-subtitle">Leading student innovation through mentorship, community events, and hands-on tech initiatives at MUST · Apr 2026</p>
-                    </div>
+            <div class="about-stats reveal delay-1">
+                <div class="stat-cell">
+                    <div class="num">2+</div>
+                    <div class="label">Years Building</div>
                 </div>
-            </section>
-
-            <!-- Timeline Section -->
-            <div class="timeline-section reveal" style="margin-top:2rem;">
-                <h2 class="section-title">Professional Timeline</h2>
-                <div class="timeline">
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div>
-                            <div class="timeline-title">Software Class President</div>
-                            <div class="timeline-sub">
-                                Mbarara University · Aug 2025
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div>
-                            <div class="timeline-title">My First Ever GDG Event — DevFest Mbarara</div>
-                            <div class="timeline-sub">
-                                Google Developer Groups · Oct 2025
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div>
-                            <div class="timeline-title">Student Lead</div>
-                            <div class="timeline-sub">
-                                DeepMinds AI Mbarara · Mar 2026
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div>
-                            <div class="timeline-title">Year 1 Pod Lead</div>
-                            <div class="timeline-sub">
-                                BlueOx · Mar 2026 <span style="color:var(--text-muted);font-size:0.78rem;">· Judge, Vibe Coding Competition</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div>
-                            <div class="timeline-title">MUCOSA President</div>
-                            <div class="timeline-sub">
-                                Mbarara University Computing Students Association · Apr 2026
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div>
-                            <div class="timeline-title">Co-Organiser</div>
-                            <div class="timeline-sub">
-                                Global AI Mbarara · May 2026
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="stat-cell">
+                    <div class="num">12+</div>
+                    <div class="label">Projects Shipped</div>
                 </div>
+                <div class="stat-cell">
+                    <div class="num">4</div>
+                    <div class="label">Communities Led</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="num">500+</div>
+                    <div class="label">Community Reach</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── SOCIAL LINKS ─── -->
+        <div class="container">
+            <h2 class="about-section-title reveal"><i class="fas fa-share-nodes"></i> Connect With Me</h2>
+            <div class="social-grid reveal delay-1">
+                <a href="https://linkedin.com/in/mubiru-elton-felix-9ab50a1b0" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">LinkedIn</div>
+                        <div class="s-handle">@mubiru-elton-felix</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://x.com/mubiruelton1" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fab fa-x-twitter"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">X / Twitter</div>
+                        <div class="s-handle">@mubiruelton1</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://discordapp.com/users/mubirueltonfelix_69518" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fab fa-discord"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">Discord</div>
+                        <div class="s-handle">mubirueltonfelix_69518</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://github.com/MubiruEltonFelix1" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fab fa-github"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">GitHub</div>
+                        <div class="s-handle">@MubiruEltonFelix1</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://www.youtube.com/@MubiruEltonFelix" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fab fa-youtube"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">YouTube</div>
+                        <div class="s-handle">@MubiruEltonFelix</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://www.tiktok.com/@mubirueltonfelix1" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fab fa-tiktok"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">TikTok</div>
+                        <div class="s-handle">@mubirueltonfelix1</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://dev.to/mubirueltonfelix" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fab fa-dev"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">DEV Community</div>
+                        <div class="s-handle">@mubirueltonfelix</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://devpost.com/MubiruEltonFelix1" target="_blank" rel="noopener" class="social-link-card">
+                    <div class="social-icon"><i class="fas fa-cube"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">Devpost</div>
+                        <div class="s-handle">MubiruEltonFelix1</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="mailto:mubirueltonfelix@gmail.com" class="social-link-card">
+                    <div class="social-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="social-info">
+                        <div class="s-name">Email</div>
+                        <div class="s-handle">mubirueltonfelix@gmail.com</div>
+                    </div>
+                    <div class="social-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- ─── MY STORY ─── -->
+        <div class="container">
+            <h2 class="about-section-title reveal"><i class="fas fa-feather"></i> My Story</h2>
+            <div class="story-layout">
+                <div class="story-card reveal delay-1">
+                    <div class="story-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>St. Mary's Kitende</h3>
+                    <div class="story-date">2018 &ndash; 2024</div>
+                    <p>
+                        Completed both O-Level and A-Level, where I developed the analytical foundation and discipline that drive my approach to problem-solving today. Those years taught me that the best solutions come from structured thinking.
+                    </p>
+                </div>
+                <div class="story-card reveal delay-2">
+                    <div class="story-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Mbarara University</h3>
+                    <div class="story-date">2025 &ndash; Present</div>
+                    <p>
+                        Pursuing Software Engineering with a focus on data engineering, backend systems, and intelligent infrastructure. Actively involved in student leadership as MUCOSA President and leading AI communities on campus.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── COMMUNITY LEADERSHIP ─── -->
+        <div class="container">
+            <h2 class="about-section-title reveal"><i class="fas fa-people-group"></i> Community Leadership</h2>
+            <div class="community-grid reveal delay-1">
+                <div class="community-card">
+                    <div class="cc-top">
+                        <div class="cc-logo"><img src="../assets/images/mucosa%20logo.png" alt="MUCOSA"></div>
+                        <div class="cc-meta">
+                            <h4>MUCOSA</h4>
+                            <div class="cc-role">President</div>
+                        </div>
+                    </div>
+                    <p>Leading the Mbarara University Computing Students Association, driving innovation through mentorship, community events, and hands-on tech initiatives across campus.</p>
+                </div>
+                <div class="community-card">
+                    <div class="cc-top">
+                        <div class="cc-logo"><img src="../assets/images/deepminds-ai-logo.svg" alt="DeepMinds AI Mbarara"></div>
+                        <div class="cc-meta">
+                            <h4>DeepMinds AI Mbarara</h4>
+                            <div class="cc-role">Student Lead</div>
+                        </div>
+                    </div>
+                    <p>Leading student-driven AI research, learning sessions, and project initiatives under the DeepMinds AI chapter, building the next generation of AI practitioners at MUST.</p>
+                </div>
+                <div class="community-card">
+                    <div class="cc-top">
+                        <div class="cc-logo"><img src="../assets/images/global_ai_mbarara_logo.jpg" alt="Global AI Mbarara"></div>
+                        <div class="cc-meta">
+                            <h4>Global AI Mbarara</h4>
+                            <div class="cc-role">Co-Organiser</div>
+                        </div>
+                    </div>
+                    <p>Co-organising AI meetups, workshops, and hands-on sessions that connect Mbarara's AI ecosystem with the global community. Ran Agent Camp 2026 and other events.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── TIMELINE ─── -->
+        <div class="container">
+            <h2 class="about-section-title reveal"><i class="fas fa-timeline"></i> Journey</h2>
+            <div class="about-timeline reveal delay-1">
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-title">Software Class President</div>
+                    <div class="tl-meta">Mbarara University &middot; Aug 2025</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-title">First GDG Event &mdash; DevFest Mbarara</div>
+                    <div class="tl-meta">Google Developer Groups &middot; Oct 2025</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-title">Student Lead, DeepMinds AI Mbarara</div>
+                    <div class="tl-meta">DeepMinds AI &middot; Mar 2026</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-title">Year 1 Pod Lead, BlueOx</div>
+                    <div class="tl-meta">BlueOx &middot; Mar 2026 <span class="tl-tag">Judge, Vibe Coding Competition</span></div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-title">MUCOSA President</div>
+                    <div class="tl-meta">Mbarara University Computing Students Association &middot; Apr 2026</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-title">Co-Organiser, Global AI Mbarara</div>
+                    <div class="tl-meta">Global AI Community &middot; May 2026</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── FOCUS AREAS ─── -->
+        <div class="container">
+            <h2 class="about-section-title reveal"><i class="fas fa-bullseye"></i> Focus Areas</h2>
+            <div class="focus-grid reveal delay-1">
+                <div class="focus-card">
+                    <i class="fas fa-database"></i>
+                    <h4>Data Engineering</h4>
+                    <p>Transforming raw data into useful outputs through clean processing, analysis, and scalable pipeline thinking.</p>
+                </div>
+                <div class="focus-card">
+                    <i class="fas fa-server"></i>
+                    <h4>Backend Systems</h4>
+                    <p>Designing reliable backend logic and system flows that support maintainable, real-world applications.</p>
+                </div>
+                <div class="focus-card">
+                    <i class="fas fa-brain"></i>
+                    <h4>Machine Learning</h4>
+                    <p>Exploring geometric deep learning, ML systems, and the mathematical foundations of intelligent infrastructure.</p>
+                </div>
+                <div class="focus-card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Community Building</h4>
+                    <p>Creating spaces where people learn, build, and grow together through mentorship, events, and shared purpose.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── CTA ─── -->
+        <div class="container">
+            <div class="about-cta reveal delay-2">
+                <p>Want to collaborate, build something together, or just say hello?</p>
+                <a href="../contact/" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get in Touch</a>
             </div>
         </div>
     </main>
