@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Build With AI Makerere Hackathon | Mubiru Elton Felix</title>
+    <meta name="description" content="Build With AI Makerere Hackathon — Tech Clan's MoMo Scam Checker secured 2nd place at the American Center Kampala. Full story, photos, team, and takeaways.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* ── Event Detail Hero ── */
+        .event-detail-hero {
+            position: relative;
+            width: 100%;
+            height: clamp(280px, 40vw, 420px);
+            overflow: hidden;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+        .event-detail-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .event-detail-hero .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+        .event-detail-hero .hero-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 2rem 1.8rem;
+            pointer-events: none;
+        }
+        .event-detail-hero .hero-text h1 {
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            font-weight: 800;
+        }
+        .event-detail-hero .hero-text .hero-meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Event Content ── */
+        .event-content {
+            max-width: 780px;
+        }
+        .event-content h2 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin: 2rem 0 0.8rem;
+            font-weight: 700;
+        }
+        .event-content h3 {
+            font-size: 1.05rem;
+            color: var(--text);
+            margin: 1.5rem 0 0.5rem;
+            font-weight: 600;
+        }
+        .event-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .event-highlight {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.8rem;
+            margin: 1.5rem 0;
+        }
+        .event-highlight h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .event-highlight p {
+            margin-bottom: 0;
+        }
+
+        .event-team-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0.8rem 0 1.2rem;
+        }
+        .event-team-list li {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.82rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .event-team-list li i {
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+
+        /* ── Photo Grid ── */
+        .event-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+            margin: 2rem 0;
+        }
+        .event-photo-grid figure {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            transition: border-color 0.25s;
+        }
+        .event-photo-grid figure:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        .event-photo-grid figure img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .event-photo-grid figure figcaption {
+            padding: 0.6rem 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'IBM Plex Mono', monospace;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Action Bar ── */
+        .event-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 2rem 0 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .event-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+        .event-back-link:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .event-detail-hero .hero-text { padding: 1.2rem 1rem 1rem; }
+            .event-photo-grid { grid-template-columns: 1fr; }
+            .event-photo-grid figure img { height: 180px; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="section">
+        <div class="container">
+            <a href="../" class="event-back-link reveal">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+
+            <!-- Hero Image -->
+            <div class="event-detail-hero reveal">
+                <img src="../../events/Build_With_AI_5.jpg" alt="Build With AI Makerere Hackathon at American Center Kampala" loading="lazy">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <div class="hero-meta"><i class="fas fa-trophy"></i> Hackathon &middot; 2025 &middot; American Center Kampala</div>
+                    <h1>Build With AI Makerere Hackathon</h1>
+                </div>
+            </div>
+
+            <div class="event-content">
+                <!-- Lead -->
+                <p class="reveal delay-1" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
+                    A weekend of building, learning, and connecting — the Build With AI Makerere Hackathon brought together 
+                    developers, designers, and dreamers at the American Center Kampala. Organised by 
+                    <strong style="color:var(--accent);">Shakiran Nannyombi</strong> and 
+                    <strong style="color:var(--accent);">Benjamin Wakida Eldon</strong>, in partnership with 
+                    Major League Hacking and GDG on Campus — Makerere University.
+                </p>
+
+                <!-- Team Highlight -->
+                <div class="event-highlight reveal delay-1">
+                    <h4><i class="fas fa-trophy" style="margin-right:6px;"></i> Result</h4>
+                    <p style="font-size:1rem;color:var(--text);font-weight:600;">
+                        Our project — <strong style="color:var(--accent);">MoMo Scam Checker</strong> — secured 
+                        <strong style="color:var(--accent);">2nd place</strong> at the hackathon!
+                    </p>
+                </div>
+
+                <!-- Team -->
+                <h2 class="reveal delay-1">The Team — Tech Clan</h2>
+                <ul class="event-team-list reveal delay-2">
+                    <li><i class="fas fa-user"></i> Joy Wabule</li>
+                    <li><i class="fas fa-user"></i> Awany Jey Daniel</li>
+                    <li><i class="fas fa-user"></i> LUBEGA Grace</li>
+                    <li><i class="fas fa-user"></i> Mubiru Elton Felix</li>
+                </ul>
+
+                <p class="reveal delay-2">
+                    Our team, <strong>Tech Clan</strong>, came together around a shared mission: build something that 
+                    actually helps people. The result was <strong>MoMo Scam Checker</strong>, a solution designed to 
+                    help reduce money lost to scammers across various telecommunication networks in Uganda.
+                </p>
+
+                <!-- The Experience -->
+                <h2 class="reveal delay-2">The Experience</h2>
+                <p class="reveal delay-2">
+                    Beyond the podium finish, the experience was truly memorable — from the amazing venue and awesome swag 
+                    to the inspiring people in the room (and, of course, the snacks).
+                </p>
+                <p class="reveal delay-2">
+                    It was also great meeting in person several people I've connected with on LinkedIn but hadn't had 
+                    the chance to meet face-to-face, including Godwin Ofwono, lailah grant, Ronnie Linslay Atuhaire, 
+                    Mariah Miranda .L and Byaruhanga Daniel.
+                </p>
+
+                <!-- Photo Gallery -->
+                <h2 class="reveal delay-2">Event Gallery</h2>
+                <div class="event-photo-grid reveal delay-2">
+                    <figure>
+                        <img src="../../events/Build_With_AI_2.jpg" alt="Build With AI Makerree — team collaboration" loading="lazy">
+                        <figcaption>Team Tech Clan in action</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Build_With_AI_3.jpg" alt="Build With AI Makerere — presentations" loading="lazy">
+                        <figcaption>Project presentations</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Build_With_AI_4.jpg" alt="Build With AI Makerere — moments" loading="lazy">
+                        <figcaption>Moments from the hackathon floor</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Build_With_AI_6.jpg" alt="Build With AI Makerere — group memories" loading="lazy">
+                        <figcaption>Group memories</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Acknowledgments -->
+                <h2 class="reveal delay-3">Acknowledgments</h2>
+                <p class="reveal delay-3">
+                    A big thank you to <strong>Major League Hacking</strong> and <strong>GDG on Campus — Makerere University</strong> 
+                    for organising and hosting such an incredible event. It was an amazing experience, and I'm already 
+                    looking forward to the next one!
+                </p>
+                <p class="reveal delay-3">
+                    And to everyone who made this weekend unforgettable — the organisers, mentors, judges, fellow 
+                    participants, and everyone who stopped by our table to ask about MoMo Scam Checker. That's what 
+                    the tech community in Uganda is about.
+                </p>
+
+                <!-- Action Bar -->
+                <div class="event-actions reveal delay-3">
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7476868688101568512/" target="_blank" rel="noopener" class="btn-event btn-event-primary" style="padding:0.7rem 1.5rem;font-size:0.78rem;">
+                        <i class="fab fa-linkedin"></i> View on LinkedIn
+                    </a>
+                    <a href="../" class="btn-event btn-event-ghost" style="padding:0.7rem 1.5rem;font-size:0.78rem;">
+                        <i class="fas fa-arrow-left"></i> All Events
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>
