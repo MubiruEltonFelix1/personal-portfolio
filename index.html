@@ -9,9 +9,227 @@
     <meta name="description" content="Modern portfolio of Mubiru Elton Felix focused on data engineering, backend systems, and software engineering.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="tokens.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* ── Hero Redesign ── */
+        .hero-section {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem 0;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 70% 40%, rgba(255,215,0,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ── Left Content ── */
+        .hero-text-col { position: relative; z-index: 3; }
+
+        .hero-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--text);
+            line-height: 1.08;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .hero-title .accent {
+            color: var(--accent);
+            display: inline-block;
+            position: relative;
+        }
+        .hero-title .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .hero-sub {
+            font-size: 0.95rem;
+            color: rgba(201,201,201,0.75);
+            line-height: 1.65;
+            max-width: 44ch;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        /* ── Right Image ── */
+        .hero-media-col {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-frame {
+            position: relative;
+            width: min(420px, 100%);
+            aspect-ratio: 4 / 3;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        .hero-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 30%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .hero-image-frame:hover img {
+            transform: scale(1.04);
+        }
+
+        .hero-image-frame .image-overlay-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,215,0,0.06) 0%, transparent 40%, transparent 70%, rgba(255,215,0,0.03) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .hero-image-frame .image-border-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent 80%);
+            z-index: 3;
+        }
+
+        /* Decorative elements around image */
+        .hero-media-deco {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-media-deco .deco-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.2;
+        }
+        .hero-media-deco .deco-dot:nth-child(1) { top: -12px; left: 15%; }
+        .hero-media-deco .deco-dot:nth-child(2) { top: 20%; right: -18px; }
+        .hero-media-deco .deco-dot:nth-child(3) { bottom: 10%; left: -12px; }
+        .hero-media-deco .deco-dot:nth-child(4) { bottom: -12px; right: 30%; }
+
+        .hero-media-deco .deco-line {
+            position: absolute;
+            background: var(--border);
+        }
+        .hero-media-deco .deco-line:nth-child(5) {
+            top: -20px;
+            left: 50%;
+            width: 1px;
+            height: 20px;
+        }
+        .hero-media-deco .deco-line:nth-child(6) {
+            bottom: -20px;
+            right: 10%;
+            width: 1px;
+            height: 20px;
+        }
+
+        /* ── Floating tag badge ── */
+        .hero-tag-badge {
+            position: absolute;
+            bottom: -10px;
+            left: -10px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 5;
+            backdrop-filter: blur(6px);
+        }
+        .hero-tag-badge i {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+        .hero-tag-badge span {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            .hero-section { min-height: auto; padding: 4rem 0 2rem; }
+            .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-text-col { order: 2; text-align: center; }
+            .hero-media-col { order: 1; }
+            .hero-sub { margin-left: auto; margin-right: auto; }
+            .hero-cta { justify-content: center; }
+            .hero-eyebrow { justify-content: center; }
+            .hero-eyebrow::before { display: none; }
+            .hero-image-frame { width: min(320px, 90%); aspect-ratio: 4/3; }
+            .hero-tag-badge { left: 50%; transform: translateX(-50%); bottom: -12px; }
+            .hero-media-deco { display: none; }
+        }
+    </style>
 </head>
 
 <body data-root="">
@@ -20,20 +238,46 @@
     <main class="home-main">
         <!-- Hero Section -->
         <section class="hero-section">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <div class="hero-eyebrow reveal">// Digital Craftsman</div>
-                    <h1 class="hero-title reveal">
-                        Data Engineering & <span class="accent">Machine Learning</span> Student
-                    </h1>
-                    <p class="hero-subtitle reveal">Focused on geometric deep learning, ML systems, and the mathematical foundations of intelligent infrastructure.</p>
-                    <div class="cta-row reveal">
-                        <a class="btn btn-primary" href="projects/">View Projects</a>
-                        <a class="btn btn-ghost" href="tools/">View My Tools</a>
-                        <a class="btn btn-ghost" id="quickMessageLink" href="#">Send Message</a>
+            <div class="container">
+                <div class="hero-layout">
+
+                    <!-- Text Column -->
+                    <div class="hero-text-col">
+                        <div class="hero-eyebrow reveal">Digital Craftsman</div>
+                        <h1 class="hero-title reveal">
+                            Data Engineering &amp; <span class="accent">Machine Learning</span> Student
+                        </h1>
+                        <p class="hero-sub reveal">
+                            Focused on geometric deep learning, ML systems, and the mathematical foundations of intelligent infrastructure. Building at the intersection of software, data, and community.
+                        </p>
+                        <div class="hero-cta reveal">
+                            <a class="btn btn-primary" href="projects/"><i class="fas fa-arrow-right"></i> View Projects</a>
+                            <a class="btn btn-ghost" href="tools/">View My Tools</a>
+                        </div>
                     </div>
+
+                    <!-- Image Column -->
+                    <div class="hero-media-col reveal delay-1">
+                        <div class="hero-media-deco">
+                            <div class="deco-dot"></div>
+                            <div class="deco-dot"></div>
+                            <div class="deco-dot"></div>
+                            <div class="deco-dot"></div>
+                            <div class="deco-line"></div>
+                            <div class="deco-line"></div>
+                        </div>
+                        <div class="hero-image-frame">
+                            <div class="image-overlay-glow"></div>
+                            <div class="image-border-accent"></div>
+                            <img src="events/Build_With_AI_Makerere/Build_With_AI_3.jpg" alt="Build With AI Makerere Hackathon" loading="lazy">
+                        </div>
+                        <div class="hero-tag-badge">
+                            <i class="fas fa-trophy"></i>
+                            <span>2nd Place &middot; Build With AI Makerere</span>
+                        </div>
+                    </div>
+
                 </div>
-                <img class="hero-ornament reveal" src="ChatGPT%20Image%20Jun%2016%2C%202026%2C%2006_35_00%20PM.png" alt="Mubiru Elton Felix" loading="lazy">
             </div>
         </section>
 
