@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Logos Circles Kampala | Mubiru Elton Felix</title>
+    <meta name="description" content="Logos Circles Kampala session on Winnable Issues — community-driven problem solving, blockchain-powered decentralisation, and a Kahoot podium finish.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* ── Event Detail Hero ── */
+        .event-detail-hero {
+            position: relative;
+            width: 100%;
+            height: clamp(280px, 40vw, 420px);
+            overflow: hidden;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+        .event-detail-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 30%;
+            display: block;
+        }
+        .event-detail-hero .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+        .event-detail-hero .hero-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 2rem 1.8rem;
+            pointer-events: none;
+        }
+        .event-detail-hero .hero-text h1 {
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            font-weight: 800;
+        }
+        .event-detail-hero .hero-text .hero-meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Event Content ── */
+        .event-content {
+            max-width: 780px;
+        }
+        .event-content h2 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin: 2rem 0 0.8rem;
+            font-weight: 700;
+        }
+        .event-content h3 {
+            font-size: 1.05rem;
+            color: var(--text);
+            margin: 1.5rem 0 0.5rem;
+            font-weight: 600;
+        }
+        .event-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .event-highlight {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.8rem;
+            margin: 1.5rem 0;
+        }
+        .event-highlight h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .event-highlight p {
+            margin-bottom: 0;
+        }
+
+        /* ── Logo Display ── */
+        .logo-display {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        .logo-display img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+        .logo-display .logo-text h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .logo-display .logo-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ── What is Logos ── */
+        .info-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.8rem;
+            margin: 1.2rem 0;
+        }
+        .info-card h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .info-card p {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+        .info-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .people-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0.8rem 0 1rem;
+        }
+        .people-list span {
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4rem 1rem;
+            font-size: 0.78rem;
+            color: var(--text);
+        }
+
+        /* ── Photo Grid ── */
+        .event-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+            margin: 2rem 0;
+        }
+        .event-photo-grid figure {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            transition: border-color 0.25s;
+        }
+        .event-photo-grid figure:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        .event-photo-grid figure img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            object-position: 50% 30%;
+            display: block;
+        }
+        .event-photo-grid figure figcaption {
+            padding: 0.6rem 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'IBM Plex Mono', monospace;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Action Bar ── */
+        .event-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 2rem 0 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn-event {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.7rem 1.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+        }
+        .btn-event-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+        .btn-event-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 215, 0, 0.2);
+        }
+        .btn-event-ghost {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+        .btn-event-ghost:hover {
+            border-color: var(--accent);
+            background: rgba(255, 215, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .event-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+        .event-back-link:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .event-detail-hero .hero-text { padding: 1.2rem 1rem 1rem; }
+            .event-photo-grid { grid-template-columns: 1fr; }
+            .event-photo-grid figure img { height: 180px; }
+            .logo-display { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="section">
+        <div class="container">
+            <a href="../" class="event-back-link reveal">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+
+            <!-- Hero Image -->
+            <div class="event-detail-hero reveal">
+                <img src="../../events/Logos_Circles_Kampala/Logos_Circles_Kampala_3.jpg" alt="Logos Circles Kampala session group photo" loading="lazy">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <div class="hero-meta"><i class="fas fa-users"></i> Meetup &middot; 2026 &middot; Kampala, Uganda</div>
+                    <h1>Logos Circles Kampala</h1>
+                </div>
+            </div>
+
+            <div class="event-content">
+                <!-- Lead -->
+                <p class="reveal delay-1" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
+                    You are probably wondering: what is Logos? I was asking the same question walking in. By the time 
+                    I walked out, I had a new framework for thinking about community action, a handful of new 
+                    connections, and a Kahoot podium finish.
+                </p>
+
+                <!-- Logo + What is Logos -->
+                <div class="logo-display reveal delay-1">
+                    <img src="../../events/Logos_Circles_Kampala/Logos_Logo.jpeg" alt="Logos logo">
+                    <div class="logo-text">
+                        <h4><i class="fas fa-info-circle" style="margin-right:6px;"></i> About Logos</h4>
+                        <p>
+                            Logos is a social movement and decentralised technology stack focused on revitalising civil society. 
+                            A Circle is a group of people who come together to identify and solve high-impact, feasible, and 
+                            pressing problems (Winnable Issues) within their communities.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Session Highlight -->
+                <div class="event-highlight reveal delay-2">
+                    <h4><i class="fas fa-gamepad" style="margin-right:6px;"></i> Highlight</h4>
+                    <p style="font-size:1rem;color:var(--text);font-weight:600;">
+                        Podium finish in the Kahoot competition hosted by 
+                        <strong style="color:var(--accent);">Benjamin Wakida Eldon</strong> 
+                        (Kahoot Ambassador) <span style="font-weight:400;color:var(--text-muted);">&mdash; with bragging rights and swag!</span>
+                    </p>
+                </div>
+
+                <!-- The Session -->
+                <h2 class="reveal delay-2">The Session: Winnable Issues</h2>
+                <p class="reveal delay-2">
+                    The session was led by <strong>Dev Johnson</strong>, who introduced us to Logos, shared insights 
+                    about other circles across Africa, and facilitated a brainstorming session on potential problems 
+                    we could tackle as a community. The energy in the room was electric: people from different 
+                    backgrounds throwing ideas on the table, debating which ones were actually winnable, and 
+                    sketching out first steps before the session even ended.
+                </p>
+                <p class="reveal delay-2">
+                    We broke down what makes an issue "winnable": it has to be high-impact, feasible with the 
+                    resources we have, and pressing enough that people feel the urgency. Some of the ideas ranged 
+                    from digital literacy for market vendors to environmental clean-up campaigns tied to local 
+                    tech meetups.
+                </p>
+
+                <!-- Kahoot -->
+                <h2 class="reveal delay-2">The Kahoot Showdown</h2>
+                <p class="reveal delay-2">
+                    Benjamin Wakida Eldon, the Kahoot Ambassador, closed the session with a quiz that turned 
+                    competitive fast. I managed to secure a podium finish (bragging rights fully earned) and 
+                    even walked away with some swag. A reminder that learning and fun belong in the same room.
+                </p>
+
+                <!-- Connections -->
+                <h2 class="reveal delay-2">People Who Made the Room</h2>
+                <p class="reveal delay-2">
+                    It was great meeting so many new people. Grateful to everyone who contributed to making 
+                    the space engaging, welcoming, and lively.
+                </p>
+                <div class="people-list reveal delay-2">
+                    <span>Bahati Brenda</span>
+                    <span>Kizito Ian Noah</span>
+                    <span>BRONIA BOONABAANA</span>
+                    <span>Awany Jey Daniel</span>
+                    <span>Louis Asingizwe</span>
+                    <span>Benjamin Wakida Eldon</span>
+                    <span>Kisembo Rodgers</span>
+                    <span>Logos Circle London</span>
+                </div>
+
+                <!-- Photo Gallery -->
+                <h2 class="reveal delay-3">Event Gallery</h2>
+                <div class="event-photo-grid reveal delay-3">
+                    <figure>
+                        <img src="../../events/Logos_Circles_Kampala/Logos_Circles_Kampala_1.jpg" alt="Logos Circles Kampala session" loading="lazy">
+                        <figcaption>Session in progress</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Logos_Circles_Kampala/Logos_Circles_Kampala_2.jpg" alt="Logos Circles Kampala discussions" loading="lazy">
+                        <figcaption>Brainstorming Winnable Issues</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Logos_Circles_Kampala/Logos_Circles_Kampala_4.jpg" alt="Logos Circles Kampala group" loading="lazy">
+                        <figcaption>Community in action</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Logos_Circles_Kampala/Logos_Circles_Kampala_5.jpg" alt="Logos Circles Kampala memories" loading="lazy">
+                        <figcaption>Memories from the session</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Looking Forward -->
+                <h2 class="reveal delay-3">Looking Forward</h2>
+                <p class="reveal delay-3">
+                    I am looking forward to attending more sessions, learning from the community, and sharing 
+                    the experience with others. If Logos Circles sounds like something you would want to be 
+                    part of, reach out and I will point you to the next session. The more people show up, 
+                    the more Winnable Issues we can actually win.
+                </p>
+
+                <!-- Action Bar -->
+                <div class="event-actions reveal delay-3">
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7474143483616759808/" target="_blank" rel="noopener" class="btn-event btn-event-primary">
+                        <i class="fab fa-linkedin"></i> View on LinkedIn
+                    </a>
+                    <a href="../" class="btn-event btn-event-ghost">
+                        <i class="fas fa-arrow-left"></i> All Events
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>
