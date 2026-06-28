@@ -101,6 +101,52 @@
             margin-bottom: 0;
         }
 
+        /* ── Partner Logos ── */
+        .partner-logos {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .partner-logos .partner-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .partner-logos .partner-item img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        .partner-logos .partner-item .partner-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .partner-logos .partner-item .partner-name {
+            font-size: 0.82rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        .partner-logos .partner-divider {
+            width: 1px;
+            height: 36px;
+            background: var(--border);
+        }
+        @media (max-width: 600px) {
+            .partner-logos { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .partner-logos .partner-divider { width: 100%; height: 1px; }
+        }
+
         .event-team-list {
             list-style: none;
             padding: 0;
@@ -347,7 +393,7 @@
 
             <!-- Hero Image -->
             <div class="event-detail-hero reveal">
-                <img src="../../events/Build_With_AI/Build_With_AI_5.jpg" alt="Build With AI Makerere Hackathon at American Center Kampala" loading="lazy">
+                <img src="../../events/Build_With_AI_Makerere/Build_With_AI_5.jpg" alt="Build With AI Makerere Hackathon at American Center Kampala" loading="lazy">
                 <div class="overlay"></div>
                 <div class="hero-text">
                     <div class="hero-meta"><i class="fas fa-trophy"></i> Hackathon &middot; 2026 &middot; American Center Kampala</div>
@@ -364,6 +410,25 @@
                     <strong style="color:var(--accent);">Benjamin Wakida Eldon</strong>, in partnership with 
                     Major League Hacking and GDG on Campus Makerere University.
                 </p>
+
+                <!-- Partner Logos -->
+                <div class="partner-logos reveal delay-1">
+                    <div class="partner-item">
+                        <img src="../../events/Build_With_AI_Makerere/gdg_makerere_university_logo.jpg" alt="GDG on Campus Makerere University">
+                        <div>
+                            <div class="partner-label">Organiser</div>
+                            <div class="partner-name">GDG on Campus Makerere University</div>
+                        </div>
+                    </div>
+                    <div class="partner-divider"></div>
+                    <div class="partner-item">
+                        <img src="../../events/Build_With_AI_Makerere/MLH_LOGO.png" alt="Major League Hacking">
+                        <div>
+                            <div class="partner-label">Organiser</div>
+                            <div class="partner-name">Major League Hacking</div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Result Highlight -->
                 <div class="event-highlight reveal delay-1">
@@ -491,7 +556,7 @@
                 <h2 class="reveal delay-3">Certificate</h2>
                 <div class="certificate-section reveal delay-3">
                     <div class="certificate-card">
-                        <img src="../../events/Build_With_AI/Copy%20of%20Google%20Developer%20Groups.png" alt="Build With AI Makerere Hackathon Certificate" loading="lazy">
+                        <img src="../../events/Build_With_AI_Makerere/Copy%20of%20Google%20Developer%20Groups.png" alt="Build With AI Makerere Hackathon Certificate" loading="lazy">
                         <div class="cert-caption">
                             <i class="fas fa-certificate"></i>
                             Participation certificate from the Build With AI Makerere Hackathon
@@ -503,19 +568,19 @@
                 <h2 class="reveal delay-3">Event Gallery</h2>
                 <div class="event-photo-grid reveal delay-3">
                     <figure>
-                        <img src="../../events/Build_With_AI/Build_With_AI_2.jpg" alt="Build With AI Makerere team collaboration" loading="lazy">
+                        <img src="../../events/Build_With_AI_Makerere/Build_With_AI_2.jpg" alt="Build With AI Makerere team collaboration" loading="lazy">
                         <figcaption>Team Tech Clan in action</figcaption>
                     </figure>
                     <figure>
-                        <img src="../../events/Build_With_AI/Build_With_AI_3.jpg" alt="Build With AI Makerere presentations" loading="lazy">
+                        <img src="../../events/Build_With_AI_Makerere/Build_With_AI_3.jpg" alt="Build With AI Makerere presentations" loading="lazy">
                         <figcaption>Project presentations</figcaption>
                     </figure>
                     <figure>
-                        <img src="../../events/Build_With_AI/Build_With_AI_4.jpg" alt="Build With AI Makerere moments" loading="lazy">
+                        <img src="../../events/Build_With_AI_Makerere/Build_With_AI_4.jpg" alt="Build With AI Makerere moments" loading="lazy">
                         <figcaption>Moments from the hackathon floor</figcaption>
                     </figure>
                     <figure>
-                        <img src="../../events/Build_With_AI/Build_With_AI_6.jpg" alt="Build With AI Makerere group memories" loading="lazy">
+                        <img src="../../events/Build_With_AI_Makerere/Build_With_AI_6.jpg" alt="Build With AI Makerere group memories" loading="lazy">
                         <figcaption>Group memories</figcaption>
                     </figure>
                 </div>
