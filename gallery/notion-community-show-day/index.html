@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Notion Community Show Day 2026 | Mubiru Elton Felix</title>
+    <meta name="description" content="Notion Community Show Day 2026 at Makerere University — dashboards, avatars, productivity tips, and a Kahoot podium finish.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        .event-detail-hero {
+            position: relative; width: 100%; height: clamp(280px,40vw,420px);
+            overflow: hidden; border-radius: var(--radius);
+            border: 1px solid var(--border); margin-bottom: 2.5rem;
+        }
+        .event-detail-hero img {
+            width: 100%; height: 100%; object-fit: cover;
+            object-position: 50% 30%; display: block;
+        }
+        .event-detail-hero .overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(0deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+        .event-detail-hero .hero-text {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 2rem 2rem 1.8rem; pointer-events: none;
+        }
+        .event-detail-hero .hero-text h1 {
+            font-size: clamp(1.3rem,3.5vw,2rem); color: var(--text);
+            margin-bottom: 0.3rem; font-weight: 800;
+        }
+        .event-detail-hero .hero-text .hero-meta {
+            font-family: 'IBM Plex Mono',monospace; font-size: 0.75rem;
+            color: var(--accent); letter-spacing: 0.05em;
+        }
+        .event-content { max-width: 780px; }
+        .event-content h2 {
+            font-size: 1.3rem; color: var(--accent);
+            margin: 2rem 0 0.8rem; font-weight: 700;
+        }
+        .event-content p {
+            font-size: 0.95rem; color: var(--text-muted);
+            line-height: 1.7; margin-bottom: 0.8rem;
+        }
+        .event-highlight {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-left: 3px solid var(--accent); border-radius: var(--radius);
+            padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+        }
+        .event-highlight h4 {
+            font-family: 'IBM Plex Mono',monospace; font-size: 0.7rem;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--accent); margin-bottom: 0.5rem;
+        }
+        .event-highlight p { margin-bottom: 0; }
+
+        .logo-display {
+            display: flex; align-items: center; gap: 2rem;
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 2rem; margin: 1.5rem 0;
+        }
+        .logo-display img {
+            width: 80px; height: 80px; object-fit: contain;
+            border-radius: 12px; flex-shrink: 0;
+        }
+        .logo-display .logo-text h4 {
+            font-family: 'IBM Plex Mono',monospace; font-size: 0.7rem;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--accent); margin-bottom: 4px;
+        }
+        .logo-display .logo-text p {
+            font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5;
+        }
+
+        .people-list {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin: 0.8rem 0 1rem;
+        }
+        .people-list span {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.4rem 1rem;
+            font-size: 0.78rem; color: var(--text);
+        }
+
+        .event-photo-grid {
+            display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            gap: 14px; margin: 2rem 0;
+        }
+        .event-photo-grid figure {
+            border: 1px solid var(--border); border-radius: var(--radius);
+            overflow: hidden; background: var(--surface); transition: border-color 0.25s;
+        }
+        .event-photo-grid figure:hover { border-color: rgba(255,215,0,0.3); }
+        .event-photo-grid figure img {
+            width: 100%; height: 220px; object-fit: cover;
+            object-position: 50% 30%; display: block;
+        }
+        .event-photo-grid figure figcaption {
+            padding: 0.6rem 1rem; font-size: 0.75rem; color: var(--text-muted);
+            font-family: 'IBM Plex Mono',monospace; letter-spacing: 0.03em;
+        }
+
+        .event-actions {
+            display: flex; gap: 0.8rem; flex-wrap: wrap;
+            margin: 2rem 0 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+        }
+        .btn-event {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.7rem 1.5rem; font-family: 'IBM Plex Mono',monospace;
+            font-size: 0.72rem; font-weight: 600; border-radius: 8px;
+            cursor: pointer; transition: all 0.25s ease;
+            text-decoration: none; letter-spacing: 0.03em;
+        }
+        .btn-event-primary { background: var(--accent); color: #000; border: none; }
+        .btn-event-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,215,0,0.2); }
+        .btn-event-ghost { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+        .btn-event-ghost:hover { border-color: var(--accent); background: rgba(255,215,0,0.04); transform: translateY(-2px); }
+
+        .event-back-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono',monospace; font-size: 0.75rem;
+            color: var(--text-muted); text-decoration: none;
+            margin-bottom: 1.5rem; transition: color 0.2s;
+        }
+        .event-back-link:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .event-detail-hero .hero-text { padding: 1.2rem 1rem 1rem; }
+            .event-photo-grid { grid-template-columns: 1fr; }
+            .event-photo-grid figure img { height: 180px; }
+            .logo-display { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="section">
+        <div class="container">
+            <a href="../" class="event-back-link reveal">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+
+            <!-- Hero -->
+            <div class="event-detail-hero reveal">
+                <img src="../../events/Notion%20Community%20Day%202026/Notion_4.jpg" alt="Notion Community Show Day 2026" loading="lazy">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <div class="hero-meta"><i class="fas fa-handshake"></i> Meetup &middot; 2026 &middot; Makerere University, COCIS Block A</div>
+                    <h1>Notion Community Show Day 2026</h1>
+                </div>
+            </div>
+
+            <div class="event-content">
+                <p class="reveal delay-1" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
+                    My very first Notion Community event, and it did not disappoint. Organised by 
+                    <strong style="color:var(--accent);">Ronnie Linslay Atuhaire</strong> and 
+                    <strong style="color:var(--accent);">Shakiran Nannyombi</strong>, with 
+                    <strong style="color:var(--accent);">Bahati Brenda Kizito</strong> serving as the MC for the day.
+                </p>
+
+                <!-- Logo -->
+                <div class="logo-display reveal delay-1">
+                    <img src="../../events/Notion%20Community%20Day%202026/Notion_logo.png" alt="Notion logo">
+                    <div class="logo-text">
+                        <h4><i class="fas fa-info-circle" style="margin-right:6px;"></i> Notion Community</h4>
+                        <p>A community-driven event series exploring how Notion can transform personal productivity, team collaboration, and creative workflows through hands-on learning and shared experiences.</p>
+                    </div>
+                </div>
+
+                <!-- Highlight -->
+                <div class="event-highlight reveal delay-2">
+                    <h4><i class="fas fa-gamepad" style="margin-right:6px;"></i> Highlight</h4>
+                    <p style="font-size:1rem;color:var(--text);font-weight:600;">
+                        Another Kahoot podium finish hosted by 
+                        <strong style="color:var(--accent);">Benjamin Wakida Eldon</strong> 
+                        <span style="font-weight:400;color:var(--text-muted);">&mdash; bragging rights well earned!</span>
+                    </p>
+                </div>
+
+                <!-- Speakers -->
+                <h2 class="reveal delay-2">What We Learned</h2>
+                <p class="reveal delay-2">
+                    The speakers shared valuable insights covering everything from building stunning dashboards 
+                    and creating customised Notion avatars to exploring creative ways Notion can boost everyday 
+                    productivity. Each session was practical, showing real workflows rather than just theory.
+                </p>
+                <p class="reveal delay-2">
+                    The energy in the room was fantastic — people from different universities, different 
+                    disciplines, all coming together around the idea that better tools enable better thinking.
+                </p>
+
+                <!-- Connections -->
+                <h2 class="reveal delay-2">Connections Made</h2>
+                <p class="reveal delay-2">
+                    I was excited to connect with amazing people from across the tech ecosystem, including 
+                    community leads from various universities such as Victoria University, IUEA, and many others. 
+                    Events like these remind me how strong Uganda's tech community is growing.
+                </p>
+                <p class="reveal delay-2">
+                    Grateful to everyone who made the space engaging and welcoming.
+                </p>
+
+                <!-- Gallery -->
+                <h2 class="reveal delay-3">Event Gallery</h2>
+                <div class="event-photo-grid reveal delay-3">
+                    <figure>
+                        <img src="../../events/Notion%20Community%20Day%202026/Notion_1.jpg" alt="Notion Community Show Day session" loading="lazy">
+                        <figcaption>Session in progress</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Notion%20Community%20Day%202026/Notion_2.jpg" alt="Notion Community Show Day speakers" loading="lazy">
+                        <figcaption>Speakers and attendees</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Notion%20Community%20Day%202026/Notion_5.jpg" alt="Notion Community Show Day group" loading="lazy">
+                        <figcaption>Group memories</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Looking Forward -->
+                <h2 class="reveal delay-3">Looking Forward</h2>
+                <p class="reveal delay-3">
+                    Looking forward to attending more community events, learning, sharing, and contributing 
+                    to Uganda's growing tech ecosystem. If you are part of a Notion community or thinking 
+                    of starting one, reach out -- the more builders we have, the better.
+                </p>
+
+                <!-- Actions -->
+                <div class="event-actions reveal delay-3">
+                    <a href="../" class="btn-event btn-event-ghost">
+                        <i class="fas fa-arrow-left"></i> All Events
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>
