@@ -1,784 +1,804 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="assets/images/logo.png">
-    <title>Mubiru Elton Felix | Data Engineering & Software Engineering Student</title>
-    <meta name="description" content="Modern portfolio of Mubiru Elton Felix focused on data engineering, backend systems, and software engineering.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="tokens.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <style>
-        /* ── Hero Redesign ── */
-        .hero-section {
-            position: relative;
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            padding: 2rem 0;
-            overflow: hidden;
-            background: var(--bg);
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 70% 60% at 70% 40%, rgba(255,215,0,0.04) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        .hero-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* ── Left Content ── */
-        .hero-text-col { position: relative; z-index: 3; }
-
-        .hero-eyebrow {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .hero-eyebrow::before {
-            content: '';
-            width: 24px;
-            height: 1px;
-            background: var(--accent);
-        }
-
-        .hero-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(1.8rem, 4.5vw, 3.2rem);
-            font-weight: 900;
-            color: var(--text);
-            line-height: 1.08;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-        .hero-title .accent {
-            color: var(--accent);
-            display: inline-block;
-            position: relative;
-        }
-        .hero-title .accent::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 2px;
-            opacity: 0.3;
-        }
-
-        .hero-sub {
-            font-size: 0.95rem;
-            color: rgba(201,201,201,0.75);
-            line-height: 1.65;
-            max-width: 44ch;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 0.7rem;
-            flex-wrap: wrap;
-        }
-
-        /* ── Right Image ── */
-        .hero-media-col {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image-frame {
-            position: relative;
-            width: min(420px, 100%);
-            aspect-ratio: 4 / 3;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            background: var(--surface);
-        }
-        .hero-image-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: 50% 30%;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-        .hero-image-frame:hover img {
-            transform: scale(1.04);
-        }
-
-        .hero-image-frame .image-overlay-glow {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,215,0,0.06) 0%, transparent 40%, transparent 70%, rgba(255,215,0,0.03) 100%);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .hero-image-frame .image-border-accent {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), transparent 80%);
-            z-index: 3;
-        }
-
-        /* Decorative elements around image */
-        .hero-media-deco {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .hero-media-deco .deco-dot {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            opacity: 0.2;
-        }
-        .hero-media-deco .deco-dot:nth-child(1) { top: -12px; left: 15%; }
-        .hero-media-deco .deco-dot:nth-child(2) { top: 20%; right: -18px; }
-        .hero-media-deco .deco-dot:nth-child(3) { bottom: 10%; left: -12px; }
-        .hero-media-deco .deco-dot:nth-child(4) { bottom: -12px; right: 30%; }
-
-        .hero-media-deco .deco-line {
-            position: absolute;
-            background: var(--border);
-        }
-        .hero-media-deco .deco-line:nth-child(5) {
-            top: -20px;
-            left: 50%;
-            width: 1px;
-            height: 20px;
-        }
-        .hero-media-deco .deco-line:nth-child(6) {
-            bottom: -20px;
-            right: 10%;
-            width: 1px;
-            height: 20px;
-        }
-
-        /* ── Floating tag badge ── */
-        .hero-tag-badge {
-            position: absolute;
-            bottom: -10px;
-            left: -10px;
-            background: var(--surface-soft);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 5;
-            backdrop-filter: blur(6px);
-        }
-        .hero-tag-badge i {
-            color: var(--accent);
-            font-size: 0.85rem;
-        }
-        .hero-tag-badge span {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        /* ── Mobile ── */
-	        @media (max-width: 768px) {
-	            .hero-section { min-height: auto; padding: 4rem 0 2rem; }
-	            .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
-	            .hero-text-col { order: 2; text-align: center; }
-	            .hero-media-col { order: 1; }
-	            .hero-sub { margin-left: auto; margin-right: auto; }
-	            .hero-cta { justify-content: center; }
-	            .hero-eyebrow { justify-content: center; }
-	            .hero-eyebrow::before { display: none; }
-	            .hero-image-frame { width: min(320px, 90%); aspect-ratio: 4/3; }
-	            .hero-tag-badge { left: 50%; transform: translateX(-50%); bottom: -12px; }
-	            .hero-media-deco { display: none; }
-	        }
-
-	        /* ── Community Roles Carousel ── */
-	        .roles-carousel-wrap {
-	            position: relative;
-	            overflow: hidden;
-	            max-width: 600px;
-	            margin: 0 auto;
-	        }
-	        .roles-track {
-	            display: flex;
-	            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	            gap: 0;
-	        }
-	        .role-slide {
-	            min-width: 100%;
-	            padding: 0 4px;
-	            box-sizing: border-box;
-	        }
-	        .role-card-inner {
-	            background: var(--surface);
-	            border: 1px solid var(--border);
-	            border-radius: var(--radius);
-	            padding: 1.8rem;
-	            text-align: center;
-	            position: relative;
-	            overflow: hidden;
-	        }
-	        .role-card-inner::before {
-	            content: '';
-	            position: absolute;
-	            top: 0;
-	            left: 0;
-	            right: 0;
-	            height: 2px;
-	            background: linear-gradient(90deg, var(--accent), transparent);
-	        }
-	        .role-icon-wrap {
-	            width: 56px;
-	            height: 56px;
-	            border-radius: 50%;
-	            overflow: hidden;
-	            border: 2px solid var(--border);
-	            background: var(--surface-soft);
-	            margin: 0 auto 0.8rem;
-	            display: flex;
-	            align-items: center;
-	            justify-content: center;
-	        }
-	        .role-icon-wrap img {
-	            width: 70%;
-	            height: 70%;
-	            object-fit: contain;
-	        }
-	        .role-badge {
-	            display: inline-block;
-	            font-family: 'IBM Plex Mono', monospace;
-	            font-size: 0.55rem;
-	            text-transform: uppercase;
-	            letter-spacing: 0.1em;
-	            padding: 2px 10px;
-	            border-radius: 4px;
-	            background: rgba(255,215,0,0.08);
-	            color: var(--accent);
-	            margin-bottom: 0.3rem;
-	        }
-	        .role-card-content h3 {
-	            font-size: 1.05rem;
-	            font-weight: 700;
-	            color: var(--text);
-	            margin-bottom: 2px;
-	        }
-	        .role-card-content .role-org {
-	            font-family: 'IBM Plex Mono', monospace;
-	            font-size: 0.6rem;
-	            color: var(--text-muted);
-	            margin-bottom: 0.5rem;
-	        }
-	        .role-card-content p {
-	            font-size: 0.82rem;
-	            color: rgba(201,201,201,0.7);
-	            line-height: 1.55;
-	            margin-bottom: 0.6rem;
-	        }
-	        .role-tags {
-	            display: flex;
-	            gap: 6px;
-	            justify-content: center;
-	            flex-wrap: wrap;
-	        }
-	        .role-tags span {
-	            font-family: 'IBM Plex Mono', monospace;
-	            font-size: 0.58rem;
-	            padding: 2px 10px;
-	            border-radius: 4px;
-	            background: rgba(255,215,0,0.05);
-	            border: 1px solid rgba(255,215,0,0.12);
-	            color: var(--text-muted);
-	        }
-	        .roles-nav {
-	            display: flex;
-	            align-items: center;
-	            justify-content: center;
-	            gap: 1rem;
-	            margin-top: 1rem;
-	        }
-	        .roles-nav button {
-	            background: none;
-	            border: 1px solid var(--border);
-	            border-radius: 8px;
-	            width: 36px;
-	            height: 36px;
-	            display: flex;
-	            align-items: center;
-	            justify-content: center;
-	            color: var(--accent);
-	            cursor: pointer;
-	            transition: all 0.2s;
-	            font-size: 0.8rem;
-	        }
-	        .roles-nav button:hover {
-	            border-color: var(--accent);
-	            background: rgba(255,215,0,0.05);
-	        }
-	        .roles-dots {
-	            display: flex;
-	            gap: 8px;
-	        }
-	        .roles-dot {
-	            width: 8px;
-	            height: 8px;
-	            border-radius: 50%;
-	            border: none;
-	            background: var(--border);
-	            cursor: pointer;
-	            padding: 0;
-	            transition: background 0.2s;
-	        }
-	        .roles-dot.is-active {
-	            background: var(--accent);
-	            width: 24px;
-	            border-radius: 4px;
-	        }
-
-	        /* ── Tech Icon Cards ── */
-	        .tech-icon-card {
-	            background: var(--surface-soft);
-	            border: 1px solid var(--border);
-	            border-radius: 10px;
-	            padding: 1rem 0.8rem;
-	            text-align: center;
-	            transition: border-color 0.25s, transform 0.25s;
-	        }
-	        .tech-icon-card:hover {
-	            border-color: rgba(255,215,0,0.3);
-	            transform: translateY(-3px);
-	        }
-	        .tech-icon-card i {
-	            font-size: 1.2rem;
-	            color: var(--accent);
-	            margin-bottom: 6px;
-	            display: block;
-	        }
-	        .tech-icon-card span {
-	            font-family: 'IBM Plex Mono', monospace;
-	            font-size: 0.65rem;
-	            color: var(--text);
-	        }
-
-	        /* ── Skills Cards ── */
-	        .skill-card {
-	            background: var(--surface);
-	            border: 1px solid var(--border);
-	            border-radius: var(--radius);
-	            padding: 1.5rem;
-	            transition: border-color 0.25s, transform 0.25s;
-	            position: relative;
-	            overflow: hidden;
-	        }
-	        .skill-card:hover {
-	            border-color: rgba(255,215,0,0.25);
-	            transform: translateY(-3px);
-	        }
-	        .skill-card .skill-icon {
-	            width: 40px;
-	            height: 40px;
-	            border-radius: 10px;
-	            background: rgba(255,215,0,0.06);
-	            border: 1px solid rgba(255,215,0,0.12);
-	            display: flex;
-	            align-items: center;
-	            justify-content: center;
-	            margin-bottom: 0.8rem;
-	            color: var(--accent);
-	            font-size: 1rem;
-	        }
-	        .skill-card h3 {
-	            font-size: 0.85rem;
-	            font-weight: 700;
-	            color: var(--text);
-	            margin-bottom: 0.4rem;
-	        }
-	        .skill-card p {
-	            font-size: 0.75rem;
-	            color: rgba(201,201,201,0.7);
-	            line-height: 1.55;
-	            margin-bottom: 0.8rem;
-	        }
-	        .skill-bar {
-	            height: 5px;
-	            background: var(--surface-soft);
-	            border-radius: 10px;
-	            overflow: hidden;
-	        }
-	        .skill-bar span {
-	            display: block;
-	            height: 100%;
-	            border-radius: 10px;
-	            background: linear-gradient(90deg, var(--accent), var(--accent-soft));
-	            transition: width 0.6s ease;
-	        }
-
-	        /* ── Featured Project Cards ── */
-	        .featured-proj-card {
-	            background: var(--surface);
-	            border: 1px solid var(--border);
-	            border-radius: var(--radius);
-	            padding: 1.5rem;
-	            transition: border-color 0.25s, transform 0.25s;
-	            display: flex;
-	            flex-direction: column;
-	        }
-	        .featured-proj-card:hover {
-	            border-color: rgba(255,215,0,0.25);
-	            transform: translateY(-3px);
-	        }
-	        .featured-proj-card .fproj-top {
-	            display: flex;
-	            align-items: center;
-	            justify-content: space-between;
-	            margin-bottom: 0.4rem;
-	        }
-	        .featured-proj-card .fproj-top h3 {
-	            font-size: 0.95rem;
-	            font-weight: 700;
-	            color: var(--text);
-	            margin: 0;
-	        }
-	        .featured-proj-card .fproj-top .fproj-badge {
-	            font-family: 'IBM Plex Mono', monospace;
-	            font-size: 0.55rem;
-	            padding: 2px 8px;
-	            border-radius: 4px;
-	            background: rgba(255,215,0,0.08);
-	            color: var(--accent);
-	            text-transform: uppercase;
-	            letter-spacing: 0.06em;
-	        }
-	        .featured-proj-card p {
-	            font-size: 0.78rem;
-	            color: rgba(201,201,201,0.7);
-	            line-height: 1.55;
-	            margin-bottom: 0.6rem;
-	            flex: 1;
-	        }
-	        .fproj-tags {
-	            display: flex;
-	            flex-wrap: wrap;
-	            gap: 4px;
-	            margin-bottom: 0.7rem;
-	        }
-	        .fproj-tags span {
-	            font-family: 'IBM Plex Mono', monospace;
-	            font-size: 0.58rem;
-	            padding: 2px 8px;
-	            border-radius: 4px;
-	            background: rgba(255,215,0,0.05);
-	            border: 1px solid rgba(255,215,0,0.12);
-	            color: var(--text-muted);
-	        }
-	        .fproj-actions {
-	            display: flex;
-	            gap: 6px;
-	            flex-wrap: wrap;
-	        }
-
-	        /* ── Connect Links ── */
-	        .connect-link {
-	            display: flex;
-	            align-items: center;
-	            gap: 10px;
-	            padding: 0.7rem 1rem;
-	            background: var(--surface-soft);
-	            border: 1px solid var(--border);
-	            border-radius: 10px;
-	            text-decoration: none;
-	            transition: all 0.25s;
-	        }
-	        .connect-link:hover {
-	            border-color: var(--accent);
-	            transform: translateY(-2px);
-	            background: var(--surface);
-	        }
-	        .connect-link i {
-	            width: 32px;
-	            height: 32px;
-	            display: flex;
-	            align-items: center;
-	            justify-content: center;
-	            border-radius: 8px;
-	            border: 1px solid var(--border);
-	            color: var(--accent);
-	            font-size: 0.85rem;
-	            flex-shrink: 0;
-	            transition: background 0.2s, color 0.2s;
-	        }
-	        .connect-link:hover i {
-	            background: var(--accent);
-	            color: #000;
-	            border-color: var(--accent);
-	        }
-	        .connect-link span {
-	            font-size: 0.72rem;
-	            font-weight: 500;
-	            color: var(--text);
-	        }
-	    </style>
-</head>
-
-<body data-root="">
-    <div id="site-nav"></div>
-
-    <main class="home-main">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="hero-layout">
-
-                    <!-- Text Column -->
-                    <div class="hero-text-col">
-                        <div class="hero-eyebrow reveal">Digital Craftsman</div>
-                        <h1 class="hero-title reveal">
-                            <span class="accent">Machine Learning</span> Student &amp; Community Lead
-                        </h1>
-                        <p class="hero-sub reveal">
-                            Focused on geometric deep learning, ML systems, and the mathematical foundations of intelligent infrastructure. Building at the intersection of software, data, and community.
-                        </p>
-                        <div class="hero-cta reveal">
-                            <a class="btn btn-primary" href="projects/"><i class="fas fa-arrow-right"></i> View Projects</a>
-                            <a class="btn btn-ghost" href="tools/">View My Tools</a>
-                        </div>
-                    </div>
-
-                    <!-- Image Column -->
-                    <div class="hero-media-col reveal delay-1">
-                        <div class="hero-media-deco">
-                            <div class="deco-dot"></div>
-                            <div class="deco-dot"></div>
-                            <div class="deco-dot"></div>
-                            <div class="deco-dot"></div>
-                            <div class="deco-line"></div>
-                            <div class="deco-line"></div>
-                        </div>
-                        <div class="hero-image-frame">
-                            <div class="image-overlay-glow"></div>
-                            <div class="image-border-accent"></div>
-                            <img src="events/Build_With_AI_Makerere/Build_With_AI_3.jpg" alt="Build With AI Makerere Hackathon" loading="lazy">
-                        </div>
-                        <div class="hero-tag-badge">
-                            <i class="fas fa-user"></i>
-                            <span>Mubiru Elton Felix</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Strip -->
-        <section class="stats-strip reveal">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Projects</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">2+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Community Members</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Hackathons</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Featured Event: Build With AI ─── -->
-        <section class="section" style="padding:3rem 0 1.5rem;">
-            <div class="container">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-trophy" style="margin-right:6px;"></i> Featured Event
-                    </span>
-                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
-                </div>
-
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-                    <div style="height:clamp(180px,22vw,280px);overflow:hidden;">
-                        <img src="events/Build_With_AI_Makerere/Build_With_AI_1.jpg" alt="Build With AI Makerere Hackathon" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 0%;display:block;transition:transform 0.4s;">
-                    </div>
-                    <div style="padding:1.5rem 1.5rem 1.5rem 0;">
-                        <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:var(--text);margin-bottom:0.3rem;">Build With AI Makerere</h2>
-                        <p style="font-size:0.8rem;color:rgba(201,201,201,0.7);line-height:1.55;margin-bottom:0.3rem;">
-                            Team Tech Clan built <strong style="color:var(--accent);">MoMo Scam Checker</strong> and secured 2nd place at the MLH and GDG Makerere hackathon.
-                        </p>
-                        <p style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.8rem;font-family:'IBM Plex Mono',monospace;">
-                            Shakiran Nannyombi &amp; Benjamin Wakida Eldon &middot; American Center Kampala
-                        </p>
-                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-                            <a href="gallery/build-with-ai-mak/" class="btn btn-primary" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
-                                <i class="fas fa-arrow-right"></i> Full Details
-                            </a>
-                            <a href="gallery/" class="btn btn-ghost" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
-                                <i class="fas fa-calendar"></i> View Events
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Featured Blog: Neural Networks 101 ─── -->
-        <section class="section" style="padding:2rem 0 1.5rem;">
-            <div class="container">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-pen-nib" style="margin-right:6px;"></i> Featured Article
-                    </span>
-                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;background:var(--surface-soft);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;">
-                    <div>
-                        <h2 style="font-family:'Orbitron',monospace;font-size:clamp(0.95rem,2vw,1.2rem);font-weight:700;color:var(--text);margin-bottom:0.3rem;">Neural Networks 101</h2>
-                        <p style="font-size:0.8rem;color:rgba(201,201,201,0.7);line-height:1.55;margin-bottom:0.6rem;">
-                            A beginner-friendly guide to what neural networks actually are, why they matter, and how to think about them — no math required. Written from the perspective of building one, not just using one.
-                        </p>
-                        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:0.7rem;">
-                            <span style="font-family:'IBM Plex Mono',monospace;font-size:0.58rem;padding:2px 8px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Neural Networks</span>
-                            <span style="font-family:'IBM Plex Mono',monospace;font-size:0.58rem;padding:2px 8px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Beginner</span>
-                            <span style="font-family:'IBM Plex Mono',monospace;font-size:0.58rem;padding:2px 8px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Intuition</span>
-                        </div>
-                        <a href="blog/neural-networks-101.html" class="btn btn-primary" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
-                            <i class="fas fa-book-open"></i> Read Article
-                        </a>
-                    </div>
-                    <div style="display:flex;justify-content:center;">
-                        <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px;">
-                            <rect width="400" height="180" fill="#0f0f0f" rx="10"/>
-                            <circle cx="60" cy="50" r="10" fill="none" stroke="#ffd700" stroke-width="1.5"/>
-                            <circle cx="60" cy="90" r="10" fill="none" stroke="#ffd700" stroke-width="1.5"/>
-                            <circle cx="60" cy="130" r="10" fill="none" stroke="#ffd700" stroke-width="1.5"/>
-                            <circle cx="160" cy="40" r="8" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
-                            <circle cx="160" cy="70" r="8" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
-                            <circle cx="160" cy="100" r="8" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
-                            <circle cx="160" cy="130" r="8" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
-                            <circle cx="260" cy="55" r="7" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
-                            <circle cx="260" cy="90" r="7" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
-                            <circle cx="260" cy="125" r="7" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
-                            <circle cx="340" cy="70" r="9" fill="none" stroke="#ffd700" stroke-width="2"/>
-                            <circle cx="340" cy="110" r="9" fill="none" stroke="#ffd700" stroke-width="2"/>
-                            <line x1="70" y1="50" x2="152" y2="40" stroke="#2a2a2a" stroke-width="0.4"/>
-                            <line x1="70" y1="90" x2="152" y2="100" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
-                            <line x1="168" y1="70" x2="253" y2="55" stroke="#2a2a2a" stroke-width="0.4"/>
-                            <line x1="168" y1="100" x2="253" y2="90" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
-                            <line x1="267" y1="90" x2="331" y2="70" stroke="#2a2a2a" stroke-width="0.4"/>
-                            <circle cx="160" cy="100" r="3" fill="#ffd700" opacity="0.7">
-                                <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" repeatCount="indefinite"/>
-                            </circle>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Community Roles ─── -->
-        <section class="section" style="padding:2rem 0;">
-            <div class="container">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-people-group" style="margin-right:6px;"></i> Community Roles
-                    </span>
-                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
-                </div>
-
-                <div class="roles-carousel-wrap">
-                    <div class="roles-track" id="rolesTrack">
-                        <div class="role-slide">
-                            <div class="role-card-inner">
-                                <div class="role-icon-wrap">
-                                    <img src="assets/images/mucosa%20logo.png" alt="MUCOSA">
-                                </div>
-                                <div class="role-card-content">
-                                    <span class="role-badge">MUCOSA</span>
-                                    <h3>Tech Community Lead</h3>
-                                    <p class="role-org">Mbarara University of Science and Technology</p>
-                                    <p>Driving innovation through mentorship, collaborative learning, and hands-on projects under MUCOSA.</p>
-                                    <div class="role-tags">
-                                        <span>Mentorship</span>
-                                        <span>Innovation</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="role-slide">
-                            <div class="role-card-inner">
-                                <div class="role-icon-wrap">
-                                    <img src="assets/images/global_ai_mbarara_logo.jpg" alt="Global AI Mbarara">
-                                </div>
-                                <div class="role-card-content">
-                                    <span class="role-badge">Global AI Mbarara</span>
-                                    <h3>Co-Organiser</h3>
-                                    <p class="role-org">Global AI Community</p>
-                                    <p>Co-organising AI meetups, workshops, and events that connect Mbarara's AI ecosystem with the global community.</p>
-                                    <div class="role-tags">
-                                        <span>globalai.community</span>
-                                        <span>AI Events</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="role-slide">
-                            <div class="role-card-inner">
-                                <div class="role-icon-wrap">
-                                    <img src="assets/images/deepminds-ai-logo.svg" alt="DeepMinds AI Mbarara">
-                                </div>
-                                <div class="role-card-content">
-                                    <span class="role-badge">DeepMinds AI Mbarara</span>
-                                    <h3>Student Lead</h3>
-                                    <p class="role-org">DeepMinds AI Mbarara</p>
-                                    <p>Leading student-driven AI research, learning sessions, and project initiatives under the DeepMinds AI chapter at Mbarara.</p>
-                                    <div class="role-tags">
-                                        <span>Research</span>
-                                        <span>Student Leadership</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <title>Mubiru Elton Felix | Data Engineering & Software Engineering Student</title>
+    <meta name="description" content="Modern portfolio of Mubiru Elton Felix focused on data engineering, backend systems, and software engineering.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="tokens.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* ── Hero Redesign ── */
+        .hero-section {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem 0;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 70% 40%, rgba(255,215,0,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ── Left Content ── */
+        .hero-text-col { position: relative; z-index: 3; }
+
+        .hero-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--text);
+            line-height: 1.08;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .hero-title .accent {
+            color: var(--accent);
+            display: inline-block;
+            position: relative;
+        }
+        .hero-title .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .hero-sub {
+            font-size: 0.95rem;
+            color: rgba(201,201,201,0.75);
+            line-height: 1.65;
+            max-width: 44ch;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        /* ── Right Image ── */
+        .hero-media-col {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-frame {
+            position: relative;
+            width: min(420px, 100%);
+            aspect-ratio: 4 / 3;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        .hero-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 30%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .hero-image-frame:hover img {
+            transform: scale(1.04);
+        }
+
+        .hero-image-frame .image-overlay-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,215,0,0.06) 0%, transparent 40%, transparent 70%, rgba(255,215,0,0.03) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .hero-image-frame .image-border-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent 80%);
+            z-index: 3;
+        }
+
+        /* Decorative elements around image */
+        .hero-media-deco {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-media-deco .deco-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.2;
+        }
+        .hero-media-deco .deco-dot:nth-child(1) { top: -12px; left: 15%; }
+        .hero-media-deco .deco-dot:nth-child(2) { top: 20%; right: -18px; }
+        .hero-media-deco .deco-dot:nth-child(3) { bottom: 10%; left: -12px; }
+        .hero-media-deco .deco-dot:nth-child(4) { bottom: -12px; right: 30%; }
+
+        .hero-media-deco .deco-line {
+            position: absolute;
+            background: var(--border);
+        }
+        .hero-media-deco .deco-line:nth-child(5) {
+            top: -20px;
+            left: 50%;
+            width: 1px;
+            height: 20px;
+        }
+        .hero-media-deco .deco-line:nth-child(6) {
+            bottom: -20px;
+            right: 10%;
+            width: 1px;
+            height: 20px;
+        }
+
+        /* ── Floating tag badge ── */
+        .hero-tag-badge {
+            position: absolute;
+            bottom: -10px;
+            left: -10px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 5;
+            backdrop-filter: blur(6px);
+        }
+        .hero-tag-badge i {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+        .hero-tag-badge span {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── Mobile ── */
+	        @media (max-width: 768px) {
+	            .hero-section { min-height: auto; padding: 4rem 0 2rem; }
+	            .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
+	            .hero-text-col { order: 2; text-align: center; }
+	            .hero-media-col { order: 1; }
+	            .hero-sub { margin-left: auto; margin-right: auto; }
+	            .hero-cta { justify-content: center; }
+	            .hero-eyebrow { justify-content: center; }
+	            .hero-eyebrow::before { display: none; }
+	            .hero-image-frame { width: min(320px, 90%); aspect-ratio: 4/3; }
+	            .hero-tag-badge { left: 50%; transform: translateX(-50%); bottom: -12px; }
+	            .hero-media-deco { display: none; }
+	        }
+
+	        /* ── Community Roles Carousel ── */
+	        .roles-carousel-wrap {
+	            position: relative;
+	            overflow: hidden;
+	            max-width: 600px;
+	            margin: 0 auto;
+	        }
+	        .roles-track {
+	            display: flex;
+	            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	            gap: 0;
+	        }
+	        .role-slide {
+	            min-width: 100%;
+	            padding: 0 4px;
+	            box-sizing: border-box;
+	        }
+	        .role-card-inner {
+	            background: var(--surface);
+	            border: 1px solid var(--border);
+	            border-radius: var(--radius);
+	            padding: 1.8rem;
+	            text-align: center;
+	            position: relative;
+	            overflow: hidden;
+	        }
+	        .role-card-inner::before {
+	            content: '';
+	            position: absolute;
+	            top: 0;
+	            left: 0;
+	            right: 0;
+	            height: 2px;
+	            background: linear-gradient(90deg, var(--accent), transparent);
+	        }
+	        .role-icon-wrap {
+	            width: 56px;
+	            height: 56px;
+	            border-radius: 50%;
+	            overflow: hidden;
+	            border: 2px solid var(--border);
+	            background: var(--surface-soft);
+	            margin: 0 auto 0.8rem;
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	        }
+	        .role-icon-wrap img {
+	            width: 70%;
+	            height: 70%;
+	            object-fit: contain;
+	        }
+	        .role-badge {
+	            display: inline-block;
+	            font-family: 'IBM Plex Mono', monospace;
+	            font-size: 0.55rem;
+	            text-transform: uppercase;
+	            letter-spacing: 0.1em;
+	            padding: 2px 10px;
+	            border-radius: 4px;
+	            background: rgba(255,215,0,0.08);
+	            color: var(--accent);
+	            margin-bottom: 0.3rem;
+	        }
+	        .role-card-content h3 {
+	            font-size: 1.05rem;
+	            font-weight: 700;
+	            color: var(--text);
+	            margin-bottom: 2px;
+	        }
+	        .role-card-content .role-org {
+	            font-family: 'IBM Plex Mono', monospace;
+	            font-size: 0.6rem;
+	            color: var(--text-muted);
+	            margin-bottom: 0.5rem;
+	        }
+	        .role-card-content p {
+	            font-size: 0.82rem;
+	            color: rgba(201,201,201,0.7);
+	            line-height: 1.55;
+	            margin-bottom: 0.6rem;
+	        }
+	        .role-tags {
+	            display: flex;
+	            gap: 6px;
+	            justify-content: center;
+	            flex-wrap: wrap;
+	        }
+	        .role-tags span {
+	            font-family: 'IBM Plex Mono', monospace;
+	            font-size: 0.58rem;
+	            padding: 2px 10px;
+	            border-radius: 4px;
+	            background: rgba(255,215,0,0.05);
+	            border: 1px solid rgba(255,215,0,0.12);
+	            color: var(--text-muted);
+	        }
+	        .roles-nav {
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	            gap: 1rem;
+	            margin-top: 1rem;
+	        }
+	        .roles-nav button {
+	            background: none;
+	            border: 1px solid var(--border);
+	            border-radius: 8px;
+	            width: 36px;
+	            height: 36px;
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	            color: var(--accent);
+	            cursor: pointer;
+	            transition: all 0.2s;
+	            font-size: 0.8rem;
+	        }
+	        .roles-nav button:hover {
+	            border-color: var(--accent);
+	            background: rgba(255,215,0,0.05);
+	        }
+	        .roles-dots {
+	            display: flex;
+	            gap: 8px;
+	        }
+	        .roles-dot {
+	            width: 8px;
+	            height: 8px;
+	            border-radius: 50%;
+	            border: none;
+	            background: var(--border);
+	            cursor: pointer;
+	            padding: 0;
+	            transition: background 0.2s;
+	        }
+	        .roles-dot.is-active {
+	            background: var(--accent);
+	            width: 24px;
+	            border-radius: 4px;
+	        }
+
+	        /* ── Tech Icon Cards ── */
+	        .tech-icon-card {
+	            background: var(--surface-soft);
+	            border: 1px solid var(--border);
+	            border-radius: 10px;
+	            padding: 1rem 0.8rem;
+	            text-align: center;
+	            transition: border-color 0.25s, transform 0.25s;
+	        }
+	        .tech-icon-card:hover {
+	            border-color: rgba(255,215,0,0.3);
+	            transform: translateY(-3px);
+	        }
+	        .tech-icon-card i {
+	            font-size: 1.2rem;
+	            color: var(--accent);
+	            margin-bottom: 6px;
+	            display: block;
+	        }
+	        .tech-icon-card span {
+	            font-family: 'IBM Plex Mono', monospace;
+	            font-size: 0.65rem;
+	            color: var(--text);
+	        }
+
+	        /* ── Skills Cards ── */
+	        .skill-card {
+	            background: var(--surface);
+	            border: 1px solid var(--border);
+	            border-radius: var(--radius);
+	            padding: 1.5rem;
+	            transition: border-color 0.25s, transform 0.25s;
+	            position: relative;
+	            overflow: hidden;
+	        }
+	        .skill-card:hover {
+	            border-color: rgba(255,215,0,0.25);
+	            transform: translateY(-3px);
+	        }
+	        .skill-card .skill-icon {
+	            width: 40px;
+	            height: 40px;
+	            border-radius: 10px;
+	            background: rgba(255,215,0,0.06);
+	            border: 1px solid rgba(255,215,0,0.12);
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	            margin-bottom: 0.8rem;
+	            color: var(--accent);
+	            font-size: 1rem;
+	        }
+	        .skill-card h3 {
+	            font-size: 0.85rem;
+	            font-weight: 700;
+	            color: var(--text);
+	            margin-bottom: 0.4rem;
+	        }
+	        .skill-card p {
+	            font-size: 0.75rem;
+	            color: rgba(201,201,201,0.7);
+	            line-height: 1.55;
+	            margin-bottom: 0.8rem;
+	        }
+	        .skill-bar {
+	            height: 5px;
+	            background: var(--surface-soft);
+	            border-radius: 10px;
+	            overflow: hidden;
+	        }
+	        .skill-bar span {
+	            display: block;
+	            height: 100%;
+	            border-radius: 10px;
+	            background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+	            transition: width 0.6s ease;
+	        }
+
+	        /* ── Featured Project Cards ── */
+	        .featured-proj-card {
+	            background: var(--surface);
+	            border: 1px solid var(--border);
+	            border-radius: var(--radius);
+	            padding: 1.5rem;
+	            transition: border-color 0.25s, transform 0.25s;
+	            display: flex;
+	            flex-direction: column;
+	        }
+	        .featured-proj-card:hover {
+	            border-color: rgba(255,215,0,0.25);
+	            transform: translateY(-3px);
+	        }
+	        .featured-proj-card .fproj-top {
+	            display: flex;
+	            align-items: center;
+	            justify-content: space-between;
+	            margin-bottom: 0.4rem;
+	        }
+	        .featured-proj-card .fproj-top h3 {
+	            font-size: 0.95rem;
+	            font-weight: 700;
+	            color: var(--text);
+	            margin: 0;
+	        }
+	        .featured-proj-card .fproj-top .fproj-badge {
+	            font-family: 'IBM Plex Mono', monospace;
+	            font-size: 0.55rem;
+	            padding: 2px 8px;
+	            border-radius: 4px;
+	            background: rgba(255,215,0,0.08);
+	            color: var(--accent);
+	            text-transform: uppercase;
+	            letter-spacing: 0.06em;
+	        }
+	        .featured-proj-card p {
+	            font-size: 0.78rem;
+	            color: rgba(201,201,201,0.7);
+	            line-height: 1.55;
+	            margin-bottom: 0.6rem;
+	            flex: 1;
+	        }
+	        .fproj-tags {
+	            display: flex;
+	            flex-wrap: wrap;
+	            gap: 4px;
+	            margin-bottom: 0.7rem;
+	        }
+	        .fproj-tags span {
+	            font-family: 'IBM Plex Mono', monospace;
+	            font-size: 0.58rem;
+	            padding: 2px 8px;
+	            border-radius: 4px;
+	            background: rgba(255,215,0,0.05);
+	            border: 1px solid rgba(255,215,0,0.12);
+	            color: var(--text-muted);
+	        }
+	        .fproj-actions {
+	            display: flex;
+	            gap: 6px;
+	            flex-wrap: wrap;
+	        }
+
+	        /* ── Connect Links ── */
+	        .connect-link {
+	            display: flex;
+	            align-items: center;
+	            gap: 10px;
+	            padding: 0.7rem 1rem;
+	            background: var(--surface-soft);
+	            border: 1px solid var(--border);
+	            border-radius: 10px;
+	            text-decoration: none;
+	            transition: all 0.25s;
+	        }
+	        .connect-link:hover {
+	            border-color: var(--accent);
+	            transform: translateY(-2px);
+	            background: var(--surface);
+	        }
+	        .connect-link i {
+	            width: 32px;
+	            height: 32px;
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	            border-radius: 8px;
+	            border: 1px solid var(--border);
+	            color: var(--accent);
+	            font-size: 0.85rem;
+	            flex-shrink: 0;
+	            transition: background 0.2s, color 0.2s;
+	        }
+	        .connect-link:hover i {
+	            background: var(--accent);
+	            color: #000;
+	            border-color: var(--accent);
+	        }
+	        .connect-link span {
+	            font-size: 0.72rem;
+	            font-weight: 500;
+	            color: var(--text);
+	        }
+	    </style>
+</head>
+
+<body data-root="">
+    <div id="site-nav"></div>
+
+    <main class="home-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-layout">
+
+                    <!-- Text Column -->
+                    <div class="hero-text-col">
+                        <div class="hero-eyebrow reveal">Digital Craftsman</div>
+                        <h1 class="hero-title reveal">
+                            <span class="accent">Machine Learning</span> Student &amp; Community Lead
+                        </h1>
+                        <p class="hero-sub reveal">
+                            Focused on geometric deep learning, ML systems, and the mathematical foundations of intelligent infrastructure. Building at the intersection of software, data, and community.
+                        </p>
+                        <div class="hero-cta reveal">
+                            <a class="btn btn-primary" href="projects/"><i class="fas fa-arrow-right"></i> View Projects</a>
+                            <a class="btn btn-ghost" href="tools/">View My Tools</a>
+                        </div>
+                    </div>
+
+                    <!-- Image Column -->
+                    <div class="hero-media-col reveal delay-1">
+                        <div class="hero-media-deco">
+                            <div class="deco-dot"></div>
+                            <div class="deco-dot"></div>
+                            <div class="deco-dot"></div>
+                            <div class="deco-dot"></div>
+                            <div class="deco-line"></div>
+                            <div class="deco-line"></div>
+                        </div>
+                        <div class="hero-image-frame">
+                            <div class="image-overlay-glow"></div>
+                            <div class="image-border-accent"></div>
+                            <img src="events/Build_With_AI_Makerere/Build_With_AI_3.jpg" alt="Build With AI Makerere Hackathon" loading="lazy">
+                        </div>
+                        <div class="hero-tag-badge">
+                            <i class="fas fa-user"></i>
+                            <span>Mubiru Elton Felix</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Strip -->
+        <section class="stats-strip reveal">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Hackathons</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Featured Event: Build With AI ─── -->
+        <section class="section" style="padding:3rem 0 1.5rem;">
+            <div class="container">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
+                        <i class="fas fa-trophy" style="margin-right:6px;"></i> Featured Event
+                    </span>
+                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+                    <div style="height:clamp(180px,22vw,280px);overflow:hidden;">
+                        <img src="events/Build_With_AI_Makerere/Build_With_AI_1.jpg" alt="Build With AI Makerere Hackathon" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 0%;display:block;transition:transform 0.4s;">
+                    </div>
+                    <div style="padding:1.5rem 1.5rem 1.5rem 0;">
+                        <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:var(--text);margin-bottom:0.3rem;">Build With AI Makerere</h2>
+                        <p style="font-size:0.8rem;color:rgba(201,201,201,0.7);line-height:1.55;margin-bottom:0.3rem;">
+                            Team Tech Clan built <strong style="color:var(--accent);">MoMo Scam Checker</strong> and secured 2nd place at the MLH and GDG Makerere hackathon.
+                        </p>
+                        <p style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.8rem;font-family:'IBM Plex Mono',monospace;">
+                            Shakiran Nannyombi &amp; Benjamin Wakida Eldon &middot; American Center Kampala
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                            <a href="gallery/build-with-ai-mak/" class="btn btn-primary" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
+                                <i class="fas fa-arrow-right"></i> Full Details
+                            </a>
+                            <a href="gallery/" class="btn btn-ghost" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
+                                <i class="fas fa-calendar"></i> View Events
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Featured Blog Posts ─── -->
+        <section class="section" style="padding:2rem 0 1.5rem;">
+            <div class="container">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
+                        <i class="fas fa-pen-nib" style="margin-right:6px;"></i> Latest Articles
+                    </span>
+                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                    <a href="blog/" style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-decoration:none;letter-spacing:0.06em;transition:opacity 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        View All <i class="fas fa-arrow-right" style="margin-left:4px;font-size:0.5rem;"></i>
+                    </a>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;">
+                    <!-- ML Article -->
+                    <div style="background:var(--surface-soft);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.3s,transform 0.3s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+                        <div style="height:140px;overflow:hidden;background:var(--surface);">
+                            <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+                                <rect width="400" height="140" fill="#0f0f0f" rx="0"/>
+                                <circle cx="60" cy="50" r="9" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                                <circle cx="60" cy="85" r="9" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                                <circle cx="140" cy="40" r="7" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                                <circle cx="140" cy="65" r="7" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                                <circle cx="140" cy="90" r="7" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                                <circle cx="220" cy="48" r="6" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                                <circle cx="220" cy="75" r="6" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                                <circle cx="300" cy="55" r="8" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.6"/>
+                                <circle cx="300" cy="85" r="8" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.6"/>
+                                <circle cx="365" cy="65" r="9" fill="none" stroke="#ffd700" stroke-width="2"/>
+                                <circle cx="365" cy="90" r="9" fill="none" stroke="#ffd700" stroke-width="2"/>
+                                <circle cx="140" cy="65" r="3" fill="#ffd700" opacity="0.7">
+                                    <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+                                <line x1="69" y1="50" x2="133" y2="40" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="69" y1="50" x2="133" y2="65" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="69" y1="85" x2="133" y2="65" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="69" y1="85" x2="133" y2="90" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="147" y1="65" x2="214" y2="75" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="226" y1="48" x2="292" y2="55" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="226" y1="75" x2="292" y2="85" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="308" y1="55" x2="356" y2="65" stroke="#2a2a2a" stroke-width="0.3"/>
+                                <line x1="308" y1="85" x2="356" y2="90" stroke="#2a2a2a" stroke-width="0.3"/>
+                            </svg>
+                        </div>
+                        <div style="padding:1.2rem 1.4rem 1.4rem;">
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">AI / Deep Learning</span>
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--text-muted);">2026</span>
+                            </div>
+                            <h3 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3;">My Journey Into Neural Networks: From Confusion to Building</h3>
+                            <p style="font-size:0.75rem;color:var(--text-muted);line-height:1.5;margin-bottom:10px;">The honest, unfiltered story of how I went from staring at equations to building neural networks from scratch. Including tiny_cnn, The Residual Stream, and what's coming next.</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.52rem;padding:2px 7px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Neural Networks</span>
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.52rem;padding:2px 7px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Building in Public</span>
+                            </div>
+                            <a href="blog/my-journey-into-neural-networks.html" style="display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;color:var(--accent);text-decoration:none;letter-spacing:0.04em;transition:gap 0.25s;" onmouseover="this.style.gap='9px'" onmouseout="this.style.gap='5px'">
+                                Read Article <i class="fas fa-arrow-right" style="font-size:0.55rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Community Article -->
+                    <div style="background:var(--surface-soft);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.3s,transform 0.3s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+                        <div style="height:140px;overflow:hidden;background:var(--surface);">
+                            <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+                                <rect width="400" height="140" fill="#0f0f0f" rx="0"/>
+                                <rect x="130" y="90" width="140" height="10" rx="3" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+                                <circle cx="200" cy="70" r="9" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                                <line x1="200" y1="79" x2="200" y2="90" stroke="#ffd700" stroke-width="1.5"/>
+                                <line x1="191" y1="82" x2="209" y2="82" stroke="#ffd700" stroke-width="1.5"/>
+                                <polygon points="210,75 370,20 370,120" fill="rgba(255,215,0,0.03)" stroke="none"/>
+                                <circle cx="40" cy="98" r="7" fill="none" stroke="#c9c9c9" stroke-width="1" opacity="0.7"/>
+                                <circle cx="65" cy="107" r="7" fill="none" stroke="#c9c9c9" stroke-width="1" opacity="0.7"/>
+                                <circle cx="90" cy="95" r="7" fill="none" stroke="#c9c9c9" stroke-width="1" opacity="0.7"/>
+                                <circle cx="310" cy="95" r="7" fill="none" stroke="#c9c9c9" stroke-width="1" opacity="0.7"/>
+                                <circle cx="335" cy="107" r="7" fill="none" stroke="#c9c9c9" stroke-width="1" opacity="0.7"/>
+                                <circle cx="360" cy="98" r="7" fill="none" stroke="#c9c9c9" stroke-width="1" opacity="0.7"/>
+                                <line x1="47" y1="98" x2="63" y2="107" stroke="#ffd700" stroke-width="0.4" opacity="0.2"/>
+                                <line x1="72" y1="107" x2="88" y2="95" stroke="#ffd700" stroke-width="0.4" opacity="0.2"/>
+                                <line x1="317" y1="95" x2="333" y2="107" stroke="#ffd700" stroke-width="0.4" opacity="0.2"/>
+                                <line x1="342" y1="107" x2="358" y2="98" stroke="#ffd700" stroke-width="0.4" opacity="0.2"/>
+                                <circle cx="200" cy="70" r="13" fill="none" stroke="#ffd700" stroke-width="0.5" opacity="0.4">
+                                    <animate attributeName="r" values="13;17;13" dur="2s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+                            </svg>
+                        </div>
+                        <div style="padding:1.2rem 1.4rem 1.4rem;">
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">Community Leadership</span>
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--text-muted);">2026</span>
+                            </div>
+                            <h3 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3;">From Agent Camp to Build With AI: Why I Show Up</h3>
+                            <p style="font-size:0.75rem;color:var(--text-muted);line-height:1.5;margin-bottom:10px;">Co-organising Agent Camp, winning 2nd place at Build With AI Makerere, attending Notion Community Day and Logos Circles Kampala. Real stories from Uganda's tech events.</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.52rem;padding:2px 7px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Community</span>
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.52rem;padding:2px 7px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Hackathons</span>
+                                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.52rem;padding:2px 7px;border-radius:4px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.12);color:var(--text-muted);">Uganda</span>
+                            </div>
+                            <a href="blog/why-attend-tech-events-uganda.html" style="display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;color:var(--accent);text-decoration:none;letter-spacing:0.04em;transition:gap 0.25s;" onmouseover="this.style.gap='9px'" onmouseout="this.style.gap='5px'">
+                                Read Article <i class="fas fa-arrow-right" style="font-size:0.55rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Community Roles ─── -->
+        <section class="section" style="padding:2rem 0;">
+            <div class="container">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
+                        <i class="fas fa-people-group" style="margin-right:6px;"></i> Community Roles
+                    </span>
+                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                </div>
+
+                <div class="roles-carousel-wrap">
+                    <div class="roles-track" id="rolesTrack">
+                        <div class="role-slide">
+                            <div class="role-card-inner">
+                                <div class="role-icon-wrap">
+                                    <img src="assets/images/mucosa%20logo.png" alt="MUCOSA">
+                                </div>
+                                <div class="role-card-content">
+                                    <span class="role-badge">MUCOSA</span>
+                                    <h3>Tech Community Lead</h3>
+                                    <p class="role-org">Mbarara University of Science and Technology</p>
+                                    <p>Driving innovation through mentorship, collaborative learning, and hands-on projects under MUCOSA.</p>
+                                    <div class="role-tags">
+                                        <span>Mentorship</span>
+                                        <span>Innovation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="role-slide">
                             <div class="role-card-inner">
                                 <div class="role-icon-wrap">
@@ -786,7 +806,7 @@
                                 </div>
                                 <div class="role-card-content">
                                     <span class="role-badge">AWS</span>
-                                    <h3>SBG Lead &mdash; MUST</h3>
+                                    <h3>SBG Lead: MUST</h3>
                                     <p class="role-org">Amazon Web Services</p>
                                     <p>Leading the AWS Student Builders Group at Mbarara University, empowering students with cloud computing skills and hands-on AWS workshops.</p>
                                     <div class="role-tags">
@@ -795,194 +815,228 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="roles-nav">
-                        <button id="rolesPrev" aria-label="Previous role"><i class="fas fa-chevron-left"></i></button>
-                        <div class="roles-dots" id="rolesDots">
-                            <button class="roles-dot is-active" aria-label="Go to slide 1"></button>
-                            <button class="roles-dot" aria-label="Go to slide 2"></button>
-                            <button class="roles-dot" aria-label="Go to slide 3"></button>
-                            <button class="roles-dot" aria-label="Go to slide 4"></button>
-                        </div>
-                        <button id="rolesNext" aria-label="Next role"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Tech Stack ─── -->
-        <section class="section" style="padding:2rem 0;">
-            <div class="container">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-code" style="margin-right:6px;"></i> Tech Stack
-                    </span>
-                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;">
-                    <div class="tech-icon-card"><i class="fab fa-react"></i><span>React JS</span></div>
-                    <div class="tech-icon-card"><svg viewBox="0 0 24 24" style="width:1.2rem;height:1.2rem;fill:var(--accent);margin:0 auto 6px;display:block;"><path d="M12 2c-.5 0-1 .2-1.4.6L2.6 10.6c-.8.8-.8 2 0 2.8l8 8c.8.8 2 .8 2.8 0l8-8c.8-.8.8-2 0-2.8l-8-8C13 2.2 12.5 2 12 2zm0 2l8 8-8 8-8-8 8-8z"/></svg><span>Next JS</span></div>
-                    <div class="tech-icon-card"><i class="fab fa-python"></i><span>Python</span></div>
-                    <div class="tech-icon-card"><svg viewBox="0 0 24 24" style="width:1.2rem;height:1.2rem;fill:var(--accent);margin:0 auto 6px;display:block;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg><span>TensorFlow</span></div>
-                    <div class="tech-icon-card"><i class="fas fa-fire" style="font-size:1.2rem;color:var(--accent);margin-bottom:6px;display:block;"></i><span>PyTorch</span></div>
-                    <div class="tech-icon-card"><i class="fab fa-js"></i><span>JavaScript</span></div>
-                    <div class="tech-icon-card"><i class="fas fa-database"></i><span>SQL</span></div>
-                    <div class="tech-icon-card"><i class="fab fa-git-alt"></i><span>Git</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Skills Focus ─── -->
-        <section class="section" style="padding:2rem 0;">
-            <div class="container">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-bullseye" style="margin-right:6px;"></i> Skills Focus
-                    </span>
-                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-leaf"></i></div>
-                        <h3>Green AI &amp; Sustainable Computing</h3>
-                        <p>Applying computational efficiency to reduce training cost and carbon footprint — low-resource ML, model compression, and energy-aware techniques.</p>
-                        <div class="skill-bar"><span style="width:85%;"></span></div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-calculator"></i></div>
-                        <h3>Numerical Computing &amp; ML Systems</h3>
-                        <p>From-scratch implementations of transformers, optimizers, and training loops using JAX and NumPy — focused on numerical stability and reproducibility.</p>
-                        <div class="skill-bar"><span style="width:78%;"></span></div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-server"></i></div>
-                        <h3>Backend &amp; System Design</h3>
-                        <p>Designing clear service logic with an emphasis on scalability, maintainability, and predictable system behaviour in real-world applications.</p>
-                        <div class="skill-bar"><span style="width:72%;"></span></div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
-                        <h3>Visualisation &amp; Communication</h3>
-                        <p>Turning complex outputs into understandable visuals and summaries that support both technical and non-technical decision-making.</p>
-                        <div class="skill-bar"><span style="width:68%;"></span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Featured Projects ─── -->
-        <section class="section" style="padding:2rem 0;">
-            <div class="container">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-folder-open" style="margin-right:6px;"></i> Featured Projects
-                    </span>
-                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;">
-                    <div class="featured-proj-card">
-                        <div class="fproj-top">
-                            <h3>BrainBolt</h3>
-                            <span class="fproj-badge">Web App</span>
-                        </div>
-                        <p>Fast, gamified live quiz battles with solo, team, and league play. Esports-broadcast styled real-time arena with mobile-first tap-to-answer. Built with React, TypeScript, and Supabase Realtime.</p>
-                        <div class="fproj-tags">
-                            <span>React</span><span>TypeScript</span><span>Supabase</span><span>Real-Time</span>
-                        </div>
-                        <div class="fproj-actions">
-                            <a href="projects/brainbolt/" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.68rem;"><i class="fas fa-arrow-right"></i> Details</a>
-                            <a href="https://brain-bolt-arena.lovable.app" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.68rem;">Live Demo</a>
-                        </div>
-                    </div>
-                    <div class="featured-proj-card">
-                        <div class="fproj-top">
-                            <h3>Claude DOCX Generator</h3>
-                            <span class="fproj-badge">CLI</span>
-                        </div>
-                        <p>A Node.js tool that turns AI-generated JavaScript into real .docx files instantly. Paste the code, run one command, and get your document with zero file-system wrestling.</p>
-                        <div class="fproj-tags">
-                            <span>Node.js</span><span>docx</span><span>CLI</span><span>Document Generation</span>
-                        </div>
-                        <div class="fproj-actions">
-                            <a href="projects/claude-docx-generator/" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.68rem;"><i class="fas fa-arrow-right"></i> Details</a>
-                            <a href="https://github.com/MubiruEltonFelix1/claude-docx-generator" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.68rem;"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── Connect ─── -->
-        <section class="section" style="padding:2rem 0 4rem;">
-            <div class="container">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-share-nodes" style="margin-right:6px;"></i> Connect
-                    </span>
-                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;">
-                    <a href="https://linkedin.com/in/mubiru-elton-felix-9ab50a1b0" target="_blank" class="connect-link"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
-                    <a href="https://x.com/mubiruelton1" target="_blank" class="connect-link"><i class="fab fa-x-twitter"></i><span>X / Twitter</span></a>
-                    <a href="https://github.com/MubiruEltonFelix1" target="_blank" class="connect-link"><i class="fab fa-github"></i><span>GitHub</span></a>
-                    <a href="https://www.youtube.com/@MubiruEltonFelix" target="_blank" class="connect-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
-                    <a href="https://www.tiktok.com/@mubirueltonfelix1" target="_blank" class="connect-link"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
-                    <a href="mailto:mubirueltonfelix@gmail.com" class="connect-link"><i class="fas fa-envelope"></i><span>Email</span></a>
-                    <a href="https://dev.to/mubirueltonfelix" target="_blank" class="connect-link"><i class="fab fa-dev"></i><span>DEV</span></a>
-                    <a href="https://devpost.com/MubiruEltonFelix1" target="_blank" class="connect-link"><i class="fas fa-cube"></i><span>Devpost</span></a>
-                </div>
-                <div style="text-align:center;margin-top:1.2rem;">
-                    <a href="contact/" class="btn btn-primary" style="padding:0.55rem 1.3rem;font-size:0.75rem;"><i class="fas fa-paper-plane"></i> Send a Message</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="site-footer"></div>
-    <script src="assets/js/layout.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        (function() {
-            var track = document.getElementById('rolesTrack');
-            var dots = document.querySelectorAll('.roles-dot');
-            var prev = document.getElementById('rolesPrev');
-            var next = document.getElementById('rolesNext');
-            if (!track || !dots.length) return;
-            var idx = 0, total = dots.length;
-
-            function goTo(i) {
-                if (i < 0) i = total - 1;
-                if (i >= total) i = 0;
-                idx = i;
-                track.style.transform = 'translateX(-' + (idx * 100) + '%)';
-                dots.forEach(function(d, j) {
-                    d.classList.toggle('is-active', j === idx);
-                });
-            }
-
-            dots.forEach(function(dot, i) {
-                dot.addEventListener('click', function() { goTo(i); });
-            });
-            if (prev) prev.addEventListener('click', function() { goTo(idx - 1); });
-            if (next) next.addEventListener('click', function() { goTo(idx + 1); });
-
-            var touchStartX = 0, touchEndX = 0;
-            var wrap = track.parentElement;
-            if (wrap) {
-                wrap.addEventListener('touchstart', function(e) {
-                    touchStartX = e.changedTouches[0].screenX;
-                }, {passive: true});
-                wrap.addEventListener('touchend', function(e) {
-                    touchEndX = e.changedTouches[0].screenX;
-                    var diff = touchStartX - touchEndX;
-                    if (Math.abs(diff) > 50) {
-                        if (diff > 0) goTo(idx + 1);
-                        else goTo(idx - 1);
-                    }
-                }, {passive: true});
-            }
-        })();
-    </script>
-</body>
+                        </div>
+                        <div class="role-slide">
+                            <div class="role-card-inner">
+                                <div class="role-icon-wrap">
+                                    <img src="assets/images/global_ai_mbarara_logo.jpg" alt="Global AI Mbarara">
+                                </div>
+                                <div class="role-card-content">
+                                    <span class="role-badge">Global AI Mbarara</span>
+                                    <h3>Co-Organiser</h3>
+                                    <p class="role-org">Global AI Community</p>
+                                    <p>Co-organising AI meetups, workshops, and events that connect Mbarara's AI ecosystem with the global community.</p>
+                                    <div class="role-tags">
+                                        <span>globalai.community</span>
+                                        <span>AI Events</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="role-slide">
+                            <div class="role-card-inner">
+                                <div class="role-icon-wrap">
+                                    <img src="assets/images/deepminds-ai-logo.svg" alt="DeepMinds AI Mbarara">
+                                </div>
+                                <div class="role-card-content">
+                                    <span class="role-badge">DeepMinds AI Mbarara</span>
+                                    <h3>Student Lead</h3>
+                                    <p class="role-org">DeepMinds AI Mbarara</p>
+                                    <p>Leading student-driven AI research, learning sessions, and project initiatives under the DeepMinds AI chapter at Mbarara.</p>
+                                    <div class="role-tags">
+                                        <span>Research</span>
+                                        <span>Student Leadership</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roles-nav">
+                        <button id="rolesPrev" aria-label="Previous role"><i class="fas fa-chevron-left"></i></button>
+                        <div class="roles-dots" id="rolesDots">
+                            <button class="roles-dot is-active" aria-label="Go to slide 1"></button>
+                            <button class="roles-dot" aria-label="Go to slide 2"></button>
+                            <button class="roles-dot" aria-label="Go to slide 3"></button>
+                            <button class="roles-dot" aria-label="Go to slide 4"></button>
+                        </div>
+                        <button id="rolesNext" aria-label="Next role"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Tech Stack ─── -->
+        <section class="section" style="padding:2rem 0;">
+            <div class="container">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
+                        <i class="fas fa-code" style="margin-right:6px;"></i> Tech Stack
+                    </span>
+                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;">
+                    <div class="tech-icon-card"><i class="fab fa-react"></i><span>React JS</span></div>
+                    <div class="tech-icon-card"><svg viewBox="0 0 24 24" style="width:1.2rem;height:1.2rem;fill:var(--accent);margin:0 auto 6px;display:block;"><path d="M12 2c-.5 0-1 .2-1.4.6L2.6 10.6c-.8.8-.8 2 0 2.8l8 8c.8.8 2 .8 2.8 0l8-8c.8-.8.8-2 0-2.8l-8-8C13 2.2 12.5 2 12 2zm0 2l8 8-8 8-8-8 8-8z"/></svg><span>Next JS</span></div>
+                    <div class="tech-icon-card"><i class="fab fa-python"></i><span>Python</span></div>
+                    <div class="tech-icon-card"><svg viewBox="0 0 24 24" style="width:1.2rem;height:1.2rem;fill:var(--accent);margin:0 auto 6px;display:block;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg><span>TensorFlow</span></div>
+                    <div class="tech-icon-card"><i class="fas fa-fire" style="font-size:1.2rem;color:var(--accent);margin-bottom:6px;display:block;"></i><span>PyTorch</span></div>
+                    <div class="tech-icon-card"><i class="fab fa-js"></i><span>JavaScript</span></div>
+                    <div class="tech-icon-card"><i class="fas fa-database"></i><span>SQL</span></div>
+                    <div class="tech-icon-card"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Skills Focus ─── -->
+        <section class="section" style="padding:2rem 0;">
+            <div class="container">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
+                        <i class="fas fa-bullseye" style="margin-right:6px;"></i> Skills Focus
+                    </span>
+                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-leaf"></i></div>
+                        <h3>Green AI &amp; Sustainable Computing</h3>
+                        <p>Applying computational efficiency to reduce training cost and carbon footprint — low-resource ML, model compression, and energy-aware techniques.</p>
+                        <div class="skill-bar"><span style="width:85%;"></span></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-calculator"></i></div>
+                        <h3>Numerical Computing &amp; ML Systems</h3>
+                        <p>From-scratch implementations of transformers, optimizers, and training loops using JAX and NumPy — focused on numerical stability and reproducibility.</p>
+                        <div class="skill-bar"><span style="width:78%;"></span></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-server"></i></div>
+                        <h3>Backend &amp; System Design</h3>
+                        <p>Designing clear service logic with an emphasis on scalability, maintainability, and predictable system behaviour in real-world applications.</p>
+                        <div class="skill-bar"><span style="width:72%;"></span></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Visualisation &amp; Communication</h3>
+                        <p>Turning complex outputs into understandable visuals and summaries that support both technical and non-technical decision-making.</p>
+                        <div class="skill-bar"><span style="width:68%;"></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Featured Projects ─── -->
+        <section class="section" style="padding:2rem 0;">
+            <div class="container">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
+                        <i class="fas fa-folder-open" style="margin-right:6px;"></i> Featured Projects
+                    </span>
+                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;">
+                    <div class="featured-proj-card">
+                        <div class="fproj-top">
+                            <h3>BrainBolt</h3>
+                            <span class="fproj-badge">Web App</span>
+                        </div>
+                        <p>Fast, gamified live quiz battles with solo, team, and league play. Esports-broadcast styled real-time arena with mobile-first tap-to-answer. Built with React, TypeScript, and Supabase Realtime.</p>
+                        <div class="fproj-tags">
+                            <span>React</span><span>TypeScript</span><span>Supabase</span><span>Real-Time</span>
+                        </div>
+                        <div class="fproj-actions">
+                            <a href="projects/brainbolt/" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.68rem;"><i class="fas fa-arrow-right"></i> Details</a>
+                            <a href="https://brain-bolt-arena.lovable.app" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.68rem;">Live Demo</a>
+                        </div>
+                    </div>
+                    <div class="featured-proj-card">
+                        <div class="fproj-top">
+                            <h3>Claude DOCX Generator</h3>
+                            <span class="fproj-badge">CLI</span>
+                        </div>
+                        <p>A Node.js tool that turns AI-generated JavaScript into real .docx files instantly. Paste the code, run one command, and get your document with zero file-system wrestling.</p>
+                        <div class="fproj-tags">
+                            <span>Node.js</span><span>docx</span><span>CLI</span><span>Document Generation</span>
+                        </div>
+                        <div class="fproj-actions">
+                            <a href="projects/claude-docx-generator/" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.68rem;"><i class="fas fa-arrow-right"></i> Details</a>
+                            <a href="https://github.com/MubiruEltonFelix1/claude-docx-generator" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.68rem;"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── Connect ─── -->
+        <section class="section" style="padding:2rem 0 4rem;">
+            <div class="container">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
+                        <i class="fas fa-share-nodes" style="margin-right:6px;"></i> Connect
+                    </span>
+                    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;">
+                    <a href="https://linkedin.com/in/mubiru-elton-felix-9ab50a1b0" target="_blank" class="connect-link"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
+                    <a href="https://x.com/mubiruelton1" target="_blank" class="connect-link"><i class="fab fa-x-twitter"></i><span>X / Twitter</span></a>
+                    <a href="https://github.com/MubiruEltonFelix1" target="_blank" class="connect-link"><i class="fab fa-github"></i><span>GitHub</span></a>
+                    <a href="https://www.youtube.com/@MubiruEltonFelix" target="_blank" class="connect-link"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+                    <a href="https://www.tiktok.com/@mubirueltonfelix1" target="_blank" class="connect-link"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
+                    <a href="mailto:mubirueltonfelix@gmail.com" class="connect-link"><i class="fas fa-envelope"></i><span>Email</span></a>
+                    <a href="https://dev.to/mubirueltonfelix" target="_blank" class="connect-link"><i class="fab fa-dev"></i><span>DEV</span></a>
+                    <a href="https://devpost.com/MubiruEltonFelix1" target="_blank" class="connect-link"><i class="fas fa-cube"></i><span>Devpost</span></a>
+                </div>
+                <div style="text-align:center;margin-top:1.2rem;">
+                    <a href="contact/" class="btn btn-primary" style="padding:0.55rem 1.3rem;font-size:0.75rem;"><i class="fas fa-paper-plane"></i> Send a Message</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        (function() {
+            var track = document.getElementById('rolesTrack');
+            var dots = document.querySelectorAll('.roles-dot');
+            var prev = document.getElementById('rolesPrev');
+            var next = document.getElementById('rolesNext');
+            if (!track || !dots.length) return;
+            var idx = 0, total = dots.length;
+
+            function goTo(i) {
+                if (i < 0) i = total - 1;
+                if (i >= total) i = 0;
+                idx = i;
+                track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+                dots.forEach(function(d, j) {
+                    d.classList.toggle('is-active', j === idx);
+                });
+            }
+
+            dots.forEach(function(dot, i) {
+                dot.addEventListener('click', function() { goTo(i); });
+            });
+            if (prev) prev.addEventListener('click', function() { goTo(idx - 1); });
+            if (next) next.addEventListener('click', function() { goTo(idx + 1); });
+
+            var touchStartX = 0, touchEndX = 0;
+            var wrap = track.parentElement;
+            if (wrap) {
+                wrap.addEventListener('touchstart', function(e) {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, {passive: true});
+                wrap.addEventListener('touchend', function(e) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    var diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) goTo(idx + 1);
+                        else goTo(idx - 1);
+                    }
+                }, {passive: true});
+            }
+        })();
+    </script>
+</body>
 </html>

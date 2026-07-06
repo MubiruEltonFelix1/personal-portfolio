@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    <title>My Journey Into Neural Networks: From Confusion to Building | Elton Blog</title>
+    <meta name="description" content="The honest, unfiltered story of how I went from staring at equations to building neural networks from scratch. And what I'm building next.">
+    <meta property="og:title" content="My Journey Into Neural Networks: From Confusion to Building">
+    <meta property="og:description" content="The honest, unfiltered story of how I went from staring at equations to building neural networks from scratch. And what I'm building next.">
+    <meta property="og:image" content="../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="blog.css">
+    <style>
+        .article-page { padding: 34px 20px 60px; }
+        .article-container { max-width: 760px; margin: 0 auto; }
+        .article-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .article-header .post-category { display: inline-block; margin-bottom: 10px; }
+        .article-header h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .article-header .article-meta { display: flex; gap: 16px; align-items: center; color: var(--text-muted); font-size: 0.82rem; font-family: 'IBM Plex Mono', monospace; flex-wrap: wrap; }
+        .article-header .article-meta i { color: var(--accent); margin-right: 4px; font-size: 0.7rem; }
+        .article-content { color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+        .article-content h2 { color: var(--text); font-size: 1.5rem; font-weight: 700; margin: 36px 0 14px; letter-spacing: -0.01em; }
+        .article-content h3 { color: var(--text); font-size: 1.2rem; font-weight: 600; margin: 28px 0 10px; }
+        .article-content p { margin-bottom: 18px; }
+        .article-content ul, .article-content ol { margin: 12px 0 20px 20px; }
+        .article-content li { margin-bottom: 8px; }
+        .article-content blockquote { border-left: 3px solid var(--accent); margin: 24px 0; padding: 12px 20px; background: rgba(255,215,0,0.04); color: var(--text); font-style: italic; border-radius: 0 8px 8px 0; }
+        .article-content code { background: var(--surface-soft); color: var(--accent); padding: 2px 7px; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; }
+        .article-content pre { background: var(--surface-soft); border: 1px solid var(--border); border-radius: 10px; padding: 18px; overflow-x: auto; margin: 20px 0; }
+        .article-content pre code { background: none; padding: 0; color: var(--text-muted); }
+        .article-content strong { color: var(--text); }
+        .article-content .highlight-box { background: var(--surface-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin: 1.8rem 0; }
+        .article-content .highlight-box h4 { color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; }
+        .article-content .highlight-box p { font-size: 0.92rem; margin-bottom: 0; }
+        .article-content .project-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 8px 16px; border: 1px solid rgba(255,215,0,0.25); border-radius: 8px; transition: all 0.25s; margin: 4px 0; }
+        .article-content .project-link:hover { background: rgba(255,215,0,0.06); border-color: var(--accent); gap: 10px; }
+        .article-illustration { margin: 28px 0; background: var(--surface-soft,#161616); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .article-illustration svg { width: 100%; display: block; }
+        .article-illustration figcaption { padding: 10px 16px; color: var(--text-muted); font-size: 0.78rem; text-align: center; border-top: 1px solid var(--border); font-family: 'IBM Plex Mono', monospace; }
+        .article-back { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-top: 36px; padding: 10px 20px; border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.25s; }
+        .article-back:hover { border-color: var(--accent); background: rgba(255,215,0,0.04); }
+        .pull-quote { font-size: 1.2rem; color: var(--accent); font-weight: 500; line-height: 1.6; margin: 2rem 0; padding: 0 1rem; border-left: 3px solid var(--accent); padding-left: 1.2rem; }
+    </style>
+</head>
+<body data-root="../">
+<div id="site-nav"></div>
+
+<main class="article-page">
+<div class="container article-container">
+    <header class="article-header reveal">
+        <span class="post-category">// Personal Journey</span>
+        <h1>My Journey Into Neural Networks: From Confusion to <span class="accent">Building</span></h1>
+        <div class="article-meta">
+            <span><i class="fas fa-clock"></i> 10 min read</span>
+            <span><i class="fas fa-tag"></i> Neural Networks, Personal, Building in Public</span>
+        </div>
+    </header>
+
+    <div class="article-content reveal delay-1">
+
+        <p>"Every expert was once a beginner who refused to stop asking questions."</p>
+
+        <p>There is something almost magical about watching a computer recognize a face, classify an image, or generate text that feels human. At first, it looks effortless. But once I stepped into the world of neural networks, I began to see what was really behind the curtain: mathematics, experimentation, debugging, patience, and persistence.</p>
+
+        <p>This story is not just about neural networks. It is about confusion, small victories, difficult lessons, and the slow realization that understanding does not arrive all at once. It grows layer by layer — just like the networks I was trying to learn.</p>
+
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="200" fill="#0f0f0f" rx="10"/>
+                <text x="360" y="22" text-anchor="middle" fill="#888" font-family="IBM Plex Mono,monospace" font-size="10">LEARNING GROWS LAYER BY LAYER</text>
+                <circle cx="60" cy="80" r="12" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                <circle cx="60" cy="140" r="12" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                <circle cx="180" cy="60" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="180" cy="100" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="180" cy="140" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="180" cy="180" r="9" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+                <circle cx="300" cy="70" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="300" cy="110" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="300" cy="150" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="420" cy="80" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="420" cy="120" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="420" cy="160" r="8" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+                <circle cx="540" cy="60" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
+                <circle cx="540" cy="110" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
+                <circle cx="540" cy="160" r="10" fill="none" stroke="#ffd700" stroke-width="1.2" opacity="0.7"/>
+                <circle cx="660" cy="90" r="11" fill="none" stroke="#ffd700" stroke-width="2"/>
+                <circle cx="660" cy="140" r="11" fill="none" stroke="#ffd700" stroke-width="2"/>
+                <line x1="72" y1="80" x2="171" y2="60" stroke="#2a2a2a" stroke-width="0.3"/>
+                <line x1="72" y1="80" x2="171" y2="100" stroke="#2a2a2a" stroke-width="0.3"/>
+                <line x1="72" y1="140" x2="171" y2="140" stroke="#2a2a2a" stroke-width="0.3"/>
+                <line x1="72" y1="140" x2="171" y2="180" stroke="#2a2a2a" stroke-width="0.3"/>
+                <circle cx="180" cy="100" r="3" fill="#ffd700" opacity="0.7">
+                    <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="420" cy="120" r="3" fill="#ffd700" opacity="0.6">
+                    <animate attributeName="opacity" values="0;0.6;0" dur="1.8s" repeatCount="indefinite" begin="0.4s"/>
+                </circle>
+                <circle cx="660" cy="140" r="3" fill="#ffd700" opacity="0.8">
+                    <animate attributeName="opacity" values="0.8;0;0.8" dur="2.2s" repeatCount="indefinite" begin="0.8s"/>
+                </circle>
+            </svg>
+            <figcaption>Learning, like information through a network, propagates. One layer at a time.</figcaption>
+        </figure>
+
+        <h2>Where It All Began</h2>
+
+        <p>Artificial intelligence sounded exciting to me long before I understood a single line of it.</p>
+
+        <p>I saw machines generating images, translating languages, helping doctors diagnose diseases, and powering tools that seemed intelligent in ways I had only imagined. Naturally, I became curious.</p>
+
+        <p><em>How could a computer learn something humans spend years mastering?</em></p>
+
+        <p>The more I read, the more questions I had. Eventually, I realised that if I truly wanted to understand AI, I could not remain a spectator. I had to learn how it worked from the inside. That decision marked the beginning of one of the most challenging and rewarding learning experiences of my life.</p>
+
+        <p>At first, I thought learning AI would mainly involve coding. I was wrong. Artificial Intelligence is mathematics. It is statistics. It is logic. It is problem-solving. Most of all, it is a <strong>new way of thinking</strong>.</p>
+
+        <h2>My First Reality Check</h2>
+
+        <p>Like many beginners, I wanted to jump straight into the exciting parts — building image classifiers, detecting objects, creating intelligent systems. Instead, I found myself staring at linear algebra, probability, gradients, derivatives, optimization, and neural network theory.</p>
+
+        <p>That was humbling.</p>
+
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 180" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="180" fill="#0f0f0f" rx="10"/>
+                <ellipse cx="360" cy="100" rx="280" ry="55" fill="none" stroke="#2a2a2a" stroke-width="0.6"/>
+                <ellipse cx="360" cy="100" rx="200" ry="38" fill="none" stroke="#2a2a2a" stroke-width="0.6"/>
+                <ellipse cx="360" cy="100" rx="120" ry="22" fill="none" stroke="#2a2a2a" stroke-width="0.6"/>
+                <ellipse cx="360" cy="100" rx="60" ry="10" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.5"/>
+                <circle cx="360" cy="100" r="4" fill="#ffd700"/>
+                <polyline points="60,40 150,55 240,70 310,82 340,92 360,100" fill="none" stroke="#ffd700" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6">
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
+                </polyline>
+                <circle r="4" fill="#ffd700">
+                    <animateMotion dur="3s" repeatCount="indefinite" path="M60,40 L150,55 L240,70 L310,82 L340,92 L360,100"/>
+                </circle>
+                <text x="60" y="155" fill="#666" font-family="IBM Plex Mono,monospace" font-size="10">Confidence → Understanding</text>
+            </svg>
+            <figcaption>The closer I got to the centre of understanding, the clearer things became</figcaption>
+        </figure>
+
+        <p>I kept asking myself: <em>"Why do I need all this mathematics before I can build something interesting?"</em> At that stage, math felt like a barrier instead of a tool. I saw symbols, not meaning. I opened tutorials, watched a few minutes, became overwhelmed, and closed everything again.</p>
+
+        <p>The problem was not lack of interest. The problem was trying to understand everything at once. That was my first lesson: <strong>learning AI is not a sprint. It is a marathon.</strong></p>
+
+        <h2>Learning to Slow Down</h2>
+
+        <p>One evening, after hours of trying to make concepts fit together, I stopped chasing speed. I changed the question. Instead of asking "how quickly can I finish this course?" I started asking: <em>"What is the one thing I can truly understand today?"</em></p>
+
+        <p>That shift changed everything. Instead of rushing through ten topics, I focused on one. Instead of collecting lectures, I paused and asked myself whether I could explain the idea in my own words. If I could not, I stayed with it a little longer.</p>
+
+        <p>I stopped measuring progress by how much content I finished. I started measuring it by how much I actually understood. Ironically, <strong>slowing down made me learn faster</strong>.</p>
+
+        <h2>Confusion Became Part of the Process</h2>
+
+        <p>One thing no tutorial prepared me for was how often I would feel confused. At first, confusion felt like failure. Whenever I could not understand something after one reading, I assumed I was not smart enough. Later, I learned the truth: confusion is often a sign that the brain is building something new.</p>
+
+        <p>I started keeping a notebook — not to copy definitions, but to write questions:</p>
+
+        <ul>
+            <li>Why do we need activation functions?</li>
+            <li>Why can one layer not solve everything?</li>
+            <li>What exactly is a weight?</li>
+            <li>How does a computer know whether it made the right prediction?</li>
+            <li>Why does changing one number improve an entire model?</li>
+        </ul>
+
+        <p>At first, those pages made me feel inexperienced. Later, they became proof of growth. The notebook stopped being a record of what I knew and became a record of <strong>how I learned</strong>.</p>
+
+        <div class="pull-quote">
+            "Confusion is not a sign to stop. It is often the beginning of understanding."
+        </div>
+
+        <h2>The Mathematics I Did Not Know I Needed</h2>
+
+        <p>One of the biggest surprises was discovering that mathematics was not my enemy — it was my guide. I will always remember Mr. Buri Gershom with gratitude. Long before I seriously studied AI, he taught me Discrete Mathematics and Multivariable Calculus at university. At the time, like many students, I wondered when those lessons would ever matter.</p>
+
+        <p>The answer came much later. As I moved deeper into neural networks, I began seeing familiar ideas hiding inside unfamiliar terms. Optimization was no longer just a chapter from calculus — it became the process through which a network learns. Partial derivatives became the language of backpropagation. Logical reasoning helped me think systematically about algorithms and computation.</p>
+
+        <p>Suddenly, subjects that once felt separate were connected. I realised that education is rarely wasted. Sometimes knowledge only waits for the right moment to reveal its value.</p>
+
+        <h2>Learning Neural Networks From First Principles</h2>
+
+        <p>Eventually I reached neural networks. I thought this would be the exciting part. Instead, it felt like standing at the base of another mountain. Neurons. Weights. Biases. Activation functions. Forward propagation. Loss functions. Backpropagation. Every chapter introduced another unfamiliar word.</p>
+
+        <p>I remember staring at diagrams full of circles and arrows while everyone called them "simple." To me, they looked anything but simple. There were moments when I genuinely wondered whether I had chosen a field beyond my ability.</p>
+
+        <p>So I changed my approach. Rather than trying to master the mathematics immediately, I focused on the story. <strong>What problem is this network solving? How does information move? Why does each layer exist?</strong> Once I understood the purpose, the equations began to make sense. They stopped looking like random symbols and started looking like explanations.</p>
+
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="200" fill="#0f0f0f" rx="10"/>
+                <text x="40" y="110" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="12" opacity="0.8">Forward →</text>
+                <text x="580" y="110" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="12" opacity="0.8">← Backward</text>
+                <circle cx="200" cy="55" r="16" fill="none" stroke="#ffd700" stroke-width="1.5">
+                    <animate attributeName="r" values="16;20;16" dur="1s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="310" cy="95" r="14" fill="none" stroke="#ffd700" stroke-width="1"/>
+                <circle cx="420" cy="55" r="16" fill="none" stroke="#ffd700" stroke-width="1.5">
+                    <animate attributeName="r" values="16;20;16" dur="1s" repeatCount="indefinite" begin="0.5s"/>
+                </circle>
+                <line x1="216" y1="55" x2="296" y2="90" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+                <line x1="324" y1="90" x2="404" y2="55" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+                <text x="260" y="140" fill="#888" font-family="IBM Plex Mono,monospace" font-size="10">Forward pass → compute error ← Backpropagate</text>
+            </svg>
+            <figcaption>The forward and backward passes. The heartbeat of every neural network.</figcaption>
+        </figure>
+
+        <h2>The Habit That Changed Everything</h2>
+
+        <p>If there is one habit that transformed my learning, it was learning to teach myself. After every study session, I would close my laptop and ask: <em>"Can I explain this without looking at my notes?"</em> If the answer was no, I knew I had not really understood it yet. So I would go back, read again, draw diagrams, watch another explanation.</p>
+
+        <p>Sometimes I searched for three or four different explanations of the same topic. One analogy might fail, and another would suddenly click. That taught me something valuable: <strong>struggling with a topic does not always mean you need more effort — sometimes you just need a different explanation.</strong></p>
+
+        <h2>When Code Refused to Cooperate</h2>
+
+        <p>Eventually, theory had to become practice. It was time to build. I was excited. I imagined writing a few lines of code, pressing run, and watching the model learn magically. Reality had different plans. My first attempt failed. Then the second. Then the third.</p>
+
+        <p>Sometimes I forgot a bracket. Sometimes the tensor shapes were wrong. Sometimes images would not load. Sometimes the model would train and still produce terrible predictions. At first, that was frustrating. Eventually, I realised the error messages were not the enemy — they were clues.</p>
+
+        <p>Instead of panicking every time I saw red text in the terminal, I started reading carefully. Debugging became less frightening. I stopped seeing bugs as proof that I was not good enough. I started seeing them as puzzles. <strong>That shift made programming far more enjoyable.</strong></p>
+
+        <h2>Learning by Building: tiny_cnn and Beyond</h2>
+
+        <p>Reading about neural networks and building one are two completely different experiences. It is like learning how to swim from a book. You can understand every technique, but until you step into the water, you do not truly know how to swim.</p>
+
+        <p>That is why I started <strong>tiny_cnn</strong> — a project where I build neural network components from scratch, starting with the simplest building blocks and working my way up. No black boxes. No "just import the library." Every neuron, every activation function, every forward pass and backpropagation step is written by hand, line by line.</p>
+
+        <div class="highlight-box">
+            <h4><i class="fas fa-microchip"></i> tiny_cnn: From Scratch</h4>
+            <p>Building neural network primitives from the matrix multiply up. Implemented in Python with NumPy — no deep learning frameworks. Each component is tested, visualised, and documented as I go. The goal: understand everything, hide nothing.</p>
+            <a href="../projects/tiny-cnn/" class="project-link" style="margin-top:12px;">
+                View the Project <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <p>This is not just about writing code that works. It is about building intuition that no high-level library can give you. Inspired by the philosophy of building from first principles — popularised by researchers like Andrej Karpathy — I believe that to truly understand neural networks, you must be able to explain what happens under the hood when you call <code>model.fit()</code>.</p>
+
+        <p>tiny_cnn is my sandbox. It is where curiosity meets construction. And it is only the beginning — <strong>more projects on neural networks are coming soon</strong>, including deeper dives into convolutional architectures, transformer internals, and practical experiments with training dynamics.</p>
+
+        <p>If this kind of work resonates with you, check out my other project, <a href="../projects/the-residual-stream/" style="color:var(--accent); font-weight: 600;">The Residual Stream</a>, where I'm building a transformer from absolute scratch — from the matrix multiply up. Together, these projects represent my commitment to understanding AI from the ground floor.</p>
+
+        <h2>Understanding Before Libraries</h2>
+
+        <p>One thing I am especially grateful for is resisting the urge to reach for high-level frameworks too early. There is nothing wrong with TensorFlow or PyTorch — they are incredible tools. But before using them, I trained myself to ask: "Could I explain this if the libraries were removed?"</p>
+
+        <p>If the answer was no, I knew there was more to learn. It slowed me down at first. But in the long run, it made me much stronger.</p>
+
+        <div class="highlight-box">
+            <h4><i class="fas fa-lightbulb"></i> What I Learned by Building From Scratch</h4>
+            <p>How gradients actually flow through a network. Why certain activation functions work better than others. The real meaning of a "learning rate." How small numerical errors compound through layers. And most importantly: that <strong>I am capable of understanding things that once seemed impossible</strong> — if I am willing to start from first principles.</p>
+        </div>
+
+        <h2>Data Matters More Than I Expected</h2>
+
+        <p>Once my model finally started running, I thought the difficult part was over. Again, I was wrong. The model trained successfully, but the accuracy was not impressive. I immediately started changing the architecture — more layers, more filters, different activation functions, different optimizers, different learning rates. Sometimes the results became worse.</p>
+
+        <p>That is when I realised I had been focusing too much on the model and not enough on the data. Images need resizing. Pixel values need normalization. Training and testing sets must be split correctly. Classes should be balanced. The model can only learn from what it receives. If the data is poor, the understanding will be poor too.</p>
+
+        <h2>Error Messages Became Teachers</h2>
+
+        <p>At first, error messages felt personal. Every red line seemed to say "you do not know what you are doing." Later, I understood: the computer was not insulting me. It was communicating. It was telling me exactly where it had become confused.</p>
+
+        <figure class="article-illustration">
+            <svg viewBox="0 0 720 180" xmlns="http://www.w3.org/2000/svg">
+                <rect width="720" height="180" fill="#0f0f0f" rx="10"/>
+                <polyline points="30,140 90,130 160,115 240,100 320,90 400,85 480,82 560,80 640,79" fill="none" stroke="#ffd700" stroke-width="2"/>
+                <polyline points="30,140 90,135 160,125 240,110 320,95 400,88 480,84 560,82 640,81" fill="none" stroke="#f0c400" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+                <polyline points="30,140 90,120 160,95 240,70 320,55 400,48 480,43 560,41 640,40" fill="none" stroke="#c9c9c9" stroke-width="1" stroke-dasharray="3,6" opacity="0.4"/>
+                <text x="90" y="155" fill="#ffd700" font-family="IBM Plex Mono,monospace" font-size="10">Curiosity</text>
+                <text x="250" y="65" fill="#f0c400" font-family="IBM Plex Mono,monospace" font-size="10" opacity="0.5">Understanding</text>
+                <text x="530" y="38" fill="#c9c9c9" font-family="IBM Plex Mono,monospace" font-size="10" opacity="0.4">Mastery</text>
+            </svg>
+            <figcaption>The learning curve is never linear, but every step builds on the last.</figcaption>
+        </figure>
+
+        <p>That changed the way I debugged. I started asking better questions: <em>What is this error actually saying? What does the function expect? What am I giving it instead? Why are the dimensions different?</em> I also learned to respect small details — a misplaced parenthesis, a forgotten comma, an incorrect path, a typo in a variable name. Small mistakes can stop an entire model from working. <strong>Computers do not reward assumptions. They reward precision.</strong></p>
+
+        <h2>Learning to Be a Beginner</h2>
+
+        <p>One of the hardest things was not convolution or backpropagation — it was accepting that I was still a beginner. It is easy to compare yourself with experienced researchers and engineers. You see someone explain a difficult concept with ease, and it is tempting to think: "Maybe I am just not good enough."</p>
+
+        <p>I had moments like that too. But over time, I realised something important: <strong>every expert I admired had once struggled with the same confusion, the same bugs, and the same questions.</strong> The difference was not that they never struggled — the difference was that they kept going.</p>
+
+        <p>That thought removed a lot of pressure. I stopped expecting myself to understand everything immediately. I gave myself permission to be a student — to ask questions, to revisit concepts, to make mistakes, to learn slowly. The moment I stopped trying to look knowledgeable was the moment I started learning more deeply.</p>
+
+        <h2>Learning to Be Comfortable With Not Knowing</h2>
+
+        <p>One of the biggest changes in me had nothing to do with programming. It had everything to do with mindset. When I started, I believed successful learners understood things quickly. Whenever I struggled for days, I wondered whether I was intelligent enough.</p>
+
+        <p>Today, I know better. Learning is rarely a straight line. Some ideas take an hour. Others take weeks. Some take months. That is perfectly okay. I have learned to say: <strong>"I do not understand this yet."</strong></p>
+
+        <p>That word — <em>yet</em> — changed everything. It reminded me that confusion is temporary. Understanding grows through patience. Every difficult concept becomes familiar if we refuse to stop asking questions.</p>
+
+        <h2>What This Journey Gave Me</h2>
+
+        <p>This journey gave me more than technical knowledge. It gave me patience. It gave me discipline. It gave me respect for small progress. It gave me comfort with uncertainty. It gave me confidence to build, fail, adjust, and try again.</p>
+
+        <p>Most importantly, it taught me that <strong>real learning is not about knowing everything immediately. It is about staying curious long enough to understand something that once felt impossible.</strong></p>
+
+        <div class="pull-quote">
+            "I did not just learn neural networks. I learned how to become the kind of learner who can keep climbing."
+        </div>
+
+        <h2>What's Next: More Coming Soon</h2>
+
+        <p>tiny_cnn is just the beginning. I am actively working on more projects that explore neural network internals — from convolutional architectures and their visual feature hierarchies to the inner workings of transformers and attention mechanisms. Every project will be built from scratch, documented thoroughly, and shared in public.</p>
+
+        <p>If you are on a similar journey — or just starting yours — I hope this article encourages you to keep going. The mountain is still there. But it no longer looks impossible.</p>
+
+        <p>Build from scratch. Ask better questions. Stay curious. And never stop climbing.</p>
+
+        <div class="highlight-box" style="margin-top:2.5rem;">
+            <h4><i class="fas fa-project-diagram"></i> Related Projects</h4>
+            <p style="margin-bottom:10px;">
+                <a href="../projects/tiny-cnn/" class="project-link" style="margin:0 6px 6px 0;">
+                    <i class="fas fa-microchip"></i> tiny_cnn
+                </a>
+                <a href="../projects/the-residual-stream/" class="project-link" style="margin:0 6px 6px 0;">
+                    <i class="fas fa-bolt"></i> The Residual Stream
+                </a>
+            </p>
+            <p style="font-size:0.85rem;margin-top:8px;color:var(--text-muted);">
+                More projects on neural networks and deep learning coming soon. Follow along or reach out if you want to collaborate.
+            </p>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="article-back reveal"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+</div>
+</main>
+
+<div id="site-footer"></div>
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>tiny_cnn — Neural Networks From Scratch | Mubiru Elton Felix</title>
+    <meta name="description" content="Building neural network primitives from the matrix multiply up. Every neuron, every activation, every gradient — written by hand, nothing hidden.">
+    <meta property="og:title" content="tiny_cnn — Neural Networks From Scratch">
+    <meta property="og:description" content="Building neural network primitives from the matrix multiply up. Every neuron, every activation, every gradient — written by hand, nothing hidden.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../the-residual-stream/project.css">
+    <style>
+        .hero-eyebrow { color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px; text-align: center; }
+        .hero-title { text-align: center; font-size: clamp(2rem,5vw,3.2rem); font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.02em; }
+        .hero-title .accent { color: var(--accent); }
+        .hero-subtitle { text-align: center; font-size: 1.05rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 24px; line-height: 1.6; }
+        .project-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; }
+        .badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; padding: 5px 12px; border-radius: 8px; background: var(--surface-soft); border: 1px solid var(--border); color: var(--text-muted); display: inline-flex; align-items: center; gap: 5px; letter-spacing: 0.03em; }
+        .project-section { padding: 3rem 0; }
+        .project-section-alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .project-container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+        .section-title { font-size: 1.4rem; font-weight: 700; color: var(--accent); margin-bottom: 1.2rem; letter-spacing: -0.01em; }
+        .section-lead { font-size: 1.05rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.2rem; }
+        .muted { color: var(--text-muted); line-height: 1.7; font-size: 0.95rem; }
+        .scenario-card { background: var(--surface-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin: 1.5rem 0; display: flex; gap: 16px; align-items: flex-start; }
+        .scenario-icon { color: var(--accent); font-size: 1.3rem; padding-top: 2px; }
+        .scenario-card h3 { color: var(--text); font-size: 0.95rem; margin-bottom: 6px; }
+        .scenario-card blockquote { border-left: 2px solid var(--accent); padding-left: 14px; color: var(--text); font-style: italic; }
+        .component-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin: 1.5rem 0; }
+        .component-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; transition: border-color 0.25s; }
+        .component-card:hover { border-color: rgba(255,215,0,0.25); }
+        .component-card h4 { color: var(--accent); font-size: 0.85rem; margin-bottom: 4px; font-family: 'IBM Plex Mono', monospace; }
+        .component-card p { color: var(--text-muted); font-size: 0.85rem; margin: 0; line-height: 1.5; }
+        .timeline { border-left: 1px solid var(--border); padding-left: 24px; margin: 1.5rem 0; }
+        .timeline-item { position: relative; margin-bottom: 24px; }
+        .timeline-item::before { content: ''; position: absolute; left: -29px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 1px solid var(--accent); }
+        .timeline-item.completed::before { background: var(--accent); }
+        .timeline-item h4 { color: var(--text); font-size: 0.9rem; margin-bottom: 3px; }
+        .timeline-item p { color: var(--text-muted); font-size: 0.82rem; margin: 0; line-height: 1.5; }
+        .timeline-item .status { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+        .btn-project { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 10px 20px; border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.25s; }
+        .btn-project:hover { border-color: var(--accent); background: rgba(255,215,0,0.04); gap: 12px; }
+        code { background: var(--surface-soft); color: var(--accent); padding: 2px 7px; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; }
+        @media (max-width:600px) {
+            .scenario-card { flex-direction: column; }
+            .component-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="project-page">
+        <!-- Hero -->
+        <section class="project-hero" style="padding:2rem 0 1rem;">
+            <div class="container">
+                <div class="hero-eyebrow reveal">// From Scratch</div>
+                <h1 class="hero-title reveal">tiny_<span class="accent">cnn</span></h1>
+                <p class="hero-subtitle reveal">Neural network primitives, one line at a time. No black boxes. No magic.</p>
+                <div class="project-badges reveal delay-1">
+                    <span class="badge"><i class="fab fa-python"></i> Python</span>
+                    <span class="badge"><i class="fas fa-calculator"></i> NumPy</span>
+                    <span class="badge"><i class="fas fa-microchip"></i> From Scratch</span>
+                    <span class="badge"><i class="fas fa-flask"></i> Active</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- What -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">What It Is</h2>
+
+                <div class="scenario-card reveal">
+                    <div class="scenario-icon"><i class="fas fa-code"></i></div>
+                    <div>
+                        <h3>Every beginner asks: what really happens inside <code>model.fit()</code>?</h3>
+                        <p class="muted" style="margin-bottom:0;">
+                            tiny_cnn is my answer to that question. It's a from-scratch implementation of neural network fundamentals — neurons, layers, activation functions, loss functions, optimizers, and eventually convolutions — all built using only Python and NumPy. No TensorFlow. No PyTorch. Just the raw mathematics, written out and tested.
+                        </p>
+                    </div>
+                </div>
+
+                <p class="muted reveal delay-1">
+                    The goal is not to compete with frameworks. The goal is <strong>understanding</strong>. Every component in tiny_cnn exists because I wrote it, debugged it, and can explain why it works. This is learning in public — with all the failed experiments, the shape-mismatch errors, and the quiet victories that come with building something real.
+                </p>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Built So Far</h2>
+                <div class="component-grid reveal delay-1">
+                    <div class="component-card">
+                        <h4>Dense Layer</h4>
+                        <p>Fully connected layer with forward and backward pass. Weight initialisation, bias handling, and gradient computation from scratch.</p>
+                    </div>
+                    <div class="component-card">
+                        <h4>ReLU / Sigmoid / Tanh</h4>
+                        <p>Activation functions with their derivatives. Essential for introducing non-linearity and enabling backpropagation.</p>
+                    </div>
+                    <div class="component-card">
+                        <h4>Mean Squared Error</h4>
+                        <p>Loss function for regression tasks. Includes gradient computation for the backward pass through the loss.</p>
+                    </div>
+                    <div class="component-card">
+                        <h4>Cross-Entropy Loss</h4>
+                        <p>Loss function for classification tasks. Softmax activation fused with cross-entropy for numerical stability.</p>
+                    </div>
+                    <div class="component-card">
+                        <h4>Stochastic Gradient Descent</h4>
+                        <p>SGD optimizer with configurable learning rate. Parameter updates computed from accumulated gradients.</p>
+                    </div>
+                    <div class="component-card">
+                        <h4>Sequential Model</h4>
+                        <p>Container for stacking layers. Handles forward pass through all layers, backpropagation, and parameter updates.</p>
+                    </div>
+                </div>
+                <p class="muted reveal delay-2">
+                    <i class="fas fa-arrow-right" style="color:var(--accent);margin-right:6px;"></i>
+                    More components coming soon: convolutional layers, pooling, batch normalisation, dropout, and advanced optimisers.
+                </p>
+            </div>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="project-section">
+            <div class="container project-container">
+                <h2 class="section-title reveal">The Philosophy</h2>
+
+                <p class="muted reveal delay-1">
+                    There's a difference between using a neural network and understanding one. Most tutorials show you how to import a library, call <code>.fit()</code>, and read the accuracy. Fewer show you what actually happens inside that call — how gradients flow backward, how weights update, why certain shapes need to match.
+                </p>
+
+                <p class="muted reveal delay-1">
+                    tiny_cnn exists for the same reason someone might build a car engine from scratch instead of just driving one: <strong>because taking things apart is the best way to learn how they work.</strong> Every component is written clearly, tested independently, and documented with the intuition behind it.
+                </p>
+
+                <div class="scenario-card reveal delay-2">
+                    <div class="scenario-icon"><i class="fas fa-quote-right"></i></div>
+                    <div>
+                        <blockquote style="margin:0;font-size:0.9rem;">
+                            "Do not just use neural networks. Understand them."<br>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">— Inspired by the philosophy of building from first principles</span>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="project-section project-section-alt">
+            <div class="container project-container">
+                <h2 class="section-title reveal">Roadmap</h2>
+                <div class="timeline reveal delay-1">
+                    <div class="timeline-item completed">
+                        <span class="status">Done</span>
+                        <h4>Core building blocks</h4>
+                        <p>Dense layer, activation functions, loss functions, SGD optimizer, sequential model container.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="status">In progress</span>
+                        <h4>Convolutional operations</h4>
+                        <p>Conv2D layer with forward and backward pass. Kernel initialisation, padding, stride, and feature map computation.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="status">Coming soon</span>
+                        <h4>Pooling and normalisation</h4>
+                        <p>Max pooling, average pooling, batch normalisation, and dropout for regularisation.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="status">Coming soon</span>
+                        <h4>Training examples &amp; visualisations</h4>
+                        <p>End-to-end training scripts with loss curves, gradient flow visualisations, and comparison with framework implementations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="project-section" style="text-align:center;">
+            <div class="container project-container">
+                <p class="muted reveal" style="margin-bottom:1.5rem;">
+                    <i class="fas fa-flask" style="color:var(--accent);margin-right:6px;"></i>
+                    Active project — new components added regularly. Want to contribute, discuss, or build something together? Reach out.
+                </p>
+                <div class="reveal delay-1" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                    <a href="../" class="btn-project">
+                        <i class="fas fa-arrow-left"></i> All Projects
+                    </a>
+                    <a href="../../blog/my-journey-into-neural-networks.html" class="btn-project">
+                        <i class="fas fa-book-open"></i> Read the Blog Post
+                    </a>
+                    <a href="../../contact/" class="btn-project">
+                        <i class="fas fa-envelope"></i> Get in Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>
