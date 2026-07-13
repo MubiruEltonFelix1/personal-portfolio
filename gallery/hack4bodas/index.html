@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Build with Gemma Uganda: Hack 4 Bodas | Mubiru Elton Felix</title>
+    <meta name="description" content="Hack 4 Bodas - AIFest Uganda hackathon where participants built solutions using Google Gemma for safer boda boda mobility. Full story, photos, and takeaways.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        .event-detail-hero {
+            position: relative; width: 100%; height: clamp(280px, 40vw, 420px); overflow: hidden;
+            border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 2.5rem;
+        }
+        .event-detail-hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+        .event-detail-hero .overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%); pointer-events: none; }
+        .event-detail-hero .hero-text { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 2rem 1.8rem; pointer-events: none; }
+        .event-detail-hero .hero-text h1 { font-size: clamp(1.3rem, 3.5vw, 2rem); color: var(--text); margin-bottom: 0.3rem; font-weight: 800; }
+        .event-detail-hero .hero-text .hero-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.05em; }
+
+        .event-content { max-width: 780px; }
+        .event-content h2 { font-size: 1.3rem; color: var(--accent); margin: 2rem 0 0.8rem; font-weight: 700; }
+        .event-content h3 { font-size: 1.05rem; color: var(--text); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+        .event-content p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.8rem; }
+
+        .event-highlight {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-left: 3px solid var(--accent); border-radius: var(--radius);
+            padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+        }
+        .event-highlight h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; }
+        .event-highlight p { margin-bottom: 0; }
+
+        .event-quote {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+            position: relative;
+        }
+        .event-quote::before { content: '\201C'; position: absolute; top: 0.2rem; left: 0.8rem; font-size: 3rem; color: var(--accent); opacity: 0.3; font-family: Georgia, serif; line-height: 1; }
+        .event-quote p { font-style: italic; font-size: 0.95rem; color: var(--text); margin: 0; line-height: 1.7; }
+
+        .event-team-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; margin: 0.8rem 0 1.2rem; }
+        .event-team-list li {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.82rem;
+            color: var(--text); display: flex; align-items: center; gap: 6px;
+        }
+        .event-team-list li i { color: var(--accent); font-size: 0.7rem; }
+
+        .tech-tag {
+            display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+            padding: 3px 10px; border-radius: 20px; color: var(--accent);
+            background: rgba(255, 215, 0, 0.08); border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-right: 5px; margin-bottom: 5px;
+        }
+
+        .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1.2rem 0 1.8rem; }
+        .split-card { background: var(--surface-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.2rem; }
+        .split-card h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+        .split-card p { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+
+        .event-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 2rem 0; }
+        .event-photo-grid figure { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); transition: border-color 0.25s; }
+        .event-photo-grid figure:hover { border-color: rgba(255, 215, 0, 0.3); }
+        .event-photo-grid figure img { width: 100%; height: 220px; object-fit: cover; object-position: 50% 0%; display: block; }
+        .event-photo-grid figure figcaption { padding: 0.6rem 1rem; font-size: 0.75rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.03em; }
+
+        .event-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 2rem 0 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .btn-event { display: inline-flex; align-items: center; gap: 6px; padding: 0.7rem 1.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; text-decoration: none; letter-spacing: 0.03em; }
+        .btn-event-primary { background: var(--accent); color: #000; border: none; }
+        .btn-event-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255, 215, 0, 0.2); }
+        .btn-event-ghost { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+        .btn-event-ghost:hover { border-color: var(--accent); background: rgba(255, 215, 0, 0.04); transform: translateY(-2px); }
+        .event-back-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; margin-bottom: 1.5rem; transition: color 0.2s; }
+        .event-back-link:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .event-detail-hero .hero-text { padding: 1.2rem 1rem 1rem; }
+            .event-photo-grid { grid-template-columns: 1fr; }
+            .event-photo-grid figure img { height: 180px; }
+            .split-section { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="section">
+        <div class="container">
+            <a href="../" class="event-back-link reveal">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+
+            <!-- Hero Image -->
+            <div class="event-detail-hero reveal">
+                <img src="../../events/Hack4Bodas/hack4bodas1.jpg" alt="Build with Gemma Uganda: Hack 4 Bodas at Makerere Innovation and Incubation Center" loading="lazy">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <div class="hero-meta"><i class="fas fa-robot"></i> Hackathon &middot; 2026 &middot; Makerere Innovation and Incubation Center</div>
+                    <h1>Build with Gemma Uganda: Hack 4 Bodas</h1>
+                </div>
+            </div>
+
+            <div class="event-content">
+                <!-- Lead -->
+                <p class="reveal delay-1" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
+                    I walked into the Makerere Innovation and Incubation Center not knowing what to expect. I had heard about 
+                    Gemma — Google's lightweight, open-source AI model family — but I had never actually built with it. 
+                    By the time I walked out, that had completely changed.
+                </p>
+                <p class="reveal delay-1">
+                    Organised by <strong style="color:var(--accent);">Ronnie Linslay Atuhaire</strong> and 
+                    <strong style="color:var(--accent);">Shakiran Nannyombi</strong>, AIFest Uganda's <strong>Hack 4 Bodas</strong> 
+                    brought together builders from across Kampala's tech ecosystem to tackle one of the most visceral, 
+                    everyday challenges in Uganda: boda boda safety. The brief was clear — use Google Gemma to build 
+                    solutions that promote safer rides, trusted trips, and smarter boda boda mobility.
+                </p>
+
+                <!-- Quote -->
+                <div class="event-quote reveal delay-1">
+                    <p>To be honest, I had never built with Gemma before. But yesterday completely changed that. Through the hacking sessions, I got to explore Gemma's capabilities and learned a lot in a very practical way — the kind of learning that sticks because you earned it line by line.</p>
+                </div>
+
+                <!-- The Theme -->
+                <h2 class="reveal delay-1">The Theme: Hack 4 Bodas</h2>
+                <p class="reveal delay-2">
+                    Boda bodas are the backbone of urban transport in Uganda. They weave through Kampala traffic, 
+                    get you where taxis won't, and they're everywhere. But they're also the centre of a safety crisis — 
+                    unregulated rides, reckless speeding, accidents, and a growing trust gap between riders and passengers.
+                </p>
+                <p class="reveal delay-2">
+                    The theme hit close to home because it wasn't abstract. Every participant in that room had taken a boda 
+                    before. Many of us had stories — a near miss, a friend who got into an accident, a ride where the 
+                    rider had no idea where the destination was. We weren't building for a hypothetical user. We were 
+                    building for ourselves and for everyone we know who flags down a boda every morning.
+                </p>
+
+                <!-- The Hackathon Experience -->
+                <h2 class="reveal delay-2">The Hacking Sessions</h2>
+                <p class="reveal delay-2">
+                    The energy in the room was electric. Teams formed organically, whiteboards filled up with sketches, 
+                    and laptops hummed with the sound of people diving into Gemma's model variants for the first time. 
+                    I spent the first part of the session reading through Gemma's documentation — its different model 
+                    sizes (2B, 7B), its strengths in instruction following, its efficiency for on-device deployment. 
+                    The more I read, the more I realised how much thought Google had put into making state-of-the-art 
+                    AI accessible to developers without requiring a supercomputer.
+                </p>
+                <p class="reveal delay-2">
+                    My team and I explored building a boda trip verification system that could analyse ride data, 
+                    flag anomalies, and provide both riders and passengers with a trust score before a trip began. 
+                    The idea was simple: if a passenger knows the rider's safety record and the rider knows the 
+                    passenger's identity, both parties are safer. Gemma's natural language capabilities let us process 
+                    trip descriptions and user feedback in real time, categorising them into risk levels and actionable insights.
+                </p>
+                <p class="reveal delay-2">
+                    What struck me most was how quickly I went from "I've never used Gemma" to "what if we chain 
+                    Gemma with a lightweight embedding model for semantic search?" That's the kind of acceleration 
+                    that only happens when you're in a room full of builders all pushing in the same direction.
+                </p>
+
+                <!-- The Kahoot Challenge -->
+                <h2 class="reveal delay-3">The Kahoot Challenge: A Humbling Detour</h2>
+                <p class="reveal delay-3">
+                    This time, the Kahoot organised by <strong style="color:var(--accent);">Benjamin Wakida Eldon</strong> 
+                    wasn't the usual cup of tea. No podium finish this time. Not even close.
+                </p>
+                <p class="reveal delay-3">
+                    Where previous Kahoots tested general tech knowledge, this one demanded a genuine understanding 
+                    of Gemma as a model — its different variants (Gemma 2B, 7B, instruction-tuned vs base), the 
+                    specific strengths of each, and the tradeoffs between latency, accuracy, and deployment context. 
+                    You couldn't wing it. You had to have done the reading. You had to have put Gemma into practical 
+                    use during the hacking session to stand a chance.
+                </p>
+                <p class="reveal delay-3">
+                    And that was the real lesson. The Kahoot wasn't a break from the learning — it was the exam 
+                    disguised as a game. Reading the documentation, experimenting with the model variants, and 
+                    understanding the tradeoffs firsthand during the hack was the biggest takeaway of the entire event. 
+                    It transformed "I tried this API once" into genuine understanding that I can carry forward into 
+                    real projects.
+                </p>
+
+                <!-- Canva Charades -->
+                <h2 class="reveal delay-3">Canva Charades & Community Fun</h2>
+                <p class="reveal delay-3">
+                    Between the hacking and the Kahoot, <strong style="color:var(--accent);">Awany Jey Daniel</strong> — 
+                    a Canvassador in Uganda and one of the hackathon winners (back-to-back hackathon winner, by the way) — 
+                    organised a round of Canva Charades. It was the perfect palette cleanser. Teams drew and guessed 
+                    tech concepts using nothing but Canva shapes and good old-fashioned creativity. It reminded everyone 
+                    that community events aren't just about winning. They're about the moments between the sessions: 
+                    the laughter, the friendly banter, and the shared experience of being part of something bigger 
+                    than any individual project.
+                </p>
+
+                <!-- The Results -->
+                <h2 class="reveal delay-3">The Winners</h2>
+                <p class="reveal delay-3">
+                    Congratulations to the winners who truly earned their spot — <strong>Awany Jey Daniel</strong>, 
+                    <strong>Mark Kalungi</strong>, <strong>Benjamin Wakida Eldon</strong>, <strong>Shatrah Ddamulira</strong>, 
+                    <strong>Dev Johnson</strong>, <strong>Mariah Miranda .L</strong>, <strong>Bahati Brenda Kizito</strong>, 
+                    <strong>Okao Victor</strong>, <strong>Twikirize Achilles</strong>, and <strong>Ian Noah</strong>. 
+                    Each of you built something that pushed the theme forward.
+                </p>
+
+                <!-- TIL -->
+                <h2 class="reveal delay-3">What Hack 4 Bodas Taught Me</h2>
+                <div class="split-section reveal delay-3">
+                    <div class="split-card">
+                        <h4><i class="fas fa-brain" style="margin-right:6px;"></i> Gemma is Accessible</h4>
+                        <p>You don't need a massive ML infrastructure to build with Gemma. The 2B variant runs efficiently on consumer hardware. Instruction-tuned Gemma produces remarkably coherent outputs with simple prompts. The barrier to entry is lower than I thought.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-road" style="margin-right:6px;"></i> Local Problems Need Local Solutions</h4>
+                        <p>Boda boda safety is a Ugandan problem that needs Ugandan-built solutions. No Silicon Valley startup is going to solve this. It takes builders who have taken those rides, who know the routes, who speak the language, and who understand the trust dynamics.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-users" style="margin-right:6px;"></i> Community Accelerates Learning</h4>
+                        <p>I went from zero Gemma experience to building with it in one afternoon. That only happens when you're surrounded by people who are equally curious, equally willing to share what they've just discovered, and equally committed to making the event meaningful.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-heart" style="margin-right:6px;"></i> Showing Up Matters</h4>
+                        <p>As I wrote in my last article — showing up is half the battle. Every event I attend teaches me something I couldn't have learned alone. Hack 4 Bodas was no exception. The connections, the conversations, the moments of shared discovery — that's what keeps me coming back.</p>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <p class="reveal delay-3" style="margin-bottom:1.5rem;">
+                    <span class="tech-tag">Google Gemma</span>
+                    <span class="tech-tag">Gemma 2B</span>
+                    <span class="tech-tag">Gemma 7B</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Keras</span>
+                    <span class="tech-tag">NLP</span>
+                    <span class="tech-tag">On-Device AI</span>
+                    <span class="tech-tag">Risk Analysis</span>
+                </p>
+
+                <!-- Photo Grid -->
+                <h2 class="reveal delay-3">Event Gallery</h2>
+                <div class="event-photo-grid reveal delay-3">
+                    <figure>
+                        <img src="../../events/Hack4Bodas/hack4bodas2.jpg" alt="Hack 4 Bodas participants at Makerere Innovation Center" loading="lazy">
+                        <figcaption>Hackers in action at Makerere Innovation and Incubation Center</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Hack4Bodas/hack4bodas3.jpg" alt="Build with Gemma Uganda hacking session" loading="lazy">
+                        <figcaption>Diving into Gemma for the first time</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Hack4Bodas/hack4bodas4.jpg" alt="Hack 4 Bodas team collaboration" loading="lazy">
+                        <figcaption>Whiteboarding solutions for safer bodas</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Hack4Bodas/hack4bodas5.jpg" alt="AIFest Uganda Hack 4 Bodas group photo" loading="lazy">
+                        <figcaption>The full Hack 4 Bodas cohort</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Hack4Bodas/hack4bodas6.jpg" alt="Hack 4 Bodas community moments" loading="lazy">
+                        <figcaption>Community moments between sessions</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Gratitude -->
+                <h2 class="reveal delay-3">Gratitude</h2>
+                <p class="reveal delay-3">
+                    A huge thank you to <strong style="color:var(--accent);">Ronnie Linslay Atuhaire</strong> and 
+                    <strong style="color:var(--accent);">Shakiran Nannyombi</strong> for putting together one of the 
+                    most eye-opening hackathons I've attended. The organisation, the venue, the flow — everything 
+                    was seamless.
+                </p>
+                <p class="reveal delay-3">
+                    To <strong style="color:var(--accent);">Benjamin Wakida Eldon</strong> for the Kahoot that 
+                    humbled us all and taught us more than any tutorial could. To 
+                    <strong style="color:var(--accent);">Awany Jey Daniel</strong> for the Canva Charades banter 
+                    and for showing what back-to-back winning looks like.
+                </p>
+                <p class="reveal delay-3">
+                    To everyone who came through from various universities and tech communities — MUK, MUST, 
+                    Kyambogo, the GDG chapters, the AI communities, the curious first-timers who had never used 
+                    Gemma before and walked out building with it — thank you. The event was filled with learning, 
+                    collaborations, fun interactions, and so many amazing people. That's what the Ugandan tech 
+                    ecosystem is about.
+                </p>
+                <p class="reveal delay-3">
+                    And to <strong style="color:var(--accent);">Google for Developers</strong> for Gemma — 
+                    for making state-of-the-art AI genuinely accessible to developers in Uganda. I am looking 
+                    forward to building with Gemma even more.
+                </p>
+
+                <!-- Actions -->
+                <div class="event-actions reveal delay-3">
+                    <a href="https://www.linkedin.com/posts/mubiru-elton-felix-9ab50a1b0_buildwithgemma-aifestuganda-hack4bodas-ugcPost-7481988057852755968-l5qE/" target="_blank" rel="noopener" class="btn-event btn-event-primary">
+                        <i class="fab fa-linkedin"></i> View LinkedIn Post
+                    </a>
+                    <a href="../" class="btn-event btn-event-ghost">
+                        <i class="fas fa-arrow-left"></i> Back to Events
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

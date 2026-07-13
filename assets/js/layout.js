@@ -5,10 +5,10 @@
 
         const links = [
             { href: `${root}index.html`, label: 'Home', key: 'home' },
-            { href: `${root}tools/index.html`, label: 'Tools', key: 'tools' },
-            { href: `${root}blog/index.html`, label: 'Blog', key: 'blog' },
             { href: `${root}gallery/index.html`, label: 'Events', key: 'events' },
             { href: `${root}projects/index.html`, label: 'Projects', key: 'projects' },
+            { href: `${root}blog/index.html`, label: 'Blog', key: 'blog' },
+            { href: `${root}tools/index.html`, label: 'Tools', key: 'tools' },
             { href: `${root}about/index.html`, label: 'About', key: 'about' },
             { href: `${root}contact/index.html`, label: 'Contact', key: 'contact' }
         ];
