@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="project.css">
     <style>
-        .project-hero { position:relative; overflow:hidden; min-height:420px; display:flex; align-items:center; background: linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.82)), url('../../banner.jpg') center/cover no-repeat; }
+        .project-hero { position:relative; overflow:hidden; min-height:420px; display:flex; align-items:center; background: linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.82)), url('../../brain_bolt_thumbnail.png') center/cover no-repeat; }
         .project-hero .container { position:relative; z-index:1; width:100%; }
         .hero-title { font-size: clamp(2rem,5vw,3.2rem); font-weight:800; }
         .hero-title .accent { color:var(--accent); }
@@ -60,33 +60,30 @@
         <section class="project-section">
             <div class="container project-container">
                 <h2 class="section-title reveal">What is BrainBolt?</h2>
-                <p class="muted reveal">BrainBolt is a real-time quiz arena where hosts launch live trivia battles in under 60 seconds and players join instantly from any device — no downloads, no account creation, just a 6-character code. Used by 2,400+ teams across 30+ countries with 120,000+ questions answered.</p>
-                <p class="muted reveal delay-1" style="margin-top:0.8rem;">Three modes cover every use case: <strong>Solo Sprint</strong> for individual training and arcade-style practice, <strong>Team Clash</strong> for corporate events and remote team engagement, and <strong>League Mode</strong> for multi-week seasonal tournaments with persistent leaderboards and automated prize distribution.</p>
+                <p class="muted reveal" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
+                    BrainBolt is a real-time quiz platform that turns any room into a live game show.
+                </p>
+                <p class="muted reveal delay-1">
+                    You launch a quiz from your device — phone, laptop, tablet — and players join instantly with a 6-character code. No apps to download, no accounts to create. They just open their browser, tap the code in, and start answering. Scores update live, leaderboards shift with every response, and within seconds the room is fully engaged.
+                </p>
+                <p class="muted reveal delay-1">
+                    It works for everything from a quick icebreaker at a team standup to a multi-week league tournament spanning dozens of teams. <strong>Solo Sprint</strong> for self-paced individual play, <strong>Team Clash</strong> for group battles, and <strong>League Mode</strong> for persistent seasons with automated standings. One platform, every format.
+                </p>
+                <p class="muted reveal delay-1" style="margin-top:1.2rem;padding:1rem 1.4rem;background:var(--surface-soft);border-radius:var(--radius);border:1px solid var(--border);">
+                    <i class="fas fa-users" style="color:var(--accent);margin-right:8px;"></i> <strong>2,400+</strong> teams &middot;
+                    <i class="fas fa-question-circle" style="color:var(--accent);margin-right:8px;"></i> <strong>120,000+</strong> questions answered &middot;
+                    <i class="fas fa-globe" style="color:var(--accent);margin-right:8px;"></i> <strong>30+</strong> countries
+                </p>
             </div>
         </section>
 
-        <!-- Tech Stack -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Tech Stack</h2>
-                <div class="reveal" style="display:flex; flex-wrap:wrap; gap:8px;">
-                    <span class="tech-badge"><i class="fab fa-react"></i> React</span>
-                    <span class="tech-badge">TanStack Start</span>
-                    <span class="tech-badge"><i class="fab fa-js"></i> TypeScript</span>
-                    <span class="tech-badge"><i class="fab fa-vuejs"></i> Vite</span>
-                    <span class="tech-badge"><i class="fab fa-css3-alt"></i> Tailwind CSS</span>
-                    <span class="tech-badge"><i class="fas fa-database"></i> Supabase Realtime</span>
-                    <span class="tech-badge">Lovable Cloud</span>
-                    <span class="tech-badge">Row-Level Security</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Core Features -->
+        <!-- Why BrainBolt -->
         <section class="project-section">
             <div class="container project-container">
                 <h2 class="section-title reveal">Why BrainBolt?</h2>
-
+                <p class="muted reveal" style="margin-bottom:1.2rem;">
+                    Most quiz tools were built for classrooms — one session, one-off, forget about it. BrainBolt was built for the real world: persistent teams, recurring leagues, millisecond scoring, and zero friction for players.
+                </p>
                 <div class="feature-grid reveal">
                     <div class="problem-card">
                         <div class="problem-icon"><i class="fas fa-bolt"></i></div>
@@ -117,6 +114,45 @@
                         <div class="problem-icon"><i class="fas fa-coins"></i></div>
                         <h4>Free to Start</h4>
                         <p>Spark plan at UGX 0. No credit card required. Upgrade only when you need more players, more questions, or persistent league structures. Pay-per-session also available.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Preview -->
+        <section class="project-section project-section-alt" style="text-align:center;">
+            <div class="container project-container">
+                <h2 class="section-title reveal">BrainBolt in Action</h2>
+                <div class="reveal delay-1" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;overflow:hidden;">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:1.5rem;">
+                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
+                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">0.84s</div>
+                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Avg Response</div>
+                        </div>
+                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
+                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">92%</div>
+                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Accuracy</div>
+                        </div>
+                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
+                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">18</div>
+                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Active Rooms</div>
+                        </div>
+                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
+                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">247</div>
+                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Players Online</div>
+                        </div>
+                    </div>
+                    <div style="background:var(--surface-soft);border-radius:8px;padding:0.8rem 1rem;text-align:left;">
+                        <p style="font-size:0.72rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;margin:0;line-height:1.7;">
+                            <i class="fas fa-circle" style="color:#27c93f;font-size:0.45rem;vertical-align:middle;margin-right:6px;"></i>
+                            Quantum Coders answered in 0.42s
+                            <br>
+                            <i class="fas fa-circle" style="color:#27c93f;font-size:0.45rem;vertical-align:middle;margin-right:6px;"></i>
+                            Data Pirates took the lead in Team Clash
+                            <br>
+                            <i class="fas fa-circle" style="color:#27c93f;font-size:0.45rem;vertical-align:middle;margin-right:6px;"></i>
+                            Syntax Sorcerers won Round 3
+                        </p>
                     </div>
                 </div>
             </div>
