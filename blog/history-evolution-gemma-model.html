@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    <title>The History & Evolution of Google's Gemma Model: From Research to Open Access | Elton Blog</title>
+    <meta name="description" content="The complete story of Google's Gemma models — from Gemini's secret knowledge distillation to the public release that changed open-source AI forever.">
+    <meta property="og:title" content="The History & Evolution of Google's Gemma Model">
+    <meta property="og:description" content="From Gemini's research to Gemma 2, CodeGemma, PaliGemma, and RecurrentGemma — the full story of Google's open-weight revolution.">
+    <meta property="og:image" content="../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="blog.css">
+    <style>
+        .article-page { padding: 34px 20px 60px; }
+        .article-container { max-width: 760px; margin: 0 auto; }
+        .article-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .article-header .post-category { display: inline-block; margin-bottom: 10px; }
+        .article-header h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .article-header .article-meta { display: flex; gap: 16px; align-items: center; color: var(--text-muted); font-size: 0.82rem; font-family: 'IBM Plex Mono', monospace; flex-wrap: wrap; }
+        .article-header .article-meta i { color: var(--accent); margin-right: 4px; font-size: 0.7rem; }
+        .article-content { color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+        .article-content h2 { color: var(--text); font-size: 1.5rem; font-weight: 700; margin: 36px 0 14px; letter-spacing: -0.01em; }
+        .article-content h3 { color: var(--text); font-size: 1.2rem; font-weight: 600; margin: 28px 0 10px; }
+        .article-content p { margin-bottom: 18px; }
+        .article-content ul, .article-content ol { margin: 12px 0 20px 20px; }
+        .article-content li { margin-bottom: 8px; }
+        .article-content blockquote { border-left: 3px solid var(--accent); margin: 24px 0; padding: 12px 20px; background: rgba(255,215,0,0.04); color: var(--text); font-style: italic; border-radius: 0 8px 8px 0; }
+        .article-content code { background: var(--surface-soft); color: var(--accent); padding: 2px 7px; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; }
+        .article-content pre { background: var(--surface-soft); border: 1px solid var(--border); border-radius: 10px; padding: 18px; overflow-x: auto; margin: 20px 0; }
+        .article-content pre code { background: none; padding: 0; color: var(--text-muted); }
+        .article-content strong { color: var(--text); }
+        .article-content .highlight-box { background: var(--surface-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin: 1.8rem 0; }
+        .article-content .highlight-box h4 { color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; }
+        .article-content .highlight-box p { font-size: 0.92rem; margin-bottom: 0; }
+        .article-illustration { margin: 28px 0; background: var(--surface-soft,#161616); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .article-illustration img { width: 100%; display: block; }
+        .article-illustration figcaption { padding: 10px 16px; color: var(--text-muted); font-size: 0.78rem; text-align: center; border-top: 1px solid var(--border); font-family: 'IBM Plex Mono', monospace; }
+        .article-back { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-top: 36px; padding: 10px 20px; border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.25s; }
+        .article-back:hover { border-color: var(--accent); background: rgba(255,215,0,0.04); }
+        .pull-quote { font-size: 1.2rem; color: var(--accent); font-weight: 500; line-height: 1.6; margin: 2rem 0; padding: 0 1rem; border-left: 3px solid var(--accent); padding-left: 1.2rem; }
+
+        .timeline { display: flex; flex-direction: column; gap: 14px; margin: 1.5rem 0; }
+        .timeline-item { display: flex; gap: 14px; align-items: flex-start; }
+        .timeline-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; position: relative; }
+        .timeline-dot::after { content: ''; position: absolute; top: 14px; left: 6px; width: 2px; height: calc(100% + 14px); background: var(--border); }
+        .timeline-item:last-child .timeline-dot::after { display: none; }
+        .timeline-body { flex: 1; }
+        .timeline-body .tl-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent); font-weight: 600; }
+        .timeline-body h4 { font-size: 1rem; color: var(--text); margin: 2px 0 4px; }
+        .timeline-body p { font-size: 0.9rem; margin-bottom: 0; }
+    </style>
+</head>
+<body data-root="../">
+<div id="site-nav"></div>
+
+<main class="article-page">
+<div class="container article-container">
+    <header class="article-header reveal">
+        <span class="post-category">// AI Models & Research</span>
+        <h1>The History &amp; Evolution of Google's <span class="accent">Gemma</span> Model</h1>
+        <div class="article-meta">
+            <span><i class="fas fa-clock"></i> 8 min read</span>
+            <span><i class="fas fa-tag"></i> Gemma, Google AI, Open-Source, LLMs, Evolution</span>
+        </div>
+    </header>
+
+    <div class="article-content reveal delay-1">
+
+        <p>On February 21, 2024, Google did something it had never done before. It released the weights of a production-grade large language model to the public — for free, under a permissive license, with no paywall, no API key required, and no strings attached.</p>
+
+        <p>The model was called <strong>Gemma</strong>, and it was a direct product of the same research and infrastructure that powers Google's most advanced AI system — <strong>Gemini</strong>. But Gemma was different. Gemma was small enough to run on a laptop, open enough to inspect, and capable enough to change how the world thought about accessible AI.</p>
+
+        <p>This is the story of that model. Where it came from, how it evolved across multiple releases, and what it means for developers, researchers, and the future of open AI.</p>
+
+        <div class="pull-quote">"Gemma proved that open-weight models could compete with closed systems — not by being bigger, but by being better built."</div>
+
+        <h2>Before Gemma: Google's Closed Era</h2>
+
+        <p>To understand why Gemma mattered, you have to understand what came before it. For years, Google's most capable language models lived behind APIs. PaLM, PaLM 2, and eventually Gemini were all locked behind usage quotas, pricing tiers, and restricted access. Researchers without institutional backing couldn't fine-tune them. Developers in emerging markets couldn't afford them. The models themselves were black boxes — you sent text in, got text out, and had no way to understand what happened in between.</p>
+
+        <p>Meanwhile, the open-source AI community was moving fast. Meta released Llama in February 2023 — not fully open, but with weights available to researchers. Mistral followed with Mistral 7B, proving that smaller models could punch far above their weight class. The message was clear: the future of AI would not be built entirely behind closed doors.</p>
+
+        <p>Google needed to respond. But more than that, Google needed to show that it could <em>lead</em> in the open-weight space — not just follow.</p>
+
+        <h2>February 2024: The Birth of Gemma</h2>
+
+        <p>Gemma 1.0 arrived in two sizes: <strong>2B</strong> and <strong>7B</strong> parameters. Both were built from the same research and technology that produced Gemini, Google's most capable AI model. The 7B version was roughly comparable to Mistral 7B and Meta's Llama 2 7B in benchmark performance, while the 2B version offered a remarkably capable model that could run on a smartphone or a Raspberry Pi with sufficient memory.</p>
+
+        <p>What made Gemma immediately interesting was not just the performance — it was the <em>quality</em>. Google had distilled knowledge from Gemini into Gemma using a process that involved supervised fine-tuning, reinforcement learning from human feedback (RLHF), and careful alignment. The result was a model that felt significantly more polished than its parameter count suggested.</p>
+
+        <p>Gemma 1.0 came with a commercial-friendly license, pre-trained and instruction-tuned variants, support for JAX, PyTorch, and Keras 3.0, and native integration with Google Colab's free tier. For the first time, anyone with a laptop and an internet connection could run a model that shared DNA with Gemini.</p>
+
+        <div class="highlight-box">
+            <h4><i class="fas fa-star" style="color:var(--accent);margin-right:6px;"></i> Gemma 1.0 at a Glance</h4>
+            <p><strong>Release:</strong> February 21, 2024 &middot; <strong>Sizes:</strong> 2B, 7B &middot; <strong>Context:</strong> 8K tokens &middot; <strong>Frameworks:</strong> JAX, PyTorch, Keras 3.0 &middot; <strong>License:</strong> Commercial-friendly, permissive</p>
+        </div>
+
+        <h2>April 2024: CodeGemma & PaliGemma</h2>
+
+        <p>Two months later, Google expanded the Gemma family in two distinct directions.</p>
+
+        <p><strong>CodeGemma</strong> was a specialized variant fine-tuned for code generation and completion. It came in 2B and 7B sizes, with the 7B version achieving competitive results against specialized code models like CodeLlama. CodeGemma 2B was particularly noteworthy — it could run comfortably on a consumer laptop and deliver meaningful code completions in real time.</p>
+
+        <p><strong>PaliGemma</strong> was something else entirely — a vision-language model built by combining a pretrained SigLIP vision encoder with the Gemma language model. This was Google's answer to models like LLaVA and BLIP, enabling visual question answering, image captioning, object detection, and segmentation. PaliGemma proved that Gemma was not just a language model — it was a <em>platform</em> capable of multimodal reasoning.</p>
+
+        <p>With these releases, Google made a strategic bet: that a single model family could span text generation, code generation, and visual understanding. And developers responded. Within months, Gemma had been downloaded hundreds of thousands of times across Hugging Face and Google's own distribution channels.</p>
+
+        <h2>June 2024: Gemma 2</h2>
+
+        <p>Gemma 2 was the breakthrough. Released in June 2024, it wasn't just an incremental update — it was a completely new architecture that redefined what "small model" performance looked like.</p>
+
+        <p>The headline advancement was Gemma 2 27B, a model that outperformed Llama 3 70B on several key benchmarks despite having less than half the parameters. This was achieved through architectural innovations including <strong>interleaved sliding window attention</strong> (which alternates between local and global attention patterns for more efficient processing), <strong>logit soft-capping</strong> (which stabilizes training by limiting logit values), and improved knowledge distillation from Gemini.</p>
+
+        <p>The 9B version matched Mistral 7B and Llama 3 8B across the board, while the 2.6B version offered incredible performance for its size — outperforming all competing sub-3B models by significant margins. Gemma 2 also doubled the context window to <strong>8K tokens</strong> (with research exploring extended versions) and introduced grouped-query attention for more efficient inference.</p>
+
+        <p>At this point, Gemma was no longer Google's "open-source experiment." It was a serious contender in the foundation model space, and the community was paying attention.</p>
+
+        <div class="highlight-box">
+            <h4><i class="fas fa-chart-line" style="color:var(--accent);margin-right:6px;"></i> The Gemma 2 Leap</h4>
+            <p>Gemma 2 27B outperformed Llama 3 70B on MMLU, HellaSwag, and ARC-Challenge despite having 43 billion fewer parameters. This was not an incremental improvement — it was an architecture-level breakthrough.</p>
+        </div>
+
+        <h2>RecurrentGemma: A Different Path</h2>
+
+        <p>In April 2024, alongside CodeGemma and PaliGemma, Google also released <strong>RecurrentGemma</strong> — an experimental variant that replaced the traditional transformer attention mechanism with <strong>Griffin recurrent blocks</strong>. This was a fundamentally different approach to sequence modeling.</p>
+
+        <p>Where standard transformers process every token against every other token (quadratic in sequence length), RecurrentGemma used a gated linear recurrent mechanism that was linear in sequence length. The result was dramatically faster inference on long sequences, particularly on CPU and edge devices where attention-based models struggle.</p>
+
+        <p>RecurrentGemma was smaller than the main Gemma variants (2B and 7B) but offered a unique tradeoff: slightly lower peak accuracy in exchange for significantly faster generation, especially at longer context lengths. It was a glimpse of a future where transformer architectures might not be the only answer — particularly for on-device and real-time applications.</p>
+
+        <h2>What Made Gemma Different</h2>
+
+        <p>Looking across the entire Gemma family — from the original 2B to the 27B, from CodeGemma to PaliGemma to RecurrentGemma — several design principles emerge that distinguish Gemma from other open-weight families:</p>
+
+        <ul>
+            <li><strong>Knowledge distillation from Gemini.</strong> Every Gemma model was trained using knowledge transferred from the larger Gemini models. This gave Gemma a quality advantage that pure reinforcement learning or self-supervised approaches couldn't match.</li>
+            <li><strong>Architectural rigor.</strong> Google's deep investment in transformer research meant Gemma incorporated the latest innovations — grouped-query attention, sliding window attention, logit soft-capping, and carefully tuned training regimes.</li>
+            <li><strong>Safety from the ground up.</strong> Gemma included automated safety filtering in its training pipeline, manual red-teaming, and a comprehensive responsibility framework. For an open-weight model, Gemma was remarkably well-aligned out of the box.</li>
+            <li><strong>Multi-framework support.</strong> Gemma worked natively with JAX, PyTorch, Keras, and later with Transformers, vLLM, and Ollama. This made it one of the most accessible model families to integrate and deploy.</li>
+            <li><strong>Ecosystem depth.</strong> From fine-tuning scripts and quantization recipes to Colab tutorials and Kaggle competitions, Google invested heavily in making Gemma usable — not just available.</li>
+        </ul>
+
+        <div class="pull-quote">"Gemma's greatest contribution wasn't a single benchmark score. It was proving that open-weight AI and responsible AI could be the same thing."</div>
+
+        <h2>Why Gemma Matters for Africa</h2>
+
+        <p>For developers and researchers in Uganda and across Africa, Gemma's impact is hard to overstate. Before Gemma, running a state-of-the-art language model required expensive cloud credits, high-end GPUs, and reliable high-speed internet — three things that are often out of reach for individual developers and small teams in the region.</p>
+
+        <p>Gemma 2B and Gemma 2 2.6B changed that. These models can run on a modern laptop, on a smartphone with sufficient memory, or on free-tier cloud instances. Instruction-tuned variants work out of the box, and the commercial-friendly license means that startups and builders can deploy Gemma-powered applications without worrying about per-token API costs or restrictive terms.</p>
+
+        <p>When I attended <strong>Build with Gemma Uganda: Hack 4 Bodas</strong> at Makerere Innovation and Incubation Center, I saw this potential firsthand. Teams of university students who had never used Gemma before were building safety applications, trip verification systems, and mobility solutions using the model — all within a single afternoon. That kind of acceleration isn't possible when the model requires an API key and a credit card. It's only possible when the model is open, accessible, and lightweight enough to run on whatever hardware is available.</p>
+
+        <p>That is Gemma's real legacy. Not the benchmark scores, not the parameter counts, not the comparisons to Llama or Mistral. The legacy is the thousands of builders around the world — including right here in Kampala — who can now build with a model that shares DNA with Gemini, without needing Google's permission or infrastructure.</p>
+
+        <h2>The Road Ahead</h2>
+
+        <p>The Gemma family continues to evolve. Speculation points toward even larger variants, more specialized fine-tunes, deeper multimodal integration, and further optimization for on-device deployment. Google has signaled that Gemma is not a one-off release but an ongoing commitment to the open-weight ecosystem.</p>
+
+        <p>More importantly, Gemma has changed Google's relationship with the open-source community. The company that once kept its best models behind closed doors is now one of the most active contributors to the open-weight AI movement. That shift — from closed to open, from proprietary to accessible — may be the most significant development in the entire story.</p>
+
+        <p>Because in the end, the future of AI won't be built by a single company. It will be built by thousands of developers, researchers, students, and builders — in Kampala, in Nairobi, in Lagos, in Bangalore, in São Paulo — each running models that are powerful enough to matter and accessible enough to use.</p>
+
+        <p>Gemma is proof that future is already here.</p>
+
+        <figure class="article-illustration">
+            <figcaption>Build with Gemma Uganda: Hack 4 Bodas at Makerere Innovation and Incubation Center — where I first built with Gemma.</figcaption>
+            <img src="../events/Hack4Bodas/hack4bodas6.jpg" alt="Build with Gemma Uganda: Hack 4 Bodas group photo" loading="lazy" style="object-fit:cover;max-height:380px;">
+        </figure>
+
+        <div style="margin-top:2rem;">
+            <a href="history-evolution-gemma-model.html" class="article-back" style="margin-right:12px;"><i class="fas fa-link"></i> Link Copied?</a>
+            <a href="../events/Hack4Bodas/" class="article-back" style="margin-right:12px;"><i class="fas fa-calendar"></i> Hack 4 Bodas Event</a>
+            <a href="../gallery/hack4bodas/" class="article-back"><i class="fas fa-image"></i> Full Event Gallery</a>
+        </div>
+    </div>
+
+    <a href="index.html" class="article-back"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+</div>
+</main>
+
+<div id="site-footer"></div>
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
