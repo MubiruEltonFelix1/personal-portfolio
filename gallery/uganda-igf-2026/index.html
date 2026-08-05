@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Uganda Internet Governance Week 2026 — Youth IGF Hackathon Win | Mubiru Elton Felix</title>
+    <meta name="description" content="Winning the Uganda Youth Internet Governance Forum hackathon with Diri — a digital rights platform for youth with accessibility tools, a WhatsApp multilingual chatbot, and a USSD simulator.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        .event-detail-hero {
+            position: relative; width: 100%; height: clamp(280px, 40vw, 420px); overflow: hidden;
+            border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 2.5rem;
+        }
+        .event-detail-hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+        .event-detail-hero .overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%); pointer-events: none; }
+        .event-detail-hero .hero-text { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 2rem 1.8rem; pointer-events: none; }
+        .event-detail-hero .hero-text h1 { font-size: clamp(1.3rem, 3.5vw, 2rem); color: var(--text); margin-bottom: 0.3rem; font-weight: 800; }
+        .event-detail-hero .hero-text .hero-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.05em; }
+
+        .event-content { max-width: 780px; }
+        .event-content h2 { font-size: 1.3rem; color: var(--accent); margin: 2rem 0 0.8rem; font-weight: 700; }
+        .event-content h3 { font-size: 1.05rem; color: var(--text); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+        .event-content p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.8rem; }
+
+        .event-highlight {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-left: 3px solid var(--accent); border-radius: var(--radius);
+            padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+        }
+        .event-highlight h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; }
+        .event-highlight p { margin-bottom: 0; }
+
+        .event-quote {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+            position: relative;
+        }
+        .event-quote::before { content: '\201C'; position: absolute; top: 0.2rem; left: 0.8rem; font-size: 3rem; color: var(--accent); opacity: 0.3; font-family: Georgia, serif; line-height: 1; }
+        .event-quote p { font-style: italic; font-size: 0.95rem; color: var(--text); margin: 0; line-height: 1.7; }
+
+        .event-team-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; margin: 0.8rem 0 1.2rem; }
+        .event-team-list li {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.82rem;
+            color: var(--text); display: flex; align-items: center; gap: 6px;
+        }
+        .event-team-list li i { color: var(--accent); font-size: 0.7rem; }
+
+        .tech-tag {
+            display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+            padding: 3px 10px; border-radius: 20px; color: var(--accent);
+            background: rgba(255, 215, 0, 0.08); border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-right: 5px; margin-bottom: 5px;
+        }
+
+        .project-feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 1.2rem 0 1.5rem; }
+        .project-feature-card {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.3rem 1.2rem; transition: border-color 0.25s;
+        }
+        .project-feature-card:hover { border-color: rgba(255, 215, 0, 0.25); }
+        .project-feature-card i { font-size: 1.2rem; color: var(--accent); margin-bottom: 8px; }
+        .project-feature-card h4 { font-size: 0.82rem; color: var(--text); margin-bottom: 4px; }
+        .project-feature-card p { font-size: 0.78rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+        .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1.2rem 0 1.8rem; }
+        .split-card { background: var(--surface-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.2rem; }
+        .split-card h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+        .split-card p { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+
+        .event-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 2rem 0; }
+        .event-photo-grid figure { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); transition: border-color 0.25s; }
+        .event-photo-grid figure:hover { border-color: rgba(255, 215, 0, 0.3); }
+        .event-photo-grid figure img { width: 100%; height: 220px; object-fit: cover; object-position: 50% 0%; display: block; }
+        .event-photo-grid figure figcaption { padding: 0.6rem 1rem; font-size: 0.75rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.03em; }
+
+        .event-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 2rem 0 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .btn-event { display: inline-flex; align-items: center; gap: 6px; padding: 0.7rem 1.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; text-decoration: none; letter-spacing: 0.03em; }
+        .btn-event-primary { background: var(--accent); color: #000; border: none; }
+        .btn-event-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255, 215, 0, 0.2); }
+        .btn-event-ghost { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+        .btn-event-ghost:hover { border-color: var(--accent); background: rgba(255, 215, 0, 0.04); transform: translateY(-2px); }
+        .event-back-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; margin-bottom: 1.5rem; transition: color 0.2s; }
+        .event-back-link:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .event-detail-hero .hero-text { padding: 1.2rem 1rem 1rem; }
+            .event-photo-grid { grid-template-columns: 1fr; }
+            .event-photo-grid figure img { height: 180px; }
+            .split-section { grid-template-columns: 1fr; }
+            .project-feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="section">
+        <div class="container">
+            <a href="../" class="event-back-link reveal">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+
+            <!-- Hero Image -->
+            <div class="event-detail-hero reveal">
+                <img src="../../events/Internet Governance Week 2026/IGF3.jpg" alt="Uganda Internet Governance Week 2026 — Youth IGF Hackathon at the National ICT Innovation Hub" loading="lazy">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <div class="hero-meta"><i class="fas fa-trophy"></i> Hackathon Win &middot; July 30, 2026 &middot; National ICT Innovation Hub</div>
+                    <h1>Uganda Internet Governance Week 2026</h1>
+                </div>
+            </div>
+
+            <div class="event-content">
+                <!-- Lead -->
+                <p class="reveal delay-1" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
+                    I was part of the <strong style="color:var(--accent);">winning team</strong> at the Uganda Youth Internet Governance Forum hackathon — a defining moment of Uganda Internet Governance Week 2026, held at the National ICT Innovation Hub on July 30, 2026.
+                </p>
+                <p class="reveal delay-1">
+                    Together with my incredible teammates — <strong style="color:var(--accent);">Opakrwoth Jonathan</strong>, <strong style="color:var(--accent);">Tukei John Steven</strong>, <strong style="color:var(--accent);">Anthony David Amulala</strong>, and <strong style="color:var(--accent);">Busingye Mbeine</strong> — we built <strong style="color:var(--accent);">Diri</strong>, a platform designed to put digital governance knowledge directly into the hands of Ugandan youth.
+                </p>
+
+                <!-- Result Highlight -->
+                <div class="event-highlight reveal delay-1">
+                    <h4><i class="fas fa-trophy" style="margin-right:6px;"></i> Result</h4>
+                    <p style="font-size:1rem;color:var(--text);font-weight:600;">
+                        Our solution <strong style="color:var(--accent);">Diri</strong> took <strong style="color:var(--accent);">first place</strong> at the Uganda Youth Internet Governance Forum hackathon.
+                    </p>
+                </div>
+
+                <!-- Team -->
+                <h2 class="reveal delay-1">The Winning Team</h2>
+                <ul class="event-team-list reveal delay-2">
+                    <li><i class="fas fa-user"></i> Mubiru Elton Felix</li>
+                    <li><i class="fas fa-user"></i> Opakrwoth Jonathan</li>
+                    <li><i class="fas fa-user"></i> Tukei John Steven</li>
+                    <li><i class="fas fa-user"></i> Anthony David Amulala</li>
+                    <li><i class="fas fa-user"></i> Busingye Mbeine</li>
+                </ul>
+
+                <!-- ─── THE PROJECT ─── -->
+                <h2 class="reveal delay-2">The Project: Diri (Digital Rights)</h2>
+
+                <h3 class="reveal delay-2">What Inspired It</h3>
+                <p class="reveal delay-2">
+                    Digital governance is one of the most important conversations of our time — yet most young Ugandans never get to be part of it. The language is often technical, the content is buried in policy documents, and the platforms used to share it simply don't reach the people who need it most.
+                </p>
+                <p class="reveal delay-2">
+                    Diri was born from a simple question: how do we make digital governance engaging, accessible, and genuinely useful for every young person in Uganda — regardless of their connectivity, their device, or their ability?
+                </p>
+
+                <h3 class="reveal delay-2">How We Built It</h3>
+                <div class="project-feature-grid reveal delay-2">
+                    <div class="project-feature-card">
+                        <i class="fas fa-universal-access"></i>
+                        <h4>Accessibility-First Platform</h4>
+                        <p>Diri delivers engaging content on digital governance with built-in accessibility tools — a screen reader, adjustable font sizes, and a high-contrast setting for youth with special needs.</p>
+                    </div>
+                    <div class="project-feature-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <h4>WhatsApp Multilingual Chatbot</h4>
+                        <p>Youth don't need to remember links to get information. A multilingual WhatsApp chatbot brings digital governance conversations to wherever young people already are — no app install required.</p>
+                    </div>
+                    <div class="project-feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>USSD Simulator</h4>
+                        <p>An embedded USSD simulator makes information accessible to youth without smartphones or internet access, ensuring no one is left out of the digital governance conversation.</p>
+                    </div>
+                    <div class="project-feature-card">
+                        <i class="fas fa-comments"></i>
+                        <h4>Youth Participation</h4>
+                        <p>Every feature points back to one goal: increasing the number of youth across the country who can participate in digital governance discussions and easily access this information.</p>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <p class="reveal delay-2" style="margin-bottom:1.5rem;">
+                    <span class="tech-tag">Digital Rights</span>
+                    <span class="tech-tag">WhatsApp Bot</span>
+                    <span class="tech-tag">USSD</span>
+                    <span class="tech-tag">Accessibility</span>
+                    <span class="tech-tag">Multilingual</span>
+                    <span class="tech-tag">Internet Governance</span>
+                    <span class="tech-tag">Youth Engagement</span>
+                </p>
+
+                <!-- The Showcase -->
+                <h2 class="reveal delay-3">From Hackathon to the National Stage</h2>
+                <p class="reveal delay-3">
+                    Following our win, the President of the Internet Society Uganda Chapter, <strong style="color:var(--accent);">Mr Joshua Mpairwe</strong>, invited us to showcase Diri at the Uganda Internet Governance Forum at the <strong style="color:var(--accent);">Sheraton Kampala Hotel</strong> the following day.
+                </p>
+                <p class="reveal delay-3">
+                    In 24 hours, Diri went from a hackathon prototype to a solution presented in front of policymakers, industry leaders, and advocates shaping Uganda's digital future. That invitation was validation that what we built in the hackathon wasn't just a winning demo — it was a genuinely useful tool with a real role to play in Uganda's digital governance landscape.
+                </p>
+
+                <div class="event-quote reveal delay-3">
+                    <p>We didn't just win a hackathon. We built a solution that earned its way to the national conversation on internet governance.</p>
+                </div>
+
+                <!-- Themes -->
+                <h2 class="reveal delay-3">The Conversations That Mattered</h2>
+                <p class="reveal delay-3">
+                    Across the Youth IGF hackathon and the main Uganda Internet Governance Forum, discussions and activities focused on the topics that are shaping Uganda's digital future:
+                </p>
+                <div class="split-section reveal delay-3">
+                    <div class="split-card">
+                        <h4><i class="fas fa-globe" style="margin-right:6px;"></i> Internet Governance</h4>
+                        <p>How Uganda's internet is run, who makes the decisions, and how young people can have a seat at that table.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-shield-alt" style="margin-right:6px;"></i> Cybersecurity</h4>
+                        <p>Building digital safety awareness and empowering youth to protect themselves and their communities online.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-heart" style="margin-right:6px;"></i> Digital Inclusion</h4>
+                        <p>Ensuring every Ugandan — regardless of device, connectivity, or ability — can participate in the digital economy.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-flag" style="margin-right:6px;"></i> Online Gender-Based Violence</h4>
+                        <p>Confronting OGBV head-on and working toward a safer online space for women and girls across the country.</p>
+                    </div>
+                </div>
+
+                <!-- Networking -->
+                <h2 class="reveal delay-3">Beyond the Code</h2>
+                <p class="reveal delay-3">
+                    It was an incredible experience filled with learning, innovation, and meaningful networking with passionate individuals from across the country. From fellow young innovators to policymakers and advocates, every conversation added a new perspective on what Uganda's digital future can look like — and what each of us can do to shape it.
+                </p>
+
+                <!-- Event Photo Gallery -->
+                <h2 class="reveal delay-3">Event Gallery</h2>
+                <div class="event-photo-grid reveal delay-3">
+                    <figure>
+                        <img src="../../events/Internet Governance Week 2026/IGF1.jpg" alt="Uganda Youth IGF hackathon session" loading="lazy">
+                        <figcaption>Hacking at the National ICT Innovation Hub</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Internet Governance Week 2026/IGF2.jpg" alt="Uganda Internet Governance Week 2026 group photo" loading="lazy">
+                        <figcaption>Uganda Internet Governance Week 2026</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Internet Governance Week 2026/IGF4.jpg" alt="Uganda IGF 2026 discussions" loading="lazy">
+                        <figcaption>Forum discussions at Sheraton Kampala Hotel</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Internet Governance Week 2026/IGF5.jpg" alt="Uganda IGF 2026 moments" loading="lazy">
+                        <figcaption>Moments from the week</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Acknowledgments -->
+                <h2 class="reveal delay-3">Acknowledgments</h2>
+                <p class="reveal delay-3">
+                    I would like to sincerely thank the <strong style="color:var(--accent);">Internet Society Uganda Chapter</strong> for organising such insightful and impactful events that continue to empower young innovators and drive Uganda's technology ecosystem forward.
+                </p>
+                <p class="reveal delay-3">
+                    I would also like to thank the <strong style="color:var(--accent);">Ministry of ICT &amp; National Guidance</strong> and <strong style="color:var(--accent);">Hon. Minister Justine Kasule Lumumba</strong> (a keynote speaker at the event) for supporting initiatives that create opportunities for young people to actively participate in building Uganda's digital future.
+                </p>
+                <p class="reveal delay-3">
+                    And my heartfelt appreciation to all the sponsors and partners whose invaluable support made these events possible: the <strong>Internet Society Foundation</strong>, <strong>Paradigm Initiative</strong>, <strong>Milima Security</strong>, the <strong>Collaboration on International ICT Policy for East and Southern Africa (CIPESA)</strong>, the <strong>Ministry of ICT &amp; National Guidance</strong>, <strong>Restless Development</strong>, and the <strong>Defenders Protection Initiative</strong>.
+                </p>
+
+                <!-- Actions -->
+                <div class="event-actions reveal delay-3">
+                    <a href="../" class="btn-event btn-event-primary">
+                        <i class="fas fa-arrow-left"></i> Back to Events
+                    </a>
+                    <a href="../build-with-ai-mak/" class="btn-event btn-event-ghost">
+                        <i class="fas fa-trophy"></i> My Other Hackathon Win
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>
