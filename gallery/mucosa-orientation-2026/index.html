@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>MUCOSA Orientation 2026 — My First Friday Session as President | Mubiru Elton Felix</title>
+    <meta name="description" content="My first ever MUCOSA Friday Session as president of the Mbarara University Computing Students Association — welcoming the 2026/27 cohort alongside IEEE, GDG, AWS, Zindi, and SPE communities.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        .event-detail-hero {
+            position: relative; width: 100%; height: clamp(280px, 40vw, 420px); overflow: hidden;
+            border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 2.5rem;
+        }
+        .event-detail-hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+        .event-detail-hero .overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%); pointer-events: none; }
+        .event-detail-hero .hero-text { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 2rem 1.8rem; pointer-events: none; }
+        .event-detail-hero .hero-text h1 { font-size: clamp(1.3rem, 3.5vw, 2rem); color: var(--text); margin-bottom: 0.3rem; font-weight: 800; }
+        .event-detail-hero .hero-text .hero-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.05em; }
+
+        .event-content { max-width: 780px; }
+        .event-content h2 { font-size: 1.3rem; color: var(--accent); margin: 2rem 0 0.8rem; font-weight: 700; }
+        .event-content h3 { font-size: 1.05rem; color: var(--text); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+        .event-content p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.8rem; }
+
+        .event-highlight {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-left: 3px solid var(--accent); border-radius: var(--radius);
+            padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+        }
+        .event-highlight h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; }
+        .event-highlight p { margin-bottom: 0; }
+
+        .event-quote {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.5rem 1.8rem; margin: 1.5rem 0;
+            position: relative;
+        }
+        .event-quote::before { content: '\201C'; position: absolute; top: 0.2rem; left: 0.8rem; font-size: 3rem; color: var(--accent); opacity: 0.3; font-family: Georgia, serif; line-height: 1; }
+        .event-quote p { font-style: italic; font-size: 0.95rem; color: var(--text); margin: 0; line-height: 1.7; }
+
+        .event-team-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; margin: 0.8rem 0 1.2rem; }
+        .event-team-list li {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.82rem;
+            color: var(--text); display: flex; align-items: center; gap: 6px;
+        }
+        .event-team-list li i { color: var(--accent); font-size: 0.7rem; }
+
+        .tech-tag {
+            display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+            padding: 3px 10px; border-radius: 20px; color: var(--accent);
+            background: rgba(255, 215, 0, 0.08); border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-right: 5px; margin-bottom: 5px;
+        }
+
+        .project-feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 1.2rem 0 1.5rem; }
+        .project-feature-card {
+            background: var(--surface-soft); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.3rem 1.2rem; transition: border-color 0.25s;
+        }
+        .project-feature-card:hover { border-color: rgba(255, 215, 0, 0.25); }
+        .project-feature-card i { font-size: 1.2rem; color: var(--accent); margin-bottom: 8px; }
+        .project-feature-card h4 { font-size: 0.82rem; color: var(--text); margin-bottom: 4px; }
+        .project-feature-card p { font-size: 0.78rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+        .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1.2rem 0 1.8rem; }
+        .split-card { background: var(--surface-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.2rem; }
+        .split-card h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+        .split-card p { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+
+        .event-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 2rem 0; }
+        .event-photo-grid figure { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); transition: border-color 0.25s; }
+        .event-photo-grid figure:hover { border-color: rgba(255, 215, 0, 0.3); }
+        .event-photo-grid figure img { width: 100%; height: 220px; object-fit: cover; object-position: 50% 0%; display: block; }
+        .event-photo-grid figure figcaption { padding: 0.6rem 1rem; font-size: 0.75rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.03em; }
+
+        .event-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 2rem 0 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .btn-event { display: inline-flex; align-items: center; gap: 6px; padding: 0.7rem 1.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; text-decoration: none; letter-spacing: 0.03em; }
+        .btn-event-primary { background: var(--accent); color: #000; border: none; }
+        .btn-event-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255, 215, 0, 0.2); }
+        .btn-event-ghost { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+        .btn-event-ghost:hover { border-color: var(--accent); background: rgba(255, 215, 0, 0.04); transform: translateY(-2px); }
+        .event-back-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; margin-bottom: 1.5rem; transition: color 0.2s; }
+        .event-back-link:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .event-detail-hero .hero-text { padding: 1.2rem 1rem 1rem; }
+            .event-photo-grid { grid-template-columns: 1fr; }
+            .event-photo-grid figure img { height: 180px; }
+            .split-section { grid-template-columns: 1fr; }
+            .project-feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main class="section">
+        <div class="container">
+            <a href="../" class="event-back-link reveal">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+
+            <!-- Hero Image -->
+            <div class="event-detail-hero reveal">
+                <img src="../../events/Mucosa%20Orientation/a0ada27b-e8a6-4aa7-bffa-f3380697739b.jpg" alt="MUCOSA Orientation 2026 at Mbarara University of Science and Technology" loading="lazy">
+                <div class="overlay"></div>
+                <div class="hero-text">
+                    <div class="hero-meta"><i class="fas fa-users"></i> MUCOSA Friday Session &middot; August 21, 2026 &middot; Mbarara University of Science &amp; Technology</div>
+                    <h1>MUCOSA Orientation 2026</h1>
+                </div>
+            </div>
+
+            <div class="event-content">
+                <!-- Lead -->
+                <p class="reveal delay-1" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
+                    My first ever <strong style="color:var(--accent);">MUCOSA Friday Session</strong> as <strong style="color:var(--accent);">President of the Mbarara University Computing Students Association (MUCOSA)</strong>. On Friday, August 21, 2026, the association's first session of the semester doubled as our orientation for the incoming 2026/27 cohort — and it was my honour to lead it.
+                </p>
+                <p class="reveal delay-1">
+                    MUCOSA is the home of computing students at MUST, and its heartbeat is the Friday session: every Friday during the semester, from <strong style="color:var(--accent);">2:00 PM to 4:00 PM</strong>, we meet to learn, share opportunities, and build together. The orientation was the first of those sessions this academic year — the moment we open the doors wide and let the freshers see what they've just joined.
+                </p>
+
+                <!-- Role Highlight -->
+                <div class="event-highlight reveal delay-1">
+                    <h4><i class="fas fa-user-tie" style="margin-right:6px;"></i> My Role</h4>
+                    <p style="font-size:1rem;color:var(--text);font-weight:600;">
+                        As president, I presided over the session — opening MUCOSA's year in front of the very people the association exists to serve.
+                    </p>
+                </div>
+
+                <!-- ─── WHAT HAPPENED ─── -->
+                <h2 class="reveal delay-2">What the Orientation Covered</h2>
+                <p class="reveal delay-2">
+                    Together with the <strong style="color:var(--accent);">Speaker of Council, Mukiibi Michael Kirinnya</strong>, I opened the session and formally welcomed the cohort into the association:
+                </p>
+
+                <div class="split-section reveal delay-2">
+                    <div class="split-card">
+                        <h4><i class="fas fa-users" style="margin-right:6px;"></i> Welcome &amp; Membership Briefing</h4>
+                        <p>The Speaker and I walked the freshers through what MUCOSA membership actually means — the weekly Friday sessions, how the association runs, and the community waiting for them beyond the lecture room.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-bolt" style="margin-right:6px;"></i> IEEE Students Branch Takeover</h4>
+                        <p>Tumwijukye Festo and Muganga Nuwagira introduced the IEEE Students Branch, with vice chairperson Joronimo Amanya highlighting upcoming opportunities like IEEE Xtreme and available scholarships.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fas fa-fire-flame-curved" style="margin-right:6px;"></i> Society of Petroleum Engineers</h4>
+                        <p>Edgar Yawe presented the SPE MUST Chapter, showing the freshers that engineering communities cut across disciplines — and that computing students have a seat there too.</p>
+                    </div>
+                    <div class="split-card">
+                        <h4><i class="fab fa-google" style="margin-right:6px;"></i> GDG &amp; the Wider Ecosystem</h4>
+                        <p>Miriam Angella Birungi and Bryant Nuwe led GDG sessions covering GDG Dev Fest (October 23–24), the AfroTech Forge X Space (August 28), the AWS Student Builder Group launch, and the Zindi Community at MUST.</p>
+                    </div>
+                </div>
+
+                <!-- Communities -->
+                <h2 class="reveal delay-2">Communities in the Room</h2>
+                <ul class="event-team-list reveal delay-2">
+                    <li><i class="fas fa-people-group"></i> IEEE Students Branch</li>
+                    <li><i class="fas fa-people-group"></i> GDG Cloud Mbarara</li>
+                    <li><i class="fas fa-people-group"></i> AWS Student Builder Group</li>
+                    <li><i class="fas fa-people-group"></i> Zindi Community at MUST</li>
+                    <li><i class="fas fa-people-group"></i> SPE MUST Chapter</li>
+                </ul>
+
+                <div class="event-quote reveal delay-3">
+                    <p>Leadership stopped being a title the moment I picked up the microphone. It became a room full of freshers counting on me to open doors.</p>
+                </div>
+
+                <!-- The Friday Ritual -->
+                <h2 class="reveal delay-3">The Friday Ritual</h2>
+                <p class="reveal delay-3">
+                    MUCOSA Friday Sessions run every Friday from <strong>2:00 PM to 4:00 PM</strong> throughout the semester. Some weeks are briefings, some are talks and demos, some are pure community — but every one of them is where computing students at MUST find out what is possible beyond the classroom. If you're a computing student at Mbarara University, that room is yours. Show up.
+                </p>
+
+                <!-- Event Photo Gallery -->
+                <h2 class="reveal delay-3">Event Gallery</h2>
+                <div class="event-photo-grid reveal delay-3">
+                    <figure>
+                        <img src="../../events/Mucosa%20Orientation/IMG_9698.jpeg" alt="Addressing the association during the MUCOSA orientation session" loading="lazy">
+                        <figcaption>Opening my first Friday session as president</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Mucosa%20Orientation/IMG_9668.jpeg" alt="Freshers attending the MUCOSA Orientation 2026 session" loading="lazy">
+                        <figcaption>Welcoming the incoming cohort</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Mucosa%20Orientation/IMG_9668%20(1).jpeg" alt="Members during the opening briefing at MUCOSA Orientation 2026" loading="lazy">
+                        <figcaption>During the opening briefing</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Mucosa%20Orientation/IMG_9708.jpeg" alt="Partner communities presenting at MUCOSA Orientation 2026" loading="lazy">
+                        <figcaption>Community takeovers</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../../events/Mucosa%20Orientation/IMG_9716.jpeg" alt="Members after the MUCOSA Orientation 2026 session" loading="lazy">
+                        <figcaption>Moments after the session</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Acknowledgments -->
+                <h2 class="reveal delay-3">Acknowledgments</h2>
+                <p class="reveal delay-3">
+                    Thank you to <strong style="color:var(--accent);">Speaker Mukiibi Michael Kirinnya</strong> for co-leading the briefing, and to <strong style="color:var(--accent);">Tumwijukye Festo</strong>, <strong style="color:var(--accent);">Muganga Nuwagira</strong>, <strong style="color:var(--accent);">Joronimo Amanya</strong>, <strong style="color:var(--accent);">Edgar Yawe</strong>, <strong style="color:var(--accent);">Miriam Angella Birungi</strong>, and <strong style="color:var(--accent);">Bryant Nuwe</strong> for showing our freshers what the community ecosystem around MUCOSA makes possible.
+                </p>
+                <p class="reveal delay-3">
+                    And to every fresher who chose to spend their Friday afternoon in that room — welcome to MUCOSA. See you next Friday, 2:00 PM sharp.
+                </p>
+
+                <!-- Actions -->
+                <div class="event-actions reveal delay-3">
+                    <a href="../" class="btn-event btn-event-primary">
+                        <i class="fas fa-arrow-left"></i> Back to Events
+                    </a>
+                    <a href="../uganda-igf-2026/" class="btn-event btn-event-ghost">
+                        <i class="fas fa-trophy"></i> Youth IGF Hackathon Win
+                    </a>
+                    <a href="https://lnkd.in/p/dRaQF3cg" target="_blank" rel="noopener" class="btn-event btn-event-ghost">
+                        <i class="fab fa-linkedin"></i> LinkedIn Post
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>
