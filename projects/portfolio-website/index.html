@@ -1,52 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>Portfolio Website | Mubiru Elton Felix</title>
+    <meta name="description" content="A fast, responsive home for every project — clean design, smooth motion, and real personality that helps recruiters remember you long after the scroll.">
+    <meta property="og:title" content="Portfolio Website — a fast, personal showcase built to impress">
+    <meta property="og:description" content="A fast, responsive home for every project — clean design, smooth motion, and real personality that helps recruiters remember you long after the scroll.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
-
-    <main class="section detail-hero">
-        <div class="container">
-            <h1 class="section-title reveal">Portfolio Website</h1>
-            <div class="detail-layout">
-                <article class="card reveal">
-                    <h3>Project Description</h3>
-                    <p class="muted">Modern, responsive portfolio website showcasing projects and skills with smooth animations and optimized performance using clean code practices.</p>
-                    <div class="stack">
-                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">GSAP</span>
-                    </div>
-                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1">GitHub Profile</a>
-                </article>
-                <article class="card reveal">
-                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80" alt="Portfolio website screenshot" style="border-radius:10px;">
-                </article>
+    <main>
+        <section class="pd-hero">
+            <div class="container">
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-laptop-code"></i> Web Experience</p>
+                <h1 class="pd-title reveal">Portfolio <span class="accent">Website</span></h1>
+                <p class="pd-pitch reveal">This very website — the one you're reading right now — built to turn a quick scroll into a lasting first impression.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-bolt"></i> Fast-loading pages</span>
+                    <span class="pd-badge"><i class="fas fa-mobile-screen"></i> Works on any device</span>
+                    <span class="pd-badge"><i class="fas fa-wand-magic-sparkles"></i> Smooth animations</span>
+                    <span class="pd-badge"><i class="fas fa-code"></i> Built with HTML5, CSS3 &amp; JavaScript</span>
+                    <span class="pd-badge"><i class="fas fa-film"></i> Motion powered by GSAP</span>
+                </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" href="../"><i class="fas fa-play"></i> See It in Action — Browse the Projects</a>
+                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> GitHub Profile</a>
+                </div>
             </div>
+        </section>
 
-            <article class="card reveal" style="margin-top:1rem;">
-                <h3>Challenges & Solutions</h3>
-                <p class="muted">Challenge: combining visual polish with simple maintainable structure. Solution: modular sections, reusable style patterns, and lightweight interactions focused on readability.</p>
-            </article>
-
-            <div class="cta-row" style="margin-top:1rem;">
-                <a class="btn btn-ghost" href="../">Back to Projects</a>
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Great Work Deserves More Than a Plain List of Links</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">Most people meet a developer through a pile of disconnected things: a resume that fits on one page, a profile full of repository names nobody opens, and maybe a message thread somewhere. The actual work — the part worth talking about — ends up hidden behind links that all look exactly the same.</p>
+                    <p class="reveal delay-2">Recruiters skim. Students and collaborators click away fast. If a visitor can't understand <strong>who you are and what you build within seconds</strong>, they simply move on — and the best projects never get their moment.</p>
+                    <p class="reveal delay-3">The hard part wasn't adding more decoration. It was combining genuine visual polish with a structure simple enough to keep updated — so the site stays sharp without turning into a chore to maintain.</p>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> What You Get When You Scroll This Site</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-layer-group"></i><h4>Everything in one place</h4><p>Projects, skills, and personality live under one roof, so visitors never have to piece together who you are from scattered links.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-bolt"></i><h4>It loads before you lose interest</h4><p>Pages are tuned for speed, so the first impression lands instantly instead of staring at a blank screen.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-wand-magic-sparkles"></i><h4>Motion that guides, not distracts</h4><p>Smooth animations draw your eye to what matters next — subtle enough to feel crafted, never showy for its own sake.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-mobile-screen"></i><h4>Looks right on any screen</h4><p>Fully responsive from a wide desktop monitor down to a phone in one hand, so it presents well wherever someone opens it.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-pen-ruler"></i><h4>Built from repeatable pieces</h4><p>The site uses shared sections and reusable style patterns, which means new projects slot in quickly and the whole thing stays easy to keep fresh.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-user-astronaut"></i><h4>A voice, not a template</h4><p>A dark theme, gold accents, and copy written like a person talks — details that make the site memorable after dozens of look-alike portfolios.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> A Visitor's Path Through the Site</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Land and get oriented</h4><p>The opening screens say who this is, what kind of work lives here, and why it's worth your next thirty seconds.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Meet the real projects</h4><p>Each project page explains what the thing does, who it helps, and why it matters — in everyday language, not buzzwords.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Feel the craft along the way</h4><p>Lightweight touches and smooth transitions keep the whole tour readable and pleasant, on whatever device you're holding.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Reach out in one click</h4><p>Everywhere you land, there's a clear way forward — explore more work, check the GitHub profile, or start a conversation.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Built to Welcome Every Kind of Visitor</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-briefcase"></i> Recruiters &amp; hiring managers</span>
+                    <span class="pd-chip"><i class="fas fa-graduation-cap"></i> Students &amp; fellow developers</span>
+                    <span class="pd-chip"><i class="fas fa-handshake"></i> People looking for a collaborator</span>
+                    <span class="pd-chip"><i class="fas fa-eye"></i> Anyone who appreciates clean design</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">First impressions happen in seconds — this one is <span style="color:var(--accent);">built to count</span>.</h2>
+                <p class="reveal delay-1">You've already experienced the product — you're scrolling it. Dig into the projects, follow along on GitHub, or loop back and pick another build to explore.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> Follow Along on GitHub</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+            </div>
+        </section>
     </main>
-
     <div id="site-footer"></div>
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>

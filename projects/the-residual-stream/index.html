@@ -1,342 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>The Residual Stream | Mubiru Elton Felix</title>
-    <meta name="description" content="Building transformers from the matrix multiply up. Every week, the weights update — a live record of closing the gap between understanding ML and building it.">
-    <meta property="og:title" content="The Residual Stream — Build Transformers From Scratch">
-    <meta property="og:description" content="A live record of the gap between understanding something and being able to build it — closing, week by week, in public.">
+    <meta name="description" content="Follow a student rebuilding AI from scratch, in public — a new working piece every week, mistakes and all. Watch how AI really gets built, week by week.">
+    <meta property="og:title" content="The Residual Stream — Watch AI Get Rebuilt From Scratch">
+    <meta property="og:description" content="Follow a student rebuilding AI from scratch, in public — a new working piece every week, mistakes and all. Watch how AI really gets built, week by week.">
     <meta property="og:image" content="../../assets/images/logo.png">
     <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="project.css">
+    <style>
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
-
-    <main class="project-page">
-        <!-- Hero -->
-        <section class="project-hero">
+    <main>
+        <section class="pd-hero">
             <div class="container">
-                <div class="hero-eyebrow reveal">// From Scratch</div>
-                <h1 class="hero-title reveal">The Residual <span class="accent">Stream</span></h1>
-                <p class="hero-subtitle reveal">Build a transformer from the matrix multiply up — in public, from scratch, every week.</p>
-                <div class="project-badges reveal delay-1">
-                    <span class="badge"><i class="fab fa-python"></i> Python</span>
-                    <span class="badge"><i class="fas fa-bolt"></i> JAX</span>
-                    <span class="badge"><i class="fas fa-calculator"></i> NumPy</span>
-                    <span class="badge"><i class="fas fa-graduation-cap"></i> Research Intern Target</span>
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-flask"></i> Open Learning Lab</p>
+                <h1 class="pd-title reveal">The Residual <span class="accent">Stream</span></h1>
+                <p class="pd-pitch reveal">One student is rebuilding AI from absolute zero — publishing every working piece and every failure, week by week. Week&nbsp;1 is live now.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fab fa-python"></i> Built with Python</span>
+                    <span class="pd-badge"><i class="fas fa-bolt"></i> Powered by JAX</span>
+                    <span class="pd-badge"><i class="fas fa-calendar-check"></i> New build every week</span>
+                    <span class="pd-badge"><i class="fas fa-location-dot"></i> Week 1 of 8 — live now</span>
+                    <span class="pd-badge"><i class="fas fa-bullseye"></i> Frontier-intern bar</span>
+                </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/the-residual-stream"><i class="fas fa-play"></i> Watch the Build on GitHub</a>
+                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://www.linkedin.com/in/mubiru-elton-felix/"><i class="fab fa-linkedin"></i> Connect on LinkedIn</a>
                 </div>
             </div>
         </section>
 
-        <!-- The Setup -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">The Setup</h2>
-
-                <div class="scenario-card reveal">
-                    <div class="scenario-icon"><i class="fas fa-clock"></i></div>
-                    <div>
-                        <h3>It's 11 PM somewhere in Kampala.</h3>
-                        <p class="muted">A student opens a terminal. No Jupyter tutorial. No course to follow. Just a blank <code>.py</code> file, the Chinchilla paper, and a question that won't leave them alone:</p>
-                        <blockquote style="margin:12px 0 0;font-size:0.9rem;">"I understand how transformers work. But can I actually build one — from the matrix multiply up — that trains, that converges, that I can debug when it breaks?"</blockquote>
-                    </div>
-                </div>
-
-                <p class="muted reveal delay-1">That's what this repo is. Not a collection of finished projects. A live record of the gap between understanding something and being able to build it — closing, week by week, in public.</p>
-
-                <p class="muted reveal delay-1">The target: frontier ML research intern level. The method: implement everything from scratch, read the primary literature cold, run real experiments, and write up what was found — including what broke.</p>
-
-                <p class="section-lead reveal delay-2">This is the residual stream. Every week, the weights update.</p>
-            </div>
-        </section>
-
-        <!-- What's Being Built -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">What's Being Built</h2>
-                <div class="how-card reveal">
-                    <pre><code>the-residual-stream/
-│
-├── lectures_exercises/       Lecture notes and JAX challenge work
-│   ├── lectures/             Course lecture material
-│   └── exercises/            Notebook-based practice and challenges
-│
-├── research_papers/          Paper PDFs and primary reading material
-│
-├── 🧮  foundations/          Mathematical bedrock. No ML yet.
-│   ├── linear_algebra/       SVD, eigendecomposition, projections
-│   ├── calculus/             Jacobians, backprop by hand, chain rule
-│   └── probability/          KL divergence, MLE, Bayesian reasoning
-│
-├── ⚙️  implementations/      Papers → running code. JAX only. No shortcuts.
-│   ├── 01_bpe_tokenizer/     Byte Pair Encoding from the 1994 paper
-│   ├── 02_transformer/       Attention Is All You Need, implemented
-│   ├── 03_training_loop/     Forward pass → loss → backprop → Adam
-│   ├── 04_lora/              Low-rank adaptation from Hu et al. 2021
-│   └── 05_chinchilla_laws/   The scaling calculator that broke GPT-3
-│
-├── 📄  paper_notes/          Structured notes on every paper read
-│
-├── 🔬  experiments/          Original questions. Stated hypotheses. Real results.
-│   ├── 01_tokenization_tax/  Does Luganda really cost 3× more tokens?
-│   └── 02_warmup_ablation/   How bad is training without LR warmup?
-│
-├── 📓  weekly_builds/        One complete, working thing per week
-│
-└── 📋  LEARNING_LOG.md       Honest weekly updates. What broke. What I don't know yet.</code></pre>
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Everyone Uses AI. Almost Nobody Can Explain It.</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">You type a question, a chatbot answers. Somewhere between those two moments, something astonishing happens — and for most people, including most people who study computers, that something is a closed box. Tutorials don't help much: they hand you finished code, it runs, and you've learned how to copy, not how to understand.</p>
+                    <p class="reveal delay-2">There's a second problem too: the gap between <strong>reading about something</strong> and <strong>being able to build it</strong>. It's the difference between knowing the rules of swimming and jumping into the pool. Most learning online hides the splashing — portfolios show only polished wins, so every learner quietly assumes everyone else finds this easy. They don't.</p>
+                    <p class="reveal delay-3">And it matters who's inside the room where AI gets built. It's 11 PM in Kampala and a student is asking whether tools like these treat African languages fairly — and whether someone from this side of the world can help decide that, by proving it the slow, honest way: building the thing from nothing, in front of everyone.</p>
                 </div>
             </div>
         </section>
 
-        <!-- The 8-Week Arc -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">The 8-Week Arc</h2>
-
-                <h4 style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;font-family:'IBM Plex Mono',monospace;">Weeks 1–2 — Foundations</h4>
-                <div class="arc-grid reveal">
-                    <div class="arc-card"><i class="fas fa-check-circle" style="color:var(--accent);margin-right:6px;"></i> Backpropagation by hand (scalar → vector → matrix)</div>
-                    <div class="arc-card"><i class="fas fa-check-circle" style="color:var(--accent);margin-right:6px;"></i> BPE tokenizer from scratch in JAX</div>
-                    <div class="arc-card"><i class="fas fa-check-circle" style="color:var(--accent);margin-right:6px;"></i> Cross-entropy loss, stable log-softmax</div>
-                    <div class="arc-card"><i class="fas fa-check-circle" style="color:var(--accent);margin-right:6px;"></i> Adam optimizer: implement the paper exactly</div>
-                    <div class="arc-card"><i class="fas fa-check-circle" style="color:var(--accent);margin-right:6px;"></i> nanoGPT re-implemented alone, no looking</div>
-                </div>
-
-                <h4 style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;margin-top:20px;font-family:'IBM Plex Mono',monospace;">Weeks 3–4 — Read the Canon</h4>
-                <div class="arc-grid reveal delay-1">
-                    <div class="arc-card"> Attention Is All You Need — Vaswani et al.</div>
-                    <div class="arc-card"> GPT-3: Language Models are Few-Shot Learners</div>
-                    <div class="arc-card"> Chinchilla — Hoffmann et al. 2022</div>
-                    <div class="arc-card"> LoRA — Hu et al. 2021</div>
-                    <div class="arc-card"> Constitutional AI — Anthropic 2022</div>
-                </div>
-
-                <h4 style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;margin-top:20px;font-family:'IBM Plex Mono',monospace;">Weeks 5–6 — Original Experiments</h4>
-                <div class="arc-grid reveal delay-2">
-                    <div class="arc-card"> Tokenization tax: English vs Luganda (hypothesis first)</div>
-                    <div class="arc-card"> Warmup ablation study on a training run</div>
-                    <div class="arc-card"> Reproduce a result from a paper, then extend it</div>
-                    <div class="arc-card"> Write up findings in experiment READMEs</div>
-                </div>
-
-                <h4 style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;margin-top:20px;font-family:'IBM Plex Mono',monospace;">Weeks 7–8 — Push the Frontier</h4>
-                <div class="arc-grid reveal delay-3">
-                    <div class="arc-card"> LoRA implementation on a small LM</div>
-                    <div class="arc-card"> Something I haven't decided yet (following curiosity)</div>
-                    <div class="arc-card"> Clean every README, every notebook</div>
-                    <div class="arc-card"> Write the full retrospective</div>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> What Following Along Gives You</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-hammer"></i><h4>Skill built in front of you</h4><p>Every piece starts life as a blank file — nothing copied, nothing imported wholesale. You watch real understanding form, including the hours where nothing works.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-lightbulb"></i><h4>A method you can steal</h4><p>Before any test runs, the guess gets written down first: what do I expect, and why? That one habit — predict, then check — is what separates studying from guessing.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-book-open"></i><h4>Mistakes included, not hidden</h4><p>A public learning log (<strong>LEARNING_LOG.md</strong>) records what broke and what still isn't understood. No highlight reel — the full game, updates weekly.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-scroll"></i><h4>Famous papers, made readable</h4><p>Each landmark research paper is read cover-to-cover and boiled down into plain notes: the claim, why it changed the field, the one result that proved it, and what surprised.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-magnifying-glass-chart"></i><h4>Real questions, real answers</h4><p>Original experiments, stated before they run — including one close to home: does writing the same sentence in Luganda really cost about three times more tokens (the tiny pieces AI reads) than English?</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-clipboard-check"></i><h4>Evidence, not promises</h4><p>The finish line: a working AI language model built entirely from scratch, written experiments, and an honest public checklist of frontier-intern skills — two underway, the rest openly marked "not yet."</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- The Principles -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">The Principles</h2>
-
-                <div class="principle-grid reveal">
-                    <div class="principle-card">
-                        <div class="principle-icon"><i class="fas fa-hammer"></i></div>
-                        <h4>Build before you explain.</h4>
-                        <p class="muted">Every folder in <code>implementations/</code> started as a blank file, not a copy of someone else's code. The point is not the output. The point is the hour where nothing works and you have to figure out why.</p>
-                    </div>
-                    <div class="principle-card">
-                        <div class="principle-icon"><i class="fas fa-flask"></i></div>
-                        <h4>State the hypothesis before running.</h4>
-                        <p class="muted">Every folder in <code>experiments/</code> has a README written before the notebook. What am I expecting? Why? What would change my mind? This is what research actually is.</p>
-                    </div>
-                    <div class="principle-card">
-                        <div class="principle-icon"><i class="fas fa-book-open"></i></div>
-                        <h4>Commit the confusion, not just the clarity.</h4>
-                        <p class="muted"><code>LEARNING_LOG.md</code> tracks what I don't understand yet. A portfolio that only shows finished, polished work is a highlight reel. This is the full game.</p>
-                    </div>
-                    <div class="principle-card">
-                        <div class="principle-icon"><i class="fas fa-file-lines"></i></div>
-                        <h4>Read the source, not the summary.</h4>
-                        <p class="muted">Every paper in <code>paper_notes/</code> was read in full — abstract, methods, experiments, limitations. Blog posts are for after.</p>
-                    </div>
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> Eight Weeks, Four Honest Phases</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Lay the groundwork — Weeks 1–2</h4><p>Rebuild the mathematical basics by hand until they're solid enough to stand on, then construct the first real pieces: the part that teaches a machine to read, and the routine that makes it learn. No borrowed code, no shortcuts.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Read the classics — Weeks 3–4</h4><p>Work through the famous research papers that created modern AI — read in full, not skimmed — and turn each one into notes a non-expert could follow.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Ask original questions — Weeks 5–6</h4><p>Run first-of-their-kind experiments, like whether African languages pay a hidden cost in today's AI tools. Prediction written first, results published either way — plus reproducing a paper's result and then pushing past it.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Push further, tell the truth — Weeks 7–8</h4><p>Add the advanced finishing techniques, tidy every note and notebook until a stranger could follow them, and write the full retrospective — including everything still unknown.</p></div></div>
+                </div>
+                <div class="pd-chips reveal delay-3">
+                    <span class="pd-chip"><i class="fas fa-puzzle-piece"></i> BPE Tokenization</span>
+                    <span class="pd-chip"><i class="fas fa-eye"></i> Multi-Head Attention</span>
+                    <span class="pd-chip"><i class="fas fa-rotate"></i> Training Loops</span>
+                    <span class="pd-chip"><i class="fas fa-layer-group"></i> LoRA Adaptation</span>
+                    <span class="pd-chip"><i class="fas fa-chart-line"></i> Chinchilla Scaling Laws</span>
+                    <span class="pd-chip"><i class="fas fa-sliders"></i> Adam Optimizer</span>
+                    <span class="pd-chip"><i class="fas fa-cube"></i> nanoGPT, rebuilt alone</span>
+                    <span class="pd-chip"><i class="fas fa-file-lines"></i> Paper: Attention Is All You Need</span>
+                    <span class="pd-chip"><i class="fas fa-file-lines"></i> Paper: GPT-3 — Few-Shot Learners</span>
+                    <span class="pd-chip"><i class="fas fa-file-lines"></i> Paper: Chinchilla (Hoffmann et al. 2022)</span>
+                    <span class="pd-chip"><i class="fas fa-file-lines"></i> Paper: Constitutional AI</span>
+                    <span class="pd-chip"><i class="fas fa-lock-open"></i> JAX + NumPy only</span>
+                    <span class="pd-chip"><i class="fas fa-ban"></i> No PyTorch, no HuggingFace</span>
                 </div>
             </div>
         </section>
 
-        <!-- Now In The Stream -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Currently In The Stream</h2>
-                <div class="how-card reveal" style="border-left:3px solid var(--accent);padding:20px 24px;">
-                    <p style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--accent);margin-bottom:8px;">WEEK 1 — ACTIVE</p>
-                    <ul class="practices-list" style="margin-bottom:0;">
-                        <li><i class="fas fa-code"></i> <strong>Building:</strong> BPE tokenizer + full training loop in JAX</li>
-                        <li><i class="fas fa-book"></i> <strong>Reading:</strong> Vaswani et al. 2017</li>
-                        <li><i class="fas fa-circle-exclamation" style="color:var(--accent);"></i> <strong>Blocked on:</strong> causal masking shape in multi-head attn</li>
-                        <li><i class="fas fa-rotate" style="color:var(--accent);"></i> <strong>Resolved:</strong> in progress</li>
-                    </ul>
-                </div>
-                <p class="muted reveal delay-1" style="margin-top:14px;">Full weekly updates in <code>LEARNING_LOG.md</code></p>
-            </div>
-        </section>
-
-        <!-- The Stack -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">The Stack</h2>
-                <div class="facts-grid reveal">
-                    <div class="fact-item">
-                        <i class="fab fa-python"></i>
-                        <span>Python — the entire pipeline from tokenization to evaluation.</span>
-                    </div>
-                    <div class="fact-item">
-                        <i class="fas fa-bolt"></i>
-                        <span>JAX — autograd, JIT compilation, and hardware acceleration.</span>
-                    </div>
-                    <div class="fact-item">
-                        <i class="fas fa-calculator"></i>
-                        <span>NumPy — for every reference implementation and gradient check.</span>
-                    </div>
-                </div>
-                <p class="muted reveal delay-1" style="margin-top:16px;">The rule: implementations use only JAX and NumPy. No PyTorch. No HuggingFace. No library that hides what's actually happening. The constraint is the point.</p>
-            </div>
-        </section>
-
-        <!-- Paper Notes Format -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">The Paper Notes Format</h2>
-                <p class="muted reveal">Every paper gets the same structure. No exceptions.</p>
-                <div class="principle-grid reveal">
-                    <div class="principle-card">
-                        <h4>The one-sentence claim</h4>
-                        <p class="muted">In my own words, not the abstract's.</p>
-                    </div>
-                    <div class="principle-card">
-                        <h4>Why it matters</h4>
-                        <p class="muted">What changed after this paper?</p>
-                    </div>
-                    <div class="principle-card">
-                        <h4>The key experiment</h4>
-                        <p class="muted">The single result that makes or breaks the argument.</p>
-                    </div>
-                    <div class="principle-card">
-                        <h4>What I found non-obvious</h4>
-                        <p class="muted">The thing that confused me and how I resolved it.</p>
-                    </div>
-                    <div class="principle-card">
-                        <h4>What I'd test next</h4>
-                        <p class="muted">If I had compute, what experiment would I run?</p>
-                    </div>
-                    <div class="principle-card">
-                        <h4>Implementation</h4>
-                        <p class="muted">Link to code if I built something from this paper.</p>
-                    </div>
-                </div>
-                <p class="muted reveal delay-1" style="font-style:italic;">The last two sections are the ones that matter. Reading comprehension is table stakes. Research taste is the thing being built.</p>
-            </div>
-        </section>
-
-        <!-- Benchmarks -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Benchmarks I'm Measuring Myself Against</h2>
-                <p class="muted reveal">These are the questions a frontier lab research intern should be able to answer cold. Checking these off as the answer becomes automatic — not recited.</p>
-                <div class="reveal">
-                    <table class="benchmark-table">
-                        <thead>
-                            <tr>
-                                <th>Question</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Implement backprop by hand for a 2-layer network</td>
-                                <td><span class="status-icon" style="color:var(--accent);">🔄</span> in progress</td>
-                            </tr>
-                            <tr>
-                                <td>Explain why Adam converges faster than SGD with momentum</td>
-                                <td><span class="status-icon" style="color:var(--accent);">🔄</span> in progress</td>
-                            </tr>
-                            <tr>
-                                <td>Read a JAX training loop and spot a bug in 5 minutes</td>
-                                <td><span style="color:var(--text-muted);">⬜</span> not yet</td>
-                            </tr>
-                            <tr>
-                                <td>Explain what a gradient checkpoint is and when to use it</td>
-                                <td><span style="color:var(--text-muted);">⬜</span> not yet</td>
-                            </tr>
-                            <tr>
-                                <td>Derive attention from query-key-value formulation</td>
-                                <td><span style="color:var(--text-muted);">⬜</span> not yet</td>
-                            </tr>
-                            <tr>
-                                <td>Explain the Chinchilla optimal ratio without notes</td>
-                                <td><span style="color:var(--text-muted);">⬜</span> not yet</td>
-                            </tr>
-                            <tr>
-                                <td>Implement LoRA and explain the rank decomposition</td>
-                                <td><span style="color:var(--text-muted);">⬜</span> not yet</td>
-                            </tr>
-                            <tr>
-                                <td>Read a new paper and identify the weakest assumption</td>
-                                <td><span style="color:var(--text-muted);">⬜</span> not yet</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Pull Up a Chair</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-briefcase"></i> Recruiters &amp; hiring labs</span>
+                    <span class="pd-chip"><i class="fas fa-user-graduate"></i> Students who feel behind</span>
+                    <span class="pd-chip"><i class="fas fa-laptop-code"></i> Self-taught learners</span>
+                    <span class="pd-chip"><i class="fas fa-circle-question"></i> Curious non-engineers</span>
+                    <span class="pd-chip"><i class="fas fa-globe-africa"></i> Africa's growing AI community</span>
+                    <span class="pd-chip"><i class="fas fa-people-group"></i> Masakhane &amp; Makerere AI circles</span>
+                    <span class="pd-chip"><i class="fas fa-bolt"></i> Anyone told "that's not for you"</span>
                 </div>
             </div>
         </section>
 
-        <!-- Why In Public -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Why In Public</h2>
-                <p class="muted reveal">There's a version of this where the work happens privately, and a polished portfolio appears when it's "ready."</p>
-                <p class="muted reveal delay-1">That version is comfortable and useless.</p>
-                <p class="muted reveal delay-1">Building in public creates a forcing function. The README has to be clear because someone else might read it. The experiment has to have a real hypothesis because it's written down before running. The learning log has to be honest because there's no point otherwise.</p>
-                <p class="muted reveal delay-2">It also means that if someone working on similar problems finds this repo — at Anthropic, DeepMind, Masakhane, or a research group at Makerere — there's something real to look at, engage with, and push back on.</p>
-                <blockquote class="reveal delay-2">That's the goal. Not the performance of learning. The actual thing.</blockquote>
-            </div>
-        </section>
-
-        <!-- Get In Touch / Action Row -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Get In Touch</h2>
-                <p class="muted reveal">If something here is wrong, I want to know. If you're working on similar problems, I want to talk. If you're at a lab and something here is interesting, reach out.</p>
-
-                <div class="action-row reveal delay-1" style="margin-bottom:20px;">
-                    <a href="https://github.com/MubiruEltonFelix1/the-residual-stream" target="_blank" rel="noopener" class="btn btn-github">
-                        <i class="fab fa-github"></i> View on GitHub
-                    </a>
-                    <a href="mailto:mubirueltonfelix@gmail.com" class="btn btn-back">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                    <a href="https://www.linkedin.com/in/mubiru-elton-felix/" target="_blank" rel="noopener" class="btn btn-back">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="../" class="btn btn-back">
-                        <i class="fas fa-arrow-left"></i> Back to Projects
-                    </a>
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Don't Just Use AI. <span style="color:var(--accent);">Come Watch One Get Built.</span></h2>
+                <p class="reveal delay-1">Everything — the code, the paper notes, the broken attempts, the honest weekly log — is free and open on GitHub. It's Week 1, so you're early. If something here is wrong, or you're working on similar problems at a lab, a research group, or your own desk: <a href="mailto:mubirueltonfelix@gmail.com">email me directly</a>.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/the-residual-stream"><i class="fab fa-github"></i> View the Repo on GitHub</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
                 </div>
             </div>
         </section>
     </main>
-
     <div id="site-footer"></div>
-
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>

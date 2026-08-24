@@ -1,202 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>Claude DOCX Generator | Mubiru Elton Felix</title>
-    <meta name="description" content="Turn AI-generated JavaScript into real .docx files instantly. When the AI writes the document code but can't deliver the file, this tool bridges the gap.">
-    <meta property="og:title" content="Claude DOCX Generator — Paste & Produce">
-    <meta property="og:description" content="Turn AI-generated JavaScript into real .docx files instantly. No path editing, no wrestling with file systems.">
+    <meta name="description" content="Stop copy-pasting broken code artifacts. One command turns AI-written document code into a real Word file — no path editing, no debugging.">
+    <meta property="og:title" content="Claude DOCX Generator — Paste &amp; Produce">
+    <meta property="og:description" content="Stop copy-pasting broken code artifacts. One command turns AI-written document code into a real Word file — no path editing, no debugging.">
     <meta property="og:image" content="../../assets/images/logo.png">
     <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="project.css">
+    <style>
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
-
-    <main class="project-page">
-        <!-- Hero -->
-        <section class="project-hero">
+    <main>
+        <section class="pd-hero">
             <div class="container">
-                <div class="hero-eyebrow reveal">// Project</div>
-                <h1 class="hero-title reveal">Claude DOCX <span class="accent">Generator</span></h1>
-                <p class="hero-subtitle reveal">Paste &amp; Produce — turn AI-generated JavaScript into real .docx files instantly, without editing a single file path.</p>
-                <div class="project-badges reveal delay-1">
-                    <span class="badge"><i class="fas fa-code"></i> Node.js</span>
-                    <span class="badge"><i class="fas fa-laptop"></i> Local Tool</span>
-                    <span class="badge"><i class="fas fa-folder-open"></i> Outputs: outputs/</span>
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-terminal"></i> CLI Tool</p>
+                <h1 class="pd-title reveal">Claude DOCX <span class="accent">Generator</span></h1>
+                <p class="pd-pitch reveal">The AI wrote your document's code but never handed you the file — this tool finishes the job, turning that code into a real Word document with a single command.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-laptop"></i> Runs 100% on Your Machine</span>
+                    <span class="pd-badge"><i class="fas fa-file-word"></i> Real .docx Files Out</span>
+                    <span class="pd-badge"><i class="fas fa-robot"></i> Works With Claude, ChatGPT &amp; Gemini Output</span>
+                    <span class="pd-badge"><i class="fas fa-code"></i> Built With Node.js</span>
+                </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/claude-docx-generator"><i class="fab fa-github"></i> Get It on GitHub</a>
+                    <a class="btn btn-ghost" href="#how-it-works"><i class="fas fa-play"></i> See How It Works</a>
                 </div>
             </div>
         </section>
 
-        <!-- Why This Exists -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Why This Exists</h2>
-
-                <div class="scenario-card reveal">
-                    <div class="scenario-icon"><i class="fas fa-clock"></i></div>
-                    <div>
-                        <h3>Scenario: AI Timed Out, But the DOCX Still Needs to Exist</h3>
-                        <p class="muted">You're working with an AI assistant to generate a 40-page report, proposal, thesis draft, or technical document. The AI successfully writes the JavaScript that builds the DOCX using the <code>docx</code> package — hundreds of lines of generated content. But then one of these things happens:</p>
-                    </div>
-                </div>
-
-                <div class="problem-grid reveal delay-1">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-hourglass-end"></i></div>
-                        <h4>Session Timeout</h4>
-                        <p>The AI session times out before producing the actual <code>.docx</code> file.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-folder-xmark"></i></div>
-                        <h4>Environment Paths</h4>
-                        <p>The generated script contains an environment-specific path such as <code>/mnt/data/report.docx</code> that doesn't exist on your machine.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-cloud"></i></div>
-                        <h4>Platform Mismatch</h4>
-                        <p>The code came from Claude, ChatGPT, Gemini, or another platform that saved files to a location you can't access locally.</p>
-                    </div>
-                </div>
-
-                <p class="section-lead reveal delay-2">You just want the document <strong>now</strong> — not another round of path fixing and debugging.</p>
-
-                <p class="muted reveal delay-2">Instead of editing file paths throughout the script, you paste the generated code into <code>paste_here.js</code> and run <code>node paste_here.js</code>. This tool automatically intercepts the DOCX file write operation and redirects the output into the local <code>outputs/</code> directory.</p>
-
-                <blockquote class="reve delay-3">When an AI can generate the document code but cannot deliver the document itself, this repository bridges the gap.</blockquote>
-            </div>
-        </section>
-
-        <!-- Badges -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Quick Facts</h2>
-                <div class="facts-grid reveal">
-                    <div class="fact-item">
-                        <i class="fas fa-box"></i>
-                        <span>No publish required — this is a local tool. Run with Node.js.</span>
-                    </div>
-                    <div class="fact-item">
-                        <i class="fas fa-shield-halved"></i>
-                        <span>Safe outputs — <code>outputs/</code> is in <code>.gitignore</code> so generated DOCX files won't be committed accidentally.</span>
-                    </div>
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> You Got the Code. Where's the Document?</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">You ask an AI assistant to help build a 40-page report, a proposal, a thesis draft, or a technical document. It happily writes out everything needed to produce your Word file — sometimes hundreds of lines of it. Then the conversation ends, and there's no file. Just code sitting there, useless to anyone who needs pages they can actually open.</p>
+                    <p class="reveal delay-1">And it usually fails in one of three familiar ways. The session times out before the actual file is ever produced. Or the code points to a folder on the AI's machine — something like /mnt/data/report.docx — that simply doesn't exist on yours. Or the code came from Claude, ChatGPT, Gemini, or another chat platform that saved its files somewhere you can't reach from your own computer.</p>
+                    <p class="reveal delay-2">So you're left doing chores: copying the code, hunting down every file location, fixing, re-running, fixing again. All you wanted was <strong>the document — now</strong>.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Quick Start -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Quick Start</h2>
-                <div class="steps-container reveal">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-body">
-                            <h4>Install the tool</h4>
-                            <pre><code>npm install claude-docx-generator</code></pre>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-body">
-                            <h4>Paste your DOCX-generating code</h4>
-                            <p class="muted">Paste your docx-generating code into <code>paste_here.js</code>. It already requires <code>runner.js</code> which redirects Buffer writes into <code>outputs/</code>.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-body">
-                            <h4>Run it</h4>
-                            <pre><code>node paste_here.js
-# or
-npm run paste
-# or directly via npx
-npx claude-docx-generator</code></pre>
-                        </div>
-                    </div>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> One Command Later, You're Holding a Word File</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-bolt"></i><h4>A Real File, Not Another Snippet</h4><p>Paste the AI's code where it belongs, run one command, and a genuine .docx is waiting for you — ready to open, edit, print, or submit.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-route"></i><h4>Zero Path Hunting</h4><p>No more editing save locations scattered through the code. Every finished document lands neatly in one local outputs folder, every time.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-hand"></i><h4>Your Code Stays Untouched</h4><p>Paste the AI's work exactly as it gave it to you. Even code written to save its file somewhere else gets quietly rerouted to the right place.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-shield-halved"></i><h4>Nothing Clutters Your Project</h4><p>Finished documents collect in a folder that's set up to stay out of your project history, so they can never be committed by accident.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-plug"></i><h4>No Setup, No Publishing</h4><p>There's nothing to deploy and nothing to sign up for. It runs privately on your own machine, whenever you need it.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- How It Works -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">How It Works</h2>
-                <div class="how-card reveal">
-                    <p class="muted">Many docx scripts follow this pattern:</p>
-                    <pre><code>Packer.toBuffer(doc).then(buffer =>
-    fs.writeFileSync('/some/absolute/path/my.docx', buffer)
-);</code></pre>
-                    <p class="muted"><code>runner.js</code> monkey-patches <code>fs.writeFileSync</code> and <code>fs.writeFile</code> at runtime. When the patched functions detect a <code>Buffer</code> (the docx payload), they replace the destination path with <code>outputs/&lt;basename&gt;</code> — so you don't have to edit the original code.</p>
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From Dead-End Code to Done in Four Steps</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Install It Once</h4><p>One short command adds the tool to your computer. No account, no cloud — it lives with you.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Paste the AI's Code</h4><p>Drop the code your AI produced into paste_here.js — the one file created exactly for this. Don't change a character.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Run a Single Command</h4><p>Type the run command, press enter, and give it a moment to do its thing.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Collect Your Document</h4><p>A real Word file appears in your outputs folder. Open it, attach it, submit it — done.</p></div></div>
+                </div>
+                <div class="pd-chips reveal delay-3">
+                    <span class="pd-chip"><i class="fas fa-download"></i> npm install claude-docx-generator</span>
+                    <span class="pd-chip"><i class="fas fa-play"></i> node paste_here.js</span>
+                    <span class="pd-chip"><i class="fas fa-play"></i> npm run paste</span>
+                    <span class="pd-chip"><i class="fas fa-bolt"></i> npx claude-docx-generator</span>
                 </div>
             </div>
         </section>
 
-        <!-- File Map -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">File Map</h2>
-                <div class="file-grid reveal">
-                    <div class="file-card">
-                        <div class="file-icon"><i class="fas fa-file-code"></i></div>
-                        <code>paste_here.js</code>
-                        <span class="muted">Development template where you paste code</span>
-                    </div>
-                    <div class="file-card">
-                        <div class="file-icon"><i class="fas fa-gear"></i></div>
-                        <code>runner.js</code>
-                        <span class="muted">Intercepts Buffer writes and redirects into outputs/</span>
-                    </div>
-                    <div class="file-card">
-                        <div class="file-icon"><i class="fas fa-flask"></i></div>
-                        <code>generate2.js</code>
-                        <span class="muted">Example generator included in the repo</span>
-                    </div>
-                    <div class="file-card">
-                        <div class="file-icon"><i class="fas fa-file-export"></i></div>
-                        <code>generate2_to_docx.js</code>
-                        <span class="muted">Example DOCX exporter</span>
-                    </div>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Made for People Who Need Pages, Not Code</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-graduation-cap"></i> Students &amp; Researchers</span>
+                    <span class="pd-chip"><i class="fas fa-file-signature"></i> Proposal &amp; Report Writers</span>
+                    <span class="pd-chip"><i class="fas fa-pen-ruler"></i> Technical Writers</span>
+                    <span class="pd-chip"><i class="fas fa-robot"></i> Anyone Working Through an AI Chat</span>
+                    <span class="pd-chip"><i class="fas fa-clock"></i> Deadlines That Can't Wait</span>
                 </div>
             </div>
         </section>
 
-        <!-- Best Practices -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Best Practices</h2>
-                <ul class="practices-list reveal">
-                    <li><i class="fas fa-check-circle"></i> Keep <code>outputs/</code> small — it contains generated binary files and is git-ignored.</li>
-                    <li><i class="fas fa-check-circle"></i> If your pasted script writes streams, custom promises, or uses other FS APIs, open an issue or ask to extend <code>runner.js</code>.</li>
-                </ul>
-
-                <div class="action-row reveal delay-1">
-                    <a href="https://github.com/MubiruEltonFelix1/claude-docx-generator" target="_blank" rel="noopener" class="btn btn-github">
-                        <i class="fab fa-github"></i> View on GitHub
-                    </a>
-                    <a href="../" class="btn btn-back">
-                        <i class="fas fa-arrow-left"></i> Back to Projects
-                    </a>
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Stop Copy-Pasting. Start <span style="color:var(--accent);">Producing</span>.</h2>
+                <p class="reveal delay-1">When an AI can generate the document's code but can't deliver the document itself, this tool bridges the gap. Grab it free on GitHub and keep the finished file where it belongs — in your hands.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/claude-docx-generator"><i class="fab fa-github"></i> Get It on GitHub</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
                 </div>
             </div>
         </section>
     </main>
-
     <div id="site-footer"></div>
-
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>

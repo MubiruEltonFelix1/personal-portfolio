@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>VibeSense | Mubiru Elton Felix</title>
+    <meta name="description" content="VibeSense listens to the vibrations of industrial machines and warns you before they fail — predictive maintenance using any phone or sensor.">
+    <meta property="og:title" content="VibeSense — Your Machines Warn You Before They Fail">
+    <meta property="og:description" content="Turn any phone into an early-warning system for equipment failure. Live machine health, evidence-based alerts, zero special hardware.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero {
+            position: relative;
+            padding: 3.5rem 0 4rem;
+            overflow: hidden;
+        }
+        .pd-hero::before {
+            content: '';
+            position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i {
+            font-size: 1.25rem; color: var(--accent);
+            margin-bottom: 12px; display: block;
+        }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body data-root="../../">
+    <div id="site-nav"></div>
+
+    <main>
+        <!-- Hero -->
+        <section class="pd-hero">
+            <div class="container">
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-wave-square" style="margin-right:6px;"></i> IoT &middot; Predictive Maintenance</p>
+                <h1 class="pd-title reveal">Vibe<span class="accent">Sense</span></h1>
+                <p class="pd-pitch reveal">
+                    Machines whisper before they scream. VibeSense catches the whisper — turning any smartphone or sensor into an early-warning system for equipment failure.
+                </p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-mobile-screen"></i> No special hardware</span>
+                    <span class="pd-badge"><i class="fas fa-heart-pulse"></i> Live machine health</span>
+                    <span class="pd-badge"><i class="fas fa-bell"></i> Evidence-based alerts</span>
+                    <span class="pd-badge"><i class="fas fa-code-branch"></i> Open source</span>
+                </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/vibration-signature-analysis"><i class="fab fa-github" style="margin-right:6px;"></i> View on GitHub</a>
+                    <a class="btn btn-ghost" href="#how-it-works"><i class="fas fa-circle-play" style="margin-right:6px;"></i> See How It Works</a>
+                </div>
+                <div class="pd-shot reveal delay-2">
+                    <div class="pd-shot-bar">
+                        <span></span><span></span><span></span>
+                        <em>vibesense — live machine health dashboard</em>
+                    </div>
+                    <img src="dashboard.png" alt="VibeSense live machine health dashboard showing real-time vibration readings, spectrum view, and alerts">
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem -->
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Breakdowns Never Send a Calendar Invite</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">
+                        It's 3 AM on a Sunday. An industrial motor gives up without warning. Production grinds to a halt, emergency crews rush in, overtime costs spike, and promises to customers quietly break. By the time anyone notices something was wrong, it's already too late.
+                    </p>
+                    <p class="reveal delay-1">
+                        That's <strong>reactive maintenance</strong> — and it's still how most equipment gets managed. Here's the part most people miss: machines rarely fail out of nowhere. Bearing wear, misalignment, looseness, imbalance — every one of them leaves fingerprints in a machine's vibration <strong>days or weeks before a breakdown</strong>. Most operations simply have no way to hear them.
+                    </p>
+                    <p class="reveal delay-2">
+                        VibeSense exists to close that gap. It listens to the subtle language of machines and translates it into intelligence you can act on — before failure happens.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What It Does For You -->
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> What VibeSense Does For You</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1">
+                        <i class="fas fa-mobile-screen"></i>
+                        <h4>Your Phone Becomes the Sensor</h4>
+                        <p>Any smartphone or IoT device with motion sensing becomes a precision diagnostic tool. No proprietary hardware to buy before you can start listening.</p>
+                    </div>
+                    <div class="pd-card reveal delay-1">
+                        <i class="fas fa-gauge-high"></i>
+                        <h4>A Live Window Into Machine Health</h4>
+                        <p>One command-center dashboard: live readings, a frequency view of what's shaking, and trend lines — all in the same glance.</p>
+                    </div>
+                    <div class="pd-card reveal delay-2">
+                        <i class="fas fa-bell"></i>
+                        <h4>Alerts With Evidence</h4>
+                        <p>No mystery warnings. Every alert tells you what was observed, what normal looks like, and why it crossed the line.</p>
+                    </div>
+                    <div class="pd-card reveal delay-2">
+                        <i class="fas fa-sliders"></i>
+                        <h4>Learns What Normal Is</h4>
+                        <p>VibeSense studies each machine's healthy rhythm first, then only speaks up when something genuinely drifts from it.</p>
+                    </div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-chart-line"></i><h4>Spots Trouble While It's Still Small</h4><p>Machines in decline leave traces in the data. Teaching VibeSense to read those traces and forecast trouble days or weeks ahead is the next milestone — so repairs stay cheap and calm.</p></div>
+                    <div class="pd-card reveal delay-3">
+                        <i class="fas fa-shield-halved"></i>
+                        <h4>Prevention Over Panic</h4>
+                        <p>The whole point: swap 3 AM emergencies for planned, scheduled maintenance you chose on your own terms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From Shakes to Foresight in Four Steps</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1">
+                        <div>
+                            <h4>Attach</h4>
+                            <p>Place any phone or vibration sensor on or near the machine you care about.</p>
+                        </div>
+                    </div>
+                    <div class="pd-step reveal delay-1">
+                        <div>
+                            <h4>Stream</h4>
+                            <p>The device sends its motion readings straight to your dashboard, live as they happen.</p>
+                        </div>
+                    </div>
+                    <div class="pd-step reveal delay-2">
+                        <div>
+                            <h4>Understand</h4>
+                            <p>VibeSense translates raw shakes into a clear health picture and compares it against what normal looks like for that machine.</p>
+                        </div>
+                    </div>
+                    <div class="pd-step reveal delay-2">
+                        <div>
+                            <h4>Act Early</h4>
+                            <p>When something drifts, you get an alert with the evidence — so maintenance happens on your schedule, not the machine's.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who It's For -->
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Built for the People Who Keep Things Running</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-industry"></i> Factory &amp; plant teams</span>
+                    <span class="pd-chip"><i class="fas fa-screwdriver-wrench"></i> Maintenance engineers</span>
+                    <span class="pd-chip"><i class="fas fa-clipboard-check"></i> Operations managers</span>
+                    <span class="pd-chip"><i class="fas fa-graduation-cap"></i> Engineering students</span>
+                    <span class="pd-chip"><i class="fas fa-microchip"></i> IoT builders</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Stop Repairing. <span style="color:var(--accent);">Start Listening.</span></h2>
+                <p class="reveal delay-1">
+                    VibeSense is under active development. Explore the project, try it with the phone already in your pocket, or reach out about bringing predictive maintenance to your floor.
+                </p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/vibration-signature-analysis"><i class="fab fa-github" style="margin-right:6px;"></i> Follow the Build on GitHub</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left" style="margin-right:6px;"></i> Back to Projects</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

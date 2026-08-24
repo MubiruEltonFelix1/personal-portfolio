@@ -1,55 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>Toka Events | Mubiru Elton Felix</title>
+    <meta name="description" content="Find out what's happening in African cities — discover events that match your interests, connect with attendees early, and relive the night after.">
+    <meta property="og:title" content="Toka Events — Your city's best nights, all in one place">
+    <meta property="og:description" content="Find out what's happening in African cities — discover events that match your interests, connect with attendees early, and relive the night after.">
+    <meta property="og:image" content="../../assets/images/logo.png">
+    <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
 
-    <main class="section detail-hero">
-        <div class="container">
-            <h1 class="section-title reveal">Toka Events</h1>
-            <div class="detail-layout">
-                <article class="card reveal">
-                    <h3>Project Description</h3>
-                    <p class="muted">Toka is a social event discovery platform built for African cities, helping people discover events that match their interests, connect with attendees before arrival, and relive moments after the event.</p>
-                    <p class="muted" style="margin-top:.8rem;">It improves local event participation by simplifying discovery, registration, and attendance while supporting mobile-money-friendly payments for wider access.</p>
-                    <div class="stack">
-                        <span class="tag">Event Discovery</span><span class="tag">Community</span><span class="tag">Mobile Money</span><span class="tag">User Experience</span>
-                    </div>
-                    <div class="cta-row">
-                        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://toka-events.site">Visit Site</a>
-                    </div>
-                </article>
-                <article class="card reveal">
-                    <img src="https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&q=80" alt="Toka Events social platform visual" style="border-radius:10px;">
-                </article>
-            </div>
+    <!-- Preserved from the previous version of this page — original hero visual: https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&q=80 -->
 
-            <article class="card reveal" style="margin-top:1rem;">
-                <h3>Challenges & Solutions</h3>
-                <p class="muted">Challenge: local event journeys are often fragmented across spreadsheets, chat apps, and manual coordination. Solution: Toka unifies discovery, registration, and community interaction into one social-first flow.</p>
-            </article>
-
-            <div class="cta-row" style="margin-top:1rem;">
-                <a class="btn btn-ghost" href="../">Back to Projects</a>
+    <main>
+        <section class="pd-hero">
+            <div class="container">
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-compass"></i> Event Discovery Platform</p>
+                <h1 class="pd-title reveal">Toka <span class="accent">Events</span></h1>
+                <p class="pd-pitch reveal">Toka pulls your city's best events out of scattered chats and spreadsheets into one place — find what fits you, meet the crowd before you arrive, and relive it all after.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-magnifying-glass"></i> Events matched to your interests</span>
+                    <span class="pd-badge"><i class="fas fa-user-group"></i> Connect before you arrive</span>
+                    <span class="pd-badge"><i class="fas fa-camera-retro"></i> Relive the moments after</span>
+                    <span class="pd-badge"><i class="fas fa-mobile-screen-button"></i> Mobile-money-friendly payments</span>
+                </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://toka-events.site"><i class="fas fa-play"></i> Visit Toka Events</a>
+                    <a class="btn btn-ghost" href="#how-it-works"><i class="fas fa-arrow-down"></i> See How It Works</a>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Finding something to do shouldn't feel like detective work</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">African cities buzz with things to see and do every week. But hearing about any of it usually means digging through group chats, forwarded messages, and half-updated spreadsheets — and hoping you didn't miss the real plan buried three days deep.</p>
+                    <p class="reveal delay-1">Even once you've picked an event, the journey stays messy. Sorting who's actually coming happens across endless separate conversations. Signing up and paying can involve manual coordination that quietly talks people out of going at all.</p>
+                    <p class="reveal delay-2">The cost is real: great local events stay under-attended, and the people who would have loved them most simply never hear about them in time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> Everything a good night out needs, in one place</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-wand-magic-sparkles"></i><h4>Discovery that gets you</h4><p>Tell Toka what you're into and it surfaces events around your city that actually match — no more wading through noise.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-comments"></i><h4>Break the ice early</h4><p>Join the community around an event before arrival, so you walk in knowing friendly faces instead of hovering by the wall.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-photo-film"></i><h4>Relive the moments</h4><p>The night doesn't end when the lights come up. Look back through the event afterwards and relive the best bits.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-mobile-screen-button"></i><h4>Paying made easy</h4><p>Mobile-money-friendly payments open the door for far more people to register and show up — no special setup needed.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-ticket-simple"></i><h4>A smoother experience</h4><p>Discovery, registration, and attendance come together in one social-first user experience instead of scattered, disconnected steps.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-city"></i><h4>Made for African cities</h4><p>Built around how local scenes really work, helping communities take part in more of what's happening around them.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From scrolling to showing up</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Find your event</h4><p>Browse happenings across your city matched to your interests, and pick the ones that spark something.</p></div></div>
+                    <div class="pd-step reveal delay-1"><div><h4>Connect and lock it in</h4><p>Meet fellow attendees before the day, then register smoothly with mobile-money-friendly payments.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Show up with your people</h4><p>Arrive to a room where faces already feel familiar — the awkward small-talk phase is done before you step in.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Relive it after</h4><p>Once the lights go up, head back to Toka and revisit the moments that made the night worth it.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Made for people who'd rather be there than hear about it</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-magnifying-glass"></i> Weekend planners</span>
+                    <span class="pd-chip"><i class="fas fa-user-group"></i> Friend groups</span>
+                    <span class="pd-chip"><i class="fas fa-graduation-cap"></i> Students</span>
+                    <span class="pd-chip"><i class="fas fa-location-dot"></i> Newcomers to a city</span>
+                    <span class="pd-chip"><i class="fas fa-earth-africa"></i> City explorers</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Your next favourite memory is already <span style="color:var(--accent);">on the calendar</span>.</h2>
+                <p class="reveal delay-1">Stop finding out about the fun afterwards. Open Toka, see where your city is headed next, and be in the room when it happens.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://toka-events.site"><i class="fas fa-arrow-up-right-from-square"></i> Visit Toka Events</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <div id="site-footer"></div>
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>

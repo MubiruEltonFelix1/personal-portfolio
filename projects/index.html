@@ -72,12 +72,35 @@
             opacity: 0.5;
         }
 
-        /* ── Project Grid ── */
+        /* ── Section Labels ── */
+        .proj-section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .proj-section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── Project Grids ── */
         .proj-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.2rem;
             margin-bottom: 2.5rem;
+        }
+        .proj-grid.proj-grid-featured {
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.4rem;
         }
 
         /* ── Project Card ── */
@@ -152,12 +175,49 @@
         }
         .proj-card:hover .proj-card-media img { transform: scale(1.05); }
 
+        /* ── Featured Card Treatment ── */
+        .proj-card.is-featured {
+            border-color: rgba(255,215,0,0.22);
+        }
+        .proj-card.is-featured:hover {
+            box-shadow: 0 16px 42px rgba(255,215,0,0.07);
+        }
+        .proj-card.is-featured .proj-card-media { height: 225px; }
+        .proj-num {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            z-index: 2;
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.15rem;
+            color: var(--accent);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.85), 0 0 22px rgba(0,0,0,0.7);
+            pointer-events: none;
+        }
+        .proj-flag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 2;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.52rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #000;
+            background: var(--accent);
+            border-radius: 4px;
+            padding: 3px 9px;
+            pointer-events: none;
+        }
         .proj-card-body {
             padding: 1.2rem 1.2rem 1rem;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
+        .is-featured .proj-card-body h3 { font-size: 1.08rem; }
 
         .proj-card-body .proj-cat-tag {
             font-family: 'IBM Plex Mono', monospace;
@@ -234,6 +294,41 @@
         }
         .proj-btn-ghost:hover { border-color: var(--accent); background: rgba(255,215,0,0.04); }
 
+        /* ── See More Toggle ── */
+        .more-toggle-row {
+            text-align: center;
+            margin: 0.5rem 0 2.8rem;
+        }
+        .more-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--accent);
+            background: transparent;
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 20px;
+            padding: 0.65rem 1.6rem;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .more-toggle:hover {
+            border-color: var(--accent);
+            background: rgba(255,215,0,0.05);
+            transform: translateY(-1px);
+        }
+        .more-toggle i { transition: transform 0.25s; }
+
+        #moreWrap { display: none; }
+        #moreWrap.is-open { display: block; animation: moreFadeUp 0.45s ease; }
+        @keyframes moreFadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* ── Coming Soon Placeholder ── */
         .proj-card.soon {
             border-style: dashed;
@@ -272,7 +367,9 @@
         /* ── Mobile ── */
         @media (max-width: 600px) {
             .proj-grid { grid-template-columns: 1fr; }
+            .proj-grid.proj-grid-featured { grid-template-columns: 1fr; }
             .proj-card-media { height: 150px; }
+            .proj-card.is-featured .proj-card-media { height: 180px; }
             .filter-bar { gap: 6px; }
             .filter-btn { font-size: 0.6rem; padding: 0.35rem 0.8rem; }
         }
@@ -297,27 +394,31 @@
 
                     <!-- Filter Bar -->
                     <div class="filter-bar reveal delay-1" id="filterBar">
-                        <button class="filter-btn is-active" data-filter="all">All <span class="count">(12)</span></button>
+                        <button class="filter-btn is-active" data-filter="all">All <span class="count">(13)</span></button>
                         <button class="filter-btn" data-filter="web-apps">Web Apps <span class="count">(5)</span></button>
                         <button class="filter-btn" data-filter="cli">CLI <span class="count">(1)</span></button>
                         <button class="filter-btn" data-filter="landing">Landing Pages <span class="count">(3)</span></button>
-                        <button class="filter-btn" data-filter="dapps">DApps <span class="count">(0)</span></button>
+                        <button class="filter-btn" data-filter="iot">IoT <span class="count">(1)</span></button>
                         <button class="filter-btn" data-filter="educational">Educational <span class="count">(2)</span></button>
                         <button class="filter-btn" data-filter="ml-dl">ML/DL <span class="count">(1)</span></button>
+                        <button class="filter-btn" data-filter="dapps">DApps <span class="count">(0)</span></button>
                     </div>
                 </div>
 
-                <!-- Project Grid -->
-                <div class="proj-grid reveal delay-2" id="projGrid">
+                <!-- ═══ Featured Projects ═══ -->
+                <p class="proj-section-label reveal delay-2" id="featuredLabel"><i class="fas fa-star" style="color:var(--accent);"></i> Featured Work</p>
+                <div class="proj-grid proj-grid-featured reveal delay-2" id="projGrid">
 
-                    <!-- ── BrainBolt ── -->
-                    <article class="proj-card" data-category="web-apps">
+                    <!-- ── 01 · BrainBolt ── -->
+                    <article class="proj-card is-featured" data-category="web-apps">
                         <div class="proj-card-bar">
                             <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
                             <span class="bar-label">Web App</span>
                         </div>
                         <div class="proj-card-media">
-                            <img loading="lazy" src="../brain_bolt_thumbnail.png" alt="BrainBolt">
+                            <span class="proj-flag"><i class="fas fa-star" style="margin-right:4px;"></i>Featured</span>
+                            <span class="proj-num">01</span>
+                            <img loading="lazy" src="../brain_bolt_thumbnail.png" alt="BrainBolt real-time quiz arena">
                         </div>
                         <div class="proj-card-body">
                             <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
@@ -336,119 +437,43 @@
                         </div>
                     </article>
 
-                    <!-- ── TechWrite ── -->
-                    <article class="proj-card" data-category="web-apps">
+                    <!-- ── 02 · VibeSense ── -->
+                    <article class="proj-card is-featured" data-category="iot">
                         <div class="proj-card-bar">
                             <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Web App</span>
+                            <span class="bar-label">IoT / Predictive Maintenance</span>
                         </div>
                         <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1000&q=80" alt="TechWrite">
+                            <span class="proj-flag"><i class="fas fa-star" style="margin-right:4px;"></i>Featured</span>
+                            <span class="proj-num">02</span>
+                            <img loading="lazy" src="vibe-sense/dashboard.png" alt="VibeSense live machine health dashboard">
                         </div>
                         <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
-                            <h3>TechWrite</h3>
-                            <p>A tech article platform where students and lecturers write, publish, comment, save, and discuss technology content with real-time notifications.</p>
+                            <div class="proj-cat-tag"><i class="fas fa-wave-square" style="margin-right:4px;"></i> IoT &middot; Predictive Maintenance</div>
+                            <h3>VibeSense</h3>
+                            <p>Turns any smartphone into a machine-health listener — catching the early warning signs of industrial equipment failure before it stops production.</p>
                             <div class="proj-tags">
-                                <span class="proj-tag">React</span>
-                                <span class="proj-tag">TypeScript</span>
-                                <span class="proj-tag">Supabase</span>
-                                <span class="proj-tag">Content Platform</span>
+                                <span class="proj-tag">Predictive Maintenance</span>
+                                <span class="proj-tag">IoT</span>
+                                <span class="proj-tag">Real-Time</span>
+                                <span class="proj-tag">Anomaly Alerts</span>
                             </div>
                             <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" href="techwrite/"><i class="fas fa-arrow-right"></i> Details</a>
-                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app">Visit Site</a>
+                                <a class="proj-btn proj-btn-primary" href="vibe-sense/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/vibration-signature-analysis"><i class="fab fa-github"></i> GitHub</a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- ── MyCGPA ── -->
-                    <article class="proj-card" data-category="web-apps">
-                        <div class="proj-card-bar">
-                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Web App</span>
-                        </div>
-                        <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1000&q=80" alt="MyCGPA">
-                        </div>
-                        <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
-                            <h3>MyCGPA</h3>
-                            <p>Student-friendly CGPA calculator and forecaster that helps track performance, model future semesters, and plan the grades needed to hit a target CGPA.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">HTML5</span>
-                                <span class="proj-tag">CSS3</span>
-                                <span class="proj-tag">JavaScript</span>
-                                <span class="proj-tag">Chart.js</span>
-                            </div>
-                            <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" href="mycgpa/"><i class="fas fa-arrow-right"></i> Details</a>
-                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/">Live App</a>
-                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ── Toka Events ── -->
-                    <article class="proj-card" data-category="web-apps">
-                        <div class="proj-card-bar">
-                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Web App</span>
-                        </div>
-                        <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1000&q=80" alt="Toka Events">
-                        </div>
-                        <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
-                            <h3>Toka Events</h3>
-                            <p>Social event discovery platform built for African cities — helping people find events, connect with attendees, and relive shared moments.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">Event Discovery</span>
-                                <span class="proj-tag">Community</span>
-                                <span class="proj-tag">Mobile Money</span>
-                                <span class="proj-tag">UX</span>
-                            </div>
-                            <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" href="toka-events/"><i class="fas fa-arrow-right"></i> Details</a>
-                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://toka-events.site">Visit Site</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ── Tour Uganda ── -->
-                    <article class="proj-card" data-category="web-apps">
-                        <div class="proj-card-bar">
-                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Web App</span>
-                        </div>
-                        <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1000&q=80" alt="Tour Uganda">
-                        </div>
-                        <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
-                            <h3>Tour Uganda</h3>
-                            <p>All-in-one travel planning ecosystem for the Pearl of Africa — AI trip planner, interactive map, cost calculator, itinerary builder, and more.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">HTML5</span>
-                                <span class="proj-tag">CSS3</span>
-                                <span class="proj-tag">JavaScript</span>
-                                <span class="proj-tag">Leaflet</span>
-                                <span class="proj-tag">Travel Tech</span>
-                            </div>
-                            <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" href="tour-uganda/"><i class="fas fa-arrow-right"></i> Details</a>
-                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/">Visit Site</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ── CLI ── -->
-                    <article class="proj-card" data-category="cli">
+                    <!-- ── 03 · Claude DOCX Generator ── -->
+                    <article class="proj-card is-featured" data-category="cli">
                         <div class="proj-card-bar">
                             <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
                             <span class="bar-label">CLI</span>
                         </div>
                         <div class="proj-card-media">
+                            <span class="proj-flag"><i class="fas fa-star" style="margin-right:4px;"></i>Featured</span>
+                            <span class="proj-num">03</span>
                             <img loading="lazy" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1000&q=80" alt="Claude DOCX Generator">
                         </div>
                         <div class="proj-card-body">
@@ -468,151 +493,50 @@
                         </div>
                     </article>
 
-                    <!-- ── AstraLog ── -->
-                    <article class="proj-card" data-category="landing">
+                    <!-- ── 04 · MyCGPA ── -->
+                    <article class="proj-card is-featured" data-category="web-apps">
                         <div class="proj-card-bar">
                             <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Landing Page</span>
+                            <span class="bar-label">Web App</span>
                         </div>
                         <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1000&q=80" alt="AstraLog">
+                            <span class="proj-flag"><i class="fas fa-star" style="margin-right:4px;"></i>Featured</span>
+                            <span class="proj-num">04</span>
+                            <img loading="lazy" src="mycgpa/Screenshot%202026-08-24%20222026.png" alt="MyCGPA calculator and forecaster interface">
                         </div>
                         <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
-                            <h3>AstraLog</h3>
-                            <p>Structured event observability platform that captures system behaviour as queryable events for monitoring, tracing, and analytics.</p>
+                            <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                            <h3>MyCGPA</h3>
+                            <p>Student-friendly CGPA calculator and forecaster that helps track performance, model future semesters, and plan the grades needed to hit a target CGPA.</p>
                             <div class="proj-tags">
                                 <span class="proj-tag">HTML5</span>
                                 <span class="proj-tag">CSS3</span>
                                 <span class="proj-tag">JavaScript</span>
-                                <span class="proj-tag">Observability</span>
+                                <span class="proj-tag">Chart.js</span>
                             </div>
                             <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/AstraLog"><i class="fab fa-github"></i> GitHub</a>
-                                <a class="proj-btn proj-btn-ghost" href="campus-food-app/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-primary" href="mycgpa/"><i class="fas fa-arrow-right"></i> Details</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/">Live App</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- ── Portfolio Website ── -->
-                    <article class="proj-card" data-category="landing">
-                        <div class="proj-card-bar">
-                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Landing Page</span>
-                        </div>
-                        <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1000&q=80" alt="Portfolio Website">
-                        </div>
-                        <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
-                            <h3>Portfolio Website</h3>
-                            <p>Responsive portfolio site with smooth animations, clean structure, and strong performance practices — the site you are on right now.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">HTML5</span>
-                                <span class="proj-tag">CSS3</span>
-                                <span class="proj-tag">JavaScript</span>
-                                <span class="proj-tag">GSAP</span>
-                            </div>
-                            <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> GitHub</a>
-                                <a class="proj-btn proj-btn-ghost" href="portfolio-website/"><i class="fas fa-arrow-right"></i> Details</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ── Blockchain MUST Landing ── -->
-                    <article class="proj-card" data-category="landing">
-                        <div class="proj-card-bar">
-                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Landing Page</span>
-                        </div>
-                        <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=1000&q=80" alt="Blockchain MUST Landing">
-                        </div>
-                        <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
-                            <h3>Blockchain MUST Landing</h3>
-                            <p>Modern blockchain-themed landing page featuring interactive elements and educational content about blockchain technology.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">HTML5</span>
-                                <span class="proj-tag">CSS3</span>
-                                <span class="proj-tag">JavaScript</span>
-                                <span class="proj-tag">Web3</span>
-                            </div>
-                            <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> GitHub</a>
-                                <a class="proj-btn proj-btn-ghost" href="blockchain-must-landing/"><i class="fas fa-arrow-right"></i> Details</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ── The Residual Stream ── -->
-                    <article class="proj-card" data-category="educational">
-                        <div class="proj-card-bar">
-                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Educational</span>
-                        </div>
-                        <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&q=80" alt="The Residual Stream">
-                        </div>
-                        <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-graduation-cap" style="margin-right:4px;"></i> Educational</div>
-                            <h3>The Residual Stream</h3>
-                            <p>Building a transformer from scratch in public. JAX implementations of BPE tokenization, multi-head attention, training loops, LoRA, and Chinchilla scaling laws.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">Python</span>
-                                <span class="proj-tag">JAX</span>
-                                <span class="proj-tag">NumPy</span>
-                                <span class="proj-tag">Transformers</span>
-                                <span class="proj-tag">Green AI</span>
-                            </div>
-                            <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/the-residual-stream"><i class="fab fa-github"></i> GitHub</a>
-                                <a class="proj-btn proj-btn-ghost" href="the-residual-stream/"><i class="fas fa-arrow-right"></i> Details</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ── Walter Bishop Labs ── -->
-                    <article class="proj-card" data-category="educational">
-                        <div class="proj-card-bar">
-                            <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
-                            <span class="bar-label">Educational</span>
-                        </div>
-                        <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1000&q=80" alt="Walter Bishop Labs">
-                        </div>
-                        <div class="proj-card-body">
-                            <div class="proj-cat-tag"><i class="fas fa-graduation-cap" style="margin-right:4px;"></i> Educational</div>
-                            <h3>Walter Bishop Labs: Calculus</h3>
-                            <p>Experiment-first calculus lab combining symbolic analysis, numerical sampling, and visual interpretation to study function behaviour and optimisation intuition.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">Python</span>
-                                <span class="proj-tag">SymPy</span>
-                                <span class="proj-tag">NumPy</span>
-                                <span class="proj-tag">Matplotlib</span>
-                                <span class="proj-tag">Calculus</span>
-                            </div>
-                            <div class="proj-actions">
-                                <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/walter-bishop-labs-calculus"><i class="fab fa-github"></i> GitHub</a>
-                                <a class="proj-btn proj-btn-ghost" href="titanic-survival/"><i class="fas fa-arrow-right"></i> Details</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ── TinyCNN ── -->
-                    <article class="proj-card" data-category="ml-dl">
+                    <!-- ── 05 · TinyCNN ── -->
+                    <article class="proj-card is-featured" data-category="ml-dl">
                         <div class="proj-card-bar">
                             <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
                             <span class="bar-label">ML/DL</span>
                         </div>
                         <div class="proj-card-media">
-                            <img loading="lazy" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1000&q=80" alt="TinyCNN">
+                            <span class="proj-flag"><i class="fas fa-star" style="margin-right:4px;"></i>Featured</span>
+                            <span class="proj-num">05</span>
+                            <img loading="lazy" src="tiny-cnn/Screenshot%202026-08-24%20221829.png" alt="TinyCNN training interface">
                         </div>
                         <div class="proj-card-body">
                             <div class="proj-cat-tag"><i class="fas fa-brain" style="margin-right:4px;"></i> Machine / Deep Learning</div>
                             <h3>TinyCNN</h3>
-                            <p>A convolutional neural network built entirely from scratch using NumPy and calculus — no TensorFlow, no PyTorch, no autograd. Trains 4 learnable kernels to classify 5&times;5 diagonal patterns with backpropagation written by hand.</p>
+                            <p>A neural network built entirely from first principles — no TensorFlow, no PyTorch, nothing off the shelf. It trains itself to recognise patterns from scratch, proving a machine can learn with nothing but maths.</p>
                             <div class="proj-tags">
                                 <span class="proj-tag">Python</span>
                                 <span class="proj-tag">NumPy</span>
@@ -623,20 +547,245 @@
                             <div class="proj-actions">
                                 <a class="proj-btn proj-btn-primary" href="tiny-cnn/"><i class="fas fa-arrow-right"></i> Details</a>
                                 <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tiny_cnn/"><i class="fas fa-external-link-alt"></i> Live Site</a>
-                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/tiny_cnn"><i class="fab fa-github"></i> GitHub</a>
+                                <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/tiny_cnn"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- ── DApps Coming Soon ── -->
-                    <article class="proj-card soon" data-category="dapps">
-                        <div class="soon-inner">
-                            <i class="fas fa-cubes"></i>
-                            <h4>DApps — Coming Soon</h4>
-                            <p style="font-size:0.7rem;color:var(--text-muted);opacity:0.6;margin-top:4px;">Web3, smart contracts, and blockchain apps in the pipeline.</p>
-                        </div>
-                    </article>
+                </div>
 
+                <!-- See More Toggle -->
+                <div class="more-toggle-row">
+                    <button class="more-toggle" id="moreToggle" type="button">
+                        <span id="moreLabel">See 8 More Projects</span>
+                        <i class="fas fa-chevron-down" id="moreIcon"></i>
+                    </button>
+                </div>
+
+                <!-- ═══ More Projects ═══ -->
+                <div id="moreWrap">
+                    <p class="proj-section-label"><i class="fas fa-layer-group" style="color:var(--accent);"></i> More Projects</p>
+                    <div class="proj-grid">
+
+                        <!-- ── TechWrite ── -->
+                        <article class="proj-card" data-category="web-apps">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Web App</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1000&q=80" alt="TechWrite">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                                <h3>TechWrite</h3>
+                                <p>A tech article platform where students and lecturers write, publish, comment, save, and discuss technology content with real-time notifications.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">React</span>
+                                    <span class="proj-tag">TypeScript</span>
+                                    <span class="proj-tag">Supabase</span>
+                                    <span class="proj-tag">Content Platform</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" href="techwrite/"><i class="fas fa-arrow-right"></i> Details</a>
+                                    <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app">Visit Site</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── Toka Events ── -->
+                        <article class="proj-card" data-category="web-apps">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Web App</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1000&q=80" alt="Toka Events">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                                <h3>Toka Events</h3>
+                                <p>Social event discovery platform built for African cities — helping people find events, connect with attendees, and relive shared moments.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">Event Discovery</span>
+                                    <span class="proj-tag">Community</span>
+                                    <span class="proj-tag">Mobile Money</span>
+                                    <span class="proj-tag">UX</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" href="toka-events/"><i class="fas fa-arrow-right"></i> Details</a>
+                                    <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://toka-events.site">Visit Site</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── Tour Uganda ── -->
+                        <article class="proj-card" data-category="web-apps">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Web App</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1000&q=80" alt="Tour Uganda">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-globe" style="margin-right:4px;"></i> Web Apps</div>
+                                <h3>Tour Uganda</h3>
+                                <p>All-in-one travel planning ecosystem for the Pearl of Africa — AI trip planner, interactive map, cost calculator, itinerary builder, and more.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">HTML5</span>
+                                    <span class="proj-tag">CSS3</span>
+                                    <span class="proj-tag">JavaScript</span>
+                                    <span class="proj-tag">Leaflet</span>
+                                    <span class="proj-tag">Travel Tech</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" href="tour-uganda/"><i class="fas fa-arrow-right"></i> Details</a>
+                                    <a class="proj-btn proj-btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/">Visit Site</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── AstraLog ── -->
+                        <article class="proj-card" data-category="landing">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Landing Page</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1000&q=80" alt="AstraLog">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
+                                <h3>AstraLog</h3>
+                                <p>Structured event observability platform that captures system behaviour as queryable events for monitoring, tracing, and analytics.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">HTML5</span>
+                                    <span class="proj-tag">CSS3</span>
+                                    <span class="proj-tag">JavaScript</span>
+                                    <span class="proj-tag">Observability</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/AstraLog"><i class="fab fa-github"></i> GitHub</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── Portfolio Website ── -->
+                        <article class="proj-card" data-category="landing">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Landing Page</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1000&q=80" alt="Portfolio Website">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
+                                <h3>Portfolio Website</h3>
+                                <p>Responsive portfolio site with smooth animations, clean structure, and strong performance practices — the site you are on right now.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">HTML5</span>
+                                    <span class="proj-tag">CSS3</span>
+                                    <span class="proj-tag">JavaScript</span>
+                                    <span class="proj-tag">GSAP</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> GitHub</a>
+                                    <a class="proj-btn proj-btn-ghost" href="portfolio-website/"><i class="fas fa-arrow-right"></i> Details</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── Blockchain MUST Landing ── -->
+                        <article class="proj-card" data-category="landing">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Landing Page</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=1000&q=80" alt="Blockchain MUST Landing">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-rocket" style="margin-right:4px;"></i> Project Landing Pages</div>
+                                <h3>Blockchain MUST Landing</h3>
+                                <p>Modern blockchain-themed landing page featuring interactive elements and educational content about blockchain technology.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">HTML5</span>
+                                    <span class="proj-tag">CSS3</span>
+                                    <span class="proj-tag">JavaScript</span>
+                                    <span class="proj-tag">Web3</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1"><i class="fab fa-github"></i> GitHub</a>
+                                    <a class="proj-btn proj-btn-ghost" href="blockchain-must-landing/"><i class="fas fa-arrow-right"></i> Details</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── The Residual Stream ── -->
+                        <article class="proj-card" data-category="educational">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Educational</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&q=80" alt="The Residual Stream">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-graduation-cap" style="margin-right:4px;"></i> Educational</div>
+                                <h3>The Residual Stream</h3>
+                                <p>Building a transformer from scratch in public. JAX implementations of BPE tokenization, multi-head attention, training loops, LoRA, and Chinchilla scaling laws.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">Python</span>
+                                    <span class="proj-tag">JAX</span>
+                                    <span class="proj-tag">NumPy</span>
+                                    <span class="proj-tag">Transformers</span>
+                                    <span class="proj-tag">Green AI</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/the-residual-stream"><i class="fab fa-github"></i> GitHub</a>
+                                    <a class="proj-btn proj-btn-ghost" href="the-residual-stream/"><i class="fas fa-arrow-right"></i> Details</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── Walter Bishop Labs ── -->
+                        <article class="proj-card" data-category="educational">
+                            <div class="proj-card-bar">
+                                <span class="bar-dot"></span><span class="bar-dot"></span><span class="bar-dot"></span>
+                                <span class="bar-label">Educational</span>
+                            </div>
+                            <div class="proj-card-media">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1000&q=80" alt="Walter Bishop Labs">
+                            </div>
+                            <div class="proj-card-body">
+                                <div class="proj-cat-tag"><i class="fas fa-graduation-cap" style="margin-right:4px;"></i> Educational</div>
+                                <h3>Walter Bishop Labs: Calculus</h3>
+                                <p>Experiment-first calculus lab combining symbolic analysis, numerical sampling, and visual interpretation to study function behaviour and optimisation intuition.</p>
+                                <div class="proj-tags">
+                                    <span class="proj-tag">Python</span>
+                                    <span class="proj-tag">SymPy</span>
+                                    <span class="proj-tag">NumPy</span>
+                                    <span class="proj-tag">Matplotlib</span>
+                                    <span class="proj-tag">Calculus</span>
+                                </div>
+                                <div class="proj-actions">
+                                    <a class="proj-btn proj-btn-primary" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/walter-bishop-labs-calculus"><i class="fab fa-github"></i> GitHub</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- ── DApps Coming Soon ── -->
+                        <article class="proj-card soon" data-category="dapps">
+                            <div class="soon-inner">
+                                <i class="fas fa-cubes"></i>
+                                <h4>DApps — Coming Soon</h4>
+                                <p style="font-size:0.7rem;color:var(--text-muted);opacity:0.6;margin-top:4px;">Web3, smart contracts, and blockchain apps in the pipeline.</p>
+                            </div>
+                        </article>
+
+                    </div>
                 </div>
 
                 <!-- No Results -->
@@ -657,30 +806,77 @@
             const filterBtns = document.querySelectorAll('.filter-btn');
             const cards = document.querySelectorAll('.proj-card');
             const noResults = document.getElementById('noResults');
+            const moreWrap = document.getElementById('moreWrap');
+            const moreBtn = document.getElementById('moreToggle');
+            const moreLabel = document.getElementById('moreLabel');
+            const moreIcon = document.getElementById('moreIcon');
+            const featGrid = document.getElementById('projGrid');
+            const featLabel = document.getElementById('featuredLabel');
+
+            let moreOpen = false;
+
+            function applyMoreVisibility(filterActive) {
+                // When a specific category filter is active, everything matching
+                // must be visible — so force the more-grid open and hide the toggle.
+                // On "all", respect the user's manual see-more state.
+                // If nothing inside survived the current filter, hide it completely
+                // (label included) instead of leaving an empty section behind.
+                let anyMore = false;
+                moreWrap.querySelectorAll('.proj-card').forEach(function(card) {
+                    if (card.style.display !== 'none') anyMore = true;
+                });
+
+                const show = (filterActive || moreOpen) && anyMore;
+                moreWrap.style.display = show ? 'block' : 'none';
+                moreWrap.classList.toggle('is-open', show);
+                moreLabel.textContent = moreOpen ? 'Show Fewer Projects' : 'See ' + moreWrap.querySelectorAll('.proj-card:not(.soon)').length + ' More Projects';
+                moreIcon.style.transform = moreOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                moreBtn.style.display = (filterActive || !anyMore) ? 'none' : 'inline-flex';
+            }
+
+            function applyFeaturedVisibility() {
+                // If no featured card survived the current filter, hide the
+                // section label and the (now empty) featured grid.
+                let anyFeatured = false;
+                featGrid.querySelectorAll('.proj-card').forEach(function(card) {
+                    if (card.style.display !== 'none') anyFeatured = true;
+                });
+                featGrid.style.display = anyFeatured ? 'grid' : 'none';
+                featLabel.style.display = anyFeatured ? 'flex' : 'none';
+            }
 
             function filterProjects(category) {
                 let visibleCount = 0;
 
                 cards.forEach(function(card) {
-                    const cat = card.dataset.category;
-                    const match = category === 'all' || cat === category;
+                    const isSoon = card.classList.contains('soon');
+                    let match;
 
-                    if (card.classList.contains('soon')) {
-                        card.style.display = match ? 'flex' : 'none';
-                        if (match) visibleCount++;
+                    if (isSoon) {
+                        // The "coming soon" placeholder shows only on the unfiltered
+                        // view and is never counted as a project.
+                        match = category === 'all';
                     } else {
-                        card.style.display = match ? 'flex' : 'none';
+                        match = category === 'all' || card.dataset.category === category;
                         if (match) visibleCount++;
                     }
+
+                    card.style.display = match ? 'flex' : 'none';
                 });
 
                 filterBtns.forEach(function(btn) {
-                    const btnCat = btn.dataset.filter;
-                    btn.classList.toggle('is-active', btnCat === category);
+                    btn.classList.toggle('is-active', btn.dataset.filter === category);
                 });
 
                 noResults.classList.toggle('is-visible', visibleCount === 0);
+                applyFeaturedVisibility();
+                applyMoreVisibility(category !== 'all');
             }
+
+            moreBtn.addEventListener('click', function() {
+                moreOpen = !moreOpen;
+                applyMoreVisibility(false);
+            });
 
             filterBtns.forEach(function(btn) {
                 btn.addEventListener('click', function() {

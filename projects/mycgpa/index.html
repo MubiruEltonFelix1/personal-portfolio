@@ -1,162 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>MyCGPA | Mubiru Elton Felix</title>
-    <meta name="description" content="MyCGPA — Student-friendly CGPA calculator and forecaster. Track current performance, model future semesters, and plan toward a target CGPA.">
-    <meta property="og:title" content="MyCGPA — Academic Planner">
-    <meta property="og:description" content="Track, forecast, and plan your academic performance with MyCGPA.">
+    <meta name="description" content="MyCGPA helps university students know where they stand, simulate future semesters, and see the exact grades needed to hit their target CGPA.">
+    <meta property="og:title" content="MyCGPA — Know your standing, plan your degree">
+    <meta property="og:description" content="MyCGPA helps university students know where they stand, simulate future semesters, and see the exact grades needed to hit their target CGPA.">
     <meta property="og:image" content="../../assets/images/logo.png">
     <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="project.css">
     <style>
-        .project-hero { background: radial-gradient(circle at top left, rgba(255,215,0,0.07), transparent 50%); }
-        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:24px; }
-        .tech-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.15); border-radius:20px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--accent); }
-        .link-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.5rem; }
-        .link-row .btn i { margin-right:6px; }
-        .steps-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-bottom:24px; }
-        @media (max-width:600px) {
-            .feature-grid, .steps-grid { grid-template-columns:1fr; }
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
-
-    <main class="project-page">
+    <main>
         <!-- Hero -->
-        <section class="project-hero">
+        <section class="pd-hero">
             <div class="container">
-                <div class="hero-eyebrow reveal">// Academic Planning Tool</div>
-                <h1 class="hero-title reveal">My<span class="accent">CGPA</span></h1>
-                <p class="hero-subtitle reveal">Student-friendly CGPA calculator and forecaster — track current performance, model future semesters, and plan the grades needed to hit a target CGPA.</p>
-                <div class="project-badges reveal delay-1">
-                    <span class="badge"><i class="fas fa-calculator"></i> CGPA Calculator</span>
-                    <span class="badge"><i class="fas fa-chart-line"></i> Forecasting</span>
-                    <span class="badge"><i class="fas fa-chart-bar"></i> Chart.js</span>
-                    <span class="badge"><i class="fas fa-mobile-alt"></i> Responsive</span>
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-graduation-cap"></i> Academic Planning Tool</p>
+                <h1 class="pd-title reveal">My<span class="accent">CGPA</span></h1>
+                <p class="pd-pitch reveal">Know exactly where your grades stand today — and exactly what it takes to graduate with the CGPA you actually want.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-calculator"></i> Instant CGPA calculator</span>
+                    <span class="pd-badge"><i class="fas fa-chart-line"></i> Forecast future semesters</span>
+                    <span class="pd-badge"><i class="fas fa-bullseye"></i> Target-grade planner</span>
+                    <span class="pd-badge"><i class="fas fa-mobile-alt"></i> Works on any device</span>
                 </div>
-                <div class="link-row reveal delay-2">
-                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/"><i class="fas fa-external-link-alt"></i> Live App</a>
-                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa"><i class="fab fa-github"></i> GitHub</a>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/"><i class="fas fa-play"></i> Try It Live</a>
+                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/my-cgpa"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <div class="pd-shot reveal delay-2">
+                    <div class="pd-shot-bar"><span></span><span></span><span></span><em>mycgpa — plan your degree</em></div>
+                    <img src="Screenshot%202026-08-24%20222026.png" alt="Screenshot of MyCGPA showing course entry, current GPA and cumulative CGPA results, and forecast charts of a student's academic trajectory">
                 </div>
             </div>
         </section>
 
-        <!-- Overview -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Overview</h2>
-                <p class="muted reveal">MyCGPA is a purpose-built academic planning tool for university students. It solves a real problem: knowing where you stand academically and what it will take to reach your goals. Instead of manual spreadsheet calculations or opaque university portals, MyCGPA gives a clear, visual picture of past performance and future possibilities.</p>
-                <p class="muted reveal delay-1" style="margin-top:0.8rem;">Built with vanilla HTML, CSS, and JavaScript — no framework overhead — with Chart.js providing clean, responsive visualisations of your academic trajectory.</p>
+        <!-- The Problem -->
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Most students find out too late</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">Ask most students how their CGPA is trending and you'll get a shrug. University portals tend to reveal the number once — after the semester is already finished, when nothing can be changed about it.</p>
+                    <p class="reveal delay-2">So people improvise. A hand-built spreadsheet full of formulas nobody fully trusts. Mental arithmetic that quietly falls apart as credit units pile up. Or worse: simply hoping it all works out.</p>
+                    <p class="reveal delay-3">The result? Semesters drift by without ever knowing whether your goal is still within reach — and by the time you find out, the exams that mattered are behind you.</p>
+                </div>
             </div>
         </section>
 
-        <!-- Tech Stack -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Tech Stack</h2>
-                <div class="reveal" style="display:flex; flex-wrap:wrap; gap:8px;">
-                    <span class="tech-badge"><i class="fab fa-html5"></i> HTML5</span>
-                    <span class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
-                    <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-                    <span class="tech-badge"><i class="fas fa-chart-bar"></i> Chart.js</span>
-                    <span class="tech-badge"><i class="fas fa-graduation-cap"></i> Academic Planning</span>
+        <!-- The Payoff -->
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> Your degree, finally in focus</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1">
+                        <i class="fas fa-eye"></i>
+                        <h4>Know your standing</h4>
+                        <p>Your semester GPA and cumulative CGPA, worked out clearly and accurately from your credit units and grades — at a glance, no formulas.</p>
+                    </div>
+                    <div class="pd-card reveal delay-1">
+                        <i class="fas fa-flask"></i>
+                        <h4>Test scenarios safely</h4>
+                        <p>Try different grade outcomes for upcoming semesters before they happen, then build your study strategy around the best route.</p>
+                    </div>
+                    <div class="pd-card reveal delay-2">
+                        <i class="fas fa-bullseye"></i>
+                        <h4>See exactly what you need</h4>
+                        <p>Enter the CGPA you're aiming for and discover precisely which grades in future semesters will get you there before you graduate.</p>
+                    </div>
+                    <div class="pd-card reveal delay-2">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Watch your trajectory</h4>
+                        <p>Clean, interactive graphs turn your academic history into a picture that's easy to understand — and easy to share.</p>
+                    </div>
+                    <div class="pd-card reveal delay-3">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Check in anywhere</h4>
+                        <p>The whole tool fits phones, tablets, and laptops, so you can check your numbers between lectures — not just at your desk.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- How It Works -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">How It Works</h2>
-                <div class="steps-grid reveal">
-                    <div class="problem-card" style="text-align:center;">
-                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-plus-circle"></i></div>
-                        <h4>Add Courses</h4>
-                        <p>Enter your current semester courses with credit units and grades.</p>
-                    </div>
-                    <div class="problem-card" style="text-align:center;">
-                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-eye"></i></div>
-                        <h4>See Your Standing</h4>
-                        <p>View your current semester GPA and cumulative CGPA at a glance.</p>
-                    </div>
-                    <div class="problem-card" style="text-align:center;">
-                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-bullseye"></i></div>
-                        <h4>Set a Target</h4>
-                        <p>Input a target CGPA and discover exactly what grades you need in future semesters.</p>
-                    </div>
-                    <div class="problem-card" style="text-align:center;">
-                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-chart-line"></i></div>
-                        <h4>Visualise</h4>
-                        <p>Interactive Chart.js graphs show your academic trajectory over time.</p>
-                    </div>
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From confusion to a clear plan</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Add your courses</h4><p>Type in this semester's courses along with their credit units and the grades you received.</p></div></div>
+                    <div class="pd-step reveal delay-1"><div><h4>See where you stand</h4><p>Your semester GPA and cumulative CGPA appear instantly, calculated correctly every time.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Set your target</h4><p>Enter the CGPA you're aiming for and find out exactly what grades your remaining semesters demand.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Watch the trend</h4><p>Graphs trace your academic journey over time, so progress — and risk — becomes visible early.</p></div></div>
+                </div>
+                <div class="pd-chips reveal delay-3">
+                    <span class="pd-chip"><i class="fab fa-html5"></i> HTML5</span>
+                    <span class="pd-chip"><i class="fab fa-css3-alt"></i> CSS3</span>
+                    <span class="pd-chip"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="pd-chip"><i class="fas fa-chart-bar"></i> Chart.js</span>
+                    <span class="pd-chip"><i class="fas fa-feather"></i> Vanilla — no framework</span>
                 </div>
             </div>
         </section>
 
-        <!-- Core Features -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Core Features</h2>
-                <div class="feature-grid reveal">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-calculator"></i></div>
-                        <h4>CGPA Calculation</h4>
-                        <p>Accurate computation of semester GPA and cumulative CGPA based on credit units and grade points.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-chart-simple"></i></div>
-                        <h4>Grade Forecasting</h4>
-                        <p>Model future semesters and see what grades you need to achieve your target CGPA before graduation.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-rotate"></i></div>
-                        <h4>What-If Analysis</h4>
-                        <p>Experiment with different grade scenarios in upcoming semesters to plan your study strategy.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-file-export"></i></div>
-                        <h4>Visual Reports</h4>
-                        <p>Chart.js-powered graphs that make your academic progress easy to understand and share.</p>
-                    </div>
+        <!-- Who It's For -->
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Made for students who want certainty</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-user-graduate"></i> University students</span>
+                    <span class="pd-chip"><i class="fas fa-bullseye"></i> Students chasing a specific CGPA</span>
+                    <span class="pd-chip"><i class="fas fa-calendar-check"></i> Semester planners</span>
+                    <span class="pd-chip"><i class="fas fa-graduation-cap"></i> Final-years mapping the road home</span>
+                    <span class="pd-chip"><i class="fas fa-table-cells"></i> Anyone tired of spreadsheet math</span>
                 </div>
             </div>
         </section>
 
-        <!-- Links -->
-        <section class="project-section">
-            <div class="container project-container">
-                <div class="action-row reveal">
-                    <a href="https://mubirueltonfelix1.github.io/my-cgpa/" target="_blank" rel="noopener" class="btn btn-github">
-                        <i class="fas fa-external-link-alt"></i> Live App
-                    </a>
-                    <a href="https://github.com/MubiruEltonFelix1/my-cgpa" target="_blank" rel="noopener" class="btn btn-back" style="border-color:var(--border);color:var(--text-muted);">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="../" class="btn btn-back">
-                        <i class="fas fa-arrow-left"></i> Back to Projects
-                    </a>
+        <!-- Final CTA -->
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Stop guessing your CGPA. <span style="color:var(--accent);">Start steering it.</span></h2>
+                <p class="reveal delay-1">Open MyCGPA, add your courses, and see the exact grades that carry you to your target — before the semester decides for you.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/my-cgpa/"><i class="fas fa-play"></i> Try It Live</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
                 </div>
             </div>
         </section>
     </main>
-
     <div id="site-footer"></div>
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>

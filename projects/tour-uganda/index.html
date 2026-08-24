@@ -1,181 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>Tour Uganda | Mubiru Elton Felix</title>
-    <meta name="description" content="Tour Uganda — The all-in-one travel planning ecosystem for the Pearl of Africa. Plan, price, and book your Uganda trip from one place.">
-    <meta property="og:title" content="Tour Uganda — Pearl of Africa Travel">
-    <meta property="og:description" content="AI trip planner, interactive map, destination guides, accommodation directory, cost calculator, and more.">
+    <meta name="description" content="Plan your entire Uganda trip in one place — AI-built itineraries, an interactive map, honest costs, trusted lodges and operators for the Pearl of Africa.">
+    <meta property="og:title" content="Tour Uganda — Plan the Pearl of Africa in One Place">
+    <meta property="og:description" content="Plan your entire Uganda trip in one place — AI-built itineraries, an interactive map, honest costs, trusted lodges and operators for the Pearl of Africa.">
     <meta property="og:image" content="../../assets/images/logo.png">
     <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="project.css">
     <style>
-        .project-hero { background: radial-gradient(circle at bottom left, rgba(255,215,0,0.06), transparent 50%); }
-        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:24px; }
-        .page-table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:0.85rem; }
-        .page-table th, .page-table td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--border); }
-        .page-table th { color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; }
-        .page-table td { color:var(--text-muted); }
-        .page-table td:first-child { font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--text); }
-        .tech-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.15); border-radius:20px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--accent); }
-        .link-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.5rem; }
-        .link-row .btn i { margin-right:6px; }
-        @media (max-width:600px) {
-            .feature-grid { grid-template-columns:1fr; }
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
-
-    <main class="project-page">
-        <!-- Hero -->
-        <section class="project-hero">
+    <main>
+        <section class="pd-hero">
             <div class="container">
-                <div class="hero-eyebrow reveal">// Travel Planning Ecosystem</div>
-                <h1 class="hero-title reveal">Tour <span class="accent">Uganda</span></h1>
-                <p class="hero-subtitle reveal">The all-in-one travel planning ecosystem for the Pearl of Africa. Plan, price, and book your Uganda trip from one place.</p>
-                <div class="project-badges reveal delay-1">
-                    <span class="badge"><i class="fas fa-route"></i> Trip Planner</span>
-                    <span class="badge"><i class="fas fa-map-marked-alt"></i> Interactive Map</span>
-                    <span class="badge"><i class="fas fa-calculator"></i> Cost Calculator</span>
-                    <span class="badge"><i class="fas fa-robot"></i> AI Chat</span>
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-earth-africa"></i> Travel Platform</p>
+                <h1 class="pd-title reveal">Tour <span class="accent">Uganda</span></h1>
+                <p class="pd-pitch reveal">Dreaming, mapping, pricing, booking — every step of your Uganda adventure finally lives in one place.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-robot"></i> AI Trip Planner</span>
+                    <span class="pd-badge"><i class="fas fa-map-marked-alt"></i> Interactive Map</span>
+                    <span class="pd-badge"><i class="fas fa-calculator"></i> Live Cost Calculator</span>
+                    <span class="pd-badge"><i class="fas fa-calendar-alt"></i> Itinerary Builder</span>
+                    <span class="pd-badge"><i class="fas fa-moon"></i> Dark Mode</span>
                 </div>
-                <div class="link-row reveal delay-2">
-                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/"><i class="fas fa-globe"></i> Visit Site</a>
-                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://github.com/MubiruEltonFelix1/tour-uganda"><i class="fab fa-github"></i> GitHub</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Overview -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Overview</h2>
-                <p class="muted reveal">Tour Uganda is a comprehensive travel platform that brings together every aspect of planning a trip to Uganda. From an AI-powered trip planner to interactive maps, accommodation directories, and a live cost calculator — everything is designed to give travellers a seamless, informed experience.</p>
-                <p class="muted reveal delay-1" style="margin-top:0.8rem;">Built as a multi-page static application with dark mode, responsive design, and an integrated AI chat assistant for real-time travel Q&A.</p>
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Features</h2>
-                <div class="feature-grid reveal">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-robot"></i></div>
-                        <h4>AI Trip Planner</h4>
-                        <p>Answer 3 simple questions, get a full day-by-day itinerary tailored to your preferences.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-map"></i></div>
-                        <h4>Interactive Map</h4>
-                        <p>Leaflet-powered map with national parks, gorilla sectors, airports, hospitals, and more.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-compass"></i></div>
-                        <h4>Destination Guides</h4>
-                        <p>8 featured destinations with GPS coordinates, ratings, seasonal calendars, and hidden gems.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-hotel"></i></div>
-                        <h4>Accommodation Directory</h4>
-                        <p>Filter lodges and hotels by tier and budget, complete with map view integration.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-handshake"></i></div>
-                        <h4>Tour Operators</h4>
-                        <p>Verified operator profiles with specialties, ratings, and direct contact.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-bus"></i></div>
-                        <h4>Transport Hub</h4>
-                        <p>Flights, car rental, private drivers, buses, and boats — all in one place.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-calculator"></i></div>
-                        <h4>Cost Calculator</h4>
-                        <p>Live trip estimate broken down by category — accommodation, transport, activities, meals.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-calendar-alt"></i></div>
-                        <h4>Itinerary Builder</h4>
-                        <p>Drag-and-drop day planner for building your perfect trip schedule.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-images"></i></div>
-                        <h4>Inspiration Gallery</h4>
-                        <p>Virtual tours, traveller reviews, and a curated photo gallery.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-moon"></i></div>
-                        <h4>Dark Mode</h4>
-                        <p>Full theme toggle with persisted user preference across all pages.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-comment-dots"></i></div>
-                        <h4>AI Chat Assistant</h4>
-                        <p>In-page travel Q&A chatbot for real-time answers about destinations, transport, and tips.</p>
-                    </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/"><i class="fas fa-play"></i> Visit Site</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
                 </div>
             </div>
         </section>
-
-        <!-- Page Map -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Site Pages</h2>
-                <p class="muted reveal">The platform spans 10 pages, each serving a distinct part of the travel planning journey:</p>
-                <div class="reveal delay-1">
-                    <table class="page-table">
-                        <thead>
-                            <tr><th>Page</th><th>File</th><th>Description</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Home</td><td>index.html</td><td>Hero, AI planner, interactive map, featured destinations</td></tr>
-                            <tr><td>Destinations</td><td>destinations.html</td><td>Park guides, seasonal calendar, hidden gems</td></tr>
-                            <tr><td>Accommodation</td><td>accommodation.html</td><td>Lodge listings with tier/price filters and map view</td></tr>
-                            <tr><td>Tour Operators</td><td>operators.html</td><td>Verified operator directory with specialties</td></tr>
-                            <tr><td>Transport</td><td>transport.html</td><td>Flights, car rental, drivers, buses, boats</td></tr>
-                            <tr><td>Budget</td><td>calculator.html</td><td>Live cost calculator with category breakdown</td></tr>
-                            <tr><td>Itinerary Builder</td><td>itinerary.html</td><td>Drag-and-drop day planner</td></tr>
-                            <tr><td>Inspiration</td><td>inspiration.html</td><td>Virtual tours, reviews, photo gallery</td></tr>
-                            <tr><td>Community</td><td>community.html</td><td>Emergency contacts, forum, partner portal</td></tr>
-                        </tbody>
-                    </table>
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Planning the Trip Was Harder Than Taking It</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">Uganda is called the Pearl of Africa for a reason — misty mountain gorillas, wide savannahs, the mighty Nile, and some of the warmest welcomes on the planet. Getting there is the easy part. <strong>Planning the trip has always been the hard part.</strong></p>
+                    <p class="reveal delay-2">Would-be travellers end up buried in scattered blogs, dead links, and advice that contradicts itself. What does a day on the road actually cost? Where can you sleep near the parks? Which tour companies can you trust — and how do you even get from the airport to the wildlife? Each answer hides on a different website, or nowhere at all.</p>
+                    <p class="reveal delay-3">So most people either give up halfway through planning, or hand the whole trip — and their whole budget — to somebody else and hope for the best. A dream destination deserved better than browser-tab chaos.</p>
                 </div>
             </div>
         </section>
-
-        <!-- Links -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <div class="action-row reveal">
-                    <a href="https://mubirueltonfelix1.github.io/tour-uganda/" target="_blank" rel="noopener" class="btn btn-github">
-                        <i class="fas fa-globe"></i> Visit Site
-                    </a>
-                    <a href="../" class="btn btn-back">
-                        <i class="fas fa-arrow-left"></i> Back to Projects
-                    </a>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> Everything You Need, Under One Roof</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-wand-magic-sparkles"></i><h4>A Planner That Knows You</h4><p>Answer three simple questions and receive a complete day-by-day itinerary shaped around the way you like to travel.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-map-location-dot"></i><h4>The Whole Country, One Map</h4><p>Zoom from national parks to gorilla sectors, airports, and hospitals, then dive into eight destination guides with GPS coordinates, ratings, seasonal calendars, and hidden gems.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-calculator"></i><h4>No More Cost Guesswork</h4><p>A live estimate builds up as you plan, broken into stays, transport, activities, and meals — so you know the real price before you ever pack a bag.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-hotel"></i><h4>Stays That Fit Your Budget</h4><p>Browse lodges and hotels, filtered by tier and price range, with a map view showing exactly where you'd wake up each morning.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-handshake"></i><h4>Trusted People, Every Leg</h4><p>Compare verified tour operators — specialties, ratings, and direct contact — alongside flights, car rental, private drivers, buses, and boats.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-images"></i><h4>Build Days, Find Ideas</h4><p>Drag and drop your perfect schedule in the itinerary builder, then wander virtual tours, traveller reviews, and a photo gallery — all glowing in a dark mode that remembers you on every page.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From Daydream to Day-by-Day Plan</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Tell it how you travel</h4><p>Answer three simple questions about your style, and the AI trip planner drafts a full day-by-day itinerary tailored to your preferences.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Pin down the details</h4><p>Explore the interactive map and destination guides, pick your lodges, and choose verified operators or transport for every leg of the journey.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>See the real price</h4><p>Open the cost calculator and watch a live estimate come together by category — accommodation, transport, activities, and meals.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Ask anything, anytime</h4><p>A built-in chat assistant answers your travel questions in real time — places, transport, tips — while you keep planning.</p></div></div>
+                </div>
+                <div class="pd-chips reveal delay-3">
+                    <span class="pd-chip"><i class="fas fa-layer-group"></i> Maps by Leaflet</span>
+                </div>
+            </div>
+        </section>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Made for Every Kind of Explorer</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-plane-arrival"></i> First-time visitors</span>
+                    <span class="pd-chip"><i class="fas fa-suitcase-rolling"></i> Budget backpackers</span>
+                    <span class="pd-chip"><i class="fas fa-paw"></i> Wildlife lovers</span>
+                    <span class="pd-chip"><i class="fas fa-users"></i> Group trip planners</span>
+                    <span class="pd-chip"><i class="fas fa-handshake"></i> Tour operators</span>
+                </div>
+            </div>
+        </section>
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Your Pearl of Africa story starts with <span style="color:var(--accent);">one smart plan</span></h2>
+                <p class="reveal delay-1">Tell the planner how you travel, let the map show you what's possible, and watch your budget fall into place — ten connected pages, one unforgettable journey.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/tour-uganda/"><i class="fas fa-play"></i> Start Planning Now</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
                 </div>
             </div>
         </section>
     </main>
-
     <div id="site-footer"></div>
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>

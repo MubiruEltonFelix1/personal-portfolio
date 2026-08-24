@@ -1,329 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>BrainBolt | Mubiru Elton Felix</title>
-    <meta name="description" content="BrainBolt — Real-Time Quiz Arena. Fast, gamified live quiz battles with solo, team, and league play.">
-    <meta property="og:title" content="BrainBolt — Real-Time Quiz Arena">
-    <meta property="og:description" content="Esports-broadcast styled real-time quiz arena. Host live trivia battles, players join from any device.">
+    <meta name="description" content="BrainBolt turns any room into a live game show. Launch a quiz in 60 seconds, players join with a 6-character code, scores update live. Free to start.">
+    <meta property="og:title" content="BrainBolt — Live Quiz Battles in Under a Minute">
+    <meta property="og:description" content="BrainBolt turns any room into a live game show. Launch a quiz in 60 seconds, players join with a 6-character code, scores update live. Free to start.">
     <meta property="og:image" content="../../assets/images/logo.png">
     <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Anton:wght@400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="project.css">
     <style>
-        .project-hero { position:relative; overflow:hidden; min-height:420px; display:flex; align-items:center; padding:0; background: var(--bg); }
-	        .project-hero .container { position:relative; z-index:1; width:100%; }
-	        .hero-title { font-size: clamp(2rem,5vw,3.2rem); font-weight:800; }
-	        .hero-title .accent { color:var(--accent); }
-	        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-bottom:24px; }
-	        .tech-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.15); border-radius:20px; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--accent); }
-	        .link-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.5rem; justify-content:center; }
-	        .link-row .btn i { margin-right:6px; }
-        @media (max-width:600px) {
-            .feature-grid { grid-template-columns:1fr; }
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
-
-    <main class="project-page">
-        <!-- Hero -->
-        <section class="project-hero">
+    <main>
+        <section class="pd-hero">
             <div class="container">
-                <div class="hero-eyebrow reveal"><span style="background:var(--accent);color:#000;padding:2px 10px;border-radius:4px;font-weight:700;font-size:0.6rem;">YC S25</span> &mdash; Live Beta Now</div>
-                <h1 class="hero-title reveal"><span class="accent">Brain</span>Bolt</h1>
-                <p class="hero-subtitle reveal">Launch a live quiz in 60 seconds. No installs, short join codes, instant leaderboards — get everyone playing in under a minute. Used by 2,400+ teams across 30+ countries.</p>
-                <div class="project-badges reveal delay-1">
-                    <span class="badge"><i class="fas fa-bolt"></i> Real-Time</span>
-                    <span class="badge"><i class="fas fa-users"></i> 2,400+ Teams</span>
-                    <span class="badge"><i class="fas fa-trophy"></i> 6 Question Types</span>
-                    <span class="badge"><i class="fas fa-globe"></i> 30+ Countries</span>
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-bolt"></i> YC S25 &middot; Real-Time Quiz Arena</p>
+                <h1 class="pd-title reveal"><span class="accent">Brain</span>Bolt</h1>
+                <p class="pd-pitch reveal">BrainBolt turns any room — office, classroom or conference hall — into a live game show where everyone plays from the device already in their hand.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-users"></i> 2,400+ Teams</span>
+                    <span class="pd-badge"><i class="fas fa-globe"></i> 30+ Countries</span>
+                    <span class="pd-badge"><i class="fas fa-circle-question"></i> 120,000+ Questions Answered</span>
+                    <span class="pd-badge"><i class="fas fa-stopwatch"></i> 0.84s Average Response</span>
+                    <span class="pd-badge"><i class="fas fa-coins"></i> Free to Start</span>
                 </div>
-                <div class="link-row reveal delay-2">
+                <div class="pd-ctas reveal delay-2">
                     <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/brain_bolt_landing_page/"><i class="fas fa-play"></i> Launch App</a>
                     <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/brain_bolt_landing_page/"><i class="fas fa-book"></i> Quick Start Guide</a>
                 </div>
             </div>
         </section>
 
-        <!-- What is BrainBolt -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">What is BrainBolt?</h2>
-                <p class="muted reveal" style="font-size:1.05rem;color:var(--text);line-height:1.7;">
-                    BrainBolt is a real-time quiz platform that turns any room into a live game show.
-                </p>
-                <p class="muted reveal delay-1">
-                    You launch a quiz from your device — phone, laptop, tablet — and players join instantly with a 6-character code. No apps to download, no accounts to create. They just open their browser, tap the code in, and start answering. Scores update live, leaderboards shift with every response, and within seconds the room is fully engaged.
-                </p>
-                <p class="muted reveal delay-1">
-                    It works for everything from a quick icebreaker at a team standup to a multi-week league tournament spanning dozens of teams. <strong>Solo Sprint</strong> for self-paced individual play, <strong>Team Clash</strong> for group battles, and <strong>League Mode</strong> for persistent seasons with automated standings. One platform, every format.
-                </p>
-                <p class="muted reveal delay-1" style="margin-top:1.2rem;padding:1rem 1.4rem;background:var(--surface-soft);border-radius:var(--radius);border:1px solid var(--border);">
-                    <i class="fas fa-users" style="color:var(--accent);margin-right:8px;"></i> <strong>2,400+</strong> teams &middot;
-                    <i class="fas fa-question-circle" style="color:var(--accent);margin-right:8px;"></i> <strong>120,000+</strong> questions answered &middot;
-                    <i class="fas fa-globe" style="color:var(--accent);margin-right:8px;"></i> <strong>30+</strong> countries
-                </p>
-            </div>
-        </section>
-
-        <!-- Why BrainBolt -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Why BrainBolt?</h2>
-                <p class="muted reveal" style="margin-bottom:1.2rem;">
-                    Most quiz tools were built for classrooms — one session, one-off, forget about it. BrainBolt was built for the real world: persistent teams, recurring leagues, millisecond scoring, and zero friction for players.
-                </p>
-                <div class="feature-grid reveal">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-bolt"></i></div>
-                        <h4>Zero Friction</h4>
-                        <p>Play in 10 seconds. No downloads, no account creation. Players join with a 6-character code from any device — phone, laptop, tablet. Just open, tap, play.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-stopwatch"></i></div>
-                        <h4>Real-Time Core</h4>
-                        <p>Sub-second scoring. Answers are scored in milliseconds and leaderboards update the instant a response arrives. Speed + accuracy = every frame matters.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-sliders-h"></i></div>
-                        <h4>By Hosts, For Hosts</h4>
-                        <p>You control the arena — manual or auto-advance, hidden leaderboards, question reveals, audience muting. Every tool a live host needs to build tension.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-users"></i></div>
-                        <h4>Team & League Persistence</h4>
-                        <p>Unlike one-off tools, BrainBolt carries rosters and standings across sessions. Run a 6-week league, track team progress, and surface cumulative rankings.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-list-ol"></i></div>
-                        <h4>6 Question Formats</h4>
-                        <p>True/False, Multiple Choice, Image MCQ, Type Answer, Map Pin, and Closest Number slider — six distinct formats keep every round unpredictable.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-coins"></i></div>
-                        <h4>Free to Start</h4>
-                        <p>Spark plan at UGX 0. No credit card required. Upgrade only when you need more players, more questions, or persistent league structures. Pay-per-session also available.</p>
-                    </div>
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Quiz Nights Keep Dying Before They Start</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">Picture the last trivia session you joined: half the room stuck downloading an app, others giving up the moment a sign-up form asked for their email. By the time everyone finally gets in, the energy is gone. Most quiz tools were built for classrooms — designed around a single session, played once, then forgotten.</p>
+                    <p class="reveal delay-1">And when the game ends, everything ends with it. Scores vanish, teams scatter, and next week the organizer starts from zero. There's no simple way to keep a rivalry alive across weeks, or to reward the team that actually showed up every single time.</p>
+                    <p class="reveal delay-2">Worst of all, when scoring lags behind the shouting, the magic dies. A live quiz should feel like a game show — the answer lands, the score flips, the room erupts. If the leaderboard catches up ten seconds later, nobody cares anymore.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Platform Preview -->
-        <section class="project-section project-section-alt" style="text-align:center;">
-            <div class="container project-container">
-                <h2 class="section-title reveal">BrainBolt in Action</h2>
-                <div class="reveal delay-1" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;overflow:hidden;">
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:1.5rem;">
-                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
-                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">0.84s</div>
-                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Avg Response</div>
-                        </div>
-                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
-                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">92%</div>
-                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Accuracy</div>
-                        </div>
-                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
-                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">18</div>
-                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Active Rooms</div>
-                        </div>
-                        <div style="padding:1rem;background:var(--surface-soft);border-radius:8px;">
-                            <div style="font-size:1.3rem;font-weight:800;color:var(--accent);">247</div>
-                            <div style="font-size:0.7rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">Players Online</div>
-                        </div>
-                    </div>
-                    <div style="background:var(--surface-soft);border-radius:8px;padding:0.8rem 1rem;text-align:left;">
-                        <p style="font-size:0.72rem;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;margin:0;line-height:1.7;">
-                            <i class="fas fa-circle" style="color:#27c93f;font-size:0.45rem;vertical-align:middle;margin-right:6px;"></i>
-                            Quantum Coders answered in 0.42s
-                            <br>
-                            <i class="fas fa-circle" style="color:#27c93f;font-size:0.45rem;vertical-align:middle;margin-right:6px;"></i>
-                            Data Pirates took the lead in Team Clash
-                            <br>
-                            <i class="fas fa-circle" style="color:#27c93f;font-size:0.45rem;vertical-align:middle;margin-right:6px;"></i>
-                            Syntax Sorcerers won Round 3
-                        </p>
-                    </div>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> Everything a Great Quiz Night Needs</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-bolt"></i><h4>In the Game in 10 Seconds</h4><p>No downloads, no accounts. Players just open a browser, tap in a 6-character code — or scan a QR code — from any phone, laptop or tablet and start answering.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-stopwatch"></i><h4>Scores That Keep Up</h4><p>Answers are scored in milliseconds and the leaderboard moves the instant a response arrives. Across the arena, answers come in after 0.84 seconds on average — and 92% of them are right.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-list-ol"></i><h4>Six Ways to Ask Anything</h4><p>True/False, Multiple Choice, Image MCQ, Type Answer, Map Pin and a Closest Number slider — pictures for visual rounds, typing for recall, map pins for geography. Every round feels different.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-sliders-h"></i><h4>You Run the Show</h4><p>Advance questions manually or automatically, hide the leaderboard for suspense, control question reveals, mute the audience — and bring your questions in straight from a spreadsheet.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-trophy"></i><h4>Rivalries That Actually Last</h4><p>Team rosters and standings carry over between sessions. Run quick Solo Sprints, head-to-head Team Clashes, or multi-week League seasons with automated standings and prizes.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-coins"></i><h4>Start Free, Stay Flexible</h4><p>The Spark plan costs UGX 0 and needs no credit card. Upgrade only when you need more players, more questions or full league structures — or simply pay per session. No annual subscription.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- How It Works -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">How It Works</h2>
-                <div class="steps-container reveal">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-body">
-                            <h4>Deploy the Arena</h4>
-                            <p class="muted">Customize quiz content, branding, and match rules in under 60 seconds. No code, no setup friction.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-body">
-                            <h4>Massive Scale Join</h4>
-                            <p class="muted">Hundreds of players join instantly via QR code or short-link. No downloads, no accounts required.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-body">
-                            <h4>Real-Time Domination</h4>
-                            <p class="muted">Millisecond-accuracy scoring. Leaderboards refresh live with every answer. The fastest mind wins.</p>
-                        </div>
-                    </div>
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From Empty Room to Full House in Four Moves</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Set Up the Arena</h4><p>Pick your questions, add your branding, set the match rules. Hosts do it in under 60 seconds — no code, no fuss.</p></div></div>
+                    <div class="pd-step reveal delay-1"><div><h4>Invite the Crowd</h4><p>Share the QR code or short link. Players join from any device using a short code — hundreds at once, with nothing to download and no accounts to create.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Run the Show</h4><p>Fire off questions at your pace or let them advance on their own. Every answer is scored instantly and the leaderboard shifts as you watch.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Keep It Going</h4><p>End the night or build on it: track standings across weeks in League Mode, or let people sharpen up on their own with Solo Sprint between meetings.</p></div></div>
                 </div>
             </div>
         </section>
 
-        <!-- How It Works Details -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Built for Scale — Three Game Modes</h2>
-
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:24px;">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-user"></i></div>
-                        <h4>Solo Sprint</h4>
-                        <p class="muted">Individual training and assessment. Designed for asynchronous learning, employee onboarding, and arcade-style practice. Players control their pace while every metric is tracked.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-people-arrows"></i></div>
-                        <h4>Team Clash</h4>
-                        <p class="muted">Team-based matchmaking for remote workplaces and tech conferences. Built to boost engagement, break the ice, and ignite friendly competition across distributed teams.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-trophy"></i></div>
-                        <h4>League Mode</h4>
-                        <p class="muted">Multi-week seasonal tournaments with persistent leaderboards and automated prize distribution. Turns casual participation into long-term loyalty.</p>
-                    </div>
-                </div>
-
-                <h2 class="section-title reveal" style="margin-top:2.5rem;">Question Types</h2>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem;">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-toggle-on"></i></div>
-                        <h4 style="font-size:0.8rem;">True / False</h4>
-                        <p class="muted" style="font-size:0.78rem;">Quick binary choices. Perfect for rapid-fire rounds.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-list-ul"></i></div>
-                        <h4 style="font-size:0.8rem;">Multiple Choice</h4>
-                        <p class="muted" style="font-size:0.78rem;">Classic MCQ with custom answer options.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-image"></i></div>
-                        <h4 style="font-size:0.8rem;">Image MCQ</h4>
-                        <p class="muted" style="font-size:0.78rem;">Questions with picture-based answers. Ideal for diagrams and visual recognition.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-keyboard"></i></div>
-                        <h4 style="font-size:0.8rem;">Type Answer</h4>
-                        <p class="muted" style="font-size:0.78rem;">Free-text response. Great for spelling, formulas, and recall.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-map-pin"></i></div>
-                        <h4 style="font-size:0.8rem;">Map Pin</h4>
-                        <p class="muted" style="font-size:0.78rem;">Place a pin on a map. Built for geography and site-based learning.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-sliders-h"></i></div>
-                        <h4 style="font-size:0.8rem;">Closest Number</h4>
-                        <p class="muted" style="font-size:0.78rem;">Drag a slider to guess the nearest value. Range-based precision.</p>
-                    </div>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Made for People Who Bring Rooms Together</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-chalkboard-user"></i> Teachers &amp; Trainers</span>
+                    <span class="pd-chip"><i class="fas fa-people-group"></i> Remote &amp; Hybrid Teams</span>
+                    <span class="pd-chip"><i class="fas fa-microphone-lines"></i> Event &amp; Conference Hosts</span>
+                    <span class="pd-chip"><i class="fas fa-user-plus"></i> New-Hire Onboarding</span>
+                    <span class="pd-chip"><i class="fas fa-graduation-cap"></i> Student Clubs &amp; Leagues</span>
+                    <span class="pd-chip"><i class="fas fa-gamepad"></i> Trivia Night Organizers</span>
                 </div>
             </div>
         </section>
 
-        <!-- Comparison Table -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">How BrainBolt Stacks Up</h2>
-                <div style="overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);">
-                    <table style="width:100%;border-collapse:collapse;font-size:0.78rem;">
-                        <thead>
-                            <tr style="background:var(--surface-soft);border-bottom:1px solid var(--border);">
-                                <th style="padding:12px 16px;text-align:left;color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;">Feature</th>
-                                <th style="padding:12px 16px;text-align:center;color:var(--text);font-weight:700;">BrainBolt</th>
-                                <th style="padding:12px 16px;text-align:center;color:var(--text-muted);font-weight:500;">Kahoot</th>
-                                <th style="padding:12px 16px;text-align:center;color:var(--text-muted);font-weight:500;">Quizizz</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom:1px solid var(--border);">
-                                <td style="padding:10px 16px;color:var(--text-muted);">Join friction</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--accent);font-weight:600;">Instant — no account</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">App download or account</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">Account required</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid var(--border);">
-                                <td style="padding:10px 16px;color:var(--text-muted);">Real-time scoring</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--accent);font-weight:600;">Millisecond accuracy</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">Yes</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">Yes</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid var(--border);">
-                                <td style="padding:10px 16px;color:var(--text-muted);">Question formats</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--accent);font-weight:600;">6 types</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">MCQ only</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">MCQ + T/F</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid var(--border);">
-                                <td style="padding:10px 16px;color:var(--text-muted);">Team mode</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--accent);font-weight:600;">Persistent teams</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">Per-session only</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">Per-session only</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid var(--border);">
-                                <td style="padding:10px 16px;color:var(--text-muted);">League / season</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--accent);font-weight:600;">Built-in</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">—</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">—</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:10px 16px;color:var(--text-muted);">CSV import</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--accent);font-weight:600;">Flexible mapping</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">—</td>
-                                <td style="padding:10px 16px;text-align:center;color:var(--text-muted);">Spreadsheet only</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="muted reveal" style="margin-top:1.2rem;font-size:0.82rem;text-align:center;">Free tier with pay-per-session — no annual subscription required.</p>
-            </div>
-        </section>
-
-        <!-- Launch CTA -->
-        <section class="project-section" style="text-align:center;">
-            <div class="container project-container">
-                <div class="action-row reveal" style="justify-content:center;">
-                    <a href="https://mubirueltonfelix1.github.io/brain_bolt_landing_page/" target="_blank" rel="noopener" class="btn btn-github">
-                        <i class="fas fa-play"></i> Launch BrainBolt
-                    </a>
-                    <a href="../" class="btn btn-back">
-                        <i class="fas fa-arrow-left"></i> Back to Projects
-                    </a>
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Your Next Quiz Night Is <span style="color:var(--accent);">Six Characters Away</span></h2>
+                <p class="reveal delay-1">Spin up your first live quiz today — it takes less than a minute, and the Spark plan is completely free. The last time we checked, there were <strong>247 active rooms</strong> running on the platform. Your turn.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mubirueltonfelix1.github.io/brain_bolt_landing_page/"><i class="fas fa-play"></i> Launch BrainBolt</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
                 </div>
             </div>
         </section>
     </main>
-
     <div id="site-footer"></div>
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>

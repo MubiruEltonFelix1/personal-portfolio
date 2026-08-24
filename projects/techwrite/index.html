@@ -1,150 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../assets/images/logo.png">
     <title>TechWrite | Mubiru Elton Felix</title>
-    <meta name="description" content="TechWrite — A tech article platform where students and lecturers write, share, and engage with technology content.">
-    <meta property="og:title" content="TechWrite — Campus Tech Articles">
-    <meta property="og:description" content="Write, upload, view, comment, and bookmark tech articles. Built for students and lecturers.">
+    <meta name="description" content="TechWrite lets students and lecturers publish tech articles, spark discussions, save reads, and get instant updates. Your campus tech voice, finally heard.">
+    <meta property="og:title" content="TechWrite — Where campus tech voices publish">
+    <meta property="og:description" content="TechWrite lets students and lecturers publish tech articles, spark discussions, save reads, and get instant updates. Your campus tech voice, finally heard.">
     <meta property="og:image" content="../../assets/images/logo.png">
     <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../../tokens.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="project.css">
     <style>
-        .project-hero { background: radial-gradient(circle at center, rgba(255,215,0,0.06), transparent 60%); }
-        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:24px; }
-        .tech-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.15); border-radius:20px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--accent); }
-        .link-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.5rem; }
-        .link-row .btn i { margin-right:6px; }
-        @media (max-width:600px) {
-            .feature-grid { grid-template-columns:1fr; }
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-
 <body data-root="../../">
     <div id="site-nav"></div>
-
-    <main class="project-page">
-        <!-- Hero -->
-        <section class="project-hero">
+    <main>
+        <section class="pd-hero">
             <div class="container">
-                <div class="hero-eyebrow reveal">// Campus Tech Publishing</div>
-                <h1 class="hero-title reveal">Tech<span class="accent">Write</span></h1>
-                <p class="hero-subtitle reveal">A tech article platform for students and lecturers — write, publish, comment, and curate technology content across campus.</p>
-                <div class="project-badges reveal delay-1">
-                    <span class="badge"><i class="fas fa-pen-fancy"></i> Write</span>
-                    <span class="badge"><i class="fas fa-bookmark"></i> Save</span>
-                    <span class="badge"><i class="fas fa-comments"></i> Comment</span>
-                    <span class="badge"><i class="fas fa-bell"></i> Notifications</span>
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-newspaper"></i> Content Platform</p>
+                <h1 class="pd-title reveal">Tech<span class="accent">Write</span></h1>
+                <p class="pd-pitch reveal">One shared home for campus tech writing — a living library built by students and lecturers, where ideas get published, discussed, and remembered.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-pen-fancy"></i> Write &amp; publish</span>
+                    <span class="pd-badge"><i class="fas fa-comments"></i> Discuss in comments</span>
+                    <span class="pd-badge"><i class="fas fa-bookmark"></i> Save for later</span>
+                    <span class="pd-badge"><i class="fas fa-bell"></i> Real-time updates</span>
                 </div>
-                <div class="link-row reveal delay-2">
-                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app"><i class="fas fa-external-link-alt"></i> Visit Site</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Overview -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Overview</h2>
-                <p class="muted reveal">TechWrite is a dedicated publishing platform where students and lecturers can write, upload, and share technology articles. Readers can view, comment, save articles for later reading, and receive notifications — creating a vibrant campus tech community.</p>
-                <p class="muted reveal delay-1" style="margin-top:0.8rem;">Built to bridge the gap between classroom learning and the broader tech conversation, TechWrite gives every campus voice a platform to share insights, tutorials, research, and opinions on technology.</p>
-            </div>
-        </section>
-
-        <!-- Branding: The Write Mark -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Brand Identity</h2>
-                <p class="muted reveal">TechWrite is branded around the idea of <strong>the write mark</strong> — a play on both <em>writing</em> and <em>right</em> — positioning the platform as the definitive place for campus tech thought leadership.</p>
-                <div class="feature-grid reveal delay-1" style="margin-top:1rem;">
-                    <div class="problem-card" style="text-align:center;">
-                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-feather-alt"></i></div>
-                        <h4>The Write Mark</h4>
-                        <p>Every article leaves a mark. TechWrite is where campus tech voices make theirs.</p>
-                    </div>
-                    <div class="problem-card" style="text-align:center;">
-                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-layer-group"></i></div>
-                        <h4>Tech Stack</h4>
-                        <p>React, TypeScript, Supabase, Tailwind CSS, Lovable Cloud</p>
-                    </div>
-                    <div class="problem-card" style="text-align:center;">
-                        <div class="problem-icon" style="margin:0 auto 10px;"><i class="fas fa-graduation-cap"></i></div>
-                        <h4>For Campus</h4>
-                        <p>Built by students, for students and lecturers — a living tech library.</p>
-                    </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app"><i class="fas fa-play"></i> Open TechWrite Live</a>
+                    <a class="btn btn-ghost" href="#how-it-works"><i class="fas fa-arrow-down"></i> See How It Works</a>
                 </div>
             </div>
         </section>
 
-        <!-- Core Features -->
-        <section class="project-section">
-            <div class="container project-container">
-                <h2 class="section-title reveal">Core Features</h2>
-                <div class="feature-grid reveal">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-pen-fancy"></i></div>
-                        <h4>Write & Publish</h4>
-                        <p>Rich text editor for writing tech articles with support for code blocks, images, and formatting.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-book-open"></i></div>
-                        <h4>Browse & Discover</h4>
-                        <p>Category-based browsing, search, and trending articles to help readers discover relevant tech content.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-comment-dots"></i></div>
-                        <h4>Comments & Discussion</h4>
-                        <p>Threaded comments on articles enabling discussion between authors and readers.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-bookmark"></i></div>
-                        <h4>Read Later</h4>
-                        <p>Save articles to a personal reading list for offline or later consumption.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-bell"></i></div>
-                        <h4>Notifications</h4>
-                        <p>Real-time notifications for new comments, replies, and articles from followed authors.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="fas fa-user-graduate"></i></div>
-                        <h4>Role-Based Access</h4>
-                        <p>Student and lecturer roles with appropriate permissions for publishing and moderation.</p>
-                    </div>
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Great campus tech knowledge kept disappearing</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">Picture a campus full of people figuring technology out at the same time. The best explanations happen in classrooms and group chats — and then they evaporate. Notes scatter across messaging apps, useful write-ups sit in documents nobody can find again, and when a junior student needs that same answer a semester later, it's simply gone.</p>
+                    <p class="reveal delay-2">Meanwhile, lecturers with years of hard-won insight had nowhere easy to share it beyond the lecture hall, and the big global tech blogs rarely speak to a campus reality students actually recognise. Every cohort ended up relearning what the one before it already knew.</p>
+                    <p class="reveal delay-3">What was missing was a single, welcoming place where campus voices could publish technology writing and build on each other's work. That's the gap TechWrite closes — and every article published there leaves what we call <strong>the write mark</strong>, a nod to both writing well and getting things right.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Links -->
-        <section class="project-section project-section-alt">
-            <div class="container project-container">
-                <div class="action-row reveal">
-                    <a href="https://mucosaweekly.lovable.app" target="_blank" rel="noopener" class="btn btn-github">
-                        <i class="fas fa-external-link-alt"></i> Visit TechWrite
-                    </a>
-                    <p class="muted" style="font-size:0.8rem;margin-top:0.5rem;width:100%;text-align:center;">Built with Lovable Cloud — source available on request</p>
-                    <a href="../" class="btn btn-back">
-                        <i class="fas fa-arrow-left"></i> Back to Projects
-                    </a>
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> Everything a campus writer and reader needs</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-pen-nib"></i><h4>Write without friction</h4><p>A friendly editor takes care of code blocks, images, and clean formatting, so your energy goes into the ideas — then hit publish when you're proud of it.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-compass"></i><h4>Find what matters fast</h4><p>Browse by category, search for topics, or check what's trending, so relevant tech content finds you instead of hiding from you.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-comments"></i><h4>Real discussion, on the page</h4><p>Threaded comments let readers and authors respond to each other directly under an article — questions asked, answers kept.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-bookmark"></i><h4>Your own reading list</h4><p>Save any article for later and build a personal library you can return to whenever you're ready, even offline.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-bell"></i><h4>Never miss a beat</h4><p>Get notified in real time when someone comments, replies to you, or publishes something new — including authors you follow.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-user-check"></i><h4>Everyone in their lane</h4><p>Student and lecturer accounts each carry the permissions that fit them — covering publishing and moderation — so the platform stays orderly.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From rough idea to living discussion</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Pick your role</h4><p>Sign in as a student or a lecturer. Each role comes with the abilities that suit it, from everyday writing to looking after the community.</p></div></div>
+                    <div class="pd-step reveal delay-1"><div><h4>Write your story</h4><p>Draft in an editor that happily handles code snippets, pictures, and neat formatting. Publish the moment it feels ready.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Reach your readers</h4><p>Your article joins a browsable campus library organised by category, with search and a trending shelf pointing people straight to the good stuff.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Keep the conversation alive</h4><p>Readers comment, reply, and save your piece. You hear about it the moment they do — instantly, not eventually.</p></div></div>
+                </div>
+                <div class="pd-chips reveal delay-3">
+                    <span class="pd-chip"><i class="fab fa-react"></i> React</span>
+                    <span class="pd-chip"><i class="fas fa-code"></i> TypeScript</span>
+                    <span class="pd-chip"><i class="fas fa-database"></i> Supabase</span>
+                    <span class="pd-chip"><i class="fas fa-wind"></i> Tailwind CSS</span>
+                    <span class="pd-chip"><i class="fas fa-cloud"></i> Lovable Cloud</span>
+                </div>
+                <p class="reveal delay-3" style="margin-top:1rem;font-size:0.82rem;color:var(--text-muted);max-width:68ch;">Want to look deeper? The full source code is available on request.</p>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Made for the whole campus conversation</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-user-graduate"></i> Students</span>
+                    <span class="pd-chip"><i class="fas fa-chalkboard-user"></i> Lecturers</span>
+                    <span class="pd-chip"><i class="fas fa-feather-pointed"></i> First-time writers</span>
+                    <span class="pd-chip"><i class="fas fa-book-open"></i> Curious readers</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Ready to leave your <span style="color:var(--accent);">write mark</span>?</h2>
+                <p class="reveal delay-1">Whether you're explaining a project you just finished or sharing something you learned this week, TechWrite gives your words a permanent home — and an audience that's genuinely listening.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://mucosaweekly.lovable.app"><i class="fas fa-play"></i> Visit TechWrite</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
                 </div>
             </div>
         </section>
     </main>
-
     <div id="site-footer"></div>
     <script src="../../assets/js/layout.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
-
 </html>
