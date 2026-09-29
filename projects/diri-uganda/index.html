@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>Diri Uganda | Mubiru Elton Felix</title>
+    <meta name="description" content="Diri is a digital safety training, assessment and certification platform built for Ugandan youth. Accessibility-first, WhatsApp and USSD reachable, with certificates anyone can verify. Winner of the Uganda Youth Internet Governance Forum hackathon.">
+    <meta property="og:title" content="Diri Uganda — Digital Safety Training, Assessment &amp; Certification">
+    <meta property="og:description" content="Accessibility-first digital safety training with a multilingual WhatsApp bot, USSD access, and publicly verifiable certificates. First place at the Uganda Youth Internet Governance Forum hackathon.">
+    <meta property="og:image" content="https://mubirueltonfelix.com/gallery/diri%20uganda/Screenshot%202026-09-29%20225729.png">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; height: auto; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-root="../../">
+    <div id="site-nav"></div>
+    <main>
+        <section class="pd-hero">
+            <div class="container">
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-shield-halved"></i> IGF Hackathon Winner &middot; Digital Safety &amp; Certification</p>
+                <h1 class="pd-title reveal"><span class="accent">Diri</span> Uganda</h1>
+                <p class="pd-pitch reveal">Diri puts digital safety training, assessment and certification into the hands of every young Ugandan &mdash; whether they have a data bundle, a smartphone, or a screen reader.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-trophy"></i> 1st Place &middot; Youth IGF Hackathon</span>
+                    <span class="pd-badge"><i class="fas fa-book-open"></i> 9 Lessons &middot; 5 Topics</span>
+                    <span class="pd-badge"><i class="fas fa-certificate"></i> Verifiable Certificates</span>
+                    <span class="pd-badge"><i class="fab fa-whatsapp"></i> WhatsApp + USSD Access</span>
+                    <span class="pd-badge"><i class="fas fa-universal-access"></i> Accessibility-First</span>
+                </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://diriuganda.online"><i class="fas fa-globe"></i> Visit Diri Uganda</a>
+                    <a class="btn btn-ghost" href="../../gallery/uganda-igf-2026/"><i class="fas fa-trophy"></i> The Hackathon Win</a>
+                </div>
+
+                <div class="pd-shot reveal delay-3">
+                    <div class="pd-shot-bar">
+                        <span></span><span></span><span></span>
+                        <em>diriuganda.online</em>
+                    </div>
+                    <img src="hero.webp" alt="Diri Uganda home page: Digital Safety Training, Assessment and Certification, with Access Learning, Request Training, Verify Certificate and Use DIRI on WhatsApp" loading="lazy" decoding="async" width="1400" height="528">
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> Digital Rights Talk, but Nobody Actually Listens</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">Internet governance decides how Uganda's digital world is run &mdash; who gets access, who is protected, who gets a say. But the conversation is written for policy experts. The language is dense, the material is buried in PDF documents, and the platforms carrying it never reach the people it was meant for.</p>
+                    <p class="reveal delay-1">So a nineteen-year-old in a rural district hears about cybersecurity once, in a school assembly, and never again. A young entrepreneur building their first app cannot find a plain-language answer about data rights. A young woman using the internet for the first time has never been told what online harassment is or where to report it.</p>
+                    <p class="reveal delay-2">The gap is not knowledge. It is access. The people who most need digital safety training are the least able to reach it &mdash; no smartphone, no data, no Wi-Fi, no accessible interface, no reason to trust another platform asking for their details.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> One Pathway, Four Ways In</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-route"></i><h4>Learn &rarr; Train &rarr; Assess &rarr; Certify &rarr; Verify</h4><p>A single pathway whether you learn independently or attend a physical session. The same learner account, the same certification route, one record that never splits.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-universal-access"></i><h4>Accessibility Built In, Not Bolted On</h4><p>A screen reader, adjustable font sizes and a high-contrast mode ship with the platform &mdash; so a learner with a visual impairment is not an afterthought in a digital safety programme.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fab fa-whatsapp"></i><h4>A Chatbot in the Chat They Already Use</h4><p>No app to install, no link to memorise. A multilingual WhatsApp bot brings the lessons to wherever young Ugandans already talk &mdash; and keeps answering in the language they asked in.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-mobile-alt"></i><h4>USSD for No-Smartphone, No-Data Users</h4><p>An embedded USSD simulator makes the content reachable on a feature phone without an internet connection. Nobody gets left out of the conversation just because they cannot afford data.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-certificate"></i><h4>Certificates Anyone Can Check</h4><p>Every issued certificate carries a unique number and a QR code, and any employer, university or funder can confirm its live status from the public verifier. Issued only after qualification and approval &mdash; never on payment alone.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-people-group"></i><h4>Training Where People Already Are</h4><p>Request a physical DIRI session at a workplace, school, university, NGO or community centre. Online and offline participation land in the same learner record.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> Five Steps From First Lesson to Verified Certificate</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Learn</h4><p>Create or activate one Diri account and work through practical digital safety content &mdash; online, at your own pace, in whichever language you prefer.</p></div></div>
+                    <div class="pd-step reveal delay-1"><div><h4>Train</h4><p>Continue independently, or request a Diri training session at a workplace, school, university, NGO or community group. Both routes count toward the same certification.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Assess</h4><p>Complete the required quizzes. Physical participation and online results are recorded against the same entry, so no one has to prove their learning twice.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Certify</h4><p>Qualifying learners are reviewed and approved before a Diri Digital Safety Certificate is issued. The certificate fee is UGX 50,000 &mdash; payment never guarantees approval.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Verify</h4><p>Enter the certificate number or scan its QR code to see its live status. If it is not in the Diri system, it is not a Diri certificate.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Anyone Who Should Have Been Taught This Years Ago</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-user-graduate"></i> Students &amp; Young People</span>
+                    <span class="pd-chip"><i class="fas fa-school"></i> Schools &amp; Universities</span>
+                    <span class="pd-chip"><i class="fas fa-briefcase"></i> Workplaces</span>
+                    <span class="pd-chip"><i class="fas fa-hand-holding-heart"></i> NGOs &amp; Community Groups</span>
+                    <span class="pd-chip"><i class="fas fa-scale-balanced"></i> Digital Rights Advocates</span>
+                    <span class="pd-chip"><i class="fas fa-user-shield"></i> Parents &amp; Guardians</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">Digital Safety Should Reach <span style="color:var(--accent);">Everyone</span></h2>
+                <p class="reveal delay-1">Diri is live now at <strong>diriuganda.online</strong> &mdash; start learning, request a training session, or verify a certificate. Built with <strong>React</strong> and <strong>Supabase</strong>, alongside partners including the <strong>Internet Society Uganda Chapter</strong>, Wota Creators, Tech Journal and St. Basil Palliative Home Care Promotion.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://diriuganda.online"><i class="fas fa-globe"></i> Open Diri Uganda</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

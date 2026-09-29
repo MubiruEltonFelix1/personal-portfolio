@@ -704,6 +704,152 @@
 		            background: rgba(255, 215, 0, 0.04);
 		            transform: translateY(-2px);
 		        }
+		        /* ═══ Upcoming Event Panel (homepage copy — each page owns its
+             own inline stylesheet, so this cannot come from gallery/) ═══ */
+		        .ev-upcoming-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+            background: var(--surface);
+            border: 1px solid rgba(255, 215, 0, 0.22);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: border-color 0.25s, transform 0.25s;
+		        }
+		        .ev-upcoming-card:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            transform: translateY(-3px);
+		        }
+		        .ev-upcoming-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 2rem 2rem 0;
+		        }
+		        .ev-panel {
+		            height: 100%;
+		            min-height: clamp(200px, 24vw, 290px);
+		            display: flex;
+		            flex-direction: column;
+		            align-items: center;
+		            justify-content: center;
+		            gap: 0.8rem;
+		            text-align: center;
+		            overflow: hidden;
+		            background:
+                radial-gradient(circle at 50% 128%, rgba(255, 215, 0, 0.2) 0%, transparent 62%),
+                repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 14px),
+                linear-gradient(160deg, #151515 0%, #0d0d0d 55%, #080808 100%);
+		        }
+		        .ev-panel-glyph {
+		            font-size: 3rem;
+		            line-height: 1;
+		            color: var(--accent);
+		            opacity: 0.22;
+		            transition: opacity 0.3s ease;
+		        }
+		        .ev-upcoming-card:hover .ev-panel-glyph { opacity: 0.36; }
+		        .ev-panel-chip {
+		            display: inline-flex;
+		            align-items: center;
+		            gap: 0.5rem;
+		            font-family: 'IBM Plex Mono', monospace;
+		            font-size: 0.6rem;
+		            font-weight: 600;
+		            letter-spacing: 0.18em;
+		            text-transform: uppercase;
+		            color: var(--accent);
+		            background: rgba(255, 215, 0, 0.07);
+		            border: 1px solid rgba(255, 215, 0, 0.25);
+		            border-radius: 20px;
+		            padding: 0.35rem 0.9rem;
+		        }
+		        /* Solid gold base, so animation:none under reduced-motion can never
+           freeze the dot invisible. The keyframe only pulses the halo. */
+		        .ev-panel-dot {
+		            width: 6px;
+		            height: 6px;
+		            border-radius: 50%;
+		            background: var(--accent);
+		            animation: evComingPulse 2s ease-in-out infinite;
+		        }
+		        .ev-panel-when {
+		            font-family: 'IBM Plex Mono', monospace;
+		            font-size: 0.7rem;
+		            letter-spacing: 0.12em;
+		            color: var(--text-muted);
+		        }
+		        @keyframes evComingPulse {
+		            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.45); }
+		            50%      { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0); }
+		        }
+		        @media (prefers-reduced-motion: reduce) {
+		            .ev-panel-dot { animation: none; }
+		        }
+
+		        /* ═══ Secondary Event Card (previous featured event, demoted) ═══ */
+		        .ev-secondary {
+		            display: grid;
+		            grid-template-columns: clamp(120px, 20vw, 200px) 1fr;
+		            gap: 1.5rem;
+		            align-items: stretch;
+		            background: var(--surface);
+		            border: 1px solid var(--border);
+		            border-radius: var(--radius);
+		            overflow: hidden;
+		            transition: border-color 0.25s, transform 0.25s;
+		        }
+		        .ev-secondary:hover {
+		            border-color: rgba(255, 215, 0, 0.25);
+		            transform: translateY(-3px);
+		        }
+		        .ev-secondary-media { height: 100%; min-height: 120px; overflow: hidden; }
+		        .ev-secondary-media img {
+		            width: 100%;
+		            height: 100%;
+		            object-fit: cover;
+		            object-position: 50% 0%;
+		            display: block;
+		        }
+		        .ev-secondary-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1.2rem 1.5rem 1.2rem 0;
+        }
+		        .ev-secondary-label {
+		            display: flex;
+		            align-items: center;
+		            gap: 6px;
+		            font-family: 'IBM Plex Mono', monospace;
+		            font-size: 0.58rem;
+		            letter-spacing: 0.14em;
+		            text-transform: uppercase;
+		            color: var(--accent);
+		            margin-bottom: 0.4rem;
+		        }
+		        .ev-secondary-body h3 {
+		            font-family: 'Orbitron', monospace;
+		            font-size: clamp(0.92rem, 2vw, 1.1rem);
+		            font-weight: 700;
+		            color: var(--text);
+		            margin-bottom: 0.35rem;
+		        }
+		        .ev-secondary-body p {
+		            font-size: 0.8rem;
+		            color: rgba(201, 201, 201, 0.7);
+		            line-height: 1.55;
+		            margin-bottom: 0.7rem;
+		        }
+		        @media (max-width: 700px) {
+		            .ev-upcoming-card { grid-template-columns: 1fr; gap: 1.5rem; }
+		            .ev-upcoming-body { padding: 0 1.3rem 1.4rem; }
+		            .ev-secondary { grid-template-columns: 1fr; }
+		            .ev-secondary-media { min-height: 150px; }
+		            .ev-secondary-body { padding: 0 1.2rem 1.2rem; }
+		        }
+
 		        @media (max-width: 600px) {
 		            .home-article-grid { grid-template-columns: 1fr; }
 		            .home-article-media { height: 170px; }
@@ -766,7 +912,7 @@
         <section class="stats-strip reveal">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-number">12+</div>
+                    <div class="stat-number">15+</div>
                     <div class="stat-label">Projects</div>
                 </div>
                 <div class="stat-item">
@@ -784,34 +930,68 @@
             </div>
         </section>
 
-        <!-- ─── Featured Event: Youth IGF 2026 ─── -->
+        <!-- ─── Featured Event: DevFest Mbarara 2026 (upcoming) ─── -->
         <section class="section" style="padding:3rem 0 1.5rem;">
             <div class="container">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
                     <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;">
-                        <i class="fas fa-trophy" style="margin-right:6px;"></i> Featured Event
+                        <i class="fas fa-bolt" style="margin-right:6px;"></i> Coming Up
                     </span>
                     <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);"></span>
+                    <a href="gallery/" style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-decoration:none;letter-spacing:0.06em;transition:opacity 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        All Events <i class="fas fa-arrow-right" style="margin-left:4px;font-size:0.5rem;"></i>
+                    </a>
                 </div>
 
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-                    <div style="height:clamp(180px,22vw,280px);overflow:hidden;">
-                        <img src="events/Internet Governance Week 2026/IGF2.jpg" alt="Uganda Internet Governance Week 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 0%;display:block;transition:transform 0.4s;">
+                <!-- Primary: DevFest Mbarara 2026 -->
+                <div class="ev-upcoming-card">
+                    <div class="ev-panel">
+                        <i class="fas fa-bolt ev-panel-glyph"></i>
+                        <span class="ev-panel-chip"><span class="ev-panel-dot"></span>Coming Up</span>
+                        <span class="ev-panel-when">Oct 23&ndash;24 &middot; Mbarara, Uganda</span>
                     </div>
-                    <div style="padding:1.5rem 1.5rem 1.5rem 0;">
-                        <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:var(--text);margin-bottom:0.3rem;">Uganda Internet Governance Week 2026</h2>
-                        <p style="font-size:0.8rem;color:rgba(201,201,201,0.7);line-height:1.55;margin-bottom:0.3rem;">
-                            My team won the Youth IGF hackathon with <strong style="color:var(--accent);">Diri</strong> — a digital rights platform with accessibility tools, a WhatsApp chatbot, and a USSD simulator — then showcased it at the national forum.
+                    <div class="ev-upcoming-body">
+                        <p style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.5rem;">
+                            <i class="fas fa-microphone-lines" style="margin-right:6px;"></i> My First Conference Talk
                         </p>
-                        <p style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.8rem;font-family:'IBM Plex Mono',monospace;">
-                            Internet Society Uganda Chapter &middot; National ICT Innovation Hub &middot; Jul 30, 2026
+                        <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1.15rem,3vw,1.6rem);font-weight:900;color:var(--text);margin-bottom:0.6rem;letter-spacing:-0.02em;">DevFest Mbarara 2026</h2>
+                        <p style="font-size:0.95rem;color:var(--text);line-height:1.5;margin-bottom:0.6rem;font-weight:500;">
+                            Edge AI on Android: Running Local Gemini Nano &amp; Gemma Models with LiteRT
+                        </p>
+                        <p style="font-size:0.8rem;color:rgba(201,201,201,0.7);line-height:1.55;margin-bottom:0.5rem;">
+                            My first time on a conference stage &mdash; talking about running AI models entirely on-device. No round trip to a server, no data leaving the phone, and inference fast enough to feel instant.
+                        </p>
+                        <p style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.9rem;font-family:'IBM Plex Mono',monospace;">
+                            GDG Cloud Mbarara &middot; Mbarara, Uganda &middot; Oct 23&ndash;24, 2026
                         </p>
                         <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-                            <a href="gallery/uganda-igf-2026/" class="btn btn-primary" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
-                                <i class="fas fa-arrow-right"></i> Full Details
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=DevFest%20Mbarara%202026&amp;dates=20261023T000000Z%2F20261024T235900Z&amp;details=Edge%20AI%20on%20Android%3A%20Running%20Local%20Gemini%20Nano%20%26%20Gemma%20Models%20with%20LiteRT.%20My%20first%20time%20speaking%20at%20DevFest%20Mbarara%202026.%20Organised%20by%20GDG%20Cloud%20Mbarara.&amp;location=Mbarara%2C%20Uganda" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
+                                <i class="fas fa-calendar-plus"></i> Add to Calendar
                             </a>
                             <a href="gallery/" class="btn btn-ghost" style="padding:0.45rem 1.1rem;font-size:0.7rem;">
                                 <i class="fas fa-calendar"></i> View Events
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary: the IGF win, demoted below the upcoming talk -->
+                <div class="ev-secondary" style="margin-top:1.2rem;">
+                    <div class="ev-secondary-media">
+                        <img src="events/Internet Governance Week 2026/IGF2.jpg" alt="Uganda Internet Governance Week 2026 group photo" loading="lazy">
+                    </div>
+                    <div class="ev-secondary-body">
+                        <div class="ev-secondary-label"><i class="fas fa-trophy" style="margin-right:5px;"></i> Recent Win</div>
+                        <h3>Uganda Internet Governance Week 2026</h3>
+                        <p>
+                            My team won the Youth IGF hackathon with <strong style="color:var(--accent);">Diri</strong> &mdash; a digital rights platform with accessibility tools, a WhatsApp chatbot, and a USSD simulator &mdash; then showcased it at the national forum.
+                        </p>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                            <a href="gallery/uganda-igf-2026/" class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.68rem;">
+                                <i class="fas fa-arrow-right"></i> Full Details
+                            </a>
+                            <a href="projects/diri-uganda/" class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.68rem;">
+                                <i class="fas fa-shield-halved"></i> The Diri Project
                             </a>
                         </div>
                     </div>

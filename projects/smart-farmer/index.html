@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <title>SmartFarmer | Mubiru Elton Felix</title>
+    <meta name="description" content="SmartFarmer turns a photo of your crop into actionable farming intelligence. Point your camera at a leaf, get a crop disease diagnosis with a confidence score, a severity read, and the next steps to take.">
+    <meta property="og:title" content="SmartFarmer — Turn a Photo of Your Crop into Actionable Farming Intelligence">
+    <meta property="og:description" content="AI-powered crop disease detection for African farmers. Identify diseases from leaf images, see a confidence score and severity, and get practical recommendations.">
+    <meta property="og:image" content="https://mubirueltonfelix.com/gallery/smart%20farmer/Screenshot%202026-09-29%20230307.png">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* ═══ Project Detail Template (canonical) ═══ */
+        .pd-hero { position: relative; padding: 3.5rem 0 4rem; overflow: hidden; }
+        .pd-hero::before {
+            content: ''; position: absolute;
+            top: -220px; right: -180px;
+            width: 560px; height: 560px;
+            background: radial-gradient(circle, rgba(255,215,0,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text-muted);
+            text-decoration: none; margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .pd-back:hover { color: var(--accent); }
+        .pd-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+        .pd-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; color: var(--text);
+            letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .pd-title .accent { color: var(--accent); }
+        .pd-pitch {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text); line-height: 1.6;
+            max-width: 58ch; margin-bottom: 1.4rem;
+        }
+        .pd-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
+        .pd-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 14px;
+        }
+        .pd-badge i { color: var(--accent); font-size: 0.75rem; }
+        .pd-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+        .pd-shot {
+            max-width: 900px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+        }
+        .pd-shot-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        .pd-shot-bar span { width: 9px; height: 9px; border-radius: 50%; }
+        .pd-shot-bar span:nth-child(1) { background: #ff5f56; }
+        .pd-shot-bar span:nth-child(2) { background: #ffbd2e; }
+        .pd-shot-bar span:nth-child(3) { background: #27c93f; }
+        .pd-shot-bar em {
+            margin-left: auto; font-style: normal;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem; color: var(--text-muted); opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+        .pd-shot img { width: 100%; height: auto; display: block; }
+        .pd-band { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+        .pd-alt { background: var(--surface-soft); }
+        .pd-band h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 700; color: var(--accent);
+            margin-bottom: 1.1rem; letter-spacing: -0.01em;
+        }
+        .pd-band h2 .kicker {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .pd-prose p {
+            font-size: 0.98rem; color: var(--text-muted);
+            line-height: 1.75; margin-bottom: 0.9rem; max-width: 68ch;
+        }
+        .pd-prose strong { color: var(--text); }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px; margin-top: 1.6rem;
+        }
+        .pd-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.3rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pd-card:hover { border-color: rgba(255,215,0,0.35); transform: translateY(-3px); }
+        .pd-card i { font-size: 1.25rem; color: var(--accent); margin-bottom: 12px; display: block; }
+        .pd-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .pd-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-steps { counter-reset: step; margin-top: 1.6rem; display: grid; gap: 12px; }
+        .pd-step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+        .pd-step::before {
+            counter-increment: step;
+            content: '0' counter(step);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900; font-size: 1.3rem;
+            color: var(--accent); opacity: 0.85;
+            line-height: 1.2; flex-shrink: 0;
+        }
+        .pd-step h4 { font-size: 0.92rem; color: var(--text); margin-bottom: 3px; }
+        .pd-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+        .pd-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; padding: 7px 16px;
+        }
+        .pd-chip i { color: var(--accent); margin-right: 6px; }
+        .pd-cta-final {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-cta-final::before {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -260px; transform: translateX(-50%);
+            width: 640px; height: 480px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .pd-cta-final h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 900; color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .pd-cta-final p {
+            color: var(--text-muted); font-size: 0.95rem;
+            max-width: 52ch; margin: 0 auto 1.8rem; line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .pd-hero { padding: 2.5rem 0 3rem; }
+            .pd-band { padding: 2.5rem 0; }
+            .pd-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-root="../../">
+    <div id="site-nav"></div>
+    <main>
+        <section class="pd-hero">
+            <div class="container">
+                <a class="pd-back reveal" href="../"><i class="fas fa-arrow-left"></i> All Projects</a>
+                <p class="pd-eyebrow reveal"><i class="fas fa-seedling"></i> AI for African Farmers &middot; Crop Disease Detection</p>
+                <h1 class="pd-title reveal"><span class="accent">Smart</span>Farmer</h1>
+                <p class="pd-pitch reveal">Turn a photo of your crop into actionable farming intelligence. Point your camera at a leaf, and SmartFarmer tells you what is wrong, how badly, and what to do about it next.</p>
+                <div class="pd-badges reveal delay-1">
+                    <span class="pd-badge"><i class="fas fa-camera"></i> Leaf-Image Diagnosis</span>
+                    <span class="pd-badge"><i class="fas fa-percent"></i> Confidence Score</span>
+                    <span class="pd-badge"><i class="fas fa-gauge-high"></i> Severity Assessment</span>
+                    <span class="pd-badge"><i class="fas fa-brain"></i> TensorFlow + MobileNet</span>
+                    <span class="pd-badge"><i class="fas fa-users"></i> Built for African Farmers</span>
+                </div>
+                <div class="pd-ctas reveal delay-2">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://smart-farmer-blond-seven.vercel.app/"><i class="fas fa-play"></i> Try Crop Diagnosis</a>
+                    <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://smart-farmer-blond-seven.vercel.app/"><i class="fas fa-book"></i> See How It Works</a>
+                </div>
+
+                <div class="pd-shot reveal delay-3">
+                    <div class="pd-shot-bar">
+                        <span></span><span></span><span></span>
+                        <em>smartfarmer &mdash; live diagnosis</em>
+                    </div>
+                    <img src="hero.webp" alt="SmartFarmer analysing a cassava leaf and reporting Cassava Mosaic Disease at 94 percent confidence, moderate severity, with recommended next steps" loading="lazy" decoding="async" width="1400" height="611">
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band pd-alt">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Problem</span> The Disease Is on the Leaf. The Answer Is Not.</h2>
+                <div class="pd-prose">
+                    <p class="reveal delay-1">A cassava plant can be dying from a disease the farmer has never heard of, and the first visible sign is a pattern on a single leaf. Plant disease does not wait for a clinic to open, and it does not announce itself. A farmer who cannot name what is attacking the crop cannot treat it, and a farmer who cannot treat it loses the harvest.</p>
+                    <p class="reveal delay-1">The people who know are rarely the people who need to know. A district agricultural officer covers hundreds of farmers across enormous distances, and a lab diagnosis takes days and costs money that most smallholders do not have. Meanwhile the extension advice that does exist is written in technical language, arrives too late in the season, and assumes a smartphone and a data bundle.</p>
+                    <p class="reveal delay-2">So the diagnosis gap is not a knowledge gap. It is a distance gap &mdash; between the diseased leaf and the person who would recognise it. SmartFarmer was built to close exactly that distance, in the time it takes to point a camera.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// The Payoff</span> A Decision, Not Just a Label</h2>
+                <div class="pd-grid">
+                    <div class="pd-card reveal delay-1"><i class="fas fa-camera"></i><h4>Snap the Leaf</h4><p>One photo of the affected leaf is enough. No forms, no account setup, no description to write &mdash; the crop is already in the frame.</p></div>
+                    <div class="pd-card reveal delay-1"><i class="fas fa-bullseye"></i><h4>A Diagnosis With a Confidence Score</h4><p>A convolutional image classifier built in TensorFlow on a MobileNet backbone returns the disease and how sure it is &mdash; 94% confidence on Cassava Mosaic Disease, for example. A number you can reason about beats a bare verdict.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-gauge-high"></i><h4>Severity, Not Just Disease</h4><p>Knowing what the disease is only gets you halfway. SmartFarmer also grades how bad it is &mdash; reads like &ldquo;generally affected, moderate severity&rdquo; &mdash; so the farmer knows whether to act this week or this season.</p></div>
+                    <div class="pd-card reveal delay-2"><i class="fas fa-list-check"></i><h4>Recommended Next Steps</h4><p>The diagnosis comes with what to do about it, ranked and concrete: remove severely affected leaves, isolate the plant, treat, replant. The output is an action, not an anxiety.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-seedling"></i><h4>Practical Recommendations, Plainly Stated</h4><p>Protect the crop, improve productivity, make the next planting decision with better information. Recommendations written for a farmer to act on, not for an agronomist to admire.</p></div>
+                    <div class="pd-card reveal delay-3"><i class="fas fa-wifi"></i><h4>Built for the Reality on the Ground</h4><p>Designed for African farmers first &mdash; a leaf in harsh daylight, a phone with modest specs, a user who wants an answer, not a dashboard. The interface stays out of the way of the answer.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band pd-alt" id="how-it-works">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// How It Works</span> From Leaf to Decision in Four Moves</h2>
+                <div class="pd-steps">
+                    <div class="pd-step reveal delay-1"><div><h4>Capture</h4><p>Frame the affected leaf and take the photo. Keep the leaf flat and fill the frame &mdash; that is the whole of the input.</p></div></div>
+                    <div class="pd-step reveal delay-1"><div><h4>Analyse</h4><p>The image goes to a convolutional image classifier trained in TensorFlow on a MobileNet backbone, which returns its ranked predictions over crop diseases.</p></div></div>
+                    <div class="pd-step reveal delay-2"><div><h4>Diagnose</h4><p>You get the disease, the confidence behind it, and how severe the damage looks &mdash; the full read, not just the name.</p></div></div>
+                    <div class="pd-step reveal delay-3"><div><h4>Act</h4><p>Recommended next steps follow immediately: what to remove, what to isolate, what to treat. Take the action and the season is still yours.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-band">
+            <div class="container">
+                <h2 class="reveal"><span class="kicker">// Who It's For</span> Anyone Who Grows Something and Cannot Afford to Guess</h2>
+                <div class="pd-chips reveal delay-1">
+                    <span class="pd-chip"><i class="fas fa-tractor"></i> Smallholder Farmers</span>
+                    <span class="pd-chip"><i class="fas fa-people-group"></i> Cooperatives &amp; Farmer Groups</span>
+                    <span class="pd-chip"><i class="fas fa-user-tie"></i> Agricultural Extension Officers</span>
+                    <span class="pd-chip"><i class="fas fa-flask"></i> Plant Pathology Students</span>
+                    <span class="pd-chip"><i class="fas fa-hand-holding-heart"></i> NGOs &amp; Extension Services</span>
+                    <span class="pd-chip"><i class="fas fa-rocket"></i> AgriTech Builders</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pd-cta-final">
+            <div class="container">
+                <h2 class="reveal">One Photo Between a Farmer and <span style="color:var(--accent);">an Answer</span></h2>
+                <p class="reveal delay-1">SmartFarmer is live. Open it, try it on a leaf, and see what a confidence score and a severity grade actually feel like when the season is on the line. Built with <strong>TensorFlow</strong> and a <strong>MobileNet</strong> image classifier.</p>
+                <div class="pd-ctas reveal delay-2" style="justify-content:center;margin-bottom:0;">
+                    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://smart-farmer-blond-seven.vercel.app/"><i class="fas fa-play"></i> Try Crop Diagnosis</a>
+                    <a class="btn btn-ghost" href="../"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>
