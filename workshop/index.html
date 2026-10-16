@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Git & GitHub Workshop | Mubiru Elton Felix</title>
+    <meta name="description" content="A practical Git and GitHub workshop guide covering installation, everyday commands, collaboration workflows, branches, and the GitHub Student Developer Pack.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Git & GitHub Workshop — Practical Field Guide">
+    <meta property="og:description" content="Install Git, ship your first repository, collaborate safely, and unlock the GitHub Student Developer Pack.">
+    <link rel="icon" type="image/png" href="../assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="workshop.css">
+</head>
+<body data-root="../">
+    <div id="site-nav"></div>
+
+    <main>
+        <section class="workshop-hero" aria-labelledby="workshop-title">
+            <div class="container workshop-hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow"><span class="eyebrow-dot"></span> MUST · Git & GitHub Workshop</p>
+                    <h1 id="workshop-title">From first <span>commit</span> to confident collaboration.</h1>
+                    <p class="hero-intro">A practical field guide for installing Git, building a repository, contributing to someone else’s project, and finding your next developer advantage.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#start-here">Start the workshop <span aria-hidden="true">↓</span></a>
+                        <button class="btn btn-ghost" type="button" data-copy-link>Copy workshop link</button>
+                    </div>
+                    <div class="hero-meta"><span><strong>01</strong> install</span><span><strong>02</strong> practise</span><span><strong>03</strong> collaborate</span></div>
+                </div>
+                <div class="terminal-card" aria-label="Example Git workflow">
+                    <div class="terminal-bar"><span></span><span></span><span></span><small>workshop / terminal</small></div>
+                    <pre><code><i>$</i> git init
+<i>$</i> git add .
+<i>$</i> git commit -m <b>"Build something useful"</b>
+<i>$</i> git branch -M main
+<i>$</i> git remote add origin &lt;repo-url&gt;
+<i>$</i> git push -u origin main
+
+<span class="terminal-success">✓ Your work is now online.</span></code></pre>
+                </div>
+            </div>
+        </section>
+
+        <div class="container workshop-layout">
+            <aside class="workshop-sidebar" aria-label="Workshop sections">
+                <div class="sidebar-inner">
+                    <p class="sidebar-label">On this page</p>
+                    <nav class="toc">
+                        <a class="is-active" href="#start-here">Start here <span>01</span></a>
+                        <a href="#first-repo">Your first repo <span>02</span></a>
+                        <a href="#cheatsheet">Cheatsheet <span>03</span></a>
+                        <a href="#contribute">Contribute <span>04</span></a>
+                        <a href="#branches">Branches <span>05</span></a>
+                        <a href="#student-pack">Student Pack <span>06</span></a>
+                    </nav>
+                    <div class="quick-note"><span class="note-icon">↗</span><p>Keep this page open while you practise. Every command is safe to copy and adapt.</p></div>
+                </div>
+            </aside>
+
+            <div class="workshop-content">
+                <section id="start-here" class="workshop-section intro-section">
+                    <div class="section-kicker">01 / Start here</div>
+                    <h2>Install once. Build everywhere.</h2>
+                    <p class="section-lead">Git is the version control tool on your computer. GitHub is the online home where repositories can be shared, reviewed, and improved together.</p>
+                    <div class="resource-grid">
+                        <article class="resource-card"><div class="resource-icon">⌘</div><div><h3>Install Git</h3><p>Download Git for Windows, macOS, or Linux from the official source.</p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Open git-scm.com/downloads ↗</a></div></article>
+                        <article class="resource-card"><div class="resource-icon">◉</div><div><h3>Create a GitHub account</h3><p>Use an email you can access and turn on two-factor authentication when possible.</p><a href="https://github.com/signup" target="_blank" rel="noopener">Create your account ↗</a></div></article>
+                        <article class="resource-card"><div class="resource-icon">▣</div><div><h3>Optional: GitHub Desktop</h3><p>A visual client for learners who want a gentle start before the terminal.</p><a href="https://desktop.github.com/" target="_blank" rel="noopener">Download Desktop ↗</a></div></article>
+                    </div>
+                    <div class="callout"><strong>Check your installation</strong><div class="code-line"><code>git --version</code><button class="copy-btn" data-copy="git --version" aria-label="Copy git version command">Copy</button></div><p>You should see an installed Git version, such as <code>git version 2.x.x</code>.</p></div>
+                </section>
+
+                <section id="first-repo" class="workshop-section">
+                    <div class="section-kicker">02 / Your first repository</div>
+                    <h2>The first-time workflow</h2>
+                    <p class="section-lead">A repository is your project plus its history. Run these steps in your project folder. Replace anything inside <code>&lt;angle brackets&gt;</code> with your own value.</p>
+                    <div class="step-list">
+                        <article class="step-card"><span class="step-number">01</span><div><h3>Configure your identity <span class="first-time">first time only</span></h3><p>Git records this name and email on your commits.</p><div class="code-stack"><div><code>git config --global user.name "Your Name"</code><button class="copy-btn" data-copy='git config --global user.name "Your Name"'>Copy</button></div><div><code>git config --global user.email "you@example.com"</code><button class="copy-btn" data-copy='git config --global user.email "you@example.com"'>Copy</button></div></div></div></article>
+                        <article class="step-card"><span class="step-number">02</span><div><h3>Start tracking the folder</h3><p>Open a terminal inside your project, then create a local repository.</p><div class="code-line"><code>git init</code><button class="copy-btn" data-copy="git init">Copy</button></div></div></article>
+                        <article class="step-card"><span class="step-number">03</span><div><h3>Stage your changes</h3><p>Stage everything in the current folder, or name individual files for more control.</p><div class="code-line"><code>git add .</code><button class="copy-btn" data-copy="git add .">Copy</button></div></div></article>
+                        <article class="step-card"><span class="step-number">04</span><div><h3>Save a checkpoint</h3><p>Write a short, clear message describing what changed.</p><div class="code-line"><code>git commit -m "Add project starter"</code><button class="copy-btn" data-copy='git commit -m "Add project starter"'>Copy</button></div></div></article>
+                        <article class="step-card"><span class="step-number">05</span><div><h3>Connect and publish</h3><p>Create an empty repository on GitHub, then connect it to your local project.</p><div class="code-stack"><div><code>git branch -M main</code><button class="copy-btn" data-copy="git branch -M main">Copy</button></div><div><code>git remote add origin https://github.com/USERNAME/REPO.git</code><button class="copy-btn" data-copy="git remote add origin https://github.com/USERNAME/REPO.git">Copy</button></div><div><code>git push -u origin main</code><button class="copy-btn" data-copy="git push -u origin main">Copy</button></div></div></div></article>
+                    </div>
+                    <div class="tip-row"><strong>Remember:</strong> <span>Working tree → staging area → commit → remote repository.</span></div>
+                </section>
+
+                <section id="cheatsheet" class="workshop-section">
+                    <div class="section-kicker">03 / Git cheatsheet</div>
+                    <div class="section-heading-row"><div><h2>Find the command you need.</h2><p class="section-lead">Popular commands first, then the tools you reach for as your confidence grows.</p></div><label class="command-search"><span aria-hidden="true">⌕</span><input type="search" id="command-search" placeholder="Search commands…" aria-label="Search Git commands"></label></div>
+                    <div class="command-group"><h3 class="group-title">The everyday essentials</h3><div class="command-grid">
+                        <article class="command-card" data-command="git status"><code>git status</code><p>See changed, staged, and untracked files.</p><button class="copy-icon" data-copy="git status" aria-label="Copy git status">⧉</button></article>
+                        <article class="command-card" data-command="git add ."><code>git add .</code><p>Stage all changes in this folder.</p><button class="copy-icon" data-copy="git add ." aria-label="Copy git add">⧉</button></article>
+                        <article class="command-card" data-command="git commit -m"><code>git commit -m "message"</code><p>Save staged changes as a checkpoint.</p><button class="copy-icon" data-copy='git commit -m "message"' aria-label="Copy git commit">⧉</button></article>
+                        <article class="command-card" data-command="git push"><code>git push</code><p>Send local commits to GitHub.</p><button class="copy-icon" data-copy="git push" aria-label="Copy git push">⧉</button></article>
+                        <article class="command-card" data-command="git pull"><code>git pull</code><p>Fetch and merge remote changes.</p><button class="copy-icon" data-copy="git pull" aria-label="Copy git pull">⧉</button></article>
+                        <article class="command-card" data-command="git clone"><code>git clone &lt;url&gt;</code><p>Copy a remote repository to your computer.</p><button class="copy-icon" data-copy="git clone <url>" aria-label="Copy git clone">⧉</button></article>
+                        <article class="command-card" data-command="git log"><code>git log --oneline</code><p>Read a compact commit history.</p><button class="copy-icon" data-copy="git log --oneline" aria-label="Copy git log">⧉</button></article>
+                        <article class="command-card" data-command="git diff"><code>git diff</code><p>Review unstaged changes before committing.</p><button class="copy-icon" data-copy="git diff" aria-label="Copy git diff">⧉</button></article>
+                    </div></div>
+                    <div class="command-group"><h3 class="group-title">Repositories & remotes</h3><div class="command-table"><div><code>git init</code><span>Create a new local repository.</span><button class="copy-icon" data-copy="git init" aria-label="Copy command">⧉</button></div><div><code>git remote -v</code><span>List remote URLs.</span><button class="copy-icon" data-copy="git remote -v" aria-label="Copy command">⧉</button></div><div><code>git remote add origin &lt;url&gt;</code><span>Add a remote named origin.</span><button class="copy-icon" data-copy="git remote add origin <url>" aria-label="Copy command">⧉</button></div><div><code>git remote set-url origin &lt;url&gt;</code><span>Change a remote URL.</span><button class="copy-icon" data-copy="git remote set-url origin <url>" aria-label="Copy command">⧉</button></div><div><code>git fetch</code><span>Download remote updates without merging.</span><button class="copy-icon" data-copy="git fetch" aria-label="Copy command">⧉</button></div><div><code>git show &lt;commit&gt;</code><span>Inspect one commit.</span><button class="copy-icon" data-copy="git show <commit>" aria-label="Copy command">⧉</button></div></div></div>
+                    <div class="command-group"><h3 class="group-title">Branches & collaboration</h3><div class="command-table"><div><code>git branch</code><span>List local branches.</span><button class="copy-icon" data-copy="git branch" aria-label="Copy command">⧉</button></div><div><code>git switch -c &lt;name&gt;</code><span>Create and switch to a branch.</span><button class="copy-icon" data-copy="git switch -c <name>" aria-label="Copy command">⧉</button></div><div><code>git switch &lt;name&gt;</code><span>Move to another branch.</span><button class="copy-icon" data-copy="git switch <name>" aria-label="Copy command">⧉</button></div><div><code>git merge &lt;name&gt;</code><span>Merge a branch into the current branch.</span><button class="copy-icon" data-copy="git merge <name>" aria-label="Copy command">⧉</button></div><div><code>git branch -d &lt;name&gt;</code><span>Delete a merged local branch.</span><button class="copy-icon" data-copy="git branch -d <name>" aria-label="Copy command">⧉</button></div><div><code>git push -u origin &lt;name&gt;</code><span>Publish a new branch.</span><button class="copy-icon" data-copy="git push -u origin <name>" aria-label="Copy command">⧉</button></div></div></div>
+                    <div class="command-group"><h3 class="group-title">Undo carefully</h3><div class="command-table"><div><code>git restore &lt;file&gt;</code><span>Discard unstaged changes in a file.</span><button class="copy-icon" data-copy="git restore <file>" aria-label="Copy command">⧉</button></div><div><code>git restore --staged &lt;file&gt;</code><span>Unstage a file but keep its edits.</span><button class="copy-icon" data-copy="git restore --staged <file>" aria-label="Copy command">⧉</button></div><div><code>git commit --amend</code><span>Update the latest commit.</span><button class="copy-icon" data-copy="git commit --amend" aria-label="Copy command">⧉</button></div><div><code>git revert &lt;commit&gt;</code><span>Create a new commit that undoes an earlier one.</span><button class="copy-icon" data-copy="git revert <commit>" aria-label="Copy command">⧉</button></div><div><code>git stash</code><span>Temporarily shelve uncommitted changes.</span><button class="copy-icon" data-copy="git stash" aria-label="Copy command">⧉</button></div><div><code>git stash pop</code><span>Restore the latest stashed changes.</span><button class="copy-icon" data-copy="git stash pop" aria-label="Copy command">⧉</button></div></div></div>
+                    <p class="no-results" hidden>No matching command. Try <code>push</code>, <code>branch</code>, or <code>undo</code>.</p>
+                </section>
+
+                <section id="contribute" class="workshop-section">
+                    <div class="section-kicker">04 / Contribute</div><h2>Four ways to join an existing project.</h2><p class="section-lead">Choose the route that matches your access. The goal is the same: make a focused change, explain it clearly, and let the project owner review it.</p>
+                    <div class="contribution-tabs" role="tablist" aria-label="Contribution methods"><button class="contribution-tab is-active" role="tab" aria-selected="true" data-tab="clone">Clone</button><button class="contribution-tab" role="tab" aria-selected="false" data-tab="pull">Pull & push</button><button class="contribution-tab" role="tab" aria-selected="false" data-tab="fork">Fork</button><button class="contribution-tab" role="tab" aria-selected="false" data-tab="download">Download</button></div>
+                    <div class="contribution-panel is-active" data-panel="clone"><div class="panel-heading"><span class="method-number">01</span><div><h3>Clone a repository</h3><p>Best when you have permission to contribute directly or you are studying a project locally.</p></div></div><ol class="walkthrough"><li>Copy the repository URL from GitHub.</li><li>Run <code>git clone &lt;repository-url&gt;</code>.</li><li>Enter the folder: <code>cd &lt;repository-name&gt;</code>.</li><li>Create a branch before editing: <code>git switch -c fix/readme</code>.</li></ol><div class="code-line"><code>git clone https://github.com/OWNER/REPO.git</code><button class="copy-btn" data-copy="git clone https://github.com/OWNER/REPO.git">Copy</button></div></div>
+                    <div class="contribution-panel" data-panel="pull"><div class="panel-heading"><span class="method-number">02</span><div><h3>Pull, commit, and push</h3><p>Use this loop when your local copy is connected to the shared repository.</p></div></div><ol class="walkthrough"><li>Start from a clean state: <code>git status</code>.</li><li>Get the latest shared work: <code>git pull origin main</code>.</li><li>Make one focused change and inspect it with <code>git diff</code>.</li><li>Stage, commit, and publish: <code>git add .</code> → <code>git commit -m "Describe change"</code> → <code>git push</code>.</li></ol><div class="workflow-strip"><span>pull</span><b>→</b><span>edit</span><b>→</b><span>commit</span><b>→</b><span>push</span></div></div>
+                    <div class="contribution-panel" data-panel="fork"><div class="panel-heading"><span class="method-number">03</span><div><h3>Fork, branch, and open a pull request</h3><p>Best for public projects where you do not have write access.</p></div></div><ol class="walkthrough"><li>Click <strong>Fork</strong> on GitHub to create your own copy.</li><li>Clone your fork locally and add the original as <code>upstream</code>.</li><li>Create a feature branch, make your change, then push it to your fork.</li><li>Open a Pull Request from your branch to the original project’s <code>main</code>.</li></ol><div class="code-stack"><div><code>git clone https://github.com/YOU/REPO.git</code><button class="copy-btn" data-copy="git clone https://github.com/YOU/REPO.git">Copy</button></div><div><code>git remote add upstream https://github.com/OWNER/REPO.git</code><button class="copy-btn" data-copy="git remote add upstream https://github.com/OWNER/REPO.git">Copy</button></div><div><code>git fetch upstream</code><button class="copy-btn" data-copy="git fetch upstream">Copy</button></div></div></div>
+                    <div class="contribution-panel" data-panel="download"><div class="panel-heading"><span class="method-number">04</span><div><h3>Download a ZIP</h3><p>Useful for reading or trying a project without Git history. It is not a contribution workflow.</p></div></div><ol class="walkthrough"><li>Click the green <strong>Code</strong> button on GitHub.</li><li>Select <strong>Download ZIP</strong> and extract it.</li><li>Make edits locally, but use Clone or Fork later if you want to send changes back.</li></ol><div class="tip-row"><strong>Choose Clone or Fork</strong><span>when you need commits, branches, pull requests, or a repeatable update path.</span></div></div>
+                    <div class="review-checklist"><h3>Before you open a pull request</h3><label><input type="checkbox"> I pulled or fetched the latest changes</label><label><input type="checkbox"> My branch has one clear purpose</label><label><input type="checkbox"> I tested the change and checked the diff</label><label><input type="checkbox"> My title and description explain the why</label></div>
+                </section>
+
+                <section id="branches" class="workshop-section">
+                    <div class="section-kicker">05 / Branches</div><h2>Branches are safe lanes for change.</h2><p class="section-lead">The <code>main</code> branch should stay reliable. A branch gives your idea its own lane so you can experiment, review, and merge without interrupting everyone else.</p>
+                    <div class="branch-visual"><div class="branch-line main-line"><span class="branch-label">main</span><i></i><i></i><i></i><em>stable</em></div><div class="branch-line feature-line"><span class="branch-label">feature / workshop-page</span><i></i><i></i><i></i><em>your work</em></div><div class="merge-arrow">↘ merge when ready</div></div>
+                    <div class="three-col"><article><span class="mini-num">01</span><h3>Create</h3><p><code>git switch -c feature-name</code> starts a new branch from your current point.</p></article><article><span class="mini-num">02</span><h3>Work</h3><p>Commit small, meaningful checkpoints. Push the branch so your work is backed up.</p></article><article><span class="mini-num">03</span><h3>Review & merge</h3><p>Open a Pull Request, respond to feedback, then merge when approved.</p></article></div>
+                    <div class="code-stack branch-code"><div><code>git switch -c feature/my-change</code><button class="copy-btn" data-copy="git switch -c feature/my-change">Copy</button></div><div><code>git push -u origin feature/my-change</code><button class="copy-btn" data-copy="git push -u origin feature/my-change">Copy</button></div><div><code>git switch main && git pull</code><button class="copy-btn" data-copy="git switch main && git pull">Copy</button></div></div>
+                </section>
+
+                <section id="student-pack" class="workshop-section pack-section">
+                    <div class="section-kicker">06 / Next advantage</div><div class="pack-card"><div class="pack-copy"><p class="pack-overline">For verified students</p><h2>Unlock the GitHub Student Developer Pack.</h2><p>Get access to a curated set of developer tools, cloud credits, learning platforms, and professional benefits—often at no cost while you are eligible.</p><a class="btn btn-primary" href="https://education.github.com/pack" target="_blank" rel="noopener">Explore the Student Pack ↗</a></div><div class="pack-list"><div><span>01</span><strong>Verify your student status</strong><p>Use your school-issued email or an enrollment document.</p></div><div><span>02</span><strong>Browse the benefits</strong><p>Review each partner’s eligibility and redemption steps.</p></div><div><span>03</span><strong>Build with intention</strong><p>Use the tools to learn, ship projects, and grow your portfolio.</p></div></div></div>
+                    <div class="eligibility-note"><strong>Have ready:</strong> a GitHub account, proof of current enrollment, and a school affiliation that matches your application. Approval is handled by GitHub Education.</div>
+                </section>
+
+                <section class="share-card" aria-label="Share the workshop"><div><p class="section-kicker">Take it with you</p><h2>One link for the whole workshop.</h2><p>Scan or share this page after the session. It is designed to work well on a phone too.</p><div class="share-url"><code data-page-url>mubirueltonfelix.com/workshop/</code><button class="copy-btn" data-copy-link>Copy link</button></div></div><div class="qr-placeholder" aria-label="QR code placeholder"><div class="qr-grid"></div><small>QR-ready URL<br><span>mubirueltonfelix.com/workshop/</span></small></div></section>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../assets/js/layout.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="workshop.js"></script>
+</body>
+</html>
