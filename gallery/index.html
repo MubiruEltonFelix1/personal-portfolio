@@ -190,28 +190,33 @@
         /* Keep the gold top bar lit at rest so "upcoming" reads without hover */
         .event-card.upcoming::before { opacity: 1; }
 
-        /* Modifier on the existing .event-card-media, not a replacement, so the
-           220px / 180px height rules still apply and siblings never reflow. */
-        .event-card-media.is-coming {
+        .event-card-media.devfest-media::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(4, 8, 17, 0.92), rgba(4, 8, 17, 0.02) 82%);
+            pointer-events: none;
+        }
+        .devfest-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            text-align: center;
-            background:
-                radial-gradient(circle at 50% 125%, rgba(255, 215, 0, 0.18) 0%, transparent 62%),
-                repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 14px),
-                linear-gradient(160deg, #151515 0%, #0d0d0d 55%, #080808 100%);
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 1rem;
+            pointer-events: none;
         }
-        .is-coming-glyph {
-            font-size: 2.6rem;
-            line-height: 1;
-            color: var(--accent);
-            opacity: 0.22;
-            transition: opacity 0.3s ease;
+        .devfest-overlay-title {
+            color: #fff;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(0.95rem, 2vw, 1.25rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
         }
-        .event-card:hover .is-coming-glyph { opacity: 0.36; }
+        .devfest-overlay-topic { color: rgba(255,255,255,0.84); font-size: 0.73rem; line-height: 1.4; }
         .is-coming-chip {
             display: inline-flex;
             align-items: center;
@@ -240,7 +245,7 @@
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.66rem;
             letter-spacing: 0.1em;
-            color: var(--text-muted);
+            color: rgba(255,255,255,0.84);
         }
         @keyframes comingPulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.45); }
@@ -356,10 +361,16 @@
             <div class="events-grid reveal delay-2">
                 <!-- ── DevFest Mbarara 2026 · Upcoming ── -->
                 <article class="event-card upcoming">
-                    <div class="event-card-media is-coming">
-                        <i class="fas fa-bolt is-coming-glyph"></i>
-                        <span class="is-coming-chip"><span class="is-coming-dot"></span>Coming Up</span>
-                        <span class="is-coming-when">Oct 23&ndash;24 &middot; Mbarara</span>
+                    <div class="event-card-media devfest-media">
+                        <img src="../events/devfest-mbarara-2026-talk.webp" alt="A smartphone running an on-device AI model in a conference audience" loading="lazy">
+                        <div class="devfest-overlay">
+                            <span class="is-coming-chip"><span class="is-coming-dot"></span>Coming Up</span>
+                            <div>
+                                <div class="devfest-overlay-title">DevFest Mbarara 2026</div>
+                                <div class="devfest-overlay-topic">Edge AI on Android: Gemini Nano, Gemma &amp; LiteRT</div>
+                            </div>
+                            <span class="is-coming-when">Oct 23&ndash;24 &middot; Mbarara, Uganda</span>
+                        </div>
                     </div>
                     <div class="event-card-body">
                         <div class="event-card-meta">
@@ -376,6 +387,9 @@
                             My first time on a conference stage. I&rsquo;m speaking on <strong style="color:var(--accent);">Edge AI on Android</strong> &mdash; running local Gemini Nano and Gemma models on-device with LiteRT &mdash; across two days of hands-on sessions.
                         </p>
                         <div class="event-card-actions">
+                            <a href="devfest-mbarara-2026/" class="btn-event btn-event-primary">
+                                <i class="fas fa-book-open"></i> Talk Details
+                            </a>
                             <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=DevFest%20Mbarara%202026&amp;dates=20261023T000000Z%2F20261024T235900Z&amp;details=Edge%20AI%20on%20Android%3A%20Running%20Local%20Gemini%20Nano%20%26%20Gemma%20Models%20with%20LiteRT.%20My%20first%20time%20speaking%20at%20DevFest%20Mbarara%202026.%20Organised%20by%20GDG%20Cloud%20Mbarara.&amp;location=Mbarara%2C%20Uganda" target="_blank" rel="noopener" class="btn-event btn-event-primary">
                                 <i class="fas fa-calendar-plus"></i> Add to Calendar
                             </a>
