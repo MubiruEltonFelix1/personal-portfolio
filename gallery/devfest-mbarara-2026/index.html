@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Mubiru Elton Felix's DevFest Mbarara 2026 talk on Edge AI on Android, running Gemini Nano and Gemma models locally with LiteRT.">
+    <meta property="og:title" content="Edge AI on Android — DevFest Mbarara 2026">
+    <meta property="og:description" content="A first conference talk on running Gemini Nano and Gemma models locally on Android with LiteRT. October 23–24, 2026 in Mbarara, Uganda.">
+    <meta property="og:type" content="article">
+    <title>Edge AI on Android — DevFest Mbarara 2026 | Mubiru Elton Felix</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        .talk-page { padding-top: 3rem; }
+        .talk-back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;
+            color: var(--text-muted); font: 600 0.72rem 'IBM Plex Mono', monospace;
+            text-decoration: none; transition: color 0.2s ease;
+        }
+        .talk-back-link:hover { color: var(--accent); }
+        .talk-hero {
+            position: relative; min-height: clamp(340px, 47vw, 540px); overflow: hidden;
+            border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 2rem;
+            background: #070b14;
+        }
+        .talk-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+        .talk-hero::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, rgba(4, 8, 17, 0.94) 0%, rgba(4, 8, 17, 0.75) 36%, rgba(4, 8, 17, 0.12) 100%),
+                        linear-gradient(0deg, rgba(4, 8, 17, 0.48), transparent 60%);
+        }
+        .talk-hero-copy { position: absolute; z-index: 1; inset: auto auto 2.2rem 2.4rem; width: min(660px, calc(100% - 4.8rem)); }
+        .talk-eyebrow { color: #a9c7ff; font: 600 0.68rem 'IBM Plex Mono', monospace; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.9rem; }
+        .talk-hero h1 { color: #fff; font-size: clamp(1.7rem, 4.4vw, 3.3rem); line-height: 1.12; letter-spacing: -0.04em; margin: 0 0 1rem; }
+        .talk-hero h1 span { color: #a9c7ff; }
+        .talk-meta { display: flex; flex-wrap: wrap; gap: 0.55rem 1.2rem; color: rgba(255,255,255,0.82); font: 500 0.74rem 'IBM Plex Mono', monospace; }
+        .talk-meta span { display: inline-flex; align-items: center; gap: 0.45rem; }
+        .talk-meta i { color: #ffd166; }
+        .talk-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 310px); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+        .talk-article { max-width: 760px; }
+        .talk-article .lead { color: var(--text); font-size: 1.08rem; line-height: 1.75; }
+        .talk-article p { color: var(--text-muted); font-size: 0.96rem; line-height: 1.75; margin-bottom: 1rem; }
+        .talk-article h2 { color: var(--accent); font-size: 1.25rem; margin: 2rem 0 0.7rem; }
+        .talk-article strong { color: var(--text); }
+        .talk-sidebar { position: sticky; top: 1.5rem; }
+        .talk-facts { padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+        .talk-facts h2 { color: var(--text); font-size: 0.95rem; margin: 0 0 0.85rem; }
+        .talk-fact { display: grid; grid-template-columns: 22px 1fr; gap: 0.65rem; padding: 0.85rem 0; border-top: 1px solid var(--border); }
+        .talk-fact i { color: var(--accent); padding-top: 0.15rem; }
+        .talk-fact strong { display: block; color: var(--text); font-size: 0.79rem; margin-bottom: 0.2rem; }
+        .talk-fact span { display: block; color: var(--text-muted); font-size: 0.77rem; line-height: 1.5; }
+        .talk-fact .pending { color: #ffd166; }
+        .talk-actions { display: grid; gap: 0.65rem; margin-top: 1rem; }
+        .talk-actions a { justify-content: center; }
+        .talk-callout { margin: 1.4rem 0; padding: 1.25rem 1.4rem; border-left: 3px solid var(--accent); background: var(--surface-soft); border-radius: var(--radius); }
+        .talk-callout p { margin: 0; color: var(--text); }
+        .talk-topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.75rem; margin: 1.1rem 0 1.5rem; }
+        .talk-topic { padding: 1rem; background: var(--surface-soft); border: 1px solid var(--border); border-radius: var(--radius); }
+        .talk-topic i { color: var(--accent); margin-bottom: 0.55rem; }
+        .talk-topic h3 { color: var(--text); font-size: 0.82rem; margin: 0 0 0.35rem; }
+        .talk-topic p { margin: 0; font-size: 0.77rem; line-height: 1.55; }
+        .talk-note { color: var(--text-muted); font-size: 0.72rem; line-height: 1.55; margin-top: 0.8rem; }
+        @media (max-width: 780px) {
+            .talk-layout { grid-template-columns: 1fr; }
+            .talk-sidebar { position: static; }
+            .talk-facts { max-width: none; }
+        }
+        @media (max-width: 600px) {
+            .talk-page { padding-top: 2rem; }
+            .talk-hero { min-height: 430px; }
+            .talk-hero img { object-position: 57% 50%; }
+            .talk-hero::after { background: linear-gradient(0deg, rgba(4,8,17,0.96) 0%, rgba(4,8,17,0.7) 43%, rgba(4,8,17,0.02) 100%); }
+            .talk-hero-copy { inset: auto 1rem 1.25rem; width: auto; }
+            .talk-meta { font-size: 0.66rem; }
+        }
+    </style>
+</head>
+<body data-root="../../">
+    <div id="site-nav"></div>
+    <main class="section talk-page">
+        <div class="container">
+            <a class="talk-back-link reveal" href="../"><i class="fas fa-arrow-left"></i> Back to Events</a>
+            <header class="talk-hero reveal">
+                <img src="../../events/devfest-mbarara-2026-talk.webp" alt="A smartphone running a glowing on-device AI model in a developer conference audience">
+                <div class="talk-hero-copy">
+                    <p class="talk-eyebrow"><i class="fab fa-google"></i> GDG Cloud Mbarara · DevFest 2026</p>
+                    <h1>Edge AI on Android:<br><span>Gemini Nano, Gemma &amp; LiteRT</span></h1>
+                    <div class="talk-meta">
+                        <span><i class="far fa-calendar"></i> October 23–24, 2026</span>
+                        <span><i class="fas fa-location-dot"></i> Mbarara, Uganda</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="talk-layout">
+                <article class="talk-article">
+                    <p class="lead reveal delay-1">I’m preparing for my first conference talk at DevFest Mbarara 2026: a practical look at running generative AI models directly on Android instead of sending every request to a remote server.</p>
+                    <p class="reveal delay-1">The session, <strong>“Edge AI on Android: Running Local Gemini Nano &amp; Gemma Models with LiteRT,”</strong> explores what changes when inference happens on the device. Local processing can keep prompts and data on the phone, reduce dependence on a network round trip, and make AI features feel more immediate.</p>
+
+                    <h2 class="reveal delay-2">What the talk is about</h2>
+                    <p class="reveal delay-2">We’ll look at the building blocks behind on-device AI on Android: compact Gemini Nano and Gemma models, the LiteRT runtime, and the practical considerations that come with running machine-learning workloads within a mobile app.</p>
+                    <div class="talk-topics reveal delay-2">
+                        <section class="talk-topic">
+                            <i class="fas fa-mobile-screen-button"></i>
+                            <h3>AI on the phone</h3>
+                            <p>What it means to run model inference locally on an Android device.</p>
+                        </section>
+                        <section class="talk-topic">
+                            <i class="fas fa-shield-halved"></i>
+                            <h3>Privacy by design</h3>
+                            <p>How local processing can keep user data on the device.</p>
+                        </section>
+                        <section class="talk-topic">
+                            <i class="fas fa-gauge-high"></i>
+                            <h3>LiteRT in the stack</h3>
+                            <p>Where LiteRT fits when bringing Gemini Nano or Gemma into Android experiences.</p>
+                        </section>
+                    </div>
+
+                    <div class="talk-callout reveal delay-3">
+                        <p><strong>The central idea:</strong> useful AI does not always need to live in the cloud. On-device inference opens a path to more private, responsive mobile experiences.</p>
+                    </div>
+
+                    <h2 class="reveal delay-3">When and where</h2>
+                    <p class="reveal delay-3">DevFest Mbarara 2026 is scheduled for <strong>October 23–24, 2026</strong> in <strong>Mbarara, Uganda</strong>, and is hosted by <strong>GDG Cloud Mbarara</strong>. The exact venue and my individual talk time have not been announced in the information currently available here; check the organizer’s event page for updates.</p>
+                    <p class="talk-note reveal delay-3">This page will be updated when the organizer confirms the venue and session schedule.</p>
+
+                    <h2 class="reveal delay-3">A first for me</h2>
+                    <p class="reveal delay-3">This will be my first time speaking on a conference stage. I’m looking forward to sharing what I’ve been learning about edge AI with the developer community in Mbarara and meeting others who are building thoughtful Android and AI experiences.</p>
+
+                    <div class="talk-actions reveal delay-3">
+                        <a class="btn-event btn-event-primary" href="https://gdg.community.dev/gdg-cloud-mbarara/" target="_blank" rel="noopener"><i class="fas fa-circle-info"></i> Check GDG Cloud Mbarara updates</a>
+                        <a class="btn-event btn-event-ghost" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=DevFest%20Mbarara%202026&amp;dates=20261023T000000Z%2F20261024T235900Z&amp;details=Edge%20AI%20on%20Android%3A%20Running%20Local%20Gemini%20Nano%20%26%20Gemma%20Models%20with%20LiteRT.%20Hosted%20by%20GDG%20Cloud%20Mbarara.&amp;location=Mbarara%2C%20Uganda" target="_blank" rel="noopener"><i class="far fa-calendar-plus"></i> Add conference dates to calendar</a>
+                    </div>
+                </article>
+
+                <aside class="talk-sidebar reveal delay-2" aria-label="Talk details">
+                    <section class="talk-facts">
+                        <h2>Talk details</h2>
+                        <div class="talk-fact">
+                            <i class="far fa-calendar"></i>
+                            <div><strong>Conference dates</strong><span>October 23–24, 2026</span></div>
+                        </div>
+                        <div class="talk-fact">
+                            <i class="fas fa-clock"></i>
+                            <div><strong>Talk time</strong><span class="pending">To be announced</span></div>
+                        </div>
+                        <div class="talk-fact">
+                            <i class="fas fa-location-dot"></i>
+                            <div><strong>Location</strong><span>Mbarara, Uganda</span><span class="pending">Specific venue to be announced</span></div>
+                        </div>
+                        <div class="talk-fact">
+                            <i class="fas fa-people-group"></i>
+                            <div><strong>Organizer</strong><span>GDG Cloud Mbarara</span></div>
+                        </div>
+                        <div class="talk-fact">
+                            <i class="fas fa-microphone-lines"></i>
+                            <div><strong>Speaker</strong><span>Mubiru Elton Felix</span></div>
+                        </div>
+                        <div class="talk-actions">
+                            <a class="btn-event btn-event-primary" href="https://gdg.community.dev/gdg-cloud-mbarara/" target="_blank" rel="noopener">Event updates <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>
