@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MUCOSA Career Day 2026 at Mbarara University of Science & Technology — career inspiration, networking, and a mock ransomware war-room with Dr. Fred Kaggwa and Lasto Mubiru.">
+    <meta property="og:title" content="MUCOSA Career Day 2026 | Mubiru Elton Felix">
+    <meta property="og:description" content="Career Day 2026 at Mbarara University of Science & Technology — industry pioneers, a ransomware war-room, and the reminder that your career starts before you get a job.">
+    <meta property="og:type" content="article">
+    <title>MUCOSA Career Day 2026 | Mubiru Elton Felix</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../tokens.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        .career-page { padding-top: 3rem; }
+        .career-back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;
+            color: var(--text-muted); font: 600 0.72rem 'IBM Plex Mono', monospace;
+            text-decoration: none; transition: color 0.2s ease;
+        }
+        .career-back-link:hover { color: var(--accent); }
+        .career-hero {
+            position: relative; min-height: clamp(300px, 40vw, 480px); overflow: hidden;
+            border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 2rem;
+            background: #070b14;
+        }
+        .career-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+        .career-hero::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, rgba(4, 8, 17, 0.94) 0%, rgba(4, 8, 17, 0.7) 36%, rgba(4, 8, 17, 0.1) 100%);
+        }
+        .career-hero-copy {
+            position: absolute; z-index: 1; inset: auto auto 2rem 2.4rem;
+            width: min(660px, calc(100% - 4.8rem));
+        }
+        .career-eyebrow { color: #ffd700; font: 600 0.68rem 'IBM Plex Mono', monospace; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.9rem; }
+        .career-eyebrow i { color: var(--accent); }
+        .career-hero h1 { color: #fff; font-family: 'Orbitron', monospace; font-size: clamp(1.6rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -0.04em; margin: 0 0 0.75rem; }
+        .career-hero h1 span { color: var(--accent); }
+        .career-meta { display: flex; flex-wrap: wrap; gap: 0.55rem 1.2rem; color: rgba(255,255,255,0.82); font: 500 0.74rem 'IBM Plex Mono', monospace; }
+        .career-meta span { display: inline-flex; align-items: center; gap: 0.45rem; }
+        .career-meta i { color: var(--accent); }
+        .career-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 310px); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+        .career-article { max-width: 760px; }
+        .career-article .lead { color: var(--text); font-size: 1.08rem; line-height: 1.75; }
+        .career-article p { color: var(--text-muted); font-size: 0.96rem; line-height: 1.75; margin-bottom: 1rem; }
+        .career-article h2 { color: var(--accent); font-family: 'Orbitron', monospace; font-size: 1.25rem; margin: 2rem 0 0.7rem; letter-spacing: -0.02em; }
+        .career-article strong { color: var(--text); }
+        .career-sidebar { position: sticky; top: 1.5rem; }
+        .career-facts { padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+        .career-facts h2 { color: var(--text); font-size: 0.95rem; margin: 0 0 0.85rem; font-family: 'Orbitron', monospace; }
+        .career-fact { display: grid; grid-template-columns: 22px 1fr; gap: 0.65rem; padding: 0.85rem 0; border-top: 1px solid var(--border); }
+        .career-fact:first-child { border-top: none; padding-top: 0; }
+        .career-fact i { color: var(--accent); padding-top: 0.15rem; }
+        .career-fact strong { display: block; color: var(--text); font-size: 0.79rem; margin-bottom: 0.2rem; font-family: 'IBM Plex Mono', monospace; }
+        .career-fact span { display: block; color: var(--text-muted); font-size: 0.77rem; line-height: 1.5; }
+        .career-takeaway {
+            margin: 1.4rem 0; padding: 1.25rem 1.4rem; border-left: 3px solid var(--accent);
+            background: var(--surface-soft); border-radius: var(--radius);
+        }
+        .career-takeaway p { margin: 0; color: var(--text); font-size: 0.95rem; line-height: 1.6; }
+        .career-takeaway strong { color: var(--accent); }
+        .career-actions { display: grid; gap: 0.65rem; margin-top: 1rem; }
+        .career-actions a { justify-content: center; }
+        .career-photo-note { color: var(--text-muted); font-size: 0.72rem; line-height: 1.55; margin-top: 1rem; font-style: italic; }
+        @media (max-width: 780px) {
+            .career-layout { grid-template-columns: 1fr; }
+            .career-sidebar { position: static; }
+            .career-facts { max-width: none; }
+        }
+        @media (max-width: 600px) {
+            .career-page { padding-top: 2rem; }
+            .career-hero { min-height: 400px; }
+            .career-hero img { object-position: 57% 50%; }
+        }
+    </style>
+</head>
+<body data-root="../../">
+    <div id="site-nav"></div>
+    <main class="section career-page">
+        <div class="container">
+            <a class="career-back-link reveal" href="../"><i class="fas fa-arrow-left"></i> Back to Events</a>
+
+            <header class="career-hero reveal">
+                <img src="../../events/FCI%20CAREER%20GUIDANCE%20DAY/FCI%20CAREER%20DAY.jpg" alt="MUCOSA Career Day 2026 group photo at Mbarara University of Science & Technology">
+                <div class="career-hero-copy">
+                    <p class="career-eyebrow"><i class="fas fa-graduation-cap"></i> MUCOSA · Mbarara University of Science &amp; Technology</p>
+                    <h1>MUCOSA Career Day 2026<br><span>Career inspiration &amp; community</span></h1>
+                    <div class="career-meta">
+                        <span><i class="far fa-calendar"></i> 2026</span>
+                        <span><i class="fas fa-location-dot"></i> Mbarara, Uganda</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="career-layout">
+                <article class="career-article">
+                    <p class="lead reveal delay-1">The MBARARA UNIVERSITY COMPUTING STUDENTS ASSOCIATION, MUCOSA Career Day 2026 at Mbarara University of Science &amp; Technology was absolutely massive.</p>
+
+                    <h2 class="reveal delay-2">Industry pioneers, same classrooms</h2>
+                    <p class="reveal delay-2">What made this event truly special was realizing that the industry pioneers speaking to us stood exactly where we are standing today. Ten to twenty years ago, they were students sitting in these very same spaces &mdash; spaces that have now evolved into developed faculties. An inspiring reminder of what is possible.</p>
+
+                    <h2 class="reveal delay-2">War-room: handling a ransomware breach</h2>
+                    <p class="reveal delay-2">Dr. Fred Kaggwa (Dean of Faculty) turned a career talk into a practical war-room scenario. We tackled a mock ransomware attack on a hospital network and mapped out the three definitive steps to handle a breach:</p>
+                    <p class="reveal delay-2"><strong>Isolate.</strong> Contain the blast radius before it spreads.</p>
+                    <p class="reveal delay-2"><strong>Escalate.</strong> Bring in the right people, fast.</p>
+                    <p class="reveal delay-2"><strong>Analyze.</strong> Understand the root cause so it never happens again.</p>
+
+                    <h2 class="reveal delay-2">Master the concepts, not just the cram</h2>
+                    <p class="reveal delay-2">Lasto Mubiru (Senior System Admin) reminded us that networking and cybersecurity go hand-in-hand. His golden rule for long-term tech success? Master the concepts, don't just cram them. He also gave us a lighthearted reality check from his own experience &mdash; confessing there were times he would end up falling asleep completely by mistake because of the grind. A funny but real moment that showed just how dedicated you have to be.</p>
+
+                    <h2 class="reveal delay-2">A day of connections</h2>
+                    <p class="reveal delay-2">It was a valuable opportunity to connect with fellow students, engage with the tech community, and gain insights into career opportunities, professional development, and the ever-evolving world of technology. Events like these remind us that building a successful career goes beyond academic knowledge. It also takes continuous learning, networking, collaboration, and the willingness to explore new opportunities.</p>
+
+                    <div class="career-takeaway reveal delay-3">
+                        <p><strong>Key takeaway of the day:</strong> Your career starts before you get a job.</p>
+                    </div>
+
+                    <h2 class="reveal delay-3">Photo moment</h2>
+                    <p class="reveal delay-3">To wrap up an incredible day, I captured a photo moment with MUCOSA President Mubiru Elton Felix and a friend to anchor the memories of a day well spent &mdash; grateful for their acceptance to share the moment.</p>
+
+                    <p class="reveal delay-3">The building blocks are right here. If you want to build yourself, the time to start is now. Here's to learning, growing, and building towards a brighter future in technology!</p>
+
+                    <div class="career-actions reveal delay-3">
+                        <a class="btn-event btn-event-primary" href="https://lnkd.in/p/dZiSbXtm" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin"></i> LinkedIn Post
+                        </a>
+                    </div>
+
+                    <p class="career-photo-note reveal delay-3">Photos from the event live in the FCI Career Guidance Day folder.</p>
+                </article>
+
+                <aside class="career-sidebar reveal delay-2" aria-label="Event details">
+                    <section class="career-facts">
+                        <h2>Event details</h2>
+                        <div class="career-fact">
+                            <i class="far fa-calendar"></i>
+                            <div><strong>Event</strong><span>MUCOSA Career Day 2026</span></div>
+                        </div>
+                        <div class="career-fact">
+                            <i class="fas fa-users"></i>
+                            <div><strong>Organizer</strong><span>Mbarara University Computing Students Association (MUCOSA)</span></div>
+                        </div>
+                        <div class="career-fact">
+                            <i class="fas fa-location-dot"></i>
+                            <div><strong>Location</strong><span>Mbarara University of Science &amp; Technology, Mbarara, Uganda</span></div>
+                        </div>
+                        <div class="career-fact">
+                            <i class="fas fa-user-tie"></i>
+                            <div><strong>Speakers</strong><span>Dr. Fred Kaggwa (Dean of Faculty) &middot; Lasto Mubiru (Senior System Admin)</span></div>
+                        </div>
+                        <div class="career-actions">
+                            <a class="btn-event btn-event-primary" href="https://lnkd.in/p/dZiSbXtm" target="_blank" rel="noopener">Event post <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="site-footer"></div>
+    <script src="../../assets/js/layout.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>
